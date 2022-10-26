@@ -1,25 +1,17 @@
 // ReSharper disable Unity.NoNullPropagation
-
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.InputSystem;
 
 public class Draggable : DraggableBase {
-	private Vector3 offset;
 	private Quaternion initialRotation;
 	private Vector3 resetPosition;
 
 	public override void OnDragBegin() {
-		Debug.Log("Down");
-		
 		resetPosition = transform.position;
 		initialRotation = transform.rotation;
 	}
 	
 	// Returns true if we are snapping, false otherwise
 	public override bool OnDrag(RaycastHit? hit_) {
-		Debug.Log("Hit");
-		
 		if(hit_ is not null) {
 			var hit = hit_.Value;
 			
@@ -30,14 +22,12 @@ public class Draggable : DraggableBase {
 			}
 		} 
 		
-		transform.position = GetPointerAsWorldPoint() + offset;
+		transform.position = GetPointerAsWorldPoint();
 		transform.rotation = initialRotation;
 		return false; // We are not snapping
 	} 
 
 	public override void OnDragEnd(bool shouldSnap) {
-		Debug.Log("Up");
-		
 		if (shouldSnap) return;
 		transform.position = resetPosition;
 		transform.rotation = initialRotation;

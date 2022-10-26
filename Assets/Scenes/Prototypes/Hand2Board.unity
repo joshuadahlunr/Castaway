@@ -469,9 +469,9 @@ GameObject:
   - component: {fileID: 1285572659}
   - component: {fileID: 1285572662}
   - component: {fileID: 1285572663}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: CardDraggable
-  m_TagString: Untagged
+  m_TagString: Targetable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -830,10 +830,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1586495331}
+  - component: {fileID: 1586495336}
   - component: {fileID: 1586495334}
   - component: {fileID: 1586495333}
   - component: {fileID: 1586495335}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: CardTargetable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -918,6 +919,24 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 10, y: 0.02, z: 10}
   m_Center: {x: 0, y: 0, z: 0.0000076293945}
+--- !u!114 &1586495336
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1586495330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bacaee4e85274ca5b1cb4c468f21b94f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pointerAction: {fileID: -1654692200621890270, guid: 2b1e799f00d5d624cbc25aa4c6f38c8e,
+    type: 3}
+  clickAction: {fileID: 3001919216989983466, guid: 2b1e799f00d5d624cbc25aa4c6f38c8e,
+    type: 3}
+  arrowPrefab: {fileID: 6722190504438028770, guid: e2e954b1ee2caff408b59a53e7370e2a,
+    type: 3}
 --- !u!1 &1752742415
 GameObject:
   m_ObjectHideFlags: 0

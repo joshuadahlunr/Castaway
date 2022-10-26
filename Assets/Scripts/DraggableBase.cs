@@ -11,6 +11,7 @@ public abstract class DraggableBase : MonoBehaviour, IPointerDownHandler {
 	private float initialZ;
 	protected bool pointerDown;
 	protected bool isSnapping;
+	protected int initalLayer;
 
 
 	// Callback functions
@@ -55,15 +56,17 @@ public abstract class DraggableBase : MonoBehaviour, IPointerDownHandler {
 
 	private void OnPointerDrag() {
 		isSnapping = Physics.Raycast(Camera.main?.ScreenPointToRay(GetPointer()) ?? new Ray(), out var hit,
-			Mathf.Infinity, /*LayerMask.NameToLayer("Card")*/ ~(1 << 6))
+			Mathf.Infinity, ~LayerMask.GetMask("CurrentCard"))
 			? OnDrag(hit)
 			: OnDrag(null);
 	}
 
 	private void OnClickUp(InputAction.CallbackContext ctx) {
+		if (!pointerDown) return; // Don't do any processing if we aren't selected
 		if (ctx.ReadValueAsButton()) return;
 
 		pointerDown = false;
+		gameObject.layer = initalLayer;
 
 		OnDragEnd(isSnapping);
 	}
@@ -71,6 +74,9 @@ public abstract class DraggableBase : MonoBehaviour, IPointerDownHandler {
 	public void OnPointerDown(PointerEventData eventData) {
 		pointerDown = true;
 		initialZ = Camera.main?.WorldToScreenPoint(transform.position).z ?? 0;
+		
+		initalLayer = gameObject.layer;
+		gameObject.layer = LayerMask.NameToLayer("CurrentCard");
 		OnDragBegin();
 	}
 }
