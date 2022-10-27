@@ -2,33 +2,43 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace Shapes {
+	
+	// Class which generates an arc mesh
 	[RequireComponent(typeof(MeshRenderer)), RequireComponent(typeof(MeshFilter))]
-	[ExecuteInEditMode]
+	[ExecuteInEditMode] // Make sure arc is regenerated even in edit mode!
 	public class Arc : MonoBehaviour {
+		// How many segments the arc should have
 		public int resolution = 32;
+		// How wide the arc should be
 		public float width;
+		// Positions where the arc should start and end
 		public Transform start, end;
 
-		// private MeshRenderer renderer;
+
+		// Mesh filter to store the generated mesh in
 		private MeshFilter filter;
+		// Find a reference to the filter on awake
+		private void Awake() => filter = GetComponent<MeshFilter>();
 
-		private void Awake() {
-			// renderer = GetComponent<MeshRenderer>();
-			filter = GetComponent<MeshFilter>();
-		}
-
+		// Every frame update the curve of the arc
 		private void Update() {
 			RegenerateCurve();
 		}
 
+		// Function which updates the curve of the arc and generates a new mesh
 		public void RegenerateCurve() {
+			// The arc should be less tall than it is long
 			var height = (start.transform.position - end.transform.position).magnitude / 2;
 
+			// Index locations of the vertices in the last segment
 			int lastTopIndex = -1, lastBottomIndex = -1;
+			
+			// List of vertices, UVs, and indices 
 			List<Vector3> vertices = new();
 			List<Vector2> UVs = new();
 			List<int> indices = new();
 
+			// For every segment we should split the arc into
 			for (var i = 0; i < resolution; i++) {
 				// Variable tracking how far along the curve we currently are
 				var t = (float)i / resolution;
@@ -36,9 +46,8 @@ namespace Shapes {
 				// Generate a plane centered at a point along a parabola facing the camera.
 				var scale = transform.lossyScale;
 				var center = SampleParabola(start.transform.position, end.transform.position, height, t);
-				center.x /= scale.x;
-				center.y /= scale.y;
-				center.z /= scale.z;
+				// Adjust te position of the plane to account for the scale of the object
+				center.x /= scale.x; center.y /= scale.y; center.z /= scale.z;
 				var normal = (Camera.main.transform.position - center).normalized;
 				var cameraRight = Camera.main.transform.right.normalized;
 				var plane = new Plane(normal, center);
@@ -67,17 +76,6 @@ namespace Shapes {
 				// Save the indices for use in the next interval
 				lastTopIndex = topIndex;
 				lastBottomIndex = bottomIndex;
-
-				// {
-				// 	var go = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-				// 	go.transform.localScale = new Vector3(.1f, .1f, .1f);
-				// 	go.transform.position = top;
-				// }
-				// {
-				// 	var go = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-				// 	go.transform.localScale = new Vector3(.1f, .1f, .1f);
-				// 	go.transform.position = bottom;
-				// }
 			}
 
 			// Update the displayed mesh

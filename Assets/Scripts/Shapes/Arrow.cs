@@ -1,12 +1,14 @@
 ﻿using UnityEngine;
 
 namespace Shapes {
+	// Class which renders an arrow composed of an arc with a cone at its end 
 	[RequireComponent(typeof(Arc))]
 	public class Arrow : MonoBehaviour {
 		public GameObject start, end;
 		public Arc arc;
 		public Cone cone;
 	
+		// On start, find/create the necessary children and configure them (if nessicary)
 		private void Awake() {
 			start ??= new GameObject { name = "start", transform = { parent = transform } };
 			end ??= new GameObject { name = "end", transform = { parent = transform } };
@@ -26,6 +28,7 @@ namespace Shapes {
 			}
 		}
 
+		// Regenerate both the arc and cone meshes at the same time
 		public void Regenerate() {
 			arc.RegenerateCurve();
 			cone.RegenerateCone();
