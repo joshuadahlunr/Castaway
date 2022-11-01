@@ -17,9 +17,21 @@ namespace Card {
 			InPlay = 1 << 2, // When the card is on the field
 			InHand = 1 << 3 // When the card is in hand
 		}
-
 		// By default cards are inactive
-		public State state = State.Inactive;
+		[SerializeField] private State _state = State.Inactive;
+		public State state {
+			get => _state;
+			set {
+				// When we change the state of the card... fire an event
+				OnStateChanged(_state, value);
+				_state = value;
+			}
+		}
+
+		// The container the card is currently held within
+		public CardContainerBase container;
+
+		public bool isOurTurn => true; // TODO: connect to whatever system we use to determine who's turn it is...
 
 		
 
@@ -29,5 +41,9 @@ namespace Card {
 
 		// TODO: Add renderer management stuff
 		// TODO: Add some events which can be subscribed to in the editor (or broadcast system?)
+		public virtual void OnStateChanged(State oldState, State newState) {}
+
+
+		
 	}
 }

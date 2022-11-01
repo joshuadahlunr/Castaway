@@ -2,6 +2,7 @@
 using UnityEngine;
 
 // Class that provides a smoothed card dragging and snapping to certain zones
+[RequireComponent(typeof(Card.CardBase))]
 public class Draggable : DraggableBase {
 	// How fast (in units/second) cards should move
 	public float moveSpeed = .1f;
@@ -17,7 +18,11 @@ public class Draggable : DraggableBase {
 	private Vector3 targetPosition;
 	private Quaternion targetRotation;
 
-	
+	// The card associated with this draggable...
+	private Card.CardBase card;
+	private void Awake() => card = GetComponent<Card.CardBase>();
+
+
 	// Make sure the card's target position is wherever it was place in the editor when we start
 	public void Start() {
 		targetPosition = transform.position;
@@ -53,7 +58,14 @@ public class Draggable : DraggableBase {
 
 	// When we finish dragging, if we aren't in a snap zone, snap the card back to the hand
 	public override void OnDragEnd(bool shouldSnap) {
-		if (shouldSnap) return;
+		// If we are snapping to a card container, move the associated card to that container 
+		if (shouldSnap) {
+			CardContainerBase container;
+			if((container = snapObject.GetComponent<CardContainerBase>()) is not null)
+				card.container.SendToContainer(container, card);
+			return;
+		};
+		
 		targetPosition = resetPosition;
 		targetRotation = initialRotation;
 	}

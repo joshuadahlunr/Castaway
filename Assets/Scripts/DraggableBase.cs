@@ -16,6 +16,8 @@ public abstract class DraggableBase : MonoBehaviour, IPointerDownHandler {
 	protected bool pointerDown;
 	// Bool indicating if we are currently snapping
 	protected bool isSnapping;
+	// The object we are snapping to
+	protected GameObject snapObject;
 	// The layer the object was assigned to before being dragged
 	protected int initalLayer;
 
@@ -67,10 +69,13 @@ public abstract class DraggableBase : MonoBehaviour, IPointerDownHandler {
 	// Called whenever the mouse pointer moves and we being dragged, preforms a raycast that ignores the dragged card
 	//  and then calls OnDrag with the result of the raycast
 	private void OnPointerDrag() {
-		isSnapping = Physics.Raycast(Camera.main?.ScreenPointToRay(GetPointer()) ?? new Ray(), out var hit,
-			Mathf.Infinity, ~LayerMask.GetMask("CurrentCard"))
-			? OnDrag(hit)
-			: OnDrag(null);
+		isSnapping = false;
+
+		if (!Physics.Raycast(Camera.main?.ScreenPointToRay(GetPointer()) ?? new Ray(), out var hit, Mathf.Infinity,
+			    ~LayerMask.GetMask("CurrentCard"))) return;
+		snapObject = hit.collider.gameObject;
+		OnDrag(hit);
+		isSnapping = true;
 	}
 
 	// Called when ever the click action occurs

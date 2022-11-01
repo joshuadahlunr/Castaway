@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Prototypes/Hand2Board.unity
+    path: Assets/Scenes/Prototypes/DragableTargetabl.unity
     guid: fcbe705c321f4eb4cb63c1e2a9f887bf
   m_configObjects: {}
