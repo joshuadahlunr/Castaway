@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using JetBrains.Annotations;
 using RotaryHeart.Lib.SerializableDictionary;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Card {
@@ -34,7 +35,9 @@ namespace Card {
 		}
 		// Dictionary that provides a list of properties relevant to the card's effect
 		[Serializable]
-		public class PropertyDictionary : SerializableDictionaryBase<string, Property> { }
+		public class PropertyDictionary : SerializableDictionaryBase<string, Property> {
+			public new PropertyDictionary Clone() => this.CloneViaSerialization();
+		}
 		
 		
 		// Class representing a change that has been applied to the card
@@ -76,6 +79,8 @@ namespace Card {
 
 		public bool isOurTurn => true; // TODO: connect to whatever system we use to determine who's turn it is...
 
+		// Index representing which player or AI owns this card
+		public int cardOwner;
 
 		[SerializeField] private string _name;
 		[CanBeNull] private string nameCache = null;
@@ -152,6 +157,7 @@ namespace Card {
 
 		
 		// Function which goes through all of the attributes which can be modified and invalidates their caches 
+		// TODO: Add a way to invalidate the cache from the Unity UI
 		public void InvalidateCaches() {
 			nameCache = null;
 			costCache = null;
@@ -162,6 +168,10 @@ namespace Card {
 
 		// TODO: Add renderer management stuff
 		// TODO: Add some events which can be subscribed to in the editor (or broadcast system?)
+		
+		public void Start() {
+			renderer.card = this;
+		}
 		public virtual void OnStateChanged(State oldState, State newState) { }
 	}
 }
