@@ -67,7 +67,7 @@ public class CardContainerBase : MonoBehaviour, IEnumerable<CardBase> {
 	public void SendToContainer(CardContainerBase newContainer, string name) => SendToContainer(newContainer, Index(name));
 	public void SendToContainer(CardContainerBase newContainer, Card.CardBase card) => SendToContainer(newContainer, Index(card));
 	
-	void Swap(int A, int B) {
+	public void Swap(int A, int B) {
 		// Swap the cards
 		(cards[A], cards[B]) = (cards[B], cards[A]);
 		// Swap them in the child hierarchy

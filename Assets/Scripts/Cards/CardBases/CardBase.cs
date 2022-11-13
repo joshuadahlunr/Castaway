@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using JetBrains.Annotations;
 using RotaryHeart.Lib.SerializableDictionary;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -52,7 +51,7 @@ namespace Card {
 			public virtual PropertyDictionary GetProperties(PropertyDictionary props) => props;
 		}
 		// The list of modifications currently applied to this card
-		private List<Modification> modifications = new();
+		protected List<Modification> modifications = new();
 
 		
 
@@ -83,7 +82,7 @@ namespace Card {
 		public int cardOwner;
 
 		[SerializeField] private string _name;
-		[CanBeNull] private string nameCache = null;
+		private string nameCache = null;
 		public new string name {
 			set {
 				_name = value;
@@ -96,7 +95,7 @@ namespace Card {
 		}
 		
 		[SerializeField] private string _cost;
-		[CanBeNull] private string costCache = null;
+		private string costCache = null;
 		public string cost {
 			set {
 				_cost = value;
@@ -109,7 +108,7 @@ namespace Card {
 		}
 		
 		[SerializeField] private Sprite _art;
-		[CanBeNull] private Sprite artCache = null;
+		private Sprite artCache = null;
 		public Sprite art {
 			set {
 				_art = value;
@@ -122,7 +121,7 @@ namespace Card {
 		}
 		
 		[SerializeField] private string _rules;
-		[CanBeNull] private string rulesCache = null;
+		private string rulesCache = null;
 		public string rules {
 			set {
 				_rules = value;
@@ -135,7 +134,7 @@ namespace Card {
 		}
 
 		[SerializeField] private PropertyDictionary _properties;
-		[CanBeNull] private PropertyDictionary propertiesCache = null;
+		private PropertyDictionary propertiesCache = null;
 		public PropertyDictionary properties {
 			set {
 				_properties = value;
@@ -158,7 +157,7 @@ namespace Card {
 		
 		// Function which goes through all of the attributes which can be modified and invalidates their caches 
 		// TODO: Add a way to invalidate the cache from the Unity UI
-		public void InvalidateCaches() {
+		public virtual void InvalidateCaches() {
 			nameCache = null;
 			costCache = null;
 			artCache = null;
