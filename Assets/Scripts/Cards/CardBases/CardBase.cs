@@ -169,7 +169,7 @@ namespace Card {
 		// TODO: Add some events which can be subscribed to in the editor (or broadcast system?)
 		
 		public void Start() {
-			renderer.card = this;
+			if(renderer is not null) renderer.card = this;
 		}
 		public virtual void OnStateChanged(State oldState, State newState) { }
 	}

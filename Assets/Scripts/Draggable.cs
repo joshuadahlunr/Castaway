@@ -15,8 +15,8 @@ public class Draggable : DraggableBase {
 	private Vector3 resetPosition;
 
 	// The target position and rotation of the card (provide smooth interpolation)
-	private Vector3 targetPosition;
-	private Quaternion targetRotation;
+	public Vector3 targetPosition;
+	public Quaternion targetRotation;
 
 	// The card associated with this draggable...
 	private Card.CardBase card;
@@ -61,11 +61,16 @@ public class Draggable : DraggableBase {
 		// If we are snapping to a card container, move the associated card to that container 
 		if (shouldSnap) {
 			CardContainerBase container;
-			if((container = snapObject.GetComponent<CardContainerBase>()) is not null)
-				card.container.SendToContainer(container, card);
-			return;
+			if ((container = snapObject.GetComponent<CardContainerBase>()) is not null) {
+				CardGameManager.instance.CreateSnapConfirmation(card, container);
+				return;
+			}
 		};
-		
+
+		Reset();
+	}
+
+	public void Reset() {
 		targetPosition = resetPosition;
 		targetRotation = initialRotation;
 	}
