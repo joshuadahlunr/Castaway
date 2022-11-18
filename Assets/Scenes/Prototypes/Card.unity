@@ -295,6 +295,8 @@ MonoBehaviour:
     type: 3}
   moveSpeed: 0.1
   rotationSpeed: 20
+  targetPosition: {x: 0, y: 0, z: 0}
+  targetRotation: {x: 0, y: 0, z: 0, w: 0}
 --- !u!65 &280062795
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -339,6 +341,7 @@ MonoBehaviour:
   _renderer: {fileID: 1176176040}
   container: {fileID: 0}
   _state: 2
+  cardOwner: 0
   _name: Attack
   _cost: 1
   _art: {fileID: 21300000, guid: 66a4d5992443d624eb240e88cf957ddb, type: 3}
@@ -420,6 +423,7 @@ MonoBehaviour:
   _renderer: {fileID: 1232506762705704381}
   container: {fileID: 0}
   _state: 2
+  cardOwner: 0
   _name: 
   _cost: 
   _art: {fileID: 0}
@@ -484,6 +488,8 @@ MonoBehaviour:
     type: 3}
   moveSpeed: 0.1
   rotationSpeed: 20
+  targetPosition: {x: 0, y: 0, z: 0}
+  targetRotation: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &889689350
 GameObject:
   m_ObjectHideFlags: 0
@@ -728,6 +734,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Base
       objectReference: {fileID: 0}
+    - target: {fileID: 1232506761773263809, guid: 43cdfc534094f1e4ab64aaacb3a6ccb9,
+        type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 351956920303991400, guid: 6a5a0c9240ffd2e409f5017ca7dcb617,
+        type: 2}
+    - target: {fileID: 1232506762330145592, guid: 43cdfc534094f1e4ab64aaacb3a6ccb9,
+        type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 351956920303991400, guid: 6a5a0c9240ffd2e409f5017ca7dcb617,
+        type: 2}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 43cdfc534094f1e4ab64aaacb3a6ccb9, type: 3}
