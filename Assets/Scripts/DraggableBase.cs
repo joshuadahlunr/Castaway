@@ -71,11 +71,13 @@ public abstract class DraggableBase : MonoBehaviour, IPointerDownHandler {
 	private void OnPointerDrag() {
 		isSnapping = false;
 
-		if (!Physics.Raycast(Camera.main?.ScreenPointToRay(GetPointer()) ?? new Ray(), out var hit, Mathf.Infinity,
-			    ~LayerMask.GetMask("CurrentCard"))) return;
-		snapObject = hit.collider.gameObject;
-		OnDrag(hit);
-		isSnapping = true;
+		if (Physics.Raycast(Camera.main?.ScreenPointToRay(GetPointer()) ?? new Ray(), out var hit, Mathf.Infinity,
+			    ~LayerMask.GetMask("CurrentCard"))) {
+			snapObject = hit.collider.gameObject;
+			OnDrag(hit);
+			isSnapping = true;
+		} else OnDrag(null);
+		
 	}
 
 	// Called when ever the click action occurs
