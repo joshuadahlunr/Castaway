@@ -6,8 +6,11 @@ public class CardGameManager : MonoBehaviour {
 	public static CardGameManager instance;
 	public void Awake() => instance = this;
 
+	public Canvas canvas;
+
 	
 	public float turnTime = 30;
+	public int playerHealth = 10;
 
 	public bool IsPlayerTurn => isPlayerTurn;
 	public float TimeLeftInTurn => turnTimer;
@@ -34,19 +37,21 @@ public class CardGameManager : MonoBehaviour {
 		// Toggle who's turn it is;
 		isPlayerTurn = !isPlayerTurn;
 		
+		// TODO: Check if the player's health is zero or if all of the monster's healths are zero!
+		
 		OnTurnStart();
 	}
 	
 
 	public Confirmation CreateSnapConfirmation(CardBase card, CardContainerBase target) {
-		var confirm = Instantiate(confirmationPrefab.gameObject, FindObjectOfType<Canvas>().transform).GetComponent<Confirmation>();
+		var confirm = Instantiate(confirmationPrefab.gameObject, canvas.transform).GetComponent<Confirmation>();
 		confirm.card = card;
 		confirm.snapTarget = target;
 		return confirm;
 	}
 	
 	public Confirmation CreateTargetConfirmation(CardBase card, CardBase target) {
-		var confirm = Instantiate(confirmationPrefab.gameObject, FindObjectOfType<Canvas>().transform).GetComponent<Confirmation>();
+		var confirm = Instantiate(confirmationPrefab.gameObject, canvas.transform).GetComponent<Confirmation>();
 		confirm.card = card;
 		confirm.target = target;
 		return confirm;

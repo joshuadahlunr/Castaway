@@ -76,7 +76,8 @@ namespace Card {
 
 		
 
-		public bool isOurTurn => true; // TODO: connect to whatever system we use to determine who's turn it is...
+		public bool IsOurTurn => CardGameManager.instance.IsPlayerTurn;
+		public bool OwnedByPlayer => cardOwner == 0; // TODO: If we change the definition of who the player is, make sure to update this property!
 
 		// Index representing which player or AI owns this card
 		public int cardOwner;
@@ -154,6 +155,16 @@ namespace Card {
 			InvalidateCaches();
 		}
 
+		// Utility function which handles dealing damage to a health card base or to the player if no health card base can be found
+		public void DamageTargetOrPlayer(int damage, HealthCardBase target = null) {
+			if (target is null) {
+				CardGameManager.instance.playerHealth -= damage;
+				return;
+			}
+
+			target.health -= damage;
+		}
+
 		
 		// Function which goes through all of the attributes which can be modified and invalidates their caches 
 		// TODO: Add a way to invalidate the cache from the Unity UI
@@ -171,6 +182,18 @@ namespace Card {
 		public void Start() {
 			if(renderer is not null) renderer.card = this;
 		}
+		
+		// Called whenever the state changes
 		public virtual void OnStateChanged(State oldState, State newState) { }
+		// Called when a monster reveals this card // TODO: Implement
+		public virtual void OnMonsterReveal() { }
+		// Called when the player begins dragging this card
+		public virtual void OnDragged() { }
+		// Called when this card is played to the field
+		public virtual void OnPlayed() { }
+		// Called when this card targets something
+		public virtual void OnTarget(CardBase target) { }
+		// Called when this card is targeted by something
+		public virtual void OnTargeted(CardBase targeter) {}
 	}
 }

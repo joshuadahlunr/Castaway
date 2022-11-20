@@ -15,10 +15,13 @@ public class Confirmation : MonoBehaviour {
 			draggable.targetRotation = snapTarget.transform.rotation;
 			
 			card.container.SendToContainer(snapTarget, card);
+			card.OnPlayed();
 		} else {
-			
+			card.OnTarget(target);
+			target.OnTargeted(card);
 		}
 		
+		// Get rid of ourselves once an action has been chosen!
 		Destroy(gameObject);
 	}
 
@@ -27,9 +30,11 @@ public class Confirmation : MonoBehaviour {
 			var draggable = card.GetComponent<Draggable>();
 			draggable.Reset();
 		} else {
-			
+			var targeting = card.GetComponent<Targeting>();
+			targeting.Reset();
 		}
 		
+		// Get rid of ourselves once an action has been chosen!
 		Destroy(gameObject);
 	}
 }

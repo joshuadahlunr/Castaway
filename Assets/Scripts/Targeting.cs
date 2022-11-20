@@ -1,4 +1,6 @@
 // ReSharper disable Unity.NoNullPropagation
+
+using Card;
 using UnityEngine;
 
 // Class that provides the ability to target "targetable" card with a selection arrow
@@ -9,7 +11,7 @@ public class Targeting : DraggableBase {
 	private static Shapes.Arrow arrowPrefabInstance;
 	
 	// The position initial position when we started dragging
-	private Vector3 initPosition;
+	public Vector3 initPosition { get; private set; }
 
 	// When we start dragging save the initial position
 	public override void OnDragBegin() {
@@ -47,9 +49,22 @@ public class Targeting : DraggableBase {
 	// When we are done dragging make sure to hide the arrow, and snap the card back to where it started
 	public override void OnDragEnd(bool shouldSnap) {
 		GetArrow().gameObject.SetActive(false);
+
+		if (isSnapping) {
+			var target = snapObject.GetComponent<CardBase>();
+			CardGameManager.instance.CreateTargetConfirmation(card, target);
+			return;
+		}
 		
+		Reset();
+	}
+	
+	// When we reset, snap the card back to its initial position and make sure the arrow is hidden
+	public override void Reset() {
+		GetArrow().gameObject.SetActive(false);
 		transform.position = initPosition;
 	}
+
 
 
 

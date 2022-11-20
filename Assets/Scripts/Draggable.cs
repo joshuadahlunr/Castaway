@@ -18,10 +18,6 @@ public class Draggable : DraggableBase {
 	public Vector3 targetPosition;
 	public Quaternion targetRotation;
 
-	// The card associated with this draggable...
-	private Card.CardBase card;
-	private void Awake() => card = GetComponent<Card.CardBase>();
-
 
 	// Make sure the card's target position is wherever it was place in the editor when we start
 	public void Start() {
@@ -70,7 +66,7 @@ public class Draggable : DraggableBase {
 		Reset();
 	}
 
-	public void Reset() {
+	public override void Reset() {
 		targetPosition = resetPosition;
 		targetRotation = initialRotation;
 	}

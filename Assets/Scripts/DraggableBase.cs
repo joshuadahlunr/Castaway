@@ -20,6 +20,10 @@ public abstract class DraggableBase : MonoBehaviour, IPointerDownHandler {
 	protected GameObject snapObject;
 	// The layer the object was assigned to before being dragged
 	protected int initalLayer;
+	
+	// The card associated with this draggable...
+	protected Card.CardBase card; 
+	protected void Awake() => card = GetComponent<Card.CardBase>();
 
 
 	// Callback functions
@@ -29,6 +33,9 @@ public abstract class DraggableBase : MonoBehaviour, IPointerDownHandler {
 	public virtual void OnDragEnd(bool shouldSnap) { }
 	// Called every frame while we are dragging
 	public virtual bool OnDrag(RaycastHit? hit) { return false; } // Returns true if we are snapping, false otherwise
+	
+	// Called when a confirmation fails or something isn't "targeted" should reset the card to its initial state!
+	public virtual void Reset() {}
 
 
 	
@@ -74,8 +81,7 @@ public abstract class DraggableBase : MonoBehaviour, IPointerDownHandler {
 		if (Physics.Raycast(Camera.main?.ScreenPointToRay(GetPointer()) ?? new Ray(), out var hit, Mathf.Infinity,
 			    ~LayerMask.GetMask("CurrentCard"))) {
 			snapObject = hit.collider.gameObject;
-			OnDrag(hit);
-			isSnapping = true;
+			isSnapping = OnDrag(hit);
 		} else OnDrag(null);
 		
 	}
@@ -103,5 +109,6 @@ public abstract class DraggableBase : MonoBehaviour, IPointerDownHandler {
 		
 		// Invoke the callback
 		OnDragBegin();
+		card?.OnDragged();
 	}
 }

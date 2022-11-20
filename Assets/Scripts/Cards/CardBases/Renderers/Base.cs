@@ -15,16 +15,16 @@ namespace Card.Renderers {
 		public TMPro.TMP_Text rules;
 
 		public void Update() {
-			var watch = new System.Diagnostics.Stopwatch();
-			watch.Start();
+			// var watch = new System.Diagnostics.Stopwatch();
+			// watch.Start();
 
 			name.text = card.name;
 			// cost.text = card.cost;
 			artwork.sprite = card.art;
 			FormatRules(card.rules);
-			
-			watch.Stop();
-			Debug.Log($"Took {watch.ElapsedMilliseconds} ms to update!"); 
+
+			// watch.Stop();
+			// Debug.Log($"Took {watch.ElapsedMilliseconds} ms to update!"); 
 		}
 
 		public virtual void FormatRules(string rulesDescription) {
