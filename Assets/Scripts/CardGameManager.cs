@@ -7,6 +7,7 @@ public class CardGameManager : MonoBehaviour {
 	public void Awake() => instance = this;
 
 	public Canvas canvas;
+	public BurningRope rope;
 
 	
 	public float turnTime = 30;
@@ -21,6 +22,9 @@ public class CardGameManager : MonoBehaviour {
 	private float turnTimer = 0;
 	public void Update() {
 		turnTimer -= Time.deltaTime;
+
+		rope.max = turnTime;
+		rope.current = turnTimer;
 		
 		// If there is no longer any time left in the turn, end the turn!
 		if (turnTimer <= 0) {
