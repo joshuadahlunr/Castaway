@@ -1,7 +1,15 @@
 ﻿using System;
+using Card;
+using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class Deck : CardContainerBase {
+	private float initalYScale;
+	public void Awake() {
+		initalYScale = transform.localScale.y;
+		UpdateDeckHeight();
+	}
+
 	// https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle//The_modern_algorithm
 	private void YatesShuffle() {
 		var n = cards.Count - 2;
@@ -54,15 +62,38 @@ public class Deck : CardContainerBase {
 		}
 	}
 
+	protected void UpdateDeckHeight() {
+		// If there are no cards in the deck, don't render it!
+		if (cards.Count == 0) {
+			if(GetComponent<MeshRenderer>() is { } r0) // Null check the the mesh renderer to make sure one is present!
+				r0.enabled = false;
+			return;
+		}
+		
+		if(GetComponent<MeshRenderer>() is { } r)
+			r.enabled = true;
+		
+		var scale = transform.localScale;
+		scale.y = initalYScale * cards.Count;
+		transform.localScale = scale;
+	}
+
 	public override void AddCard(Card.CardBase card, int index = -1) {
 		base.AddCard(card, index);
-		
+
+		card.gameObject.SetActive(false);
+		card.state = CardBase.State.InHand;
+
+		UpdateDeckHeight();
+
 		// TODO: Represent that deck has increased in size
 	}
 
 	public override void RemoveCard(int index) {
 		base.RemoveCard(index);
-		
+
+		UpdateDeckHeight();
+
 		// TODO: Represent that deck has decreased in size
 	}
 	
