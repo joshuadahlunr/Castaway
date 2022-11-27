@@ -82,7 +82,7 @@ public class Deck : CardContainerBase {
 		base.AddCard(card, index);
 
 		card.gameObject.SetActive(false);
-		card.state = CardBase.State.InHand;
+		card.state |= CardBase.State.Inactive;
 
 		UpdateDeckHeight();
 
@@ -90,6 +90,7 @@ public class Deck : CardContainerBase {
 	}
 
 	public override void RemoveCard(int index) {
+		cards[index].state &= ~CardBase.State.Inactive;
 		base.RemoveCard(index);
 
 		UpdateDeckHeight();
