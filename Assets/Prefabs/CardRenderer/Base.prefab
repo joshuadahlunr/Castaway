@@ -37,11 +37,11 @@ RectTransform:
   - {fileID: 1232506762896862249}
   - {fileID: 1232506762330145599}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 90, y: 180, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0.001}
+  m_AnchoredPosition: {x: 0, y: 0.0010070801}
   m_SizeDelta: {x: 530, y: 520}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &6002180650330517427
