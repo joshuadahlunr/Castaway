@@ -4,7 +4,7 @@ using UnityEngine;
 public class Hand : CardContainerBase {
 	public class HandLayouter : MonoBehaviour {
 		public Hand owner;
-		public int index;
+		public CardBase card;
 		
 		public void Update() {
 			var camera = Camera.main;
@@ -18,7 +18,7 @@ public class Hand : CardContainerBase {
 			// TODO improve placement algorithm to use an arc around the center of the screen!
 
 			var pos = transform.position;
-			pos.x = Mathf.Lerp(min, max, (float)index / owner.Count);
+			pos.x = Mathf.Lerp(min, max, (float)owner.Index(card) / owner.Count);
 			transform.position = pos;
 		}
 	}
@@ -43,25 +43,15 @@ public class Hand : CardContainerBase {
 		// Add the hand layout component to the card
 		var layout = card.gameObject.AddComponent<HandLayouter>();
 		layout.owner = this;
-		layout.index = index > 0 ? index : cards.Count;
-
-		// TODO: Attach script that properly lays out the cards
+		layout.card = card;
 	}
 
 	public override void RemoveCard(int index) {
 		// Mark the card as no longer being in hand
 		cards[index].state &= ~CardBase.State.InHand;
-		
-		base.RemoveCard(index);
 		// Remove the hand layout component to the card
 		Destroy(cards[index].GetComponent<HandLayouter>());
-
-		// TODO: When a card is removed, attach script to properly
-	}
-
-	public override void Swap(int A, int B) {
-		base.Swap(A, B);
-		cards[A].GetComponent<HandLayouter>().index = A;
-		cards[B].GetComponent<HandLayouter>().index = B;
+		
+		base.RemoveCard(index);
 	}
 }

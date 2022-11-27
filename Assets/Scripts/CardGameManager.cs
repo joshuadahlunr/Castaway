@@ -13,6 +13,9 @@ public class CardGameManager : MonoBehaviour {
 	public float turnTime = 30;
 	public int playerHealth = 10;
 
+	public Deck playerDeck, playerGraveyard;
+	public Hand playerHand;
+
 	public bool IsPlayerTurn => isPlayerTurn;
 	public float TimeLeftInTurn => turnTimer;
 
@@ -20,6 +23,9 @@ public class CardGameManager : MonoBehaviour {
 	
 	private bool isPlayerTurn = true;
 	private float turnTimer = 0;
+
+	public void Start() => OnTurnStart();
+
 	public void Update() {
 		turnTimer -= Time.deltaTime;
 
@@ -34,6 +40,20 @@ public class CardGameManager : MonoBehaviour {
 	}
 
 	public void OnTurnStart() {
+		if (isPlayerTurn) {
+			var missingCards = Math.Max(5 - playerHand.Count, 0);
+			for (var i = 0; i < missingCards; i++) {
+				if (playerDeck.Count <= 1) {
+					// Shuffle the graveyard into the deck
+					playerGraveyard.SendAllToContainer(playerDeck);
+					playerDeck.Shuffle();
+				}
+				
+				playerDeck.SendToContainer(0, playerHand);
+			}
+		} else {
+			// TODO: Implement monster side!
+		}
 		
 	}
 

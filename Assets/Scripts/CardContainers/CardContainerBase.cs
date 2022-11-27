@@ -46,7 +46,7 @@ public class CardContainerBase : MonoBehaviour, IEnumerable<CardBase> {
 		// Make sure the newly added card is a child of this container
 		card.transform.parent = transform;
 		if(index >= 0) card.transform.SetSiblingIndex(index);
-		
+
 		// Make the card active or inactive depending on if this container is face up or face down
 		// TODO: Does deactivating the cards (update not running...) have any negative ramifications?
 		card.gameObject.SetActive(facing == Facing.FaceUp);
@@ -60,14 +60,19 @@ public class CardContainerBase : MonoBehaviour, IEnumerable<CardBase> {
 	public void RemoveCard(Card.CardBase card) => RemoveCard(Index(card));
 	
 
-	public virtual void SendToContainer(CardContainerBase newContainer, int index) {
+	public virtual void SendToContainer(int index, CardContainerBase newContainer) {
 		var card = cards[index];
-		RemoveCard(card);
+		RemoveCard(index);
 		newContainer.AddCard(card);
 	}
-	public void SendToContainer(CardContainerBase newContainer, string name) => SendToContainer(newContainer, Index(name));
-	public void SendToContainer(CardContainerBase newContainer, Card.CardBase card) => SendToContainer(newContainer, Index(card));
-	
+	public void SendToContainer(string name, CardContainerBase newContainer) => SendToContainer(Index(name), newContainer);
+	public void SendToContainer(Card.CardBase card, CardContainerBase newContainer) => SendToContainer(Index(card), newContainer);
+
+	public virtual void SendAllToContainer(CardContainerBase newContainer) {
+		while(Count > 0)
+			SendToContainer(Count - 1, newContainer);
+	}
+
 	public virtual void Swap(int A, int B) {
 		// Swap the cards
 		(cards[A], cards[B]) = (cards[B], cards[A]);

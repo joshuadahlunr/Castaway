@@ -14,7 +14,7 @@ public class Confirmation : MonoBehaviour {
 			draggable.targetPosition = snapTarget.transform.position;
 			draggable.targetRotation = snapTarget.transform.rotation;
 			
-			card.container.SendToContainer(snapTarget, card);
+			card.container.SendToContainer(card, snapTarget);
 			card.OnPlayed();
 		} else {
 			card.OnTarget(target);

@@ -14,7 +14,7 @@ namespace Card {
 		public new Card.Renderers.Base renderer => _renderer; // Exposed as a property so that derived classes can cast it to different types
 		// The container the card is currently held within
 		public CardContainerBase container;
-		
+
 		// Card property, has a tag indicating what it is used for and a value
 		[Serializable]
 		public struct Property {
@@ -155,17 +155,6 @@ namespace Card {
 			InvalidateCaches();
 		}
 
-		// Utility function which handles dealing damage to a health card base or to the player if no health card base can be found
-		public void DamageTargetOrPlayer(int damage, HealthCardBase target = null) {
-			if (target is null) {
-				CardGameManager.instance.playerHealth -= damage;
-				return;
-			}
-
-			target.health -= damage;
-		}
-
-		
 		// Function which goes through all of the attributes which can be modified and invalidates their caches 
 		// TODO: Add a way to invalidate the cache from the Unity UI
 		public virtual void InvalidateCaches() {
@@ -175,10 +164,19 @@ namespace Card {
 			rulesCache = null;
 			propertiesCache = null;
 		}
+		
+		
+		// Helper function which sends the card to its owner's graveyard!
+		public void SendToGraveyard() {
+			if (OwnedByPlayer) {
+				container.SendToContainer(this, CardGameManager.instance.playerGraveyard);
+			} else {
+				// TODO: Add back to the associated monster deck and shuffle it	
+			}
+		}
 
 		// TODO: Add renderer management stuff
-		// TODO: Add some events which can be subscribed to in the editor (or broadcast system?)
-		
+
 		public void Start() {
 			if(renderer is not null) renderer.card = this;
 		}
