@@ -40,9 +40,10 @@ namespace Card {
 		
 		
 		// Class representing a change that has been applied to the card
+		// TODO: Implement turns remaining removal
 		[Serializable]
 		public abstract class Modification {
-			public virtual int TurnsRemaining => -1; // -1 turns remaining indicates that the modification is permanent 
+			public int turnsRemaining = -1; // -1 turns remaining indicates that the modification is permanent 
 			
 			public virtual string GetName(string name) => name; 
 			public virtual string GetCost(string cost) => cost; 
@@ -174,13 +175,34 @@ namespace Card {
 				// TODO: Add back to the associated monster deck and shuffle it	
 			}
 		}
+		
 
-		// TODO: Add renderer management stuff
+		// When a new card is enabled, add it to the list of cards... when it is disabled remove it from the list of cards 
+		// This list of cards acts as a cache so that all of the cards currently in the scene can be found quickly!
+		public static readonly List<CardBase> ActiveCards = new();
+		public void OnEnable() => ActiveCards.Add(this);
+		public void OnDisable() => ActiveCards.Remove(this);
+		
 
 		public void Start() {
 			if(renderer is not null) renderer.card = this;
 		}
-		
+
+
+		// Called when a turn starts
+		public virtual void OnTurnStart() {}
+		// Called when a turn ends (processes modifications lifetimes)
+		// NOTE: needs to be called in overriding classes if automatic modifier removal is expected to function!
+		public virtual void OnTurnEnd() {
+			for (var i = 0; i < modifications.Count; i++) {
+				var mod = modifications[i];
+				if (mod.turnsRemaining == 0) {
+					modifications.RemoveAt(i);
+					i--;
+				} else if (mod.turnsRemaining > 0) 
+					mod.turnsRemaining--;
+			}
+		}
 		// Called whenever the state changes
 		public virtual void OnStateChanged(State oldState, State newState) { }
 		// Called when a monster reveals this card // TODO: Implement

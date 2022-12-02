@@ -21,11 +21,10 @@ public class CardGameManager : MonoBehaviour {
 
 	public Confirmation confirmationPrefab;
 	
-	private bool isPlayerTurn = true;
+
+	// Update will immediately reset the counter invoking the start of a new turn
+	private bool isPlayerTurn = false; // Since the turn owner immediately flips, start as monster's turn so that the player's turn will be next
 	private float turnTimer = 0;
-
-	public void Start() => OnTurnStart();
-
 	public void Update() {
 		turnTimer -= Time.deltaTime;
 
@@ -40,6 +39,10 @@ public class CardGameManager : MonoBehaviour {
 	}
 
 	public void OnTurnStart() {
+		// Invoke the turn start event on all cards
+		foreach(var card in Card.CardBase.ActiveCards)
+			card.OnTurnStart();
+		
 		if (isPlayerTurn) {
 			var missingCards = Math.Max(5 - playerHand.Count, 0);
 			for (var i = 0; i < missingCards; i++) {
@@ -54,10 +57,13 @@ public class CardGameManager : MonoBehaviour {
 		} else {
 			// TODO: Implement monster side!
 		}
-		
 	}
 
 	public void OnTurnEnd() {
+		// Invoke the turn end event on all cards
+		foreach(var card in Card.CardBase.ActiveCards)
+			card.OnTurnEnd();
+		
 		// Toggle who's turn it is;
 		isPlayerTurn = !isPlayerTurn;
 		

@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Units/DragableTargeting.unity
-    guid: fcbe705c321f4eb4cb63c1e2a9f887bf
+    path: Assets/Scenes/BattleScene.unity
+    guid: 8697964f0083e2f4d811d26f5f6cab66
   m_configObjects: {}

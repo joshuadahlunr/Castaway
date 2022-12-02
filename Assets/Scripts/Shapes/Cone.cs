@@ -2,7 +2,6 @@ using UnityEngine;
 
 // From: https://gist.github.com/gszauer/5718607
 // Author: Wolfram Kresse
-
 namespace Shapes {
 	// Creates a Cone mesh
 	[RequireComponent(typeof(MeshRenderer)), RequireComponent(typeof(MeshFilter))]
@@ -36,7 +35,7 @@ namespace Shapes {
 #endif
 
 		public void RegenerateCone() {
-			if (openingAngle > 0 && openingAngle < 180) {
+			if (openingAngle is > 0 and < 180) {
 				radiusTop = 0;
 				radiusBottom = length * Mathf.Tan(openingAngle * Mathf.Deg2Rad / 2);
 			}

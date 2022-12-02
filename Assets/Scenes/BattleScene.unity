@@ -208,7 +208,7 @@ MonoBehaviour:
   _name: Attack
   _cost: 1
   _art: {fileID: 21300000, guid: 66a4d5992443d624eb240e88cf957ddb, type: 3}
-  _rules: Deal <color=red>{prop[primary]}</color> damage.
+  _rules: Deal <color=red>{properties["primary"]}</color> damage.
   _properties:
     reorderableList:
       canAdd: 1
@@ -1714,6 +1714,11 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 147116289}
     m_Modifications:
+    - target: {fileID: 7992626169782994615, guid: b12620cf2bf3db14887538a945f8b6c3,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.4000244
+      objectReference: {fileID: 0}
     - target: {fileID: 7992626169977034672, guid: b12620cf2bf3db14887538a945f8b6c3,
         type: 3}
       propertyPath: m_Name
@@ -1833,6 +1838,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7992626170834239838, guid: b12620cf2bf3db14887538a945f8b6c3,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.4000244
+      objectReference: {fileID: 0}
+    - target: {fileID: 7992626171409837640, guid: b12620cf2bf3db14887538a945f8b6c3,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7992626171409837640, guid: b12620cf2bf3db14887538a945f8b6c3,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 4.909973
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []

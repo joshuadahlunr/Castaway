@@ -30,17 +30,11 @@ public class AttackCardProto : Card.ActionCardBase {
             }
     }
 
-    // When the player targets something
+    // When the player targets something...
     public override void OnTarget(Card.CardBase _target) {
         var target = _target.GetComponent<Card.HealthCardBase>();
-        
-        // If the target is null, and we are the player then send us back to their hand!
-        // If the target is null, and we are a monster then DamageTargetOrPlayer handles it
-        if (target is null && OwnedByPlayer) { 
-            GetComponent<Targeting>().Reset();
-            return;
-        }
-        
+        if (NullAndPlayerCheck(target)) return; // Make sure the target isn't null if owned by the player
+
         // Damage target (falling back to player if we are monster and not targeting anything!)
         DamageTargetOrPlayer(properties["primary"], target);
         

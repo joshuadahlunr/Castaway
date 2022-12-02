@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Linq;
+using UnityEngine;
 
 namespace Card {
 	public class ActionCardBase : CardBase {
@@ -21,6 +22,16 @@ namespace Card {
 			}
 
 			target.health -= damage;
+		}
+		
+		// Send the card back to the player's hand if any of the provided targets are null 
+		// Returns true in this case indicating the calling function should return, return of false indicates that the calling function should not return
+		public bool NullAndPlayerCheck(params CardBase[] targets){
+			if (!OwnedByPlayer) return false;
+			if (!targets.Any(target => target is null)) return false;
+			
+			GetComponent<DraggableBase>().Reset();
+			return true;
 		}
 	}
 }

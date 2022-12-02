@@ -15,28 +15,27 @@ namespace Card.Renderers {
 		public TMPro.TMP_Text rules;
 
 		public void Update() {
-			// var watch = new System.Diagnostics.Stopwatch();
-			// watch.Start();
-
 			name.text = card.name;
 			// cost.text = card.cost;
 			artwork.sprite = card.art;
 			FormatRules(card.rules);
-
-			// watch.Stop();
-			// Debug.Log($"Took {watch.ElapsedMilliseconds} ms to update!"); 
 		}
 
-		public virtual void FormatRules(string rulesDescription) {
+		protected virtual Dictionary<string, object> CalculateReplacementParameters() {
 			var parameters = new Dictionary<string, object> {
 				{ "{name}", card.name },
 				{ "{cost}", card.cost }
 			};
 			foreach (var (name, prop) in card.properties) 
-				parameters.Add($"{{prop[{name}]}}", prop.value);
+				parameters.Add($"{{properties[\"{name}\"]}}", prop.value);
+			return parameters;
+		}
 
+		public void FormatRules(string rulesDescription) {
 			// Update the displayed text
-			rules.text = parameters.Aggregate(rulesDescription, (current, parameter) => current.Replace(parameter.Key,parameter.Value.ToString()));
+			rules.text = CalculateReplacementParameters()
+				.Aggregate(rulesDescription, (current, parameter) 
+					=> current.Replace(parameter.Key,parameter.Value.ToString()));
 		}
 	}
 }
