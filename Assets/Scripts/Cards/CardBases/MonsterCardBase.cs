@@ -8,7 +8,7 @@ namespace Card {
 			if (newHealth <= 0) {
 				Debug.Log($"Monster {name} defeated!");
 				
-				Destroy(gameObject); // TODO: Implement defeat logic
+				gameObject.SetActive(false); // TODO: Implement defeat logic
 			}
 			
 			Debug.Log($"{name} took {oldHealth - newHealth} damage");

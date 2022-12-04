@@ -18,7 +18,6 @@ public class MonsterDeck : Deck {
 		var revealHolder = new GameObject(); // TODO: This is super inefficient and needs to be cached!
 		revealedCard.gameObject.SetActive(true);
 		revealHolder.transform.parent = transform;
-		revealHolder.transform.SetGlobalScale(Vector3.one);
 		revealHolder.transform.LookAt(Camera.main.transform.position);
 		revealHolder.transform.rotation *= Quaternion.Euler(90, 0, 0);
 		revealHolder.transform.position = transform.position + Vector3.up * .25f;

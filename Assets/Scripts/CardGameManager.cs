@@ -9,6 +9,9 @@ public class CardGameManager : MonoBehaviour {
 
 	public Canvas canvas;
 	public BurningRope rope;
+	
+	// TODO: Improve
+	public BurningRope healthBar;
 
 	
 	public float turnTime = 30;
@@ -59,6 +62,9 @@ public class CardGameManager : MonoBehaviour {
 
 		rope.max = turnTime;
 		rope.current = turnTimer;
+
+		healthBar.max = 10;
+		healthBar.current = playerHealth;
 		
 		// If there is no longer any time left in the turn, end the turn!
 		if (turnTimer <= 0) {
