@@ -12,6 +12,7 @@ public class CardGameManager : MonoBehaviour {
 
 	
 	public float turnTime = 30;
+	public int playerMaxHandSize = 5;
 	public int playerHealth = 10;
 
 	public Deck playerDeck, playerGraveyard;
@@ -72,7 +73,7 @@ public class CardGameManager : MonoBehaviour {
 			card.OnTurnStart();
 		
 		if (isPlayerTurn) {
-			var missingCards = Math.Max(5 - playerHand.Count, 0);
+			var missingCards = Math.Max(playerMaxHandSize - playerHand.Count, 0);
 			for (var i = 0; i < missingCards; i++) {
 				if (playerDeck.Count <= 1) {
 					// Shuffle the graveyard into the deck
@@ -85,7 +86,7 @@ public class CardGameManager : MonoBehaviour {
 		} else {
 			// TODO: Implement monster side!
 			foreach(var monster in monsters)
-				if(monster.isActiveAndEnabled)
+				if(monster?.isActiveAndEnabled ?? false)
 					monster.deck.RevealCard();
 		}
 	}
@@ -97,7 +98,7 @@ public class CardGameManager : MonoBehaviour {
 
 		if (!isPlayerTurn) {
 			foreach(var monster in monsters)
-				if(monster.isActiveAndEnabled)
+				if(monster?.isActiveAndEnabled ?? false)
 					monster.deck.PlayRevealedCard();
 		}
 
