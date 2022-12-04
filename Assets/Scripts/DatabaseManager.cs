@@ -9,4 +9,10 @@ public static class DatabaseManager {
 			return _database;
 		}
 	}
+	
+	// Function which ensures that the requested table exists and returns a reference to it
+	public static TableQuery<T> GetOrCreateTable<T>() where T : new() {
+		database.CreateTable<T>();
+		return database.Table<T>();
+	}
 }

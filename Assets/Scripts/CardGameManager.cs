@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Linq;
 using Card;
+using Extensions;
 using UnityEngine;
 
 public class CardGameManager : MonoBehaviour {
@@ -20,6 +22,17 @@ public class CardGameManager : MonoBehaviour {
 	public float TimeLeftInTurn => turnTimer;
 
 	public Confirmation confirmationPrefab;
+
+	public void Start() {
+		// If the player's deck hasn't been defined yet, create a deck which is just a bunch of prototype attacks
+		if (!DatabaseManager.GetOrCreateTable<Deck.DeckList>().Any()) 
+			DatabaseManager.database.InsertOrReplace(new Deck.DeckList() {
+				name = "Player Deck",
+				Cards = new[] { "Prototype AttackCard" }.Replicate(10).ToArray()
+			});
+		
+		playerDeck.DatabaseLoad();
+	}
 	
 
 	// Update will immediately reset the counter invoking the start of a new turn

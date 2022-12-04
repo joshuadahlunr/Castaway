@@ -58,6 +58,11 @@ public class CardContainerBase : MonoBehaviour, IEnumerable<CardBase> {
 	}
 	public void RemoveCard(string name) => RemoveCard(Index(name));
 	public void RemoveCard(Card.CardBase card) => RemoveCard(Index(card));
+
+	public void RemoveAllCards() {
+		while(Count > 0)
+			RemoveCard(0);
+	}
 	
 
 	public virtual void SendToContainer(int index, CardContainerBase newContainer) {
@@ -68,7 +73,7 @@ public class CardContainerBase : MonoBehaviour, IEnumerable<CardBase> {
 	public void SendToContainer(string name, CardContainerBase newContainer) => SendToContainer(Index(name), newContainer);
 	public void SendToContainer(Card.CardBase card, CardContainerBase newContainer) => SendToContainer(Index(card), newContainer);
 
-	public virtual void SendAllToContainer(CardContainerBase newContainer) {
+	public void SendAllToContainer(CardContainerBase newContainer) {
 		while(Count > 0)
 			SendToContainer(Count - 1, newContainer);
 	}

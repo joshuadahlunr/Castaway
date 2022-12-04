@@ -1,13 +1,43 @@
 ﻿using System;
 using Card;
+using SQLite;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class Deck : CardContainerBase {
+	// Type used to store a decklist in the SQL database
+	public class DeckList {
+		[PrimaryKey, Unique] public string name { set; get; }
+		public string cards { set; get; }
+
+		[SQLite.Ignore] public string[] Cards {
+			get => cards.Split("~");
+			set => cards = string.Join("~", value);
+		}
+	}
+
+	// Card database that loads are drawn from
+	public CardDatabase cardDB;
+	
 	private float initalYScale;
 	public void Awake() {
 		initalYScale = transform.localScale.y;
 		UpdateDeckHeight();
+	}
+
+	public void DatabaseLoad(string name = "Player Deck", bool clear = true) {
+		// Get the table out of the database and find the decklist with the given name!
+		var deckList = DatabaseManager.GetOrCreateTable<DeckList>().FirstOrDefault(l => l.name == name);
+		if (deckList is null) throw new ArgumentException($"The decklist {name} could not be found in the database!");
+		
+		// If we are clearing, remove all of the cards currently in the deck
+		if(clear) RemoveAllCards();
+		
+		// Use the associated cardDB to load the cards from the database
+		foreach (var card in deckList.Cards) {
+			Debug.Log(card);
+			AddCard(cardDB.Instantiate(card));
+		}
 	}
 
 	// https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle//The_modern_algorithm

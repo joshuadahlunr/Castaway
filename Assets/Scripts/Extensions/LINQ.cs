@@ -25,5 +25,20 @@ namespace Extensions {
 
 			concatenatedData = concat.ToArray();
 		}
+
+		// Create an infinitely repeating view of the data stored within the range 
+		public static IEnumerable<T> Replicate<T>([NotNull] this IEnumerable<T> data, bool indicator = true) {
+			using var enumerator = data.GetEnumerator();
+			while (true) {
+				var shouldReset = enumerator.MoveNext();
+				yield return enumerator.Current;
+				if(shouldReset) enumerator.Reset();
+			}
+		}
+
+		// Create a view of the data stored within the range that repeats <times> times 
+		public static IEnumerable<T> Replicate<T>([NotNull] this IEnumerable<T> data, int times) {
+			return data.Replicate().Take(data.Count() * times);
+		}
 	}
 }
