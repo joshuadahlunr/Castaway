@@ -1,5 +1,6 @@
 ﻿using System;
 using Card;
+using Extensions;
 using SQLite;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -34,11 +35,11 @@ public class Deck : CardContainerBase {
 		if(clear) RemoveAllCards();
 		
 		// Use the associated cardDB to load the cards from the database
-		foreach (var card in deckList.Cards) {
-			Debug.Log(card);
+		foreach (var card in deckList.Cards) 
 			AddCard(cardDB.Instantiate(card));
-		}
 	}
+	
+	
 
 	// https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle//The_modern_algorithm
 	private void YatesShuffle() {
@@ -102,10 +103,10 @@ public class Deck : CardContainerBase {
 		
 		if(GetComponent<MeshRenderer>() is { } r)
 			r.enabled = true;
-		
+
 		var scale = transform.localScale;
 		scale.y = initalYScale * cards.Count;
-		transform.localScale = scale;
+		transform.ChangeParentScale(scale);
 	}
 
 	public override void AddCard(Card.CardBase card, int index = -1) {

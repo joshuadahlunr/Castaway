@@ -168,11 +168,17 @@ namespace Card {
 		
 		
 		// Helper function which sends the card to its owner's graveyard!
+		// NOTE: For monsters, the graveyard is the deck associated with the monster!
 		public void SendToGraveyard() {
 			if (OwnedByPlayer) {
 				container.SendToContainer(this, CardGameManager.instance.playerGraveyard);
 			} else {
-				// TODO: Add back to the associated monster deck and shuffle it	
+				var ownerDeck = CardGameManager.instance.monsters[cardOwner - 1].deck;
+				if(container != null) container.SendToContainer(this, ownerDeck);
+				else ownerDeck.AddCard(this);
+				
+				// Once the card has been sent back to its owner's deck, shuffle its owner's deck
+				ownerDeck.Shuffle();
 			}
 		}
 		

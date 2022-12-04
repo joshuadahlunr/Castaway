@@ -6,7 +6,6 @@ using UnityEngine;
 
 public class CardGameManager : MonoBehaviour {
 	public static CardGameManager instance;
-	public void Awake() => instance = this;
 
 	public Canvas canvas;
 	public BurningRope rope;
@@ -18,20 +17,36 @@ public class CardGameManager : MonoBehaviour {
 	public Deck playerDeck, playerGraveyard;
 	public Hand playerHand;
 
+	public MonsterCardBase[] monsters;
+
 	public bool IsPlayerTurn => isPlayerTurn;
 	public float TimeLeftInTurn => turnTimer;
 
 	public Confirmation confirmationPrefab;
 
-	public void Start() {
+	public void Awake() {
+		// Setup singleton
+		instance = this;
+		
 		// If the player's deck hasn't been defined yet, create a deck which is just a bunch of prototype attacks
-		if (!DatabaseManager.GetOrCreateTable<Deck.DeckList>().Any()) 
+		if (!DatabaseManager.GetOrCreateTable<Deck.DeckList>().Any()) {
 			DatabaseManager.database.InsertOrReplace(new Deck.DeckList() {
 				name = "Player Deck",
 				Cards = new[] { "Prototype AttackCard" }.Replicate(10).ToArray()
 			});
-		
+			DatabaseManager.database.InsertOrReplace(new Deck.DeckList() {
+				name = "Shark Deck",
+				Cards = new[] { "Prototype AttackCard" }.Replicate(10).ToArray()
+			});
+		}
+
+		// Load decks from SQL and assign the monster's cards to the appropriate monster
 		playerDeck.DatabaseLoad();
+		for (var i = 0; i < monsters.Length; i++){
+			var monster = monsters[i];
+			monster.deck.DatabaseLoad("Shark Deck");
+			monster.deck.AssignOwnerToCards(i);
+		}
 	}
 	
 
@@ -69,6 +84,9 @@ public class CardGameManager : MonoBehaviour {
 			}
 		} else {
 			// TODO: Implement monster side!
+			foreach(var monster in monsters)
+				if(monster.isActiveAndEnabled)
+					monster.deck.RevealCard();
 		}
 	}
 
@@ -76,7 +94,13 @@ public class CardGameManager : MonoBehaviour {
 		// Invoke the turn end event on all cards
 		foreach(var card in Card.CardBase.ActiveCards)
 			card.OnTurnEnd();
-		
+
+		if (!isPlayerTurn) {
+			foreach(var monster in monsters)
+				if(monster.isActiveAndEnabled)
+					monster.deck.PlayRevealedCard();
+		}
+
 		// Toggle who's turn it is;
 		isPlayerTurn = !isPlayerTurn;
 		
