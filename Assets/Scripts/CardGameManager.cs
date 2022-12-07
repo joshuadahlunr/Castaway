@@ -3,6 +3,7 @@ using System.Linq;
 using Card;
 using Extensions;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CardGameManager : MonoBehaviour {
 	public static CardGameManager instance;
@@ -12,11 +13,20 @@ public class CardGameManager : MonoBehaviour {
 	
 	// TODO: Improve
 	public BurningRope healthBar;
+	public GameObject losePanel;
 
 	
 	public float turnTime = 30;
 	public int playerMaxHandSize = 5;
-	public int playerHealth = 10;
+
+	[SerializeField] private int _playerHealth = 10;
+	public int playerHealth {
+		set {
+			OnPlayerHealthChange(_playerHealth, value);
+			_playerHealth = value;
+		}
+		get => _playerHealth;
+	}
 
 	public Deck playerDeck, playerGraveyard;
 	public Hand playerHand;
@@ -110,10 +120,37 @@ public class CardGameManager : MonoBehaviour {
 
 		// Toggle who's turn it is;
 		isPlayerTurn = !isPlayerTurn;
-		
-		// TODO: Check if the player's health is zero or if all of the monster's healths are zero!
+
+		CheckWinLose();
 		
 		OnTurnStart();
+	}
+
+	public void OnPlayerHealthChange(int oldHealth, int newHealth) {
+		CheckWinLose();
+	}
+	
+	
+	// Check if the player has won (all monsters defeated) or lost (has 0 HP left)
+	public void CheckWinLose() {
+		if (playerHealth <= 0)
+			OnLose();
+
+		bool allDead = monsters.All(monster => !monster.isActiveAndEnabled);
+		if(allDead)
+			OnWin();
+	}
+
+	
+	
+	public void OnWin() {
+		SceneManager.LoadScene("Scenes/ResourceMgmtScene");
+	}
+
+	public void OnLose() {
+		Time.timeScale = 0;
+		losePanel.SetActive(true);
+		// TODO: Need to go back to the main menu or something...
 	}
 	
 

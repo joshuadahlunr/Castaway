@@ -8,7 +8,9 @@ namespace Card {
 			if (newHealth <= 0) {
 				Debug.Log($"Monster {name} defeated!");
 				
-				gameObject.SetActive(false); // TODO: Implement defeat logic
+				// Mark the monster as defeated (disabled in Unity) and check if all monsters have been defeated
+				gameObject.SetActive(false);
+				CardGameManager.instance.CheckWinLose();
 			}
 			
 			Debug.Log($"{name} took {oldHealth - newHealth} damage");
