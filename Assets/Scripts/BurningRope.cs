@@ -2,7 +2,7 @@
 using UnityEngine;
 
 public class BurningRope : ProgressBar {
-	[SerializeField] private TMPro.TMP_Text text;
+	[SerializeField] protected TMPro.TMP_Text text;
 
 	public float current;
 	public float max = 1;

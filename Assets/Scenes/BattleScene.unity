@@ -753,9 +753,50 @@ PrefabInstance:
       propertyPath: m_Name
       value: Health
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 9020992274372086225, guid: 79cf75bcad4ec5c4aa123a30fdc3d977,
+        type: 3}
+      propertyPath: m_text
+      value: 10 HP
+      objectReference: {fileID: 0}
+    - target: {fileID: 9020992274372086225, guid: 79cf75bcad4ec5c4aa123a30fdc3d977,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 12.2
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 9020992274062601815, guid: 79cf75bcad4ec5c4aa123a30fdc3d977, type: 3}
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 79cf75bcad4ec5c4aa123a30fdc3d977, type: 3}
+--- !u!114 &568946723 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9020992274640233541, guid: 79cf75bcad4ec5c4aa123a30fdc3d977,
+    type: 3}
+  m_PrefabInstance: {fileID: 568946722}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &568946724 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9020992274372086225, guid: 79cf75bcad4ec5c4aa123a30fdc3d977,
+    type: 3}
+  m_PrefabInstance: {fileID: 568946722}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &568946725 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9020992274062601835, guid: 79cf75bcad4ec5c4aa123a30fdc3d977,
+    type: 3}
+  m_PrefabInstance: {fileID: 568946722}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &592492769
 GameObject:
   m_ObjectHideFlags: 0
@@ -1131,7 +1172,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canvas: {fileID: 115369221}
   rope: {fileID: 1696576803}
-  healthBar: {fileID: 1575277745}
+  healthBar: {fileID: 0}
   turnTime: 5
   playerMaxHandSize: 5
   playerHealth: 10
@@ -1414,18 +1455,23 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 568946722}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1575277745 stripped
+--- !u!114 &1575277746
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 9020992274062601815, guid: 79cf75bcad4ec5c4aa123a30fdc3d977,
-    type: 3}
-  m_PrefabInstance: {fileID: 568946722}
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 568946725}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d4c5e962c04248caaf3ba3da42ffcd30, type: 3}
+  m_Script: {fileID: 11500000, guid: 40a23efe5bff450c8606c8668246c923, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  progress: 1
+  progressImage: {fileID: 568946723}
+  text: {fileID: 568946724}
+  current: 0
+  max: 1
 --- !u!224 &1696576800 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 9020992274062601812, guid: 79cf75bcad4ec5c4aa123a30fdc3d977,
