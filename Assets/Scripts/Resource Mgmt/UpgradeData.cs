@@ -23,7 +23,18 @@ public class UpgradeData
 
     public void ResetProgress()
     {
-        _progress = 0;
+        // If progress is equal to cost, reset progress to 0
+        if (_progress == _cost)
+        {
+            _progress = 0;
+
+        } 
+        
+        // Otherwise, set progress to difference of progress and cost
+        else if (_progress > _cost)
+        {
+            _progress = _progress - _cost;
+        }
     }
 
     public void IncreaseCost()

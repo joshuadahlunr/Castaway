@@ -23,24 +23,6 @@ public class StrategyGameManager : MonoBehaviour
         Globals.SHIP_RESOURCE.AddAmount(resourcesWon);
     }
 
-    public void Upgrade()
-    {
-
-        for (int i = 0; i < Globals.UPGRADE_DATA.Length; i++)
-        {
-            if (Globals.UPGRADE_DATA[i].CanBuy()) // If we have enough resources for an upgrade...
-            {
-                Globals.SHIP_RESOURCE.AddAmount(-sliderArr[i].value); // ...subtract however much was allocated to slider
-                Globals.UPGRADE_DATA[i].AddProgress(sliderArr[i].value); // ...and record progress toward that upgrade
-                Debug.Log("Progress towards upgrade " + i.ToString() + " is: " + Globals.UPGRADE_DATA[i].Progress.ToString());
-            }
-            else
-            {
-                break;
-            }
-        }
-    }
-
     private int remainder;
     private int evenNum;
     private int quotient;
@@ -78,7 +60,6 @@ public class StrategyGameManager : MonoBehaviour
 
     private void Awake()
     {
-        confirmBtn.onClick.AddListener(Upgrade);
         sustainBtn.onClick.AddListener(SustainShip);
         clearBtn.onClick.AddListener(ClearSliders);
 

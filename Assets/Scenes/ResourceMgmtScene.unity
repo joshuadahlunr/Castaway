@@ -1134,6 +1134,7 @@ GameObject:
   m_Component:
   - component: {fileID: 344213659}
   - component: {fileID: 344213660}
+  - component: {fileID: 344213661}
   m_Layer: 5
   m_Name: UpgradeSystem
   m_TagString: Untagged
@@ -1183,9 +1184,29 @@ MonoBehaviour:
   confirmBtn: {fileID: 200057632}
   sustainBtn: {fileID: 1482736151}
   clearBtn: {fileID: 167103201}
-  resourcesWon: 50
+  resourcesWon: 100
   upgradeTime: 60
   winMsg: {fileID: 1147127513}
+--- !u!114 &344213661
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 344213658}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 787e3dff857b181449daab5d884017e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sliderArr:
+  - {fileID: 469829415}
+  - {fileID: 232200257}
+  - {fileID: 410361460}
+  - {fileID: 1186279185}
+  - {fileID: 1911709795}
+  - {fileID: 1683251042}
+  confirmBtn: {fileID: 200057632}
 --- !u!1 &410361458
 GameObject:
   m_ObjectHideFlags: 0
