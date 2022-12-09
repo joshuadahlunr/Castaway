@@ -46,7 +46,7 @@ public class CardGameManager : MonoBehaviour {
 		if (!DatabaseManager.GetOrCreateTable<Deck.DeckList>().Any()) {
 			DatabaseManager.database.InsertOrReplace(new Deck.DeckList() {
 				name = "Player Deck",
-				Cards = new[] { "Prototype AttackCard" }.Replicate(10).ToArray()
+				Cards = new[] { "Prototype AttackCard" }.Replicate(6).ToArray()
 			});
 			DatabaseManager.database.InsertOrReplace(new Deck.DeckList() {
 				name = "Shark Deck",
