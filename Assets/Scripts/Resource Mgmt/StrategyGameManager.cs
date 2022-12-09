@@ -23,7 +23,6 @@ public class StrategyGameManager : MonoBehaviour
         Globals.SHIP_RESOURCE.AddAmount(resourcesWon);
     }
 
-    private bool canUpgrade;
     public void Upgrade()
     {
 
@@ -41,27 +40,6 @@ public class StrategyGameManager : MonoBehaviour
             }
         }
     }
-
-    /* private float sliderTotals;
-    private float currentVal;
-
-    public void ValidateResources()
-    {
-        sliderTotals = 0;
-
-        for (int i = 0; i < Globals.UPGRADE_DATA.Length; i++)
-        {
-            sliderTotals += sliderArr[i].value;
-        }
-
-        for (int i = 0; i < Globals.UPGRADE_DATA.Length; i++)
-        {
-            if (sliderTotals > Globals.SHIP_RESOURCE.Amount)
-            {
-                sliderArr[i].value = currentVal;
-            }
-        }
-    } */
 
     private int remainder;
     private int evenNum;
@@ -105,11 +83,6 @@ public class StrategyGameManager : MonoBehaviour
         clearBtn.onClick.AddListener(ClearSliders);
 
         AddResources();
-
-        /*for (int i = 0; i < Globals.UPGRADE_DATA.Length; i++)
-        {
-            sliderArr[i].onValueChanged.AddListener(delegate { ValidateResources(); });
-        }*/
 
         winMsg.text = "Congratulations! You have earned " + resourcesWon.ToString() + " resources for your ship and crew. You have " +
             Globals.SHIP_RESOURCE.Amount.ToString() + " resources in total. How would you like to allocate them?";
