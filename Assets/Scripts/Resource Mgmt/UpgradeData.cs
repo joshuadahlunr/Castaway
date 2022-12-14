@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// @author: Misha Desear
+/// </summary>
 public class UpgradeData
 {
     private string _code;

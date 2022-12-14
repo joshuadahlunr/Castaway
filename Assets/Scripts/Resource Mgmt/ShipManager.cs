@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// @author: Misha Desear
+/// </summary>
 public class ShipManager : MonoBehaviour
 {
     public Slider[] sliderArr;

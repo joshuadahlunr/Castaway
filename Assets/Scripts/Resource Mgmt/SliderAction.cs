@@ -4,6 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+/// <summary>
+/// @author: Misha Desear
+/// </summary>
 public class SliderAction : MonoBehaviour
 {
     public TextMeshProUGUI sliderText;

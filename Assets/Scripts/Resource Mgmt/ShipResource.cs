@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// @author: Misha Desear
+/// </summary>
 public class ShipResource
 {
     private float _currentAmt;
