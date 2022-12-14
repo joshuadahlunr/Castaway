@@ -3,7 +3,10 @@
 using Card;
 using UnityEngine;
 
-// Class that provides the ability to target "targetable" card with a selection arrow
+/// <summary>
+/// Class that provides the ability to target "targetable" card with a selection arrow
+/// </summary>
+/// <author>Joshua Dahl</author>
 public class Targeting : DraggableBase {
 	// Arrow prefab
 	public GameObject arrowPrefab;

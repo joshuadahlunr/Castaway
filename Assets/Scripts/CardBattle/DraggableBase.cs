@@ -3,57 +3,83 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
-// Base class providing abstract dragging behavior
+/// <summary>
+/// Base class providing abstract dragging behavior
+/// </summary>
+/// <author>Joshua Dahl</author>
 public abstract class DraggableBase : MonoBehaviour, IPointerDownHandler {
-	// Reference to the point (mouse position) action
+	/// <summary>
+	/// Reference to the point (mouse position) action
+	/// </summary>
 	public InputActionReference pointerAction;
-	// Reference to the click (left mouse button) action
+	/// <summary>
+	/// Reference to the click (left mouse button) action
+	/// </summary>
 	public InputActionReference clickAction;
-
-	// The initial Z position (in screen space) of the card when we start dragging it.
+	
+	/// <summary>
+	/// The initial Z position (in screen space) of the card when we start dragging it.
+	/// </summary>
 	private float initialZ;
-	// Bool if the mouse is down and selecting us
+	/// <summary>
+	/// Bool if the mouse is down and selecting us
+	/// </summary>
 	protected bool pointerDown;
-	// Bool indicating if we are currently snapping
+	/// <summary>
+	/// Bool indicating if we are currently snapping
+	/// </summary>
 	protected bool isSnapping;
-	// The object we are snapping to
+	/// <summary>
+	/// The object we are snapping to
+	/// </summary>
 	protected GameObject snapObject;
-	// The layer the object was assigned to before being dragged
+	/// <summary>
+	/// The layer the object was assigned to before being dragged
+	/// </summary>
 	protected int initalLayer;
 	
-	// The card associated with this draggable...
+	/// <summary>
+	/// The card associated with this draggable...
+	/// </summary>
 	protected Card.CardBase card; 
+	/// <summary>
+	/// At the start of the game, find the reference to the associated card
+	/// </summary>
 	protected void Awake() => card = GetComponent<Card.CardBase>();
 
 
-	// Callback functions
-	// Called when we start dragging
-	public virtual void OnDragBegin() { }
-	// Called when we stop dragging, is passed weather or not we are currently sanpping
-	public virtual void OnDragEnd(bool shouldSnap) { }
-	// Called every frame while we are dragging
-	public virtual bool OnDrag(RaycastHit? hit) { return false; } // Returns true if we are snapping, false otherwise
+	// ---- Callback functions ----
 	
-	// Called when a confirmation fails or something isn't "targeted" should reset the card to its initial state!
+	
+	/// <summary>
+	/// Callback called when we start dragging
+	/// </summary>
+	public virtual void OnDragBegin() { }
+	/// <summary>
+	/// Callback called when we stop dragging, is passed weather or not we are currently snapping
+	/// </summary>
+	/// <param name="shouldSnap">Bool representing weather or not we are currently snapping</param>
+	public virtual void OnDragEnd(bool shouldSnap) { }
+	/// <summary>
+	/// Callback called every frame while we are dragging
+	/// </summary>
+	/// <param name="hit">The potential raycast hit (null if mouse not over anything relevant)</param>
+	/// <returns>Returns true if we are snapping, false otherwise</returns>
+	public virtual bool OnDrag(RaycastHit? hit) { return false; } 
+	
+	/// <summary>
+	/// Callback called when a confirmation fails or something isn't "targeted" should reset the card to its initial state!
+	/// </summary>
 	public virtual void Reset() {}
 
 
+
+
+	// ---- Behavior ----
 	
-	// Helper functions
-	// Gets the mouse position in screen space (with Z set)
-	protected Vector3 GetPointer() {
-		// Pixel coordinates of mouse (x,y)...
-		var mousePoint2D = pointerAction.action.ReadValue<Vector2>();
-		// Converted to 3D vector
-		return new Vector3(mousePoint2D.x, mousePoint2D.y, initialZ);
-	}
-	// Gets the mouse position in world space
-	protected Vector3 GetPointerAsWorldPoint() => Camera.main?.ScreenToWorldPoint(GetPointer()) ?? Vector3.zero;
-
-
-
-
-	// Behavior
+	
+	
+	
 	// On dis/enable un/register listeners for the click and pointer actions
 	public void OnEnable() {
 		pointerAction.action.Enable();
@@ -67,14 +93,19 @@ public abstract class DraggableBase : MonoBehaviour, IPointerDownHandler {
 		clickAction.action.performed -= OnClickUp;
 	}
 	
-	// Called whenever the mouse pointer moves
-	private void OnPointerMove(InputAction.CallbackContext ctx) {
+	/// <summary>
+	/// Called whenever the mouse pointer moves
+	/// </summary>
+	/// <param name="_">Input action context (which is ignored)</param>
+	private void OnPointerMove(InputAction.CallbackContext _) {
 		if (!pointerDown) return;
 		OnPointerDrag();
 	}
-
-	// Called whenever the mouse pointer moves and we being dragged, preforms a raycast that ignores the dragged card
-	//  and then calls OnDrag with the result of the raycast
+	
+	/// <summary>
+	/// Called whenever the mouse pointer moves and we being dragged, preforms a raycast that ignores the dragged card
+	///  and then calls OnDrag with the result of the raycast
+	/// </summary>
 	private void OnPointerDrag() {
 		isSnapping = false;
 
@@ -86,8 +117,12 @@ public abstract class DraggableBase : MonoBehaviour, IPointerDownHandler {
 		
 	}
 
-	// Called when ever the click action occurs
-	// Ignores all cases except releases, and cleans up after the drag (calling the OnDragEnd function)(
+
+	/// <summary>
+	/// Called when ever the click action occurs
+	/// Ignores all cases except releases, and cleans up after the drag (calling the OnDragEnd function)
+	/// </summary>
+	/// <param name="ctx">Input action context (used to get if the mouse button is pressed or not)</param>
 	private void OnClickUp(InputAction.CallbackContext ctx) {
 		if (!pointerDown) return; // Don't do any processing if we aren't selected
 		if (ctx.ReadValueAsButton()) return; // Don't do any processing if the mouse button is pressed at all
@@ -98,9 +133,12 @@ public abstract class DraggableBase : MonoBehaviour, IPointerDownHandler {
 		// Invoke the callback
 		OnDragEnd(isSnapping);
 	}
-
-	// Called when this object is initially clicked on, sets up the drag
-	public void OnPointerDown(PointerEventData eventData) {
+	
+	/// <summary>
+	/// Called when this object is initially clicked on, sets up the drag
+	/// </summary>
+	/// <param name="_">Input action context (ignored)</param>
+	public void OnPointerDown(PointerEventData _) {
 		// Record all of the variables we need for dragging
 		pointerDown = true;
 		initialZ = Camera.main?.WorldToScreenPoint(transform.position).z ?? 0;
@@ -111,4 +149,26 @@ public abstract class DraggableBase : MonoBehaviour, IPointerDownHandler {
 		OnDragBegin();
 		card?.OnDragged();
 	}
+	
+	
+	
+	// ---- Helper functions ----
+	
+	
+	
+	/// <summary>
+	/// Gets the mouse position in screen space (with Z set)
+	/// </summary>
+	/// <returns>The mouse position in screen space (with Z set)</returns>
+	protected Vector3 GetPointer() {
+		// Pixel coordinates of mouse (x,y)...
+		var mousePoint2D = pointerAction.action.ReadValue<Vector2>();
+		// Converted to 3D vector
+		return new Vector3(mousePoint2D.x, mousePoint2D.y, initialZ);
+	}
+	/// <summary>
+	/// Gets the mouse position in world space
+	/// </summary>
+	/// <returns>The mouse position in world space</returns>
+	protected Vector3 GetPointerAsWorldPoint() => Camera.main?.ScreenToWorldPoint(GetPointer()) ?? Vector3.zero;
 }

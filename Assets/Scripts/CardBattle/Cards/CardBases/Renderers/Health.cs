@@ -4,6 +4,7 @@ namespace Card.Renderers {
 	/// <summary>
 	/// Extension to the base renderer which adds health text
 	/// </summary>
+	/// <author>Joshua Dahl</author>
 	public class Health: Base {
 		/// <summary>
 		/// Reference to the health UI text

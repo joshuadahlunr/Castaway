@@ -5,21 +5,51 @@ using Extensions;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+/// Singleton Manager responsible for controlling the flow of the card game
+/// </summary>
+/// <author>Joshua Dahl</author>
 public class CardGameManager : MonoBehaviour {
+	/// <summary>
+	/// Singleton instance of this class
+	/// </summary>
 	public static CardGameManager instance;
 
+	/// <summary>
+	/// Reference to the main scene canvas
+	/// </summary>
 	public Canvas canvas;
+	/// <summary>
+	/// Reference to the timer countdown rope
+	/// </summary>
 	public BurningRope rope;
 	
 	// TODO: Improve
 	public BurningRope healthBar;
 	public GameObject losePanel;
+	
+	/// <summary>
+	/// Reference to the prefab for confirmation prompts
+	/// </summary>
+	public Confirmation confirmationPrefab;
 
 	
+	/// <summary>
+	/// The amount of time in a turn
+	/// </summary>
 	public float turnTime = 30;
+	/// <summary>
+	/// The number of cards the player's hand is refilled to every turn
+	/// </summary>
 	public int playerMaxHandSize = 5;
 
+	/// <summary>
+	/// Backing memory for the player's health
+	/// </summary>
 	[SerializeField] private int _playerHealth = 10;
+	/// <summary>
+	/// Players health (invokes a callback whenever changed)
+	/// </summary>
 	public int playerHealth {
 		set {
 			OnPlayerHealthChange(_playerHealth, value);
@@ -28,16 +58,28 @@ public class CardGameManager : MonoBehaviour {
 		get => _playerHealth;
 	}
 
+	// References to the player's deck, graveyard, and hand
 	public Deck playerDeck, playerGraveyard;
 	public Hand playerHand;
 
+	/// <summary>
+	/// References to all of the monsters
+	/// </summary>
 	public MonsterCardBase[] monsters;
 
+	/// <summary>
+	/// Provide public read only access to who's turn it is
+	/// </summary>
 	public bool IsPlayerTurn => isPlayerTurn;
+	/// <summary>
+	/// Provide public read only access to how much time is left in the turn
+	/// </summary>
 	public float TimeLeftInTurn => turnTimer;
 
-	public Confirmation confirmationPrefab;
-
+	
+	/// <summary>
+	/// When the game starts...
+	/// </summary>
 	public void Awake() {
 		// Setup singleton
 		instance = this;
@@ -64,15 +106,25 @@ public class CardGameManager : MonoBehaviour {
 	}
 	
 
-	// Update will immediately reset the counter invoking the start of a new turn
-	private bool isPlayerTurn = false; // Since the turn owner immediately flips, start as monster's turn so that the player's turn will be next
-	private float turnTimer = 0;
-	public void Update() {
-		turnTimer -= Time.deltaTime;
 
+	/// <summary>
+	/// Variable tracking if it is the player's turn or not
+	/// </summary>
+	private bool isPlayerTurn = false; // Since the turn owner immediately flips, start as monster's turn so that the player's turn will be next
+	/// <summary>
+	/// Variable tracking how much time remains in the turn
+	/// </summary>
+	private float turnTimer = 0;
+	/// <summary>
+	/// Every frame...
+	/// </summary>
+	public void Update() {
+		// Decrease the time left in the turn
+		turnTimer -= Time.deltaTime;
 		rope.max = turnTime;
 		rope.current = turnTimer;
 
+		// Update the player's healthbar
 		healthBar.max = 10;
 		healthBar.current = playerHealth;
 		
@@ -83,6 +135,9 @@ public class CardGameManager : MonoBehaviour {
 		}
 	}
 
+	/// <summary>
+	/// Called whenever a new turn begins
+	/// </summary>
 	public void OnTurnStart() {
 		// Invoke the turn start event on all cards
 		foreach(var card in Card.CardBase.ActiveCards)
@@ -90,15 +145,8 @@ public class CardGameManager : MonoBehaviour {
 		
 		if (isPlayerTurn) {
 			var missingCards = Math.Max(playerMaxHandSize - playerHand.Count, 0);
-			for (var i = 0; i < missingCards; i++) {
-				if (playerDeck.Count <= 1) {
-					// Shuffle the graveyard into the deck
-					playerGraveyard.SendAllToContainer(playerDeck);
-					playerDeck.Shuffle();
-				}
-				
-				playerDeck.SendToContainer(0, playerHand);
-			}
+			for (var i = 0; i < missingCards; i++)
+				DrawPlayerCard();
 		} else {
 			// TODO: Implement monster side!
 			foreach(var monster in monsters)
@@ -107,6 +155,9 @@ public class CardGameManager : MonoBehaviour {
 		}
 	}
 
+	/// <summary>
+	/// Called whenever a turn ends
+	/// </summary>
 	public void OnTurnEnd() {
 		// Invoke the turn end event on all cards
 		foreach(var card in Card.CardBase.ActiveCards)
@@ -126,12 +177,50 @@ public class CardGameManager : MonoBehaviour {
 		OnTurnStart();
 	}
 
+	/// <summary>
+	/// Callback called whenever the player's health changes
+	/// </summary>
+	/// <param name="oldHealth">The player's old health</param>
+	/// <param name="newHealth">The player's current health</param>
 	public void OnPlayerHealthChange(int oldHealth, int newHealth) {
 		CheckWinLose();
 	}
 	
+	/// <summary>
+	/// Callback called when the player wins the game
+	/// </summary>
+	public void OnWin() {
+		SceneManager.LoadScene("Scenes/ResourceMgmtScene");
+	}
+
+	/// <summary>
+	/// Callback called when the player loses the game
+	/// </summary>
+	public void OnLose() {
+		Time.timeScale = 0; // Pause
+		losePanel.SetActive(true); // Display the lose panel
+		// TODO: Need to go back to the main menu or something...
+	}
 	
-	// Check if the player has won (all monsters defeated) or lost (has 0 HP left)
+	
+	/// <summary>
+	/// Function which draws a card for the player (shuffling the graveyard into their deck if necessary)
+	/// </summary>
+	public void DrawPlayerCard() {
+		// If drawing the card would leave the deck empty...
+		if (playerDeck.Count <= 1) {
+			// Shuffle the graveyard into the deck
+			playerGraveyard.SendAllToContainer(playerDeck);
+			playerDeck.Shuffle();
+		}
+		
+		// Send a card from the player's deck to their hand
+		playerDeck.SendToContainer(0, playerHand);
+	} 
+	
+	/// <summary>
+	/// Check if the player has won (all monsters defeated) or lost (has 0 HP left) and invoke the appropriate events
+	/// </summary>
 	public void CheckWinLose() {
 		if (playerHealth <= 0)
 			OnLose();
@@ -141,19 +230,12 @@ public class CardGameManager : MonoBehaviour {
 			OnWin();
 	}
 
-	
-	
-	public void OnWin() {
-		SceneManager.LoadScene("Scenes/ResourceMgmtScene");
-	}
-
-	public void OnLose() {
-		Time.timeScale = 0;
-		losePanel.SetActive(true);
-		// TODO: Need to go back to the main menu or something...
-	}
-	
-
+	/// <summary>
+	/// Creates a snap confirmation
+	/// </summary>
+	/// <param name="card">The card to snap into place if confirmed</param>
+	/// <param name="target">The container to move the card to if confirmed</param>
+	/// <returns>Reference to the created confirmation</returns>
 	public Confirmation CreateSnapConfirmation(CardBase card, CardContainerBase target) {
 		var confirm = Instantiate(confirmationPrefab.gameObject, canvas.transform).GetComponent<Confirmation>();
 		confirm.card = card;
@@ -161,6 +243,12 @@ public class CardGameManager : MonoBehaviour {
 		return confirm;
 	}
 	
+	/// <summary>
+	/// Creates a target confirmation
+	/// </summary>
+	/// <param name="card">The card that is performing the targeting</param>
+	/// <param name="target">The card this is being targeted</param>
+	/// <returns>Reference to the created confirmation</returns>
 	public Confirmation CreateTargetConfirmation(CardBase card, CardBase target) {
 		var confirm = Instantiate(confirmationPrefab.gameObject, canvas.transform).GetComponent<Confirmation>();
 		confirm.card = card;

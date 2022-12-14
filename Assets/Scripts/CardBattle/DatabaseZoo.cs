@@ -1,13 +1,23 @@
 using System.Data;
 using UnityEngine;
 
-// Lays out every card in the database so that it can be inspected
+/// <summary>
+/// Lays out every card in a database so that it can be inspected
+/// </summary>
+/// <author>Joshua Dahl</author>
 public class DatabaseZoo : MonoBehaviour {
-    // The database to visualize
+    /// <summary>
+    /// The database to visualize
+    /// </summary>
     public CardDatabase database;
-    // The number of columns to split cards into
+    /// <summary>
+    /// The number of columns to split cards into
+    /// </summary>
     public int numberOfColumns = 10;
     
+    /// <summary>
+    /// At the start of the game instantiate a copy of every card in the database
+    /// </summary>
     public void Start() {
         int x = 0, y = 0;
 
@@ -28,7 +38,13 @@ public class DatabaseZoo : MonoBehaviour {
         }
     }
     
-    // From: https://gamedev.stackexchange.com/questions/86863/calculating-the-bounding-box-of-a-game-object-based-on-its-children
+    
+    /// <summary>
+    /// Function which calculates the visible bounding box of an object (and its children>
+    /// </summary>
+    /// <remarks>From: https://gamedev.stackexchange.com/questions/86863/calculating-the-bounding-box-of-a-game-object-based-on-its-children</remarks>
+    /// <param name="g">The game object to bound</param>
+    /// <returns>The bounds of <see cref="g"/> and its children</returns>
     Bounds GetRenderBounds(GameObject g) {
         var b = new Bounds(g.transform.position, Vector3.zero);
         foreach (Renderer r in g.GetComponentsInChildren<Renderer>()) {

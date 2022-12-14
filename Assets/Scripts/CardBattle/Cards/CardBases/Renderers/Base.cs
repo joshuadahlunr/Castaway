@@ -7,6 +7,7 @@ namespace Card.Renderers {
 	/// <summary>
 	/// Component which simply holds references to all of the world space UI elements that can be tweaked
 	/// </summary>
+	/// <author>Joshua Dahl</author>
 	[RequireComponent(typeof(Canvas))]
 	public class Base : MonoBehaviour {
 		/// <summary>

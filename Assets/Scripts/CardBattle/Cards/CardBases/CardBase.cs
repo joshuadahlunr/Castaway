@@ -9,6 +9,7 @@ namespace Card {
 	/// <summary>
 	/// Base class all card types inherit from!
 	/// </summary>
+	/// <author>Joshua Dahl</author>
 	public class CardBase : MonoBehaviour {
 		
 		/// <summary>

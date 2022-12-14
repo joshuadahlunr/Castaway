@@ -9,6 +9,7 @@ using Random = UnityEngine.Random;
 /// <summary>
 /// Deck of cards which can be visualized in the world
 /// </summary>
+/// <author>Joshua Dahl</author>
 public class Deck : CardContainerBase {
 	/// <summary>
 	/// Decks are face down containers

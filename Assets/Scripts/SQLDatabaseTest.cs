@@ -2,6 +2,7 @@
 using SQLite;
 using UnityEngine;
 
+// Testing code that is being left in as a reference on how to access the SQL database
 public class SQLDatabaseTest : MonoBehaviour {
 	public class Stock {
 		[PrimaryKey, AutoIncrement] public int Id { get; set; }

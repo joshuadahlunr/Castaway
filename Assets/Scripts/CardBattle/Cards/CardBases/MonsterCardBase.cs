@@ -4,6 +4,7 @@ namespace Card {
 	/// <summary>
 	/// Extension to health card that represents one of the monsters on the field
 	/// </summary>
+	/// <author>Joshua Dahl</author>
 	public class MonsterCardBase : HealthCardBase {
 		/// <summary>
 		/// Reference to the deck associated with this monster

@@ -4,6 +4,7 @@ using UnityEngine;
 /// <summary>
 /// Extension to deck which provide a tiny bit of AI needed for monsters to seam lively
 /// </summary>
+/// <author>Joshua Dahl</author>
 public class MonsterDeck : Deck {
 	/// <summary>
 	/// Reference to the card which the monster reveals to the player on each of its turns

@@ -1,9 +1,12 @@
 using UnityEngine;
 
-// From: https://gist.github.com/gszauer/5718607
-// Author: Wolfram Kresse
 namespace Shapes {
-	// Creates a Cone mesh
+	
+	/// <summary>
+	/// Creates a Cone mesh
+	/// </summary>
+	/// <remarks>From: https://gist.github.com/gszauer/5718607</remarks>
+	/// <author>Wolfram Kresse + Joshua Dahl</author>
 	[RequireComponent(typeof(MeshRenderer)), RequireComponent(typeof(MeshFilter))]
 	[ExecuteInEditMode]
 	public class Cone : MonoBehaviour {

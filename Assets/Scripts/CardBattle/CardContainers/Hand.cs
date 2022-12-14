@@ -4,6 +4,7 @@ using UnityEngine;
 /// <summary>
 /// Container representing the player's hand
 /// </summary>
+/// <author>Joshua Dahl</author>
 public class Hand : CardContainerBase {
 	
 	/// <summary>

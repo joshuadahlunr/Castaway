@@ -1,13 +1,27 @@
 ﻿using Card;
 using UnityEngine;
 
+/// <summary>
+/// Component which holds an action (card play or target) in a pending state until the player confirms the action
+/// </summary>
+/// <author>Joshua Dahl</author>
 public class Confirmation : MonoBehaviour {
+	// Relevant references 
 	public CardBase card, target;
 	public CardContainerBase snapTarget;
 
+	/// <summary>
+	/// Bool indicating if we are targeting
+	/// </summary>
 	public bool TargetingCard => target is not null && snapTarget is null;
+	/// <summary>
+	/// Bool indicating if we are snapping
+	/// </summary>
 	public bool TargetingZone => snapTarget is not null && target is null;
 
+	/// <summary>
+	/// Callback called when the player confirms their choice
+	/// </summary>
 	public void Confirm() {
 		if (TargetingZone) {
 			var draggable = card.GetComponent<Draggable>();
@@ -25,6 +39,9 @@ public class Confirmation : MonoBehaviour {
 		Destroy(gameObject);
 	}
 
+	/// <summary>
+	/// Callback called when the player cancels their choice
+	/// </summary>
 	public void Cancel() {
 		if (TargetingZone) {
 			var draggable = card.GetComponent<Draggable>();

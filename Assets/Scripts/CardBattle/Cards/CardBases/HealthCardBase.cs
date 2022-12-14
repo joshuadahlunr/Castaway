@@ -5,6 +5,7 @@ namespace Card {
 	/// <summary>
 	/// Extension to card which adds health
 	/// </summary>
+	/// <author>Joshua Dahl</author>
 	public class HealthCardBase : CardBase {
 		/// <summary>
 		/// Extension to modification which adds health

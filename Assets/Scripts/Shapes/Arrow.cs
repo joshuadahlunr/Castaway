@@ -1,7 +1,10 @@
 ﻿using UnityEngine;
 
 namespace Shapes {
-	// Class which renders an arrow composed of an arc with a cone at its end 
+	/// <summary>
+	/// Class which renders an arrow composed of an arc with a cone at its end 
+	/// </summary>
+	/// <author>Joshua Dahl</author>
 	[RequireComponent(typeof(Arc))]
 	public class Arrow : MonoBehaviour {
 		public GameObject start, end;

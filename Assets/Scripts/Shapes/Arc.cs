@@ -3,7 +3,10 @@ using UnityEngine;
 
 namespace Shapes {
 	
-	// Class which generates an arc mesh
+	/// <summary>
+	/// Class which generates an arc mesh
+	/// </summary>
+	/// <author>Joshua Dahl</author>
 	[RequireComponent(typeof(MeshRenderer)), RequireComponent(typeof(MeshFilter))]
 	[ExecuteInEditMode] // Make sure arc is regenerated even in edit mode!
 	public class Arc : MonoBehaviour {

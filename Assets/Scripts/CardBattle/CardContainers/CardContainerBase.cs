@@ -9,6 +9,7 @@ using UnityEngine;
 /// <summary>
 /// Base type for all containers which hold cards (decks, hands, graveyards, etc...)
 /// </summary>
+/// <author>Joshua Dahl</author>
 public class CardContainerBase : MonoBehaviour, IEnumerable<CardBase> {
 	/// <summary>
 	/// Enum indicating if cards in the container are face up or face down
