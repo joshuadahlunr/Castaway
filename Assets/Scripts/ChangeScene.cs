@@ -1,7 +1,10 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-// TODO: Is this necessary?
+/// <summary>
+/// @author: Jared White
+/// </summary>
+
 public class ChangeScene : MonoBehaviour {
 
     public void SceneChange(string scene)

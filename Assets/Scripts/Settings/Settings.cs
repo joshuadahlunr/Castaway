@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// @author: Jared White
+/// </summary>
+
 public class Settings : MonoBehaviour
 {
     // Start is called before the first frame update

@@ -4,6 +4,10 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
 
+/// <summary>
+/// @author: Jared White
+/// </summary>
+
 public class PlayerMovement : MonoBehaviour, IPointerClickHandler
 {
     private Vector2 startPos;

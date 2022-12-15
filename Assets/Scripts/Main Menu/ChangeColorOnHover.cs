@@ -5,6 +5,10 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using TMPro;
 
+/// <summary>
+/// @author: Jared White
+/// </summary>
+
 public class ChangeColorOnHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     public TextMeshProUGUI text;
