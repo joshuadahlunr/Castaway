@@ -58,7 +58,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   card: {fileID: 0}
   name: {fileID: 1232506761773263809}
-  cost: {fileID: 0}
   artwork: {fileID: 1232506762896862250}
   rules: {fileID: 1232506762330145592}
 --- !u!223 &1232506761614981827
@@ -481,7 +480,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5049118823662714869}
   - component: {fileID: 2497315350915228849}
-  - component: {fileID: 6466231282346409730}
+  - component: {fileID: 3115892745455897382}
   m_Layer: 0
   m_Name: Background
   m_TagString: Untagged
@@ -517,7 +516,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8109144145815917572}
   m_CullTransparentMesh: 1
---- !u!114 &6466231282346409730
+--- !u!114 &3115892745455897382
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -537,7 +536,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 4ec0c2d006a5fdf41a907a9b865afae3, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1290e9d7f2d1a054ca025ef153163953, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

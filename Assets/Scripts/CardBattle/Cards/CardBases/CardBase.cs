@@ -77,11 +77,7 @@ namespace Card {
 			/// <summary>
 			/// Returns a (potentially) modified version of the card's name
 			/// </summary>
-			public virtual string GetName(string name) => name; 
-			/// <summary>
-			/// Returns a (potentially) modified version of the card's cost
-			/// </summary>
-			public virtual string GetCost(string cost) => cost; 
+			public virtual string GetName(string name) => name;
 			/// <summary>
 			/// Returns a (potentially) modified version of the card's art
 			/// </summary>
@@ -164,30 +160,7 @@ namespace Card {
 				return nameCache;
 			}
 		}
-		
-		/// <summary>
-		/// Backing memory for cost
-		/// </summary>
-		[SerializeField] private string _cost;
-		/// <summary>
-		/// Cache for modified cost
-		/// </summary>
-		private string costCache = null;
-		/// <summary>
-		/// The (modified) cost of the card
-		/// </summary>
-		/// <remarks>The modification operation is costly enough for there to be a benefit to caching the results!</remarks>
-		public string cost {
-			set {
-				_cost = value;
-				costCache = null;
-			} 
-			get {
-				costCache ??= modifications.Aggregate(_cost, (current, mod) => mod.GetCost(current));
-				return costCache;
-			}
-		}
-		
+
 		/// <summary>
 		/// Backing memory for art
 		/// </summary>
@@ -276,7 +249,6 @@ namespace Card {
 		/// </summary>
 		public virtual void InvalidateCaches() {
 			nameCache = null;
-			costCache = null;
 			artCache = null;
 			rulesCache = null;
 			propertiesCache = null;

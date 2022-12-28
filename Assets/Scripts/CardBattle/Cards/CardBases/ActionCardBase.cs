@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using Cost = CardBattle.PeopleJuice.Cost;
 using UnityEngine;
 
 namespace Card {
@@ -7,6 +8,40 @@ namespace Card {
 	/// </summary>
 	/// <author>Joshua Dahl</author>
 	public class ActionCardBase : CardBase {
+		/// <summary>
+		/// Extension to modification which adds health
+		/// </summary>
+		public new class Modification : CardBase.Modification {
+			public virtual Cost GetCost(Cost cost) => cost; 	
+		}
+		
+		/// <summary>
+		/// Backing memory for cost
+		/// </summary>
+		[SerializeField] private Cost _cost = new() { CardBattle.PeopleJuice.Types.Generic };
+		/// <summary>
+		/// Cache for modified cost
+		/// </summary>
+		/// <remarks>The modification operation is costly enough for there to be a benefit to caching the results!</remarks>
+		private Cost costCache = null;
+		/// <summary>
+		/// The (modified) cost of the card
+		/// </summary>
+		public Cost cost {
+			set {
+				_cost = value;
+				costCache = null;
+			} 
+			get {
+				costCache ??= modifications.Aggregate(_cost, (current, _mod) => {
+					if(_mod is Modification mod) return mod.GetCost(current); // If the modification touches cost then run that process!
+					return current;
+				});
+				return costCache;
+			}
+		}
+
+
 		/// <summary>
 		/// Error whenever an action card is played instead of targeted (should never happen)
 		/// </summary>
@@ -17,8 +52,18 @@ namespace Card {
 		}
 		
 		
+		/// <summary>
+		/// Override which also invalidates the cost cache
+		/// </summary>
+		public override void InvalidateCaches() {
+			base.InvalidateCaches();
+			costCache = null;
+		}
 		
+
+
 		// ---- Helper Utilities ----
+		
 		
 		/// <summary>
 		/// Provides convenient access to check if it is currently our turn or not

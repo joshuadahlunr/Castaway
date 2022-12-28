@@ -21,10 +21,6 @@ namespace Card.Renderers {
 		/// </summary>
 		public new TMPro.TMP_Text name;
 		/// <summary>
-		/// Reference to the cost UI text
-		/// </summary>
-		public TMPro.TMP_Text cost;
-		/// <summary>
 		/// Reference to the UI artwork image
 		/// </summary>
 		public Image artwork;
@@ -38,7 +34,6 @@ namespace Card.Renderers {
 		/// </summary>
 		public void Update() {
 			name.text = card.name;
-			// cost.text = card.cost;
 			artwork.sprite = card.art;
 			FormatRules(card.rules);
 		}
@@ -51,7 +46,6 @@ namespace Card.Renderers {
 		protected virtual Dictionary<string, object> CalculateReplacementParameters() {
 			var parameters = new Dictionary<string, object> {
 				{ "{name}", card.name },
-				{ "{cost}", card.cost }
 			};
 			foreach (var (name, prop) in card.properties) 
 				parameters.Add($"{{properties[\"{name}\"]}}", prop.value);
