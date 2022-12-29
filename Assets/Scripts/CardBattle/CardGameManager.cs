@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using Card;
+using CardBattle;
 using Extensions;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -103,6 +104,13 @@ public class CardGameManager : MonoBehaviour {
 			monster.deck.DatabaseLoad("Shark Deck");
 			monster.deck.AssignOwnerToCards(i);
 		}
+
+		PeopleJuice.Cost pool = new() { PeopleJuice.Types.B, PeopleJuice.Types.Generic, PeopleJuice.Types.A, PeopleJuice.Types.Generic, PeopleJuice.Types.B };
+		PeopleJuice.Cost cost = new() { PeopleJuice.Types.Generic, PeopleJuice.Types.Generic, PeopleJuice.Types.B};
+
+		PeopleJuice.DeductCost(ref pool, cost);
+		Debug.Log(pool);	
+		// Debug.Log(PeopleJuice.CostAvailable(pool, cost));
 	}
 	
 

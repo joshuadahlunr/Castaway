@@ -13,7 +13,10 @@ namespace CardBattle {
 		/// </summary>
 		[Serializable]
 		public enum Types {
-			Generic	
+			Generic,
+			A,
+			B,
+			Max
 		}
 
 		/// <summary>
@@ -21,16 +24,26 @@ namespace CardBattle {
 		/// </summary>
 		[Serializable]
 		public class Cost : List<Types> {
+			public int Value => Count;
+
+			public Cost() : base() { }
+			public Cost(IEnumerable<Types> iter) : base(iter) { }
+
 			public IEnumerable<Counted<Types>> CountedForm() {
 				return this.GroupBy(t => t)
 					.Select(g => new Counted<Types> { value = g.Key, count = g.Count() });
 			}
 			
-			public override string ToString() {
-				string @out = "";
-				foreach(var counted in CountedForm())
-					@out += $"{{{counted.value}}} = {counted.count} ";
+			public static Cost ExpandedForm(IEnumerable<Counted<Types>> counted) {
+				var @out = new Cost();
+				foreach(var count in counted)
+					for(var i = 0; i < count.count; i++)
+						@out.Add(count.value);
 				return @out;
+			}
+			
+			public override string ToString() {
+				return this.Aggregate("", (current, type) => current + $"{{{type}}} ");
 			}
 		}
 		
@@ -50,13 +63,80 @@ namespace CardBattle {
 		// ----- Static Helpers ------
 
 
-		// public static var 
-		//
-		//
-		// bool CostAvailable(Cost pool, Cost cost) {
-		// 	pool.Sort();
-		// 	
-		// }
+		/// <summary>
+		///     Deducts <see cref="cost" /> from the provided <see cref="pool" />
+		/// </summary>
+		/// <param name="pool">
+		///     The pool to deduct a <see cref="cost" /> from. Passed as reference the variable in the caller will
+		///     be holding the new pool once finished
+		/// </param>
+		/// <param name="cost">The cost to deduct from the <see cref="pool" /></param>
+		/// <returns>
+		///     True if the pool has enough value (of the correct types) to deduct the cost, false if there isn't enough value in
+		///     the pool.
+		/// </returns>
+		public static bool DeductCost(ref Cost pool_, Cost cost_) {
+			// Optimization, if there are more symbols in the cost than the pool... of course the pool can't afford the cost!
+			if (pool_.Value < cost_.Value) return false;
 
+			Counted<Types> needed;
+			var pool = pool_.CountedForm().ToArray();
+			var cost = cost_.CountedForm().ToArray();
+
+			// Check if all the typed symbols are accounted for
+			// For each type of symbol...
+			for (var i = (int)Types.Generic + 1; i < (int)Types.Max; i++) {
+				// Check if any of this type is needed
+				needed = cost.FirstOrDefault(x => (int)x.value == i);
+				if (needed == null) continue;
+
+				// If it is needed check if any is available
+				var available = pool.WithIndex().FirstOrDefault(x => (int)x.item.value == i);
+				// available = [(x[1], j) for j, x in enumerate(pool) if x[0].value == i]
+				if (available.item is null) return false; // If not available, cost isn't available in pool
+				
+				// Cost is available in pool if we need more than is available
+				if (available.item.count < needed.count) return false;
+
+				// Remove the typed cost from pool
+				var tup = pool[available.index];
+				tup.count -= needed.count;
+				pool[available.index] = tup;
+			}
+
+			// The typed cost has now been deducted from the pool
+			var ePool = Cost.ExpandedForm(pool); // Convert the pool to an expanded form
+			ePool.Sort();
+
+			// Determine if any generic cost is needed
+			needed = cost.FirstOrDefault(x => x.value == Types.Generic);
+			// needed = [x[1] for x in cost if x[0].value == Types.GENERIC.value]
+			if (needed == null) {
+				pool_ = ePool; // If no generic cost is needed, whats currently in the pool is finalized 
+				return true;
+			}
+
+			// If some generic cost is needed, make sure the needed cost is less than whatever is remaining in the pool
+			if (needed.count > ePool.Value) return false;
+
+			// Just drop symbols from the front of the pool to pay the generic cost
+			pool_ = new Cost(
+				ePool.Skip(needed.count)); // TODO: Would draining the fullest pool first be better? round robin?
+			return true;
+		}
+
+		/// <summary>
+		///     Checks if there is enough value in the <see cref="pool" /> to deduct the provided <see cref="cost" />
+		/// </summary>
+		/// <param name="pool">The pool to check if the <see cref="cost" /> could be deducted from.</param>
+		/// <param name="cost">The cost to hypothetically deduct from the <see cref="pool" /></param>
+		/// <returns>
+		///     True if the pool has enough value (of the correct types) to deduct the cost, false if there isn't enough value in
+		///     the pool.
+		/// </returns>
+		public static bool CostAvailable(Cost pool, Cost cost) {
+			var clone = new Cost(pool);
+			return DeductCost(ref clone, cost);
+		}
 	}
 }
