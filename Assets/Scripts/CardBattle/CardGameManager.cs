@@ -24,11 +24,13 @@ public class CardGameManager : MonoBehaviour {
 	/// Reference to the timer countdown rope
 	/// </summary>
 	public BurningRope rope;
+
+	public TMPro.TMP_Text PeopleJuiceText;
 	
 	// TODO: Improve
 	public BurningRope healthBar;
 	public GameObject losePanel;
-	
+
 	/// <summary>
 	/// Reference to the prefab for confirmation prompts
 	/// </summary>
@@ -58,6 +60,9 @@ public class CardGameManager : MonoBehaviour {
 		}
 		get => _playerHealth;
 	}
+	
+	public PeopleJuice.Types[] resetPeopleJuice;
+	public PeopleJuice.Cost currentPeopleJuice;
 
 	// References to the player's deck, graveyard, and hand
 	public Deck playerDeck, playerGraveyard;
@@ -135,6 +140,8 @@ public class CardGameManager : MonoBehaviour {
 		// Update the player's healthbar
 		healthBar.max = 10;
 		healthBar.current = playerHealth;
+
+		PeopleJuiceText.text = currentPeopleJuice.ToString();
 		
 		// If there is no longer any time left in the turn, end the turn!
 		if (turnTimer <= 0) {
@@ -152,6 +159,10 @@ public class CardGameManager : MonoBehaviour {
 			card.OnTurnStart();
 		
 		if (isPlayerTurn) {
+			// Refill the player's people juice
+			currentPeopleJuice = new PeopleJuice.Cost(resetPeopleJuice);
+			
+			// Refill the player's hand
 			var missingCards = Math.Max(playerMaxHandSize - playerHand.Count, 0);
 			for (var i = 0; i < missingCards; i++)
 				DrawPlayerCard();
@@ -239,6 +250,11 @@ public class CardGameManager : MonoBehaviour {
 	}
 
 	/// <summary>
+	/// Lock which prevents the player from creating multiple card confirmations...
+	/// </summary>
+	public bool activeConfirmationExists;
+	
+	/// <summary>
 	/// Creates a snap confirmation
 	/// </summary>
 	/// <param name="card">The card to snap into place if confirmed</param>
@@ -248,6 +264,11 @@ public class CardGameManager : MonoBehaviour {
 		var confirm = Instantiate(confirmationPrefab.gameObject, canvas.transform).GetComponent<Confirmation>();
 		confirm.card = card;
 		confirm.snapTarget = target;
+		if(activeConfirmationExists){ // Don't let the player play a new card if they are sill confirming one...
+			confirm.Cancel();
+			return null;
+		}
+		activeConfirmationExists = true;
 		return confirm;
 	}
 	
@@ -261,6 +282,15 @@ public class CardGameManager : MonoBehaviour {
 		var confirm = Instantiate(confirmationPrefab.gameObject, canvas.transform).GetComponent<Confirmation>();
 		confirm.card = card;
 		confirm.target = target;
-		return confirm;
+		if(activeConfirmationExists){ // Don't let the player play a new card if they are sill confirming one...
+			confirm.Cancel();
+			return null;
+		}
+		activeConfirmationExists = true;
+
+		if (card is not ActionCardBase aCard) return confirm;
+		if (PeopleJuice.CostAvailable(currentPeopleJuice, aCard.cost)) return confirm;
+		confirm.Cancel();
+		return null;
 	}
 }

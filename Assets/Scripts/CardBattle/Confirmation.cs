@@ -1,4 +1,6 @@
-﻿using Card;
+﻿using System;
+using Card;
+using CardBattle;
 using UnityEngine;
 
 /// <summary>
@@ -18,6 +20,7 @@ public class Confirmation : MonoBehaviour {
 	/// Bool indicating if we are snapping
 	/// </summary>
 	public bool TargetingZone => snapTarget is not null && target is null;
+	
 
 	/// <summary>
 	/// Callback called when the player confirms their choice
@@ -31,11 +34,16 @@ public class Confirmation : MonoBehaviour {
 			card.container.SendToContainer(card, snapTarget);
 			card.OnPlayed();
 		} else {
+			if (card is ActionCardBase aCard)
+				if (!PeopleJuice.DeductCost(ref CardGameManager.instance.currentPeopleJuice, aCard.cost))
+					throw new Exception("Attempted to play card when cost is not in the pool!");
+			
 			card.OnTarget(target);
 			target.OnTargeted(card);
 		}
-		
+
 		// Get rid of ourselves once an action has been chosen!
+		CardGameManager.instance.activeConfirmationExists = false;
 		Destroy(gameObject);
 	}
 
@@ -52,6 +60,7 @@ public class Confirmation : MonoBehaviour {
 		}
 		
 		// Get rid of ourselves once an action has been chosen!
+		CardGameManager.instance.activeConfirmationExists = false;
 		Destroy(gameObject);
 	}
 }
