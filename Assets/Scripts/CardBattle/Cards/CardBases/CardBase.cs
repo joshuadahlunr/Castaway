@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using RotaryHeart.Lib.SerializableDictionary;
@@ -272,6 +273,39 @@ namespace Card {
 				ownerDeck.Shuffle();
 			}
 		}
+
+		/// <summary>
+		/// Helper function which draws <see cref="number"/> cards
+		/// </summary>
+		/// <param name="number">The number of cards to draw</param>
+		/// <exception cref="NotImplementedException">Throws a not implemented exception when called by a monster</exception>
+		public virtual void Draw(int number = 1) {
+			if (OwnedByPlayer)
+				for (var i = 0; i < number; i++)
+					CardGameManager.instance.DrawPlayerCard();
+			else if (number == 1 && container is MonsterDeck deck) {
+				IEnumerator DoMonsterDraw() {
+					yield return new WaitForSeconds(1);
+					deck.PlayRevealedCard();
+					deck.RevealCard();
+				}
+
+				StartCoroutine(DoMonsterDraw());
+			} else {
+				throw new NotImplementedException();
+				// TODO: Can monsters draw cards?
+			}
+		}
+
+		/// <summary>
+		/// Helper function which removes this card from the game!
+		/// </summary>
+		public void RemoveFromGame() {
+			container.RemoveCard(this);
+			Destroy(gameObject);
+		}
+		
+		
 		
 
 		// When a new card is enabled, add it to the list of cards... when it is disabled remove it from the list of cards 

@@ -60,6 +60,11 @@ public class CardGameManager : MonoBehaviour {
 		}
 		get => _playerHealth;
 	}
+	/// <summary>
+	/// Variable tracking how much "shield" the player has, damage it taken from damageNegation rather than health
+	/// </summary>
+	/// <remarks>Is reset to 0 at the start of player turns!</remarks>
+	public int playerDamageNegation = 0;
 	
 	public PeopleJuice.Types[] resetPeopleJuice;
 	public PeopleJuice.Cost currentPeopleJuice;
@@ -159,6 +164,9 @@ public class CardGameManager : MonoBehaviour {
 			card.OnTurnStart();
 		
 		if (isPlayerTurn) {
+			// Reset their damage negation
+			playerDamageNegation = 0;
+			
 			// Refill the player's people juice
 			currentPeopleJuice = new PeopleJuice.Cost(resetPeopleJuice);
 			
@@ -166,12 +174,12 @@ public class CardGameManager : MonoBehaviour {
 			var missingCards = Math.Max(playerMaxHandSize - playerHand.Count, 0);
 			for (var i = 0; i < missingCards; i++)
 				DrawPlayerCard();
-		} else {
-			// TODO: Implement monster side!
+		} else 
 			foreach(var monster in monsters)
-				if(monster?.isActiveAndEnabled ?? false)
+				if (monster?.isActiveAndEnabled ?? false) {
+					monster.damageNegation = 0; // Reset their damage negation
 					monster.deck.RevealCard();
-		}
+				}
 	}
 
 	/// <summary>

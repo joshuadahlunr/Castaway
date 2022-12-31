@@ -41,6 +41,12 @@ namespace Card {
 			}
 		}
 		
+		/// <summary>
+		/// Variable tracking how much "shield" this monster has, damage it taken from damageNegation rather than health
+		/// </summary>
+		/// <remarks>Is reset to 0 at the start of monster turns!</remarks>
+		public int damageNegation = 0;
+		
 		
 		/// <summary>
 		/// Override which also invalidates the health cache

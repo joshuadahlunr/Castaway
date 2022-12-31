@@ -50,14 +50,19 @@ public class Deck : CardContainerBase {
 	/// </summary>
 	private float initalYScale;
 	/// <summary>
+	/// Reference to the attached mesh renderer
+	/// </summary>
+	private MeshRenderer r;
+	/// <summary>
 	/// When the game starts save the initial scale and then scale the deck to match the number of cards currently in it
 	/// </summary>
 	public void Awake() {
 		initalYScale = transform.localScale.y;
+		r = GetComponent<MeshRenderer>();
 		UpdateDeckHeight();
 	}
 
-	
+
 	/// <summary>
 	/// Function which can be called to load a decklist from the SQL database
 	/// </summary>
@@ -143,14 +148,12 @@ public class Deck : CardContainerBase {
 	protected void UpdateDeckHeight() {
 		// If there are no cards in the deck, don't render it!
 		if (cards.Count == 0) {
-			if(GetComponent<MeshRenderer>() is { } r0) // Null check the the mesh renderer to make sure one is present!
-				r0.enabled = false;
+			if(r is not null) r.enabled = false; // Null check the the mesh renderer to make sure one is present!
 			return;
 		}
 		
 		// If there are cards in the deck, make sure it is being rendered!
-		if(GetComponent<MeshRenderer>() is { } r)
-			r.enabled = true;
+		if(r is not null) r.enabled = true;
 
 		var scale = transform.localScale;
 		scale.y = initalYScale * cards.Count;

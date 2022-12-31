@@ -294,6 +294,7 @@ MonoBehaviour:
     _keys: []
     _values: []
   _health: 20
+  damageNegation: 0
   deck: {fileID: 1030063322}
 --- !u!65 &147116286
 BoxCollider:
@@ -1663,12 +1664,14 @@ MonoBehaviour:
   turnTime: 30
   playerMaxHandSize: 5
   _playerHealth: 2
+  playerDamageNegation: 0
   resetPeopleJuice: 000000000000000000000000
   playerDeck: {fileID: 1911337661}
   playerGraveyard: {fileID: 396847612}
   playerHand: {fileID: 385885770}
   monsters:
   - {fileID: 147116285}
+  activeConfirmationExists: 0
 --- !u!4 &1239616466
 Transform:
   m_ObjectHideFlags: 0

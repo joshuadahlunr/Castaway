@@ -75,11 +75,22 @@ namespace Card {
 		/// </summary>
 		/// <param name="damage">Damage to deal</param>
 		/// <param name="target">Target to deal damage to (or player if null)</param>
-		public void DamageTargetOrPlayer(int damage, HealthCardBase target = null) {
+		public void DamageTargetOrPlayer(int damage_, HealthCardBase target = null) {
+			var damage = damage_;
+			
 			if (target is null) {
+				// Reduce the damage from the damage negation and reduce the damage negation from the damage!
+				damage = Mathf.Max(damage_ - CardGameManager.instance.playerDamageNegation, 0);
+				CardGameManager.instance.playerDamageNegation =
+					Mathf.Max(CardGameManager.instance.playerDamageNegation - damage_, 0);
+				
 				CardGameManager.instance.playerHealth -= damage;
 				return;
 			}
+			
+			// Reduce the damage from the damage negation and reduce the damage negation from the damage!
+			damage = Mathf.Max(damage_ - target.damageNegation, 0);
+			target.damageNegation = Mathf.Max(target.damageNegation - damage_, 0);
 
 			target.health -= damage;
 		}
