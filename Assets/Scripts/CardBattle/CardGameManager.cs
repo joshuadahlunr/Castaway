@@ -257,6 +257,16 @@ public class CardGameManager : MonoBehaviour {
 			OnWin();
 	}
 
+
+	/// <summary>
+	/// Function which creates a basic attack card (invoked when the player bins a card)
+	/// </summary>
+	/// <returns>Reference to the newly created attack card</returns>
+	public CardBase InstantiateBinnedAttack() {
+		return playerDeck.cardDB.Instantiate("Binned Attack");
+	}
+	
+
 	/// <summary>
 	/// Lock which prevents the player from creating multiple card confirmations...
 	/// </summary>
@@ -300,5 +310,18 @@ public class CardGameManager : MonoBehaviour {
 		if (PeopleJuice.CostAvailable(currentPeopleJuice, aCard.cost)) return confirm;
 		confirm.Cancel();
 		return null;
+	}
+	
+	/// <summary>
+	/// Creates a bin confirmation
+	/// </summary>
+	/// <param name="card">The card that may be binned</param>
+	/// <param name="bin">The graveyard to send the binned card to</param>
+	/// <returns>Reference to the created confirmation</returns>
+	public Confirmation CreateBinConfirmation(CardBase card, Graveyard bin) {
+		var confirm = Instantiate(confirmationPrefab.gameObject, canvas.transform).GetComponent<Confirmation>();
+		confirm.card = card;
+		confirm.bin = bin;
+		return confirm;
 	}
 }

@@ -54,6 +54,12 @@ public class Targeting : DraggableBase {
 		GetArrow().gameObject.SetActive(false);
 
 		if (isSnapping) {
+			var graveyard = snapObject.GetComponent<Graveyard>();
+			if (graveyard is not null) {
+				CardGameManager.instance.CreateBinConfirmation(card, graveyard);
+				return;
+			}
+			
 			var target = snapObject.GetComponent<CardBase>();
 			CardGameManager.instance.CreateTargetConfirmation(card, target);
 			return;

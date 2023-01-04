@@ -36,11 +36,14 @@ MonoBehaviour:
     reqReferences: {fileID: 0}
     isExpanded: 1
     _keyValues:
+    - Binned Attack
     - Prototype AttackCard
     - Frozen
     _keys:
+    - Binned Attack
     - Prototype AttackCard
     - Frozen
     _values:
+    - {fileID: 2271024447710015734, guid: 8fba69ea9cabcfa4b89aaa763ac1bd82, type: 3}
     - {fileID: 4430917359204932427, guid: ffed5da40e94bbd4ba57c97a28388c0a, type: 3}
     - {fileID: 1427780925322784421, guid: 4ed95169b93d183459db567c5cee3ab7, type: 3}

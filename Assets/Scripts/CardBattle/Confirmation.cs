@@ -10,17 +10,27 @@ using UnityEngine;
 public class Confirmation : MonoBehaviour {
 	// Relevant references 
 	public CardBase card, target;
+	public Graveyard bin;
 	public CardContainerBase snapTarget;
 
 	/// <summary>
 	/// Bool indicating if we are targeting
 	/// </summary>
-	public bool TargetingCard => target is not null && snapTarget is null;
+	public bool TargetingCard => target is not null && snapTarget is null && bin is null;
 	/// <summary>
 	/// Bool indicating if we are snapping
 	/// </summary>
-	public bool TargetingZone => snapTarget is not null && target is null;
-	
+	public bool TargetingZone => snapTarget is not null && target is null && bin is null;
+	/// <summary>
+	/// Bool indicating we are binning the card
+	/// </summary>
+	public bool TargetingGraveyard => bin is not null && snapTarget is null && target is null;
+
+	public void Start() {
+		// if(true /* should auto confirm*/)
+		// 	Confirm();
+	}
+
 
 	/// <summary>
 	/// Callback called when the player confirms their choice
@@ -33,6 +43,8 @@ public class Confirmation : MonoBehaviour {
 			
 			card.container.SendToContainer(card, snapTarget);
 			card.OnPlayed();
+		} else if (TargetingGraveyard) {
+			card.BinCardForAttack();
 		} else {
 			if (card is ActionCardBase aCard)
 				if (!PeopleJuice.DeductCost(ref CardGameManager.instance.currentPeopleJuice, aCard.cost))
