@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
-using CardBattle;
 using UnityEngine.UI;
 
-namespace Card.Renderers {
+namespace CardBattle.Card.Renderers {
 	/// <summary>
 	/// Extension to the base renderer which adds costs
 	/// </summary>

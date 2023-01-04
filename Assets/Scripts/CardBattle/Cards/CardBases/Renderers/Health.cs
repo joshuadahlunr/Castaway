@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Card.Renderers {
+namespace CardBattle.Card.Renderers {
 	/// <summary>
 	/// Extension to the base renderer which adds health text
 	/// </summary>

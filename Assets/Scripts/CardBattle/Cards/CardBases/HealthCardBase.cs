@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using UnityEngine;
 
-namespace Card {
+namespace CardBattle.Card {
 	/// <summary>
 	/// Extension to card which adds health
 	/// </summary>

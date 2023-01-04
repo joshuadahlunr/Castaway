@@ -3,7 +3,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Card.Renderers {
+namespace CardBattle.Card.Renderers {
 	/// <summary>
 	/// Component which simply holds references to all of the world space UI elements that can be tweaked
 	/// </summary>

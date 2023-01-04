@@ -2,11 +2,12 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using CardBattle.Containers;
 using RotaryHeart.Lib.SerializableDictionary;
 using Unity.VisualScripting;
 using UnityEngine;
 
-namespace Card {
+namespace CardBattle.Card {
 	/// <summary>
 	/// Base class all card types inherit from!
 	/// </summary>

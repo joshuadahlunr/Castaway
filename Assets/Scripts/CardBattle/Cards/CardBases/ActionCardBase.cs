@@ -2,7 +2,7 @@
 using Cost = CardBattle.PeopleJuice.Cost;
 using UnityEngine;
 
-namespace Card {
+namespace CardBattle.Card {
 	/// <summary>
 	/// Base class for cards representing an action which a crewmate or monster can perform
 	/// </summary>

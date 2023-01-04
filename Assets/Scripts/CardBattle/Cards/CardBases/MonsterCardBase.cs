@@ -1,7 +1,7 @@
-﻿using System;
+﻿using CardBattle.Containers;
 using UnityEngine;
 
-namespace Card {
+namespace CardBattle.Card {
 	/// <summary>
 	/// Extension to health card that represents one of the monsters on the field
 	/// </summary>

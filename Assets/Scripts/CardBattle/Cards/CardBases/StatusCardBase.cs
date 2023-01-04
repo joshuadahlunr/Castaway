@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-namespace Card {
+namespace CardBattle.Card {
     /// <summary>
     ///     Base class for status cards
     /// </summary>

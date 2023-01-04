@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Linq;
-using Card;
-using CardBattle;
+using CardBattle.Containers;
 using Extensions;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-/// <summary>
+namespace CardBattle {
+	/// <summary>
 /// Singleton Manager responsible for controlling the flow of the card game
 /// </summary>
 /// <author>Joshua Dahl</author>
@@ -76,7 +76,7 @@ public class CardGameManager : MonoBehaviour {
 	/// <summary>
 	/// References to all of the monsters
 	/// </summary>
-	public MonsterCardBase[] monsters;
+	public Card.MonsterCardBase[] monsters;
 
 	/// <summary>
 	/// Provide public read only access to who's turn it is
@@ -268,7 +268,7 @@ public class CardGameManager : MonoBehaviour {
 	/// <param name="card">The card to snap into place if confirmed</param>
 	/// <param name="target">The container to move the card to if confirmed</param>
 	/// <returns>Reference to the created confirmation</returns>
-	public Confirmation CreateSnapConfirmation(CardBase card, CardContainerBase target) {
+	public Confirmation CreateSnapConfirmation(Card.CardBase card, CardContainerBase target) {
 		var confirm = Instantiate(confirmationPrefab.gameObject, canvas.transform).GetComponent<Confirmation>();
 		confirm.card = card;
 		confirm.snapTarget = target;
@@ -286,7 +286,7 @@ public class CardGameManager : MonoBehaviour {
 	/// <param name="card">The card that is performing the targeting</param>
 	/// <param name="target">The card this is being targeted</param>
 	/// <returns>Reference to the created confirmation</returns>
-	public Confirmation CreateTargetConfirmation(CardBase card, CardBase target) {
+	public Confirmation CreateTargetConfirmation(Card.CardBase card, Card.CardBase target) {
 		var confirm = Instantiate(confirmationPrefab.gameObject, canvas.transform).GetComponent<Confirmation>();
 		confirm.card = card;
 		confirm.target = target;
@@ -296,9 +296,10 @@ public class CardGameManager : MonoBehaviour {
 		}
 		activeConfirmationExists = true;
 
-		if (card is not ActionCardBase aCard) return confirm;
+		if (card is not Card.ActionCardBase aCard) return confirm;
 		if (PeopleJuice.CostAvailable(currentPeopleJuice, aCard.cost)) return confirm;
 		confirm.Cancel();
 		return null;
 	}
+}
 }
