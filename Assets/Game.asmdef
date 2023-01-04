@@ -1,0 +1,34 @@
+{
+    "name": "Game",
+    "rootNamespace": "",
+    "references": [
+        "RotaryHeart",
+        "Unity.AI.Navigation",
+        "Unity.Burst",
+        "Unity.InputSystem",
+	    "Unity.Mathematics",
+        "Unity.RenderPipeline.Universal.ShaderLibrary",
+	    "Unity.RenderPipelines.Core.Runtime",
+        "Unity.RenderPipelines.Core.ShaderLibrary",
+        "Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary","Unity.RenderPipelines.Universal.Runtime",
+        "Unity.Services.Core",
+        "Unity.Services.Core.Analytics",
+        "Unity.Services.Core.Environments",
+        "Unity.TextMeshPro",
+        "Unity.VisualScripting.Core",
+        "Unity.VisualScripting.Flow",
+        "Unity.VisualScripting.State"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [
+        "Community.CsharpSqlite.dll",
+        "Community.CsharpSqlite.SQLiteClient.dll"
+    ],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
