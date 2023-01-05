@@ -49,23 +49,18 @@ public class CardGameManager : MonoBehaviour {
 	/// <summary>
 	/// Backing memory for the player's health
 	/// </summary>
-	[SerializeField] private int _playerHealth = 10;
+	[SerializeField] private HealthState _playerHealthState = new HealthState {health = 10};
 	/// <summary>
 	/// Players health (invokes a callback whenever changed)
 	/// </summary>
-	public int playerHealth {
+	public HealthState playerHealthState {
 		set {
-			OnPlayerHealthChange(_playerHealth, value);
-			_playerHealth = value;
+			OnPlayerHealthStateChange(_playerHealthState, value);
+			_playerHealthState = value;
 		}
-		get => _playerHealth;
+		get => _playerHealthState;
 	}
-	/// <summary>
-	/// Variable tracking how much "shield" the player has, damage it taken from damageNegation rather than health
-	/// </summary>
-	/// <remarks>Is reset to 0 at the start of player turns!</remarks>
-	public int playerDamageNegation = 0;
-	
+
 	public PeopleJuice.Types[] resetPeopleJuice;
 	public PeopleJuice.Cost currentPeopleJuice;
 
@@ -144,7 +139,7 @@ public class CardGameManager : MonoBehaviour {
 
 		// Update the player's healthbar
 		healthBar.max = 10;
-		healthBar.current = playerHealth;
+		healthBar.current = playerHealthState.health;
 
 		PeopleJuiceText.text = currentPeopleJuice.ToString();
 		
@@ -165,7 +160,7 @@ public class CardGameManager : MonoBehaviour {
 		
 		if (isPlayerTurn) {
 			// Reset their damage negation
-			playerDamageNegation = 0;
+			playerHealthState = playerHealthState.SetTemporaryDamageReduction(0);
 			
 			// Refill the player's people juice
 			currentPeopleJuice = new PeopleJuice.Cost(resetPeopleJuice);
@@ -177,7 +172,7 @@ public class CardGameManager : MonoBehaviour {
 		} else 
 			foreach(var monster in monsters)
 				if (monster?.isActiveAndEnabled ?? false) {
-					monster.damageNegation = 0; // Reset their damage negation
+					monster.healthState = monster.healthState.SetTemporaryDamageReduction(0); // Reset their damage negation
 					monster.deck.RevealCard();
 				}
 	}
@@ -209,7 +204,9 @@ public class CardGameManager : MonoBehaviour {
 	/// </summary>
 	/// <param name="oldHealth">The player's old health</param>
 	/// <param name="newHealth">The player's current health</param>
-	public void OnPlayerHealthChange(int oldHealth, int newHealth) {
+	public void OnPlayerHealthStateChange(HealthState oldHealth, HealthState newHealth) {
+		if(oldHealth != newHealth)
+			Debug.Log($"Player took {oldHealth - newHealth} damage");
 		CheckWinLose();
 	}
 	
@@ -249,7 +246,7 @@ public class CardGameManager : MonoBehaviour {
 	/// Check if the player has won (all monsters defeated) or lost (has 0 HP left) and invoke the appropriate events
 	/// </summary>
 	public void CheckWinLose() {
-		if (playerHealth <= 0)
+		if (playerHealthState.health <= 0)
 			OnLose();
 
 		bool allDead = monsters.All(monster => !monster.isActiveAndEnabled);

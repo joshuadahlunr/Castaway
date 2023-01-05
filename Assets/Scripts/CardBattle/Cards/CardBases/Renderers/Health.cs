@@ -18,7 +18,7 @@ namespace CardBattle.Card.Renderers {
 			base.Update();
 
 			if (card is HealthCardBase hCard)
-				health.text = "" + hCard.health;
+				health.text = "" + hCard.healthState;
 		}
 
 		/// <summary>
@@ -27,7 +27,7 @@ namespace CardBattle.Card.Renderers {
 		/// <returns>Dictionary mapping from replacement string to its replacement value</returns>
 		protected override Dictionary<string, object> CalculateReplacementParameters() {
 			var parameters = base.CalculateReplacementParameters();
-			if (card is HealthCardBase hCard) parameters["{health}"] = hCard.health;
+			if (card is HealthCardBase hCard) parameters["{health}"] = hCard.healthState;
 			return parameters;
 		}
 	}

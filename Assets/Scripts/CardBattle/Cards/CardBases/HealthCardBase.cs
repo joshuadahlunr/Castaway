@@ -11,24 +11,24 @@ namespace CardBattle.Card {
 		/// Extension to modification which adds health
 		/// </summary>
 		public new class Modification : CardBase.Modification {
-			public virtual int GetHealth(int health) => health; 	
+			public virtual HealthState GetHealth(HealthState health) => health; 	
 		}
 		
 		/// <summary>
 		/// Backing memory for health
 		/// </summary>
-		[SerializeField] private int _health;
+		[SerializeField] private HealthState _health;
 		/// <summary>
 		/// Cache for modified health
 		/// </summary>
 		/// <remarks>The modification operation is costly enough for there to be a benefit to caching the results!</remarks>
-		private int? healthCache = null;
+		private HealthState? healthCache = null;
 		/// <summary>
-		/// The (modified) health of the card, calls <see cref="OnHealthChanged"/> whenever the health changes
+		/// The (modified) health of the card, calls <see cref="OnHealthStateChanged"/> whenever the health changes
 		/// </summary>
-		public int health {
+		public HealthState healthState {
 			set {
-				OnHealthChanged(_health, value);
+				OnHealthStateChanged(_health, value);
 				_health = value;
 				healthCache = null;
 			} 
@@ -40,14 +40,16 @@ namespace CardBattle.Card {
 				return healthCache.Value;
 			}
 		}
-		
 		/// <summary>
-		/// Variable tracking how much "shield" this monster has, damage it taken from damageNegation rather than health
+		/// Reference to the monster's health
 		/// </summary>
-		/// <remarks>Is reset to 0 at the start of monster turns!</remarks>
-		public int damageNegation = 0;
-		
-		
+		public int Health => healthState.health;
+		/// <summary>
+		/// Reference to the current damage reduction (both permanent and temporary)
+		/// </summary>
+		public int DamageReduction => healthState.TotalDamageReduction;
+
+
 		/// <summary>
 		/// Override which also invalidates the health cache
 		/// </summary>
@@ -61,6 +63,6 @@ namespace CardBattle.Card {
 		/// </summary>
 		/// <param name="oldHealth">The old health of the card</param>
 		/// <param name="newHealth">The new health of the card</param>
-		public virtual void OnHealthChanged(int oldHealth, int newHealth) { }
+		public virtual void OnHealthStateChanged(HealthState oldHealth, HealthState newHealth) { }
 	}
 }

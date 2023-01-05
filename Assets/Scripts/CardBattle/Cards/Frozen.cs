@@ -12,7 +12,7 @@ namespace CardBattle {
 				CardGameManager.instance.playerHand.SendAllToContainer(CardGameManager.instance.playerGraveyard);
 
 				// Max out the player's damage negation
-				CardGameManager.instance.playerDamageNegation = int.MaxValue;
+				CardGameManager.instance.playerHealthState = CardGameManager.instance.playerHealthState.SetTemporaryDamageReduction(int.MaxValue);
 
 				// Remove the card from the game!
 				RemoveFromGame();

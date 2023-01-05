@@ -293,8 +293,10 @@ MonoBehaviour:
     _keyValues: []
     _keys: []
     _values: []
-  _health: 20
-  damageNegation: 0
+  _health:
+    health: 20
+    permanentDamageReduction: 0
+    temporaryDamageReduction: 0
   deck: {fileID: 1030063322}
 --- !u!65 &147116286
 BoxCollider:
@@ -1661,10 +1663,12 @@ MonoBehaviour:
   losePanel: {fileID: 435326279}
   confirmationPrefab: {fileID: 916742549020013938, guid: f063c1a5fe865b847baa675b47759856,
     type: 3}
-  turnTime: 30
+  turnTime: 5
   playerMaxHandSize: 5
-  _playerHealth: 2
-  playerDamageNegation: 0
+  _playerHealthState:
+    health: 10
+    permanentDamageReduction: 0
+    temporaryDamageReduction: 0
   resetPeopleJuice: 000000000000000000000000
   playerDeck: {fileID: 1911337661}
   playerGraveyard: {fileID: 396847612}

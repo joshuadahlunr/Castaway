@@ -17,7 +17,9 @@ namespace CardBattle.Card {
 		/// </summary>
 		/// <param name="oldHealth"></param>
 		/// <param name="newHealth"></param>
-		public override void OnHealthChanged(int oldHealth, int newHealth) {
+		public override void OnHealthStateChanged(HealthState oldHealth, HealthState newHealth) {
+			if (oldHealth == newHealth) return; // Ignore this function unless the health changed
+			
 			if (newHealth <= 0) {
 				Debug.Log($"Monster {name} defeated!");
 				
