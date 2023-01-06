@@ -8,21 +8,28 @@ using UnityEngine;
 public class Crewmate : MonoBehaviour
 {
     [SerializeField]
-    private string _id;
+    private int _id;
     private string _crewName;
     private bool _inCrew;
     private int _crewLevel;
     private int _xpNeeded;
+    private int _hunger;
+    private Preference[] _likes;
+    private Preference[] _dislikes;
     private int _morale;
     //TODO: implement card type, likes, and dislikes (as class objects)
 
-    public Crewmate(string id, string crewName, bool inCrew, int crewLevel, int xpNeeded, int morale)
+    public Crewmate(int id, string crewName, bool inCrew, int crewLevel, int xpNeeded, 
+        int hunger, Preference[] likes, Preference[] dislikes, int morale)
     {
         _id = id;
         _crewName = crewName;
         _inCrew = inCrew;
         _crewLevel = crewLevel;
         _xpNeeded = xpNeeded;
+        _hunger = hunger;
+        _likes = likes;
+        _dislikes = dislikes;
         _morale = morale;
     }
 
@@ -36,6 +43,11 @@ public class Crewmate : MonoBehaviour
         _morale += moraleVal;
     }
 
+    public void AddHunger(int hungerVal)
+    {
+        _hunger += hungerVal;
+    }
+
     public void IncreaseCrewLevel()
     {
         _crewLevel += 1;
@@ -46,10 +58,13 @@ public class Crewmate : MonoBehaviour
         _xpNeeded *= 2; // Subject to change
     }
 
-    public string ID { get => _id; }
+    public int ID { get => _id; }
     public string CrewName { get => _crewName; }
     public bool InCrew { get => _inCrew; }
     public int CrewLevel { get => _crewLevel; }
     public int XPNeeded { get => _xpNeeded; }
+    public int Hunger { get => _hunger; }
+    public Preference[] Likes { get { return _likes; } set => _likes = value; }
+    public Preference[] Dislikes { get { return _dislikes; } set => _dislikes = value; }
     public int Morale { get => _morale;}
 }

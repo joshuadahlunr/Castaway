@@ -28,7 +28,6 @@ public class ShipManager : MonoBehaviour
         }
         DoLevelUp();
     }
-
     public void DoLevelUp()
     {
         for (int i = 0; i < Globals.UPGRADE_DATA.Length; i++)
