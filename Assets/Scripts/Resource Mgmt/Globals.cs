@@ -20,9 +20,4 @@ public class Globals
         new UpgradeData("Gun Deck", 10, 0, 0),
         new UpgradeData("Forecastle", 10, 0, 0)
     };
-
-    public static Crewmate[] CREW = new Crewmate[]
-    {
-        // TODO: Populate this with random crew members (besides Jerry)
-    };
 }

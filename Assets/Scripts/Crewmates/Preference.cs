@@ -18,7 +18,7 @@ public class Preference : MonoBehaviour
         _likeDislike = likeDislike;
     }
 
-    public string PrefName { get => _prefName; }
+    public string PrefName { get { return _prefName; } set => _prefName = value; }
     public int Modifier { get => _modifier; }
-    public bool LikeDislike { get => _likeDislike; }
+    public bool LikeDislike { get { return _likeDislike; } set => _likeDislike = value; }
 }
