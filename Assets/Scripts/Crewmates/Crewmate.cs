@@ -58,8 +58,8 @@ public class Crewmate : MonoBehaviour
         _xpNeeded *= 2; // Subject to change
     }
 
-    public int ID { get => _id; }
-    public string CrewName { get => _crewName; }
+    public int ID { get { return _id; } set => _id = value; }
+    public string CrewName { get { return _crewName; } set => _crewName = value; }
     public bool InCrew { get => _inCrew; }
     public int CrewLevel { get => _crewLevel; }
     public int XPNeeded { get => _xpNeeded; }

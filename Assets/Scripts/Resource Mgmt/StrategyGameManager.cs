@@ -11,7 +11,6 @@ using TMPro;
 public class StrategyGameManager : MonoBehaviour
 {
     public Slider[] sliderArr;
-    public Crewmate[] crew;
     public Slider crewSlider;
     public Button confirmBtn;
     public Button sustainBtn;
@@ -62,18 +61,18 @@ public class StrategyGameManager : MonoBehaviour
     public void FeedCrew()
     {
         // TODO: fix so crewmates cannot be "overfed" past 0 hunger
-        remainder = (int)crewSlider.value % crew.Length; // Find remainder of slider value divided by crewmates
+        remainder = (int)crewSlider.value % GlobalCrew.CREW.Count; // Find remainder of slider value divided by crewmates
         evenNum = (int)crewSlider.value - remainder; // Subtract remainder from slider value to get evenly divisible number
-        quotient = evenNum / crew.Length;
+        quotient = evenNum / GlobalCrew.CREW.Count;
 
-        for (int i = 0; i < crew.Length; i++)
+        for (int i = 0; i < GlobalCrew.CREW.Count; i++)
         {
  
-            crew[i].AddHunger(-quotient); // Subtract quotient from each crewmate's hunger
+            GlobalCrew.CREW[i].AddHunger(-quotient); // Subtract quotient from each crewmate's hunger
 
             if (remainder != 0) // For allocating the remainder of resources
             {
-                crew[i].AddHunger(1);
+                GlobalCrew.CREW[i].AddHunger(1);
                 remainder -= 1;
             }
         }
