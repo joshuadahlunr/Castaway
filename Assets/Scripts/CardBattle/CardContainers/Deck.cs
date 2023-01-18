@@ -126,8 +126,8 @@ namespace CardBattle.Containers {
 					// Apply a random offset to all of the swaps so they aren't exact
 					var offset = Random.Range(2, n / 10);
 					if (offset == i)
-						offset = Math.Max(offset + 2,
-							n - 1); // If the offset is i make it bigger (maxing out at the total size of the deck)
+						offset = Math.Max(offset + 2, n - 1); // If the offset is i make it bigger (maxing out at the total size of the deck)
+					offset = Math.Clamp(offset, 0, n - 1);
 
 					// Swap it to the other end of the deck (if we can)
 					if (n - i + offset < cards.Count)
