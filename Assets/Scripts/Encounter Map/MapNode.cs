@@ -9,8 +9,10 @@ public class MapNode : MonoBehaviour {
 	public MapNode[] parents;
 	public MapNode[] children;
 
-	public int Depth => generation?.depth ?? -1; 
-
+	public int Depth => generation?.depth ?? -1;
+	public Vector3[] parentPositions => parents.Select(x => x.transform.position).ToArray();
+	public float[] parentDistances => parentPositions.Select(x => (x - transform.position).magnitude).ToArray();
+ 
 	private LineRenderer line;
 	public void InitLine(LineRenderer dashedLinePrefab) {
 		line = GetComponent<LineRenderer>();
