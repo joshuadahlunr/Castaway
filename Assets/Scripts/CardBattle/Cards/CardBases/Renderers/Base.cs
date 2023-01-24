@@ -28,6 +28,10 @@ namespace CardBattle.Card.Renderers {
 		/// Reference to the rules UI text
 		/// </summary>
 		public TMPro.TMP_Text rules;
+		/// <summary>
+		/// Reference to the panel which disables the card
+		/// </summary>
+		public GameObject disabled;
 
 		/// <summary>
 		/// Every frame make sure the text we are displaying matches the state of the card

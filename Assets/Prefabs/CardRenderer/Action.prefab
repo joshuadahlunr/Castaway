@@ -763,7 +763,7 @@ PrefabInstance:
     - target: {fileID: 1232506761614981826, guid: 43cdfc534094f1e4ab64aaacb3a6ccb9,
         type: 3}
       propertyPath: m_PresetInfoIsWorld
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1232506761614981831, guid: 43cdfc534094f1e4ab64aaacb3a6ccb9,
         type: 3}
@@ -776,7 +776,7 @@ PrefabInstance:
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 1232506761614981824, guid: 43cdfc534094f1e4ab64aaacb3a6ccb9,
         type: 3}
-      insertIndex: -1
+      insertIndex: 4
       addedObject: {fileID: 7694315935040179271}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 1232506761614981831, guid: 43cdfc534094f1e4ab64aaacb3a6ccb9,
@@ -842,6 +842,7 @@ MonoBehaviour:
   name: {fileID: 1305000173535176517}
   artwork: {fileID: 1305000172205105326}
   rules: {fileID: 1305000172980572092}
+  disabled: {fileID: 2814818704083953013}
   peopleJuiceMapping: {fileID: 11400000, guid: 8c136e78ce6618d469a76ab7d765f10e, type: 2}
   redCircles:
   - {fileID: 1766542623}
@@ -856,6 +857,12 @@ MonoBehaviour:
 --- !u!224 &1305000173628552772 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1232506761614981824, guid: 43cdfc534094f1e4ab64aaacb3a6ccb9,
+    type: 3}
+  m_PrefabInstance: {fileID: 218130879071915140}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2814818704083953013 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2600488289960765937, guid: 43cdfc534094f1e4ab64aaacb3a6ccb9,
     type: 3}
   m_PrefabInstance: {fileID: 218130879071915140}
   m_PrefabAsset: {fileID: 0}

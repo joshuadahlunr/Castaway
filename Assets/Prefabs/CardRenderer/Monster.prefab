@@ -26,7 +26,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5954383398381643665}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -296,7 +296,7 @@ PrefabInstance:
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 1232506761614981824, guid: 43cdfc534094f1e4ab64aaacb3a6ccb9,
         type: 3}
-      insertIndex: -1
+      insertIndex: 4
       addedObject: {fileID: 603189415486681321}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 1232506761614981831, guid: 43cdfc534094f1e4ab64aaacb3a6ccb9,
@@ -304,6 +304,12 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 4211132627376067378}
   m_SourcePrefab: {fileID: 100100000, guid: 43cdfc534094f1e4ab64aaacb3a6ccb9, type: 3}
+--- !u!1 &6622533542788695174 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2600488289960765937, guid: 43cdfc534094f1e4ab64aaacb3a6ccb9,
+    type: 3}
+  m_PrefabInstance: {fileID: 9219217503155858807}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &7992626169782994614 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1232506761773263809, guid: 43cdfc534094f1e4ab64aaacb3a6ccb9,
@@ -338,6 +344,7 @@ MonoBehaviour:
   name: {fileID: 7992626169782994614}
   artwork: {fileID: 7992626170834239837}
   rules: {fileID: 7992626171409837647}
+  disabled: {fileID: 6622533542788695174}
   health: {fileID: 8705953693113563530}
 --- !u!224 &7992626169977034679 stripped
 RectTransform:

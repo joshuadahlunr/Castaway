@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using CardBattle.Card;
 using CardBattle.Containers;
 using Extensions;
 using UnityEngine;
@@ -67,6 +69,7 @@ public class CardGameManager : MonoBehaviour {
 	// References to the player's deck, graveyard, and hand
 	public Deck playerDeck, playerGraveyard;
 	public Hand playerHand;
+	public CardContainerBase[] inPlayContainers;
 
 	/// <summary>
 	/// References to all of the monsters
@@ -109,13 +112,6 @@ public class CardGameManager : MonoBehaviour {
 			monster.deck.DatabaseLoad("Shark Deck");
 			monster.deck.AssignOwnerToCards(i);
 		}
-
-		PeopleJuice.Cost pool = new() { PeopleJuice.Types.B, PeopleJuice.Types.Generic, PeopleJuice.Types.A, PeopleJuice.Types.Generic, PeopleJuice.Types.B };
-		PeopleJuice.Cost cost = new() { PeopleJuice.Types.Generic, PeopleJuice.Types.Generic, PeopleJuice.Types.B};
-
-		PeopleJuice.DeductCost(ref pool, cost);
-		Debug.Log(pool);	
-		// Debug.Log(PeopleJuice.CostAvailable(pool, cost));
 	}
 	
 
@@ -164,6 +160,8 @@ public class CardGameManager : MonoBehaviour {
 			
 			// Refill the player's people juice
 			currentPeopleJuice = new PeopleJuice.Cost(resetPeopleJuice);
+			// Enable all of the cards in their hand that were disabled
+			EnableCards(CardFilterer.EnumerateAllCards()); // TODO: Should we be more specific with which cards are renabled?
 			
 			// Refill the player's hand
 			var missingCards = Math.Max(playerMaxHandSize - playerHand.Count, 0);
@@ -171,10 +169,12 @@ public class CardGameManager : MonoBehaviour {
 				DrawPlayerCard();
 		} else 
 			foreach(var monster in monsters)
-				if (monster?.isActiveAndEnabled ?? false) {
+				if ( !(monster?.Disabled ?? true) ) {
 					monster.healthState = monster.healthState.SetTemporaryDamageReduction(0); // Reset their damage negation
 					monster.deck.RevealCard();
 				}
+		
+		OnlyEnableAffordableCards();
 	}
 
 	/// <summary>
@@ -187,7 +187,7 @@ public class CardGameManager : MonoBehaviour {
 
 		if (!isPlayerTurn) {
 			foreach(var monster in monsters)
-				if(monster?.isActiveAndEnabled ?? false)
+				if( !(monster?.Disabled ?? true) )
 					monster.deck.PlayRevealedCard();
 		}
 
@@ -249,10 +249,42 @@ public class CardGameManager : MonoBehaviour {
 		if (playerHealthState.health <= 0)
 			OnLose();
 
-		bool allDead = monsters.All(monster => !monster.isActiveAndEnabled);
+		bool allDead = monsters.All(monster => monster.Disabled);
 		if(allDead)
 			OnWin();
 	}
+	
+	
+	
+	/// <summary>
+	/// Function which disables all of the given cards
+	/// </summary>
+	/// <param name="cards">The cards to disable</param>
+	public static void DisableCards(IEnumerable<Card.CardBase> cards) {
+		foreach (var card in cards) 
+			card.MarkDisabled();
+	}
+
+	/// <summary>
+	/// Function which enables all of the given cards
+	/// </summary>
+	/// <param name="cards">The cards to enable</param>
+	public static void EnableCards(IEnumerable<Card.CardBase> cards) {
+		foreach (var card in cards)
+			card.MarkEnabled();
+	}
+
+	/// <summary>
+	/// Function which enables all of the affordable cards in the player's hand, and disables all of the unaffordable cards in their hand!
+	/// </summary>
+	public void OnlyEnableAffordableCards() {
+		// Enable all of the affordable cards in hand!
+		EnableCards(CardFilterer.FilterCards(~(CardFilterer.CardFilters.Affordable | CardFilterer.CardFilters.Hand)));
+		// Disable all of the unaffordable cards
+		CardFilterer.FilterAndDisableCards(CardFilterer.CardFilters.Unaffordable);
+	}
+	
+	
 
 	/// <summary>
 	/// Lock which prevents the player from creating multiple card confirmations...

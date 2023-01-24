@@ -133,12 +133,17 @@ namespace CardBattle.Card {
 		/// Property which determines if the card is owned by the player or not
 		/// </summary>
 		public bool OwnedByPlayer => cardOwner == 0; // TODO: If we change the definition of who the player is, make sure to update this property!
-		
+
 		/// <summary>
 		/// Index representing which player or AI owns this card
 		/// </summary>
 		/// <remarks>Index 0 represents the player, while index 1+ represnt all of the monsters in the <see cref="CardGameManager"/>'s monster list</remarks>
 		public int cardOwner;
+		
+		/// <summary>
+		/// Bool indicating if the card is disabled
+		/// </summary>
+		public bool Disabled => !isActiveAndEnabled && !renderer.disabled.activeInHierarchy;
 
 		/// <summary>
 		/// Backing memory for name
@@ -255,7 +260,22 @@ namespace CardBattle.Card {
 			rulesCache = null;
 			propertiesCache = null;
 		}
-		
+
+		public virtual void MarkDisabled() {
+			renderer.disabled.SetActive(true);
+			
+			if ((state & State.InHand) == 0) return; // Don't deal with the draggable if not in hand!
+			var drag = GetComponent<DraggableBase>();
+			if(drag is not null) drag.enabled = false;
+		}
+
+		public virtual void MarkEnabled() {
+			renderer.disabled.SetActive(false);
+			
+			if ((state & State.InHand) == 0) return; // Don't deal with the draggable if not in hand!
+			var drag = GetComponent<DraggableBase>();
+			if(drag is not null) drag.enabled = true;
+		}
 
 		/// <summary>
 		/// Helper function which sends the card to its owner's graveyard!

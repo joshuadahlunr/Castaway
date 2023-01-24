@@ -140,6 +140,12 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 2862726488666766045}
   m_SourcePrefab: {fileID: 100100000, guid: 5a1ba109fb2faf6459cc61ba4c4fb70c, type: 3}
+--- !u!1 &1124121317472396756 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2814818704083953013, guid: 5a1ba109fb2faf6459cc61ba4c4fb70c,
+    type: 3}
+  m_PrefabInstance: {fileID: 2921025070319943841}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &4221520387936970724 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1305000173535176517, guid: 5a1ba109fb2faf6459cc61ba4c4fb70c,
@@ -174,6 +180,7 @@ MonoBehaviour:
   name: {fileID: 4221520387936970724}
   artwork: {fileID: 4221520388765884431}
   rules: {fileID: 4221520389533781789}
+  disabled: {fileID: 1124121317472396756}
 --- !u!114 &4221520388765884431 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1305000172205105326, guid: 5a1ba109fb2faf6459cc61ba4c4fb70c,

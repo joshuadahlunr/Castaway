@@ -43,6 +43,9 @@ namespace CardBattle {
 				card.OnTarget(target);
 				target.OnTargeted(card);
 			}
+			
+			// Disable all of the unaffordable cards
+			CardGameManager.instance.OnlyEnableAffordableCards();
 
 			// Get rid of ourselves once an action has been chosen!
 			CardGameManager.instance.activeConfirmationExists = false;

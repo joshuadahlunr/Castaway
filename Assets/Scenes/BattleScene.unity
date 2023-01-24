@@ -1673,6 +1673,7 @@ MonoBehaviour:
   playerDeck: {fileID: 1911337661}
   playerGraveyard: {fileID: 396847612}
   playerHand: {fileID: 385885770}
+  inPlayContainers: []
   monsters:
   - {fileID: 147116285}
   activeConfirmationExists: 0
