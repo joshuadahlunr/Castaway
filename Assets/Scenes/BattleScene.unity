@@ -490,7 +490,7 @@ GameObject:
   - component: {fileID: 396847612}
   m_Layer: 0
   m_Name: Graveyard
-  m_TagString: Untagged
+  m_TagString: Targetable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -590,7 +590,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 396847606}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 89870d3f081e4915b0c9ebc58fbd9243, type: 3}
+  m_Script: {fileID: 11500000, guid: 3ad88ec5760b4a648cba6131a5a321a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   cards: []

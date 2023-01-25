@@ -282,7 +282,7 @@ namespace CardBattle.Card {
 		/// </summary>
 		/// <remarks>NOTE: For monsters, the graveyard is the deck associated with the monster!</remarks>
 		/// <remarks>This function is one of the few helpers in the base class since every type of card will need to be sent to the graveyard... not just action cards!</remarks>
-		public void SendToGraveyard() {
+		public virtual void SendToGraveyard() {
 			if (OwnedByPlayer) {
 				container.SendToContainer(this, CardGameManager.instance.playerGraveyard);
 			} else {
@@ -318,6 +318,7 @@ namespace CardBattle.Card {
 			}
 		}
 
+		
 		/// <summary>
 		/// Helper function which removes this card from the game!
 		/// </summary>
@@ -327,7 +328,15 @@ namespace CardBattle.Card {
 		}
 		
 		
-		
+		/// <summary>
+		/// Function called when the player targets their graveyard with this card... sends this card to their graveyard and adds a binned attack
+		/// </summary>
+		public void BinCardForAttack() {
+			var attack = CardGameManager.instance.InstantiateBinnedAttack();
+			container.AddCard(attack);
+			container.Swap(container.Index(this), container.Index(attack));
+			SendToGraveyard();
+		}
 
 		// When a new card is enabled, add it to the list of cards... when it is disabled remove it from the list of cards 
 		/// <summary>

@@ -1,4 +1,5 @@
 // ReSharper disable Unity.NoNullPropagation
+using CardBattle.Containers;
 using UnityEngine;
 
 namespace CardBattle {
@@ -54,12 +55,16 @@ namespace CardBattle {
 			GetArrow().gameObject.SetActive(false);
 
 			if (isSnapping) {
+				var graveyard = snapObject.GetComponent<Graveyard>();
+				if (graveyard is not null) {
+					CardGameManager.instance.CreateBinConfirmation(card, graveyard);
+					return;
+				}
+				
 				var target = snapObject.GetComponent<Card.CardBase>();
 				CardGameManager.instance.CreateTargetConfirmation(card, target);
 				return;
 			}
-
-			Reset();
 		}
 
 		// When we reset, snap the card back to its initial position and make sure the arrow is hidden
