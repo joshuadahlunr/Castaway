@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using CardBattle.Containers;
 using UnityEngine;
 
@@ -31,6 +31,12 @@ namespace CardBattle {
 		public void Start() {
 			// if(true /* should auto confirm*/)
 			// 	Confirm();
+
+			// If nothing valid is targeted... immediately cancel and throw an exception
+			if (!TargetingZone && !TargetingCard && !TargetingGraveyard) {
+				Cancel();
+				throw new ArgumentException("No valid target was passed to the confirmation!");
+			}
 		}
 
 

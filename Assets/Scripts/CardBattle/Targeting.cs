@@ -55,12 +55,14 @@ namespace CardBattle {
 			GetArrow().gameObject.SetActive(false);
 
 			if (isSnapping) {
+#if (!DISABLE_ATTACK_BINNING)
 				var graveyard = snapObject.GetComponent<Graveyard>();
 				if (graveyard is not null) {
 					CardGameManager.instance.CreateBinConfirmation(card, graveyard);
 					return;
 				}
-				
+#endif
+
 				var target = snapObject.GetComponent<Card.CardBase>();
 				CardGameManager.instance.CreateTargetConfirmation(card, target);
 				return;
