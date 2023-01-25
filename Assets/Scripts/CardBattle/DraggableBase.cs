@@ -54,6 +54,11 @@ namespace CardBattle {
 		/// </summary>
 		protected void Awake() => card = GetComponent<Card.CardBase>();
 
+		/// <summary>
+		/// Public bool indicating if the draggable is being dragged
+		/// </summary>
+		public bool IsDragging => pointerDown;
+
 
 		// ---- Callback functions ----
 
