@@ -68,11 +68,11 @@ public class StrategyGameManager : MonoBehaviour
         for (int i = 0; i < GlobalCrew.CREW.Count; i++)
         {
  
-            GlobalCrew.CREW[i].AddHunger(-quotient); // Subtract quotient from each crewmate's hunger
+            GlobalCrew.CREW[i].AddMorale(-quotient); // Subtract quotient from each crewmate's hunger
 
             if (remainder != 0) // For allocating the remainder of resources
             {
-                GlobalCrew.CREW[i].AddHunger(1);
+                GlobalCrew.CREW[i].AddMorale(1);
                 remainder -= 1;
             }
         }

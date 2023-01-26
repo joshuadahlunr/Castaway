@@ -13,21 +13,19 @@ public class Crewmate : MonoBehaviour
     private bool _inCrew;
     private int _crewLevel;
     private int _xpNeeded;
-    private int _hunger;
     private Preference[] _likes;
     private Preference[] _dislikes;
     private int _morale;
     //TODO: implement card type, likes, and dislikes (as class objects)
 
-    public Crewmate(int id, string crewName, bool inCrew, int crewLevel, int xpNeeded, 
-        int hunger, Preference[] likes, Preference[] dislikes, int morale)
+    public Crewmate(int id, string crewName, bool inCrew, int crewLevel, int xpNeeded,
+        Preference[] likes, Preference[] dislikes, int morale)
     {
         _id = id;
         _crewName = crewName;
         _inCrew = inCrew;
         _crewLevel = crewLevel;
         _xpNeeded = xpNeeded;
-        _hunger = hunger;
         _likes = likes;
         _dislikes = dislikes;
         _morale = morale;
@@ -41,11 +39,6 @@ public class Crewmate : MonoBehaviour
     public void AddMorale(int moraleVal)
     {
         _morale += moraleVal;
-    }
-
-    public void AddHunger(int hungerVal)
-    {
-        _hunger += hungerVal;
     }
 
     public void IncreaseCrewLevel()
@@ -63,7 +56,6 @@ public class Crewmate : MonoBehaviour
     public bool InCrew { get => _inCrew; }
     public int CrewLevel { get => _crewLevel; }
     public int XPNeeded { get => _xpNeeded; }
-    public int Hunger { get => _hunger; }
     public Preference[] Likes { get { return _likes; } set => _likes = value; }
     public Preference[] Dislikes { get { return _dislikes; } set => _dislikes = value; }
     public int Morale { get => _morale;}
