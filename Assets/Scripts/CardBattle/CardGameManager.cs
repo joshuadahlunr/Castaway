@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using CardBattle.Card;
 using CardBattle.Containers;
 using Extensions;
 using UnityEngine;
@@ -17,6 +16,11 @@ public class CardGameManager : MonoBehaviour {
 	/// Singleton instance of this class
 	/// </summary>
 	public static CardGameManager instance;
+
+	/// <summary>
+	/// Variable set by the encounter map, used to determine how difficult this encounter should be!
+	/// </summary>
+	public static float encounterDifficulty;
 
 	/// <summary>
 	/// Reference to the main scene canvas
