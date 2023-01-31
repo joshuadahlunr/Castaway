@@ -128,6 +128,17 @@ namespace CardBattle.Card {
 			}
 		}
 
+
+		/// <summary>
+		/// Filters used to determine what kind of cards are invalid for this card to target!
+		/// </summary>
+		public virtual CardFilterer.CardFilters TargetingFilters => CardFilterer.CardFilters.All;
+		/// <summary>
+		/// Bool indicating weather or not this card can directly target the player
+		/// </summary>
+		/// <remarks>The player is represented as a null target! If this is true null is added as a valid potential target!</remarks>
+		public virtual bool CanTargetPlayer => true;
+
 		
 		/// <summary>
 		/// Property which determines if the card is owned by the player or not

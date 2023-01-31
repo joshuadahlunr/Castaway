@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Linq;
+using UnityEngine;
 
 namespace CardBattle.Containers {
 	/// <summary>
@@ -48,11 +49,15 @@ namespace CardBattle.Containers {
 			revealedCard.OnMonsterReveal();
 		}
 
+		
+		
 		/// <summary>
 		/// Function which "plays" the currently revealed card
 		/// </summary>
 		/// <remarks>Called by the <see cref="CardGameManager"/> at the end of the monster's turn</remarks>
 		public void PlayRevealedCard() {
+			Card.CardBase target = null;
+			
 			// Make sure the revealed card can be interacted with again!
 			if (revealedCard is not null) {
 				revealedCard.GetComponent<Collider>().enabled = true;
@@ -61,10 +66,15 @@ namespace CardBattle.Containers {
 				var p = revealedCard.transform.parent;
 				revealedCard.transform.parent = null;
 				Destroy(p.gameObject);
+
+				// Pick a random card to target
+				var targetableCards = CardFilterer.FilterCards(revealedCard.TargetingFilters).ToList();
+				if(revealedCard.CanTargetPlayer) targetableCards.Add(null); // If the player is targetable... null is a valid target!
+				var targets = targetableCards.Distinct().ToArray();
+				target = targets[Random.Range(0, targets.Length)];
 			}
 
-			// TODO: Pick a random card for it to target
-			revealedCard?.OnTarget(null);
+			revealedCard?.OnTarget(target);
 			revealedCard = null;
 		}
 	}

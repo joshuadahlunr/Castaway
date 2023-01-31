@@ -7,6 +7,10 @@ namespace CardBattle {
     /// </summary>
     /// <author>Joshua Dahl</author>
     public class AttackCardProto : Card.ActionCardBase {
+        // Can only target monsters and equipment
+        public override CardFilterer.CardFilters TargetingFilters =>
+            ~(CardFilterer.CardFilters.Monster /*|| CardFilterer.CardFilters.Equipment*/);
+        
         /// <summary>
         /// Example modification that multiplies damage values by some factor
         /// </summary>

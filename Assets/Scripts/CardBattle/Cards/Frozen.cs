@@ -6,6 +6,10 @@ namespace CardBattle {
 	/// </summary>
 	/// <author>Joshua Dahl</author>
 	public class FrozenStatus : Card.StatusCardBase {
+		// Can't target anything (filter out everything)!
+		public override CardFilterer.CardFilters TargetingFilters => CardFilterer.CardFilters.All;
+		public override bool CanTargetPlayer => false;
+
 		public override void OnDrawn() => StartCoroutine(
 			IndicationAnimation(() => {
 				// TODO: We should show the player some kind of indication that this is happening!

@@ -10,6 +10,9 @@ namespace CardBattle {
     /// </remarks>
     /// <author>Joshua Dahl</author>
     public class Scry : Card.ActionCardBase {
+        // Can't target anything but monsters...
+        public override CardFilterer.CardFilters TargetingFilters => ~CardFilterer.CardFilters.Monster;
+        
         /// <summary>
         /// When the player targets a monster... reveal the top card of its deck and slightly reduce its effectiveness
         /// </summary>
