@@ -84,17 +84,36 @@ namespace CardBattle.Card {
 			// Reduce the damage from the damage negation and reduce the damage negation from the damage!
 			target.healthState = target.healthState.ApplyDamage(damage);
 		}
+
 		
 		/// <summary>
-		/// Send the card back to the player's hand if any of the provided targets are null 
+		/// Utility function which adds a "cost" to the current pool
 		/// </summary>
+		/// <param name="toAdd">The "cost" to refund/add to the pool.</param>
+		public void AddCostToPool(Cost toAdd) {
+			foreach (var symbol in cost)
+				CardGameManager.instance.currentPeopleJuice.Add(symbol);
+		}
+
+		/// <summary>
+		/// Utility function which refunds the cost of the card and moves it back into the player's hand!
+		/// </summary>
+		public void RefundAndReset() {
+			AddCostToPool(cost);
+			GetComponent<DraggableBase>().Reset();
+		}
+		
+		/// <summary>
+		/// Utility function which sends the card back to the player's hand and refunds its cost if any of the provided targets are null 
+		/// </summary>
+		/// <remarks>If acting as a monster... assumes that the target can be null and that null represents the player themselves!</remarks>
 		/// <param name="targets">List of targets to check the null status of</param>
 		/// <returns>Returns true if any of the targets are null, indicating the calling function should return, return of false indicates that the calling function should not return</returns>
 		public bool NullAndPlayerCheck(params CardBase[] targets){
 			if (!OwnedByPlayer) return false;
 			if (!targets.Any(target => target is null)) return false;
-			
-			GetComponent<DraggableBase>().Reset();
+
+			RefundAndReset();
 			return true;
 		}
 

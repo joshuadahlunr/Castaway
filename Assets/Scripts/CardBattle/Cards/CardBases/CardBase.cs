@@ -133,6 +133,11 @@ namespace CardBattle.Card {
 		/// Property which determines if the card is owned by the player or not
 		/// </summary>
 		public bool OwnedByPlayer => cardOwner == 0; // TODO: If we change the definition of who the player is, make sure to update this property!
+		
+		/// <summary>
+		/// Property which returns a reference to the monster which owns the card (null if owned by the player)
+		/// </summary>
+		public MonsterCardBase OwningMonster => OwnedByPlayer ? null : CardGameManager.instance.monsters[cardOwner - 1];
 
 		/// <summary>
 		/// Index representing which player or AI owns this card

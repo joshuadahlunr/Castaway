@@ -8,6 +8,7 @@ namespace CardBattle {
 
 		[Flags]
 		public enum CardFilters {
+			None = 0,
 			Enemy = 1 << 1,
 			Player = 1 << 2,
 			Hand = 1 << 3,
@@ -18,6 +19,9 @@ namespace CardBattle {
 			Status = 1 << 8,
 			Affordable = 1 << 9,
 			Unaffordable = 1 << 10,
+			
+			// Everything...
+			All = ~0
 		}
 
 		private static CardGameManager cgm => CardGameManager.instance;

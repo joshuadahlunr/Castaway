@@ -26,6 +26,8 @@ namespace CardBattle.Containers {
 		/// </summary>
 		/// <remarks>Called by the <see cref="CardGameManager"/> when the monster's turn starts</remarks>
 		public void RevealCard() {
+			if (revealedCard != null) return;
+			
 			revealedCard = cards[0];
 			RemoveCard(0);
 
