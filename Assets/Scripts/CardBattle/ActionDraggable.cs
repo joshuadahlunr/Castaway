@@ -9,9 +9,13 @@ namespace CardBattle {
 	/// Class that provides the ability to target "targetable" card with a selection arrow
 	/// </summary>
 	/// <author>Joshua Dahl</author>
-	public class Targeting : DraggableBase {
+	public class ActionDraggable : DraggableBase {
 		// Arrow prefab
 		public GameObject arrowPrefab;
+		/// <summary>
+		/// Bool indicating weather or not a target needs to be specified for the card to be played
+		/// </summary>
+		public bool targetNeeded = true;
 
 		// Instance of the arrow prefab in this scene
 		private static Shapes.Arrow arrowPrefabInstance;
@@ -32,7 +36,7 @@ namespace CardBattle {
 			GetArrow().gameObject.SetActive(false);
 
 			// Move the card 1/30th of the amount that the mouse moved
-			var offset = (GetPointerAsWorldPoint() - initPosition) / 30;
+			var offset = (GetPointerAsWorldPoint() - initPosition) / (targetNeeded ? 30 : 1);
 			transform.position = initPosition + offset;
 
 			// If we hit something...
@@ -66,9 +70,15 @@ namespace CardBattle {
 #endif
 
 				var target = snapObject.GetComponent<Card.CardBase>();
-				CardGameManager.instance.CreateTargetConfirmation(card, target);
-				return;
+				if (targetNeeded && target is not null) {
+					CardGameManager.instance.CreateTargetConfirmation(card, target);
+					return;
+				}
 			}
+			
+			if(!targetNeeded && (card.transform.position - initPosition).magnitude > .1f)
+				CardGameManager.instance.CreateTargetConfirmation(card, card); // Emulate not target by targeting itself...
+			else Reset();
 		}
 
 		// When we reset, snap the card back to its initial position and make sure the arrow is hidden

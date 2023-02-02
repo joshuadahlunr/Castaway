@@ -9,7 +9,7 @@ namespace CardBattle {
 	/// </summary>
 	/// <author>Joshua Dahl</author>
 	[RequireComponent(typeof(Card.CardBase))]
-	public class Draggable : DraggableBase {
+	public class EquipmentDraggable : DraggableBase {
 		/// <summary>
 		/// How fast (in units/second) cards should move
 		/// </summary>
@@ -87,8 +87,6 @@ namespace CardBattle {
 					return;
 				}
 			}
-
-			;
 
 			Reset();
 		}

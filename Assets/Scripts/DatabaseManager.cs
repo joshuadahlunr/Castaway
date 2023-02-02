@@ -7,6 +7,11 @@ using UnityEngine;
 /// <author>Joshua Dahl</author>
 public static class DatabaseManager {
 	/// <summary>
+	/// Path to where the database can be located
+	/// </summary>
+	public static string DatabasePath => Application.persistentDataPath + "/castaway.db";
+	
+	/// <summary>
 	/// Backing memory for the database connection
 	/// </summary>
 	private static SQLiteConnection _database;
@@ -15,7 +20,12 @@ public static class DatabaseManager {
 	/// </summary>
 	public static SQLiteConnection database {
 		get {
-			_database ??= new SQLiteConnection(Application.persistentDataPath + "/castaway.db");
+			SQLiteConnection CreateConnection() {
+				Debug.Log($"Established a connection with the database located at {DatabasePath}");
+				return new SQLiteConnection(DatabasePath);
+			}
+
+			_database ??= CreateConnection();
 			return _database;
 		}
 	}

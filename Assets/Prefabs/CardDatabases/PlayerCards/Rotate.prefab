@@ -9,11 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4430917359204932422}
-  - component: {fileID: 2271024447710015734}
+  - component: {fileID: -874858629119296669}
   - component: {fileID: 4430917359204932420}
-  - component: {fileID: 4430917359204932421}
+  - component: {fileID: 7621077776159269127}
   m_Layer: 0
-  m_Name: Binned Attack
+  m_Name: Rotate
   m_TagString: Targetable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -35,7 +35,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2271024447710015734
+--- !u!114 &-874858629119296669
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -44,16 +44,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 4430917359204932423}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a88419d3f4014131aba280dfdcfc4665, type: 3}
+  m_Script: {fileID: 11500000, guid: 4052ff9e27f2477a85991a56db2e292e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _renderer: {fileID: 8054100049657687534}
   container: {fileID: 0}
   _state: 2
   cardOwner: 0
-  _name: Attack (binned)
-  _art: {fileID: 21300000, guid: 66a4d5992443d624eb240e88cf957ddb, type: 3}
-  _rules: Deal <color=red>{properties["primary"]}</color> damage.
+  _name: Rotate
+  _art: {fileID: 0}
+  _rules: Select a new rotation for the ship.
   _properties:
     reorderableList:
       canAdd: 1
@@ -61,7 +61,7 @@ MonoBehaviour:
       draggable: 1
       expandable: 1
       multipleSelection: 1
-      isExpanded: 1
+      isExpanded: 0
       label:
         m_Text: Keys
         m_Image: {fileID: 0}
@@ -76,14 +76,10 @@ MonoBehaviour:
       elementNameOverride: 
       elementIcon: {fileID: 0}
     reqReferences: {fileID: 0}
-    isExpanded: 1
-    _keyValues:
-    - primary
-    _keys:
-    - primary
-    _values:
-    - tag: 0
-      value: 1
+    isExpanded: 0
+    _keyValues: []
+    _keys: []
+    _values: []
 --- !u!65 &4430917359204932420
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -105,7 +101,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 10, y: 0.02, z: 10}
   m_Center: {x: 0, y: 0, z: 0.0000076293945}
---- !u!114 &4430917359204932421
+--- !u!114 &7621077776159269127
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -123,7 +119,7 @@ MonoBehaviour:
     type: 3}
   arrowPrefab: {fileID: 6722190504438028770, guid: e2e954b1ee2caff408b59a53e7370e2a,
     type: 3}
-  targetNeeded: 1
+  targetNeeded: 0
 --- !u!1001 &4487235728669804067
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -246,6 +242,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_PresetInfoIsWorld
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5872751417051278285, guid: 5a1ba109fb2faf6459cc61ba4c4fb70c,
+        type: 3}
+      propertyPath: card
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

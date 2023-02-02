@@ -129,6 +129,7 @@ MonoBehaviour:
     type: 3}
   arrowPrefab: {fileID: 6722190504438028770, guid: e2e954b1ee2caff408b59a53e7370e2a,
     type: 3}
+  targetNeeded: 1
 --- !u!1001 &4487235728669804067
 PrefabInstance:
   m_ObjectHideFlags: 0

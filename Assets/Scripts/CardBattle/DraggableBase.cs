@@ -88,8 +88,7 @@ namespace CardBattle {
 		/// <summary>
 		/// Callback called when a confirmation fails or something isn't "targeted" should reset the card to its initial state!
 		/// </summary>
-		public virtual void Reset() {
-		}
+		public virtual void Reset() { }
 
 
 

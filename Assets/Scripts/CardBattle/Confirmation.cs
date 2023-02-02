@@ -45,7 +45,7 @@ namespace CardBattle {
 		/// </summary>
 		public void Confirm() {
 			if (TargetingZone) {
-				var draggable = card.GetComponent<Draggable>();
+				var draggable = card.GetComponent<EquipmentDraggable>();
 				draggable.targetPosition = snapTarget.transform.position;
 				draggable.targetRotation = snapTarget.transform.rotation;
 
@@ -74,13 +74,8 @@ namespace CardBattle {
 		/// Callback called when the player cancels their choice
 		/// </summary>
 		public void Cancel() {
-			if (TargetingZone) {
-				var draggable = card.GetComponent<Draggable>();
-				draggable.Reset();
-			} else {
-				var targeting = card.GetComponent<Targeting>();
-				targeting.Reset();
-			}
+			var draggable = card.GetComponent<DraggableBase>();
+			draggable.Reset();
 
 			// Get rid of ourselves once an action has been chosen!
 			CardGameManager.instance.activeConfirmationExists = false;
