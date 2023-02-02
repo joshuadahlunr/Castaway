@@ -9,7 +9,7 @@ namespace CardBattle {
     public class AttackCardProto : Card.ActionCardBase {
         // Can only target monsters and equipment
         public override CardFilterer.CardFilters TargetingFilters =>
-            ~(CardFilterer.CardFilters.Monster /*|| CardFilterer.CardFilters.Equipment*/);
+            ~(CardFilterer.CardFilters.Monster | CardFilterer.CardFilters.InPlay/*| CardFilterer.CardFilters.Equipment*/);
         
         /// <summary>
         /// Example modification that multiplies damage values by some factor

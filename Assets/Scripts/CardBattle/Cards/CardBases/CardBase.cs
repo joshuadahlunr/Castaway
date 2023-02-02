@@ -19,6 +19,10 @@ namespace CardBattle.Card {
 		/// </summary>
 		[SerializeField] private Card.Renderers.Base _renderer;
 		public new Card.Renderers.Base renderer => _renderer; // Exposed as a property so that derived classes can cast it to different types
+		/// <summary>
+		/// The collider associated with this card
+		/// </summary>
+		protected Collider collider;
 		
 		/// <summary>
 		/// The container the card is currently held within
@@ -279,6 +283,7 @@ namespace CardBattle.Card {
 
 		public virtual void MarkDisabled() {
 			renderer.disabled.SetActive(true);
+			collider.enabled = false;
 			
 			if ((state & State.InHand) == 0) return; // Don't deal with the draggable if not in hand!
 			var drag = GetComponent<DraggableBase>();
@@ -287,6 +292,7 @@ namespace CardBattle.Card {
 
 		public virtual void MarkEnabled() {
 			renderer.disabled.SetActive(false);
+			collider.enabled = true;
 			
 			if ((state & State.InHand) == 0) return; // Don't deal with the draggable if not in hand!
 			var drag = GetComponent<DraggableBase>();
@@ -367,6 +373,7 @@ namespace CardBattle.Card {
 		/// When the game starts make sure our renderer has a reference to us
 		/// </summary>
 		public void Start() {
+			collider = GetComponent<Collider>();
 			if(renderer is not null) renderer.card = this;
 		}
 

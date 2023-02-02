@@ -150,6 +150,9 @@ namespace CardBattle {
 
 			pointerDown = false;
 			gameObject.layer = initalLayer;
+			
+			// Reenable all of the valid cards!
+			CardGameManager.EnableCards(CardFilterer.EnumerateAllCards());
 
 			// Invoke the callback
 			OnDragEnd(isSnapping);
@@ -166,6 +169,10 @@ namespace CardBattle {
 			initalLayer = gameObject.layer;
 			gameObject.layer = LayerMask.NameToLayer("CurrentCard");
 
+			// Disable all of the cards this card can't target...
+			CardFilterer.FilterAndDisableCards(card.TargetingFilters);
+			card.MarkEnabled();
+			
 			// Invoke the callback
 			OnDragBegin();
 			card?.OnDragged();

@@ -1,4 +1,6 @@
 // ReSharper disable Unity.NoNullPropagation
+
+using CardBattle.Card;
 using CardBattle.Containers;
 using UnityEngine;
 

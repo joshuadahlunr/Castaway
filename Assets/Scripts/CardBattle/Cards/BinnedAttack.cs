@@ -6,7 +6,7 @@ namespace CardBattle {
     public class BinnedAttack : Card.ActionCardBase {
         // Can only target monsters and equipment
         public override CardFilterer.CardFilters TargetingFilters =>
-            ~(CardFilterer.CardFilters.Monster /*|| CardFilterer.CardFilters.Equipment*/);
+            ~(CardFilterer.CardFilters.Monster | CardFilterer.CardFilters.InPlay /*| CardFilterer.CardFilters.Equipment*/);
 
         /// <summary>
         /// When the player targets something, damage it (if it exists) and then send this card to the graveyard
