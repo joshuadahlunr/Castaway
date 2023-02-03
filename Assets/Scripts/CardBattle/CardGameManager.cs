@@ -74,6 +74,7 @@ public class CardGameManager : MonoBehaviour {
 	public Deck playerDeck, playerGraveyard;
 	public Hand playerHand;
 	public CardContainerBase[] inPlayContainers;
+	public GameObject ship;
 
 	/// <summary>
 	/// References to all of the monsters

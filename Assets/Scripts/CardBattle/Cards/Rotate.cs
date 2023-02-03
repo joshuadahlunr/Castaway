@@ -1,4 +1,4 @@
-using System.Runtime.CompilerServices;
+using System.Collections;
 using UnityEngine;
 
 namespace CardBattle {
@@ -7,6 +7,8 @@ namespace CardBattle {
     /// </summary>
     /// <author>Joshua Dahl</author>
     public class Rotate : Card.ActionCardBase {
+        public GameObject rotatorPrefab;
+        
         // Can't target anything...
         public override CardFilterer.CardFilters TargetingFilters => CardFilterer.CardFilters.All;
         public override bool CanTargetPlayer => false;
@@ -16,8 +18,20 @@ namespace CardBattle {
         /// </summary>
         public override void OnTarget(Card.CardBase _) {
             Debug.Log("Rotate logic goes here...");
-
-            SendToGraveyard();
+            StartCoroutine(RotateNextFrame());
+            
+            IEnumerator RotateNextFrame() {
+                yield return null;
+                if (OwnedByPlayer) {
+                    Instantiate(rotatorPrefab, CardGameManager.instance.ship.transform);
+                    Debug.Log("Created rotator!");
+                } else {
+                    var angle = Mathf.Round(Random.Range(0f, 360f) / 30) * 30;
+                    CardGameManager.instance.ship.transform.rotation = Quaternion.Euler(0, angle, 0);
+                }
+                
+                SendToGraveyard();
+            }
         }
     }
 }
