@@ -1,34 +1,48 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem.Controls;
 
 /// <summary>
 /// @author: Misha Desear
 /// </summary>
+/// 
+
+[System.Serializable]
 public class Crewmate : MonoBehaviour
 {
     [SerializeField]
-    private int _id;
+    private int _crewLevel, _xpNeeded, _morale;
+    [SerializeField]
     private string _crewName;
+    [SerializeField]
     private bool _inCrew;
-    private int _crewLevel;
-    private int _xpNeeded;
-    private Preference[] _likes;
-    private Preference[] _dislikes;
-    private int _morale;
+    [SerializeField]
+    private Preference[] _preferences;
     //TODO: implement card type, likes, and dislikes (as class objects)
 
-    public Crewmate(int id, string crewName, bool inCrew, int crewLevel, int xpNeeded,
-        Preference[] likes, Preference[] dislikes, int morale)
+    private int defaultMorale = 50; // Between a range of 0-100?
+    private string[] randomNames = { "Jeff", "Tommy", "David" };
+
+    public Crewmate()
     {
-        _id = id;
-        _crewName = crewName;
-        _inCrew = inCrew;
-        _crewLevel = crewLevel;
-        _xpNeeded = xpNeeded;
-        _likes = likes;
-        _dislikes = dislikes;
-        _morale = morale;
+    }
+
+    public Preference[] RandomPreferences()
+    {
+        Preference[] prefList = new Preference[4]; // Limit on # of preferences subject to change
+        for (int i = 0; i < prefList.Length; i++)
+        {
+            Preference pref = new Preference();
+            prefList[i] = pref;
+        }
+        return prefList;
+    }
+
+    public string RandomName()
+    {
+        string newName = randomNames[Random.Range(0, randomNames.Length)];
+        return newName;
     }
 
     public void AddXP(int value)
@@ -51,12 +65,20 @@ public class Crewmate : MonoBehaviour
         _xpNeeded *= 2; // Subject to change
     }
 
-    public int ID { get { return _id; } set => _id = value; }
+    private void Awake()
+    {
+        _crewName = RandomName();
+        _inCrew = false;
+        _crewLevel = 0;
+        _xpNeeded = 10; // Subject to change
+        _preferences = RandomPreferences();
+        _morale = defaultMorale;
+    }
+
     public string CrewName { get { return _crewName; } set => _crewName = value; }
-    public bool InCrew { get => _inCrew; }
-    public int CrewLevel { get => _crewLevel; }
-    public int XPNeeded { get => _xpNeeded; }
-    public Preference[] Likes { get { return _likes; } set => _likes = value; }
-    public Preference[] Dislikes { get { return _dislikes; } set => _dislikes = value; }
-    public int Morale { get => _morale;}
+    public bool InCrew { get { return _inCrew; } set => _inCrew = value; }
+    public int CrewLevel { get { return _crewLevel; } }
+    public int XPNeeded { get { return _xpNeeded; } }
+    public Preference[] Preferences { get { return _preferences; } set => _preferences = value; }
+    public int Morale { get { return _morale; } set => _morale = value; }
 }
