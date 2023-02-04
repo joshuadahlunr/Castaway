@@ -28,4 +28,5 @@ public class MapGeneration: MonoBehaviour {
 		nodes = nodes.Length > 0 ? new List<MapNode>(nodes) { node }.ToArray() : new[] { node };
 		return nodes[^1];
 	}
+
 }
