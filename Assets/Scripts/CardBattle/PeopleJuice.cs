@@ -15,8 +15,14 @@ namespace CardBattle {
 		[Serializable]
 		public enum Types {
 			Generic,
-			A,
-			B,
+			Wizard,
+			Navigator,
+			Entertainer,
+			Engineer,
+			Cook,
+			Occultist,
+			Mercenary,
+			Deckhand,
 			Max
 		}
 

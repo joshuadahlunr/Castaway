@@ -262,7 +262,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _renderer: {fileID: 3462084749647272758}
   container: {fileID: 0}
-  _state: 2
+  _state: 4
   cardOwner: 1
   _name: Shark
   _art: {fileID: 21300000, guid: 78b97ab64caade04c86dd363ee35c42b, type: 3}
@@ -758,10 +758,10 @@ RectTransform:
   m_Father: {fileID: 115369222}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 0.025, y: 0.9}
+  m_AnchorMax: {x: 1, y: 0.975}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1000, y: 50}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &449194252
 MonoBehaviour:
@@ -959,7 +959,7 @@ PrefabInstance:
     - target: {fileID: 9020992274062601812, guid: 79cf75bcad4ec5c4aa123a30fdc3d977,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0.5388632
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 9020992274062601812, guid: 79cf75bcad4ec5c4aa123a30fdc3d977,
         type: 3}
@@ -969,7 +969,7 @@ PrefabInstance:
     - target: {fileID: 9020992274062601812, guid: 79cf75bcad4ec5c4aa123a30fdc3d977,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0.20886323
+      value: 0.07
       objectReference: {fileID: 0}
     - target: {fileID: 9020992274062601812, guid: 79cf75bcad4ec5c4aa123a30fdc3d977,
         type: 3}
@@ -1625,7 +1625,10 @@ MonoBehaviour:
     health: 10
     permanentDamageReduction: 0
     temporaryDamageReduction: 0
-  resetPeopleJuice: 000000000000000000000000
+  resetPeopleJuice:
+    list: 020000000000000000000000
+  currentPeopleJuice:
+    list: 
   playerDeck: {fileID: 1911337661}
   playerGraveyard: {fileID: 396847612}
   playerHand: {fileID: 385885770}

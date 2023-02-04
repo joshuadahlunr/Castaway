@@ -283,7 +283,7 @@ namespace CardBattle.Card {
 
 		public virtual void MarkDisabled() {
 			renderer.disabled.SetActive(true);
-			collider.enabled = false;
+			if(collider is not null) collider.enabled = false;
 			
 			if ((state & State.InHand) == 0) return; // Don't deal with the draggable if not in hand!
 			var drag = GetComponent<DraggableBase>();
@@ -292,7 +292,7 @@ namespace CardBattle.Card {
 
 		public virtual void MarkEnabled() {
 			renderer.disabled.SetActive(false);
-			collider.enabled = true;
+			if(collider is not null) collider.enabled = true;
 			
 			if ((state & State.InHand) == 0) return; // Don't deal with the draggable if not in hand!
 			var drag = GetComponent<DraggableBase>();
@@ -367,13 +367,14 @@ namespace CardBattle.Card {
 		public static readonly List<CardBase> ActiveCards = new();
 		private void OnEnable() => ActiveCards.Add(this);
 		private void OnDisable() => ActiveCards.Remove(this);
-		
+
 
 		/// <summary>
 		/// When the game starts make sure our renderer has a reference to us
 		/// </summary>
+		public void Awake() => collider = GetComponent<Collider>();
+
 		public void Start() {
-			collider = GetComponent<Collider>();
 			if(renderer is not null) renderer.card = this;
 		}
 

@@ -13,7 +13,8 @@ namespace CardBattle {
 			Player = 1 << 2,
 			Hand = 1 << 3,
 			InPlay = 1 << 4,
-			Monster = 1 << 5,
+			MonsterImpl = 1 << 5,
+			Monster = Enemy | MonsterImpl,
 			// Equipment = 1 << 6,
 			Action = 1 << 7,
 			Status = 1 << 8,
@@ -32,6 +33,8 @@ namespace CardBattle {
 			foreach(var container in cgm.inPlayContainers)
 				foreach (var card in container)
 					yield return card;
+			foreach (var card in cgm.monsters)
+				yield return card;
 		}
 
 		public static IEnumerable<Card.CardBase> EnumerateDisabledCards() =>

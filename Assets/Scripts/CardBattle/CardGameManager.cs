@@ -67,8 +67,7 @@ public class CardGameManager : MonoBehaviour {
 		get => _playerHealthState;
 	}
 
-	public PeopleJuice.Types[] resetPeopleJuice;
-	public PeopleJuice.Cost currentPeopleJuice;
+	public PeopleJuice.Cost resetPeopleJuice, currentPeopleJuice;
 
 	// References to the player's deck, graveyard, and hand
 	public Deck playerDeck, playerGraveyard;
@@ -179,6 +178,7 @@ public class CardGameManager : MonoBehaviour {
 					monster.deck.RevealCard();
 				}
 		
+		// Disable all of the unaffordable cards in the player's hand!
 		OnlyEnableAffordableCards();
 	}
 

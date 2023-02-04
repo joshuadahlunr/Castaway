@@ -47,7 +47,8 @@ namespace CardBattle {
         /// <summary>
         /// When the game starts add a <see cref="DamageTimesXModification"/> to the card 
         /// </summary>
-        public void Awake() {
+        public new void Awake() {
+            base.Awake();
             AddModification(new DamageTimesXModification());
         }
 
