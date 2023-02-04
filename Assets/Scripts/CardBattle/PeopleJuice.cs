@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Extensions;
@@ -23,14 +24,25 @@ namespace CardBattle {
 		/// Type representing a people juice cost (just a list of people juice)
 		/// </summary>
 		[Serializable]
-		public class Cost : List<Types> {
+		public class Cost : IEnumerable<Types> {
+			[SerializeField] private List<Types> list;
+
+			public int Count => list.Count;
 			public int Value => Count;
 
-			public Cost() : base() { }
-			public Cost(IEnumerable<Types> iter) : base(iter) { }
+			public Cost() => list = new List<Types>();
+			public Cost(IEnumerable<Types> iter) => list = new List<Types>(iter);
+
+			public Types this[int index] {
+				get => list[index];
+				set => list[index] = value;
+			}
+			
+			public IEnumerator<Types> GetEnumerator() => list.GetEnumerator();
+			IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
 			public IEnumerable<Counted<Types>> CountedForm() {
-				return this.GroupBy(t => t)
+				return list.GroupBy(t => t)
 					.Select(g => new Counted<Types> { value = g.Key, count = g.Count() });
 			}
 			
@@ -38,12 +50,27 @@ namespace CardBattle {
 				var @out = new Cost();
 				foreach(var count in counted)
 					for(var i = 0; i < count.count; i++)
-						@out.Add(count.value);
+						@out.list.Add(count.value);
 				return @out;
 			}
-			
+
 			public override string ToString() {
-				return this.Aggregate("", (current, type) => current + $"{{{type}}} ");
+				return list.Aggregate("", (current, type) => current + $"{{{type}}} ");
+			}
+
+			public Cost Sort() {
+				list.Sort();
+				return this;
+			}
+
+			public Cost Add(Types symbol) {
+				list.Add(symbol);
+				return this;
+			}
+
+			public Cost AddRange(IEnumerable<Types> symbols) {
+				list.AddRange(symbols);
+				return this;
 			}
 		}
 		
