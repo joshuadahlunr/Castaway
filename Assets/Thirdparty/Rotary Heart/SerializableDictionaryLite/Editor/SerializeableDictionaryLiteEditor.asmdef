@@ -1,0 +1,19 @@
+{
+    "name": "SerializeableDictionaryLiteEditor",
+    "rootNamespace": "",
+    "references": [
+        "GUID:79e0b16f848f9a14cb089706c3bba5d5",
+        "GUID:10ebc479cc081044d87faf0f7bd87988"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
