@@ -137,6 +137,7 @@ namespace CardBattle.Card {
 		/// Filters used to determine what kind of cards are invalid for this card to target!
 		/// </summary>
 		public virtual CardFilterer.CardFilters TargetingFilters => CardFilterer.CardFilters.All;
+		public virtual CardFilterer.CardFilters MonsterTargetingFilters => TargetingFilters;
 		/// <summary>
 		/// Bool indicating weather or not this card can directly target the player
 		/// </summary>

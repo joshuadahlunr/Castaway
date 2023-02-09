@@ -92,7 +92,7 @@ namespace CardBattle.Containers {
 		/// <param name="name">The name of the decklist to load (defaults to "Player Deck")</param>
 		/// <param name="clear">If this parameter is true we will remove all cards currently in this deck before loading, if this is false we can additively load cards to the deck</param>
 		/// <exception cref="ArgumentException"></exception>
-		public void DatabaseLoad(string name = "Player Deck", bool clear = true) {
+		public virtual void DatabaseLoad(string name = "Player Deck", bool clear = true) {
 			// Get the table out of the database and find the decklist with the given name!
 			var deckList = DatabaseManager.GetOrCreateTable<DeckList>().FirstOrDefault(l => l.name == name);
 			if (deckList is null)

@@ -35,18 +35,13 @@ namespace CardBattle {
                     RefundAndReset();
                     return;
                 }
-
-                // If the target is already revealing a card... return to hand!
-                if (target.deck.revealedCard != null) {
-                    RefundAndReset();
-                    return;
-                }
+                
                 
                 // Reveal the top card of the monster's deck!
                 target.deck.RevealCard();
 
                 // Reduce every property of the card by 1
-                target.deck.revealedCard.AddModification(mod);
+                target.deck.revealedCards[^1].Item1.AddModification(mod);
                 
             // For a monster this card only does something if there are cards in the player's deck!
             } else if (CardGameManager.instance.playerDeck.Count > 0) {

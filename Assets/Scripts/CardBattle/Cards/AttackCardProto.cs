@@ -10,6 +10,8 @@ namespace CardBattle {
         // Can only target monsters and equipment
         public override CardFilterer.CardFilters TargetingFilters =>
             ~(CardFilterer.CardFilters.Monster | CardFilterer.CardFilters.InPlay/*| CardFilterer.CardFilters.Equipment*/);
+        public override CardFilterer.CardFilters MonsterTargetingFilters =>
+            TargetingFilters | CardFilterer.CardFilters.Monster;
         
         /// <summary>
         /// Example modification that multiplies damage values by some factor

@@ -1,4 +1,9 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
+using CardBattle.Card;
+using CardBattle.Card.Modifications.Generic;
+using Extensions;
+using Shapes;
 using UnityEngine;
 
 namespace CardBattle.Containers {
@@ -10,7 +15,12 @@ namespace CardBattle.Containers {
 		/// <summary>
 		/// Reference to the card which the monster reveals to the player on each of its turns
 		/// </summary>
-		public Card.CardBase revealedCard;
+		public readonly List<(Card.CardBase, Card.CardBase)> revealedCards = new();
+
+		/// <summary>
+		/// Reference to the prefab to spawn to create a targeting arrow
+		/// </summary>
+		public Arrow arrowPrefab;
 
 		/// <summary>
 		/// Function which makes sure that all of the cards within this deck are flagged as belonging to the monster
@@ -27,26 +37,42 @@ namespace CardBattle.Containers {
 		/// </summary>
 		/// <remarks>Called by the <see cref="CardGameManager"/> when the monster's turn starts</remarks>
 		public void RevealCard() {
-			if (revealedCard != null) return;
-			
-			revealedCard = cards[0];
-			RemoveCard(0);
+			// Pick a random card to target
+			var targetableCards = CardFilterer.FilterCards(cards[0].MonsterTargetingFilters).ToList();
+			if (cards[0].CanTargetPlayer)
+				targetableCards.Add(null); // If the player is targetable... null is a valid target!
+			var targets = targetableCards.Distinct().ToArray();
+			var target = targets[Random.Range(0, targets.Length)];
 
-			// TODO: Need to improve the appearance of revealed cards!
-			var revealHolder = new GameObject(); // TODO: This is super inefficient and needs to be cached!
-			revealedCard.gameObject.SetActive(true);
-			revealHolder.transform.parent = transform;
+			// Remove the revealed card from the deck
+			revealedCards.Add((cards[0], target));
+			RemoveCard(0);
+			
+			// Temporarily remove the cost of the card!
+			revealedCards[^1].Item1.AddModification(new NoCostModification() {
+				turnsRemaining = 1
+			});
+			
+			var revealHolderA = new GameObject { name = "RevealHolderOuter", transform = { parent = transform } }; // TODO: This is super inefficient and needs to be cached!
+			revealHolderA.transform.SetGlobalScale(Vector3.one);
+			var revealHolder = new GameObject{ transform =  { parent = revealHolderA.transform } };
 			revealHolder.transform.LookAt(Camera.main.transform.position);
 			revealHolder.transform.rotation *= Quaternion.Euler(90, 0, 0);
-			revealHolder.transform.position = transform.position + Vector3.up * .25f;
+			revealHolder.transform.position = transform.position + Vector3.up * .25f + Vector3.right * (revealedCards.Count - 1);
+			if (target is not null) {
+				var arrow = Instantiate(arrowPrefab.gameObject, revealHolder.transform).GetComponent<Arrow>();
+				arrow.transform.localScale = new Vector3(.05f, .05f, .05f);
+				arrow.start.transform.position = revealedCards[^1].Item1.transform.position;
+				arrow.end.transform.position = revealedCards[^1].Item2.transform.position;
+			}
+			
+			revealedCards[^1].Item1.gameObject.SetActive(true);
+			revealedCards[^1].Item1.transform.parent = revealHolder.transform;
+			revealedCards[^1].Item1.transform.localPosition = Vector3.zero;
+			revealedCards[^1].Item1.transform.localRotation = Quaternion.Euler(0, 0, 0);
+			revealedCards[^1].Item1.GetComponent<Collider>().enabled = false; // Don't let the player interact with the revealed card!
 
-			revealedCard.transform.parent = revealHolder.transform;
-			revealedCard.transform.localPosition = Vector3.zero;
-			revealedCard.transform.localRotation = Quaternion.Euler(0, 0, 0);
-			revealedCard.GetComponent<Collider>().enabled =
-				false; // Don't let the player interact with the revealed card!
-
-			revealedCard.OnMonsterReveal();
+			revealedCards[^1].Item1.OnMonsterReveal();
 		}
 
 		
@@ -55,27 +81,20 @@ namespace CardBattle.Containers {
 		/// Function which "plays" the currently revealed card
 		/// </summary>
 		/// <remarks>Called by the <see cref="CardGameManager"/> at the end of the monster's turn</remarks>
-		public void PlayRevealedCard() {
-			Card.CardBase target = null;
-			
-			// Make sure the revealed card can be interacted with again!
-			if (revealedCard is not null) {
+		public void PlayRevealedCard() { // Make sure the revealed card can be interacted with again!
+			foreach (var (revealedCard, target) in revealedCards) {
 				revealedCard.GetComponent<Collider>().enabled = true;
 
 				// Get rid of the temporary object used to reveal the card
-				var p = revealedCard.transform.parent;
+				var p = revealedCard.transform.parent.parent;
 				revealedCard.transform.parent = null;
 				Destroy(p.gameObject);
 
-				// Pick a random card to target
-				var targetableCards = CardFilterer.FilterCards(revealedCard.TargetingFilters).ToList();
-				if(revealedCard.CanTargetPlayer) targetableCards.Add(null); // If the player is targetable... null is a valid target!
-				var targets = targetableCards.Distinct().ToArray();
-				target = targets[Random.Range(0, targets.Length)];
+				// NOTE: On target should send the card back to the graveyard (aka bottom of deck)
+				revealedCard?.OnTarget(target);
 			}
-
-			revealedCard?.OnTarget(target);
-			revealedCard = null;
+			
+			revealedCards.Clear();
 		}
 	}
 }

@@ -124,4 +124,8 @@ namespace CardBattle.Card.Modifications.Generic {
 			return health;
 		}
 	}
+	
+	class NoCostModification : ActionCardBase.Modification {
+		public override PeopleJuice.Cost GetCost(PeopleJuice.Cost _) => new();
+	}
 }
