@@ -90,6 +90,8 @@ MonoBehaviour:
       value: 2
     - tag: 4
       value: 1
+  _cost:
+    list: 06000000
 --- !u!65 &4430917359204932420
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -298,6 +298,7 @@ MonoBehaviour:
     permanentDamageReduction: 0
     temporaryDamageReduction: 0
   deck: {fileID: 1030063322}
+  selkieCard: {fileID: 0}
 --- !u!65 &147116286
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -551,6 +552,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cards: []
   cardDB: {fileID: 0}
+  injectCardPrototypes: []
 --- !u!1 &435326279
 GameObject:
   m_ObjectHideFlags: 0
@@ -1442,6 +1444,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cards: []
   cardDB: {fileID: 11400000, guid: 5631e1aa1e5ef424e9af340e6b5cff49, type: 2}
+  injectCardPrototypes: []
   revealedCard: {fileID: 0}
 --- !u!4 &1030063323
 Transform:
@@ -2178,6 +2181,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cards: []
   cardDB: {fileID: 11400000, guid: 5631e1aa1e5ef424e9af340e6b5cff49, type: 2}
+  injectCardPrototypes: []
 --- !u!1 &2027293939
 GameObject:
   m_ObjectHideFlags: 0

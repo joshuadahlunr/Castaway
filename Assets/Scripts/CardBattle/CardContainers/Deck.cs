@@ -1,4 +1,5 @@
 ﻿using System;
+using CardBattle.Card;
 using Extensions;
 using SQLite;
 using UnityEngine;
@@ -49,6 +50,11 @@ namespace CardBattle.Containers {
 		public CardDatabase cardDB;
 
 		/// <summary>
+		/// List of card prototypes to inject into the deck whenever it is loaded
+		/// </summary>
+		public CardBase[] injectCardPrototypes;
+
+		/// <summary>
 		/// Variable the represents the initial scale of the object, as cards are added and removed from the deck this value is changed
 		/// </summary>
 		private float initalYScale;
@@ -67,6 +73,18 @@ namespace CardBattle.Containers {
 			UpdateDeckHeight();
 		}
 
+#if UNITY_EDITOR
+		public void Update() {
+			if (injectCardPrototypes == null) return;
+			
+			// If there are any cards in the inject list, add them to the front of the deck
+			foreach(var cardPrototype in injectCardPrototypes)
+				AddCard(Instantiate(cardPrototype), 0);
+
+			injectCardPrototypes = null; // Empty the list of cards to inject
+		}
+#endif
+
 
 		/// <summary>
 		/// Function which can be called to load a decklist from the SQL database
@@ -82,7 +100,11 @@ namespace CardBattle.Containers {
 
 			// If we are clearing, remove all of the cards currently in the deck
 			if (clear) RemoveAllCards();
-
+			
+			// If there are any cards in the inject list, add them to the front of the deck
+			foreach(var cardPrototype in injectCardPrototypes)
+				AddCard(Instantiate(cardPrototype), 0);
+			injectCardPrototypes = null;
 			// Use the associated cardDB to load the cards from the database
 			foreach (var card in deckList.Cards)
 				AddCard(cardDB.Instantiate(card));
