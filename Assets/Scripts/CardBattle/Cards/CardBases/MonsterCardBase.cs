@@ -13,6 +13,16 @@ namespace CardBattle.Card {
 		public MonsterDeck deck;
 
 		/// <summary>
+		/// Bool indicating if the card is a swarm or not
+		/// </summary>
+		public virtual bool IsSwarm => false;
+		/// <summary>
+		/// The representative card prototype if this card is a selkie
+		/// </summary>
+		/// <remarks>A value of null indicates that this card is not a selkie!</remarks>
+		public CardBase selkieCard = null;
+
+		/// <summary>
 		/// When the monster's health falls below 0 it has been defeated and is disabled (and we trigger a win/lose check in the card game manager)
 		/// </summary>
 		/// <param name="oldHealth"></param>
