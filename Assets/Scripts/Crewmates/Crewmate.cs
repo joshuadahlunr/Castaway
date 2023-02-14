@@ -14,7 +14,7 @@ public class Crewmate : MonoBehaviour
     [SerializeField]
     private int _crewLevel, _xpNeeded, _morale;
     [SerializeField]
-    private string _crewName;
+    private string _crewName, _crewType;
     [SerializeField]
     private bool _inCrew;
     [SerializeField]
@@ -23,6 +23,8 @@ public class Crewmate : MonoBehaviour
 
     private int defaultMorale = 50; // Between a range of 0-100?
     private string[] randomNames = { "Jeff", "Tommy", "David" };
+    private string[] randomTypes = { "Wizard", "Navigator", "Entertainer", "Engineer", 
+                                    "Cook", "Occultist", "Mercenary", "Deckhand" };
 
     public Crewmate()
     {
@@ -76,6 +78,7 @@ public class Crewmate : MonoBehaviour
     }
 
     public string CrewName { get { return _crewName; } set => _crewName = value; }
+    public string CrewType { get { return _crewType; } set => _crewType = value; }
     public bool InCrew { get { return _inCrew; } set => _inCrew = value; }
     public int CrewLevel { get { return _crewLevel; } }
     public int XPNeeded { get { return _xpNeeded; } }
