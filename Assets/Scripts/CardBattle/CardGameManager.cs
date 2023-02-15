@@ -299,12 +299,19 @@ public class CardGameManager : MonoBehaviour {
 	public Card.CardBase InstantiateBinnedAttack() {
 		return playerDeck.cardDB.Instantiate("Binned Attack");
 	}
-	
 
 	/// <summary>
-	/// Lock which prevents the player from creating multiple card confirmations...
+	/// Function which creates an Electric card
 	/// </summary>
-	public bool activeConfirmationExists;
+	/// <returns>Reference to the newly created Electric card</returns>
+    public Card.CardBase InstantiateElectric() {
+		return playerDeck.cardDB.Instantiate("Electric");
+    }
+
+        /// <summary>
+        /// Lock which prevents the player from creating multiple card confirmations...
+        /// </summary>
+        public bool activeConfirmationExists;
 	
 	/// <summary>
 	/// Creates a snap confirmation
