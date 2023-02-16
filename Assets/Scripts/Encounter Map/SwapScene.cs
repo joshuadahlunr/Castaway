@@ -11,6 +11,7 @@ using Random = System.Random;
 public class SwapScene : MonoBehaviour {
 
     public virtual void SetScene() {
+        // Sets the scene from the values given from DetermineNode()
         int eventType =  DetermineNode(); 
         if(eventType == 1) {
             // Random

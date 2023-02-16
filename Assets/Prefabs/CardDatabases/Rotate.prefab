@@ -52,7 +52,7 @@ MonoBehaviour:
   _state: 2
   cardOwner: 0
   _name: Rotate
-  _art: {fileID: 0}
+  _art: {fileID: 21300000, guid: 86c002fcc57865e4a8b82cf07fef30bb, type: 3}
   _rules: Select a new rotation for the ship.
   _properties:
     reorderableList:
@@ -61,7 +61,7 @@ MonoBehaviour:
       draggable: 1
       expandable: 1
       multipleSelection: 1
-      isExpanded: 0
+      isExpanded: 1
       label:
         m_Text: Keys
         m_Image: {fileID: 0}
@@ -76,7 +76,7 @@ MonoBehaviour:
       elementNameOverride: 
       elementIcon: {fileID: 0}
     reqReferences: {fileID: 0}
-    isExpanded: 0
+    isExpanded: 1
     _keyValues: []
     _keys: []
     _values: []
@@ -132,6 +132,12 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4430917359204932422}
     m_Modifications:
+    - target: {fileID: 1305000172205105326, guid: 5a1ba109fb2faf6459cc61ba4c4fb70c,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 541c920f99b4e864dbcea25a778185ec,
+        type: 3}
     - target: {fileID: 1305000173628552771, guid: 5a1ba109fb2faf6459cc61ba4c4fb70c,
         type: 3}
       propertyPath: m_Name

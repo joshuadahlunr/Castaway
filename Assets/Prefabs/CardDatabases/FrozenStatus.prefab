@@ -52,7 +52,7 @@ MonoBehaviour:
   _state: 2
   cardOwner: 0
   _name: Frozen
-  _art: {fileID: 0}
+  _art: {fileID: 21300000, guid: ed77b10e3637e2a4e933c89f5683d9dd, type: 3}
   _rules: "Discard hand when drawn.\\nCan\u2019t take damage until next turn! "
   _properties:
     reorderableList:
@@ -80,6 +80,8 @@ MonoBehaviour:
     _keyValues: []
     _keys: []
     _values: []
+  _cost:
+    list: 00000000
 --- !u!65 &4753575742049232133
 BoxCollider:
   m_ObjectHideFlags: 0
