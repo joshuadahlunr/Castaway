@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Random = System.Random;
 
 [RequireComponent(typeof(LineRenderer))]
 public class MapNode : MonoBehaviour {
@@ -12,7 +14,7 @@ public class MapNode : MonoBehaviour {
 	public int Depth => generation?.depth ?? -1;
 	public Vector3[] parentPositions => parents.Select(x => x.transform.position).ToArray();
 	public float[] parentDistances => parentPositions.Select(x => (x - transform.position).magnitude).ToArray();
- 
+
 	private LineRenderer line;
 	public void InitLine(LineRenderer dashedLinePrefab) {
 		line = GetComponent<LineRenderer>();
@@ -43,8 +45,6 @@ public class MapNode : MonoBehaviour {
 				lineRenderer.material.mainTextureScale = new Vector2((parent.transform.position - transform.position).magnitude / 5, 1.0f);
 			}
 		}
-		
 		// line.text
-		
 	}
 }

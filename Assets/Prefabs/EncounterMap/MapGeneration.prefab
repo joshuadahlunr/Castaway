@@ -45,5 +45,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   depth: 0
-  parent: {fileID: 0}
+  previous: {fileID: 0}
+  next: {fileID: 0}
   nodes: []
