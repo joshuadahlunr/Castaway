@@ -1,28 +1,32 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.InputSystem.Controls;
+using UnityEditor;
+using Unity.VisualScripting;
 
 /// <summary>
 /// @author: Misha Desear
 /// </summary>
 /// 
-
-[System.Serializable]
 public class Crewmate : MonoBehaviour
 {
+    public GameObject infoPrefab;
     [SerializeField]
-    private int _crewLevel, _xpNeeded, _morale;
+    private int _crewLevel, _xpNeeded, _currentXp, _morale;
     [SerializeField]
     private string _crewName, _crewType;
     [SerializeField]
     private bool _inCrew;
     [SerializeField]
     private Preference[] _preferences;
+
     //TODO: implement card type, likes, and dislikes (as class objects)
 
     private int defaultMorale = 50; // Between a range of 0-100?
-    private string[] randomNames = { "Jeff", "Tommy", "David" };
+    private string[] randomNames = { "Jeff", "Joe", "Tommy", "Timmy", "David", "Josh", "Misha", "Jared", "Dana"};
     private string[] randomTypes = { "Wizard", "Navigator", "Entertainer", "Engineer", 
                                     "Cook", "Occultist", "Mercenary", "Deckhand" };
 
@@ -39,6 +43,12 @@ public class Crewmate : MonoBehaviour
             prefList[i] = pref;
         }
         return prefList;
+    }
+
+    public string RandomTypes()
+    {
+        string newType = randomTypes[Random.Range(0, randomTypes.Length)];
+        return newType;
     }
 
     public string RandomName()
@@ -72,9 +82,40 @@ public class Crewmate : MonoBehaviour
         _crewName = RandomName();
         _inCrew = false;
         _crewLevel = 0;
+        _currentXp = 0;
         _xpNeeded = 10; // Subject to change
         _preferences = RandomPreferences();
+        _crewType = RandomTypes();
         _morale = defaultMorale;
+        GameObject.FindGameObjectWithTag("Info Panel").transform.localScale = new Vector3(0, 0, 0);
+    }
+
+    public void ShowInfo()
+    {
+        GameObject.FindGameObjectWithTag("Info Panel").transform.localScale = new Vector3(1, 1, 1);
+
+        GameObject displayName = GameObject.FindGameObjectWithTag("Crew Name");
+        displayName.GetComponent<TextMeshProUGUI>().text = _crewName.ToString();
+
+        GameObject displayType = GameObject.FindGameObjectWithTag("Crew Type");
+        displayType.GetComponent<TextMeshProUGUI>().text = "the " + _crewType.ToString();
+
+        GameObject morale = GameObject.FindGameObjectWithTag("Morale");
+        morale.GetComponent<TextMeshProUGUI>().text = "Morale: " + _morale.ToString();
+        GameObject moraleSlider = GameObject.FindGameObjectWithTag("Morale Slider");
+        moraleSlider.GetComponent<Slider>().value = _morale;
+
+        GameObject level = GameObject.FindGameObjectWithTag("Level");
+        level.GetComponent<TextMeshProUGUI>().text = "Level: " + _crewLevel.ToString();
+
+        GameObject xpSlider = GameObject.FindGameObjectWithTag("XP Slider");
+        xpSlider.GetComponent<Slider>().value = _currentXp;
+        xpSlider.GetComponent<Slider>().maxValue = _xpNeeded;
+    }
+
+    public void HideInfo()
+    {
+        GameObject.FindGameObjectWithTag("Info Panel").transform.localScale = new Vector3(0, 0, 0);
     }
 
     public string CrewName { get { return _crewName; } set => _crewName = value; }

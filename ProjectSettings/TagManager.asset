@@ -7,6 +7,12 @@ TagManager:
   - Targetable
   - Card
   - Snappable
+  - Canvas
+  - Info Panel
+  - Level
+  - Morale
+  - XP Slider
+  - Morale Slider
   layers:
   - Default
   - TransparentFX
