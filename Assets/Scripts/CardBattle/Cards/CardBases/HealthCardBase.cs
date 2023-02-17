@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace CardBattle.Card {
 	/// <summary>
@@ -40,6 +41,9 @@ namespace CardBattle.Card {
 				return healthCache.Value;
 			}
 		}
+
+		public UnityEvent<HealthState, HealthState> healthStateChanged;
+
 		/// <summary>
 		/// Reference to the monster's health
 		/// </summary>
@@ -63,6 +67,8 @@ namespace CardBattle.Card {
 		/// </summary>
 		/// <param name="oldHealth">The old health of the card</param>
 		/// <param name="newHealth">The new health of the card</param>
-		public virtual void OnHealthStateChanged(HealthState oldHealth, HealthState newHealth) { }
+		public virtual void OnHealthStateChanged(HealthState oldHealth, HealthState newHealth) {
+			healthStateChanged?.Invoke(oldHealth, newHealth);
+		}
 	}
 }

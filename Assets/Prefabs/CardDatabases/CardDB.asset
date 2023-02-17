@@ -41,15 +41,21 @@ MonoBehaviour:
     - Frozen
     - Rotate
     - ArcaneTwirl
+    - Scry
+    - Cannon
     _keys:
     - Binned Attack
     - Prototype AttackCard
     - Frozen
     - Rotate
     - ArcaneTwirl
+    - Scry
+    - Cannon
     _values:
     - {fileID: 2271024447710015734, guid: 8fba69ea9cabcfa4b89aaa763ac1bd82, type: 3}
     - {fileID: 4430917359204932427, guid: ffed5da40e94bbd4ba57c97a28388c0a, type: 3}
     - {fileID: 1427780925322784421, guid: 4ed95169b93d183459db567c5cee3ab7, type: 3}
     - {fileID: -874858629119296669, guid: b2014efdd714972479d08a574d4fa620, type: 3}
     - {fileID: -7979424505752031029, guid: d6d4f210111954e4fb0ffe90290287ad, type: 3}
+    - {fileID: 8474119564818363157, guid: f674866313c09184a95e00b1074bc542, type: 3}
+    - {fileID: 1302548177074960351, guid: 7f64d2c389d671d45b0304aeed4e7fc3, type: 3}

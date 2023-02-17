@@ -4,6 +4,7 @@ using System.Linq;
 using CardBattle.Containers;
 using Extensions;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
 namespace CardBattle {
@@ -67,9 +68,12 @@ public class CardGameManager : MonoBehaviour {
 		get => _playerHealthState;
 	}
 
+	/// <summary>
+	/// Variables tracking the player's people juice (both available and current)
+	/// </summary>
 	public PeopleJuice.Cost resetPeopleJuice, currentPeopleJuice;
 
-	// References to the player's deck, graveyard, and hand
+	// References to the player's deck, graveyard, hand, containers, and ship
 	public Deck playerDeck, playerGraveyard;
 	public Hand playerHand;
 	public CardContainerBase[] inPlayContainers;
@@ -80,6 +84,10 @@ public class CardGameManager : MonoBehaviour {
 	/// </summary>
 	public Card.MonsterCardBase[] monsters;
 
+	// Events that cards (and other things) can subscribe to
+	public UnityEvent turnStart, turnEnd;
+	public UnityEvent<HealthState, HealthState> playerHealthStateChange;
+
 	/// <summary>
 	/// Provide public read only access to who's turn it is
 	/// </summary>
@@ -89,7 +97,7 @@ public class CardGameManager : MonoBehaviour {
 	/// </summary>
 	public float TimeLeftInTurn => turnTimer;
 
-	
+
 	/// <summary>
 	/// When the game starts...
 	/// </summary>
@@ -116,6 +124,9 @@ public class CardGameManager : MonoBehaviour {
 			monster.deck.DatabaseLoad("Shark Deck");
 			monster.deck.AssignOwnerToCards(i);
 		}
+		
+		// Invoke the turn start event
+		turnStart?.Invoke();
 	}
 	
 
@@ -180,6 +191,7 @@ public class CardGameManager : MonoBehaviour {
 		
 		// Disable all of the unaffordable cards in the player's hand!
 		OnlyEnableAffordableCards();
+		turnStart?.Invoke();
 	}
 
 	/// <summary>
@@ -200,7 +212,9 @@ public class CardGameManager : MonoBehaviour {
 		isPlayerTurn = !isPlayerTurn;
 
 		CheckWinLose();
+		turnEnd?.Invoke();
 		
+		// TODO: Show a turn transition screen here!
 		OnTurnStart();
 	}
 
@@ -213,6 +227,7 @@ public class CardGameManager : MonoBehaviour {
 		if(oldHealth != newHealth)
 			Debug.Log($"Player took {oldHealth - newHealth} damage");
 		CheckWinLose();
+		playerHealthStateChange?.Invoke(oldHealth, newHealth);
 	}
 	
 	/// <summary>

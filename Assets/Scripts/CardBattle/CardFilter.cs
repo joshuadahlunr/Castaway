@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using CardBattle.Card;
 
 namespace CardBattle {
 	public static class CardFilterer {
@@ -15,7 +14,8 @@ namespace CardBattle {
 			InPlay = 1 << 4,
 			MonsterImpl = 1 << 5,
 			Monster = Enemy | MonsterImpl,
-			// Equipment = 1 << 6,
+			EquipmentImpl = 1 << 6,
+			Equipment = EquipmentImpl | Player,
 			Action = 1 << 7,
 			Status = 1 << 8,
 			Affordable = 1 << 9,
@@ -44,8 +44,8 @@ namespace CardBattle {
 			EnumerateAllCards().Where(c => !c.Disabled);
 
 		private static (Card.CardBase[], Card.CardBase[]) FilterCardsImpl(CardFilters filters, IEnumerable<Card.CardBase> cards) {
-			var matchingCards = new List<CardBase>();
-			var filteredCards = new List<CardBase>();
+			var matchingCards = new List<Card.CardBase>();
+			var filteredCards = new List<Card.CardBase>();
 			foreach (var card in cards) {
 				if((filters & CardFilters.Enemy) != 0) { // If filtering enemies'
 					if (!card.OwnedByPlayer) { // Disabled everything owned by enemies
@@ -62,32 +62,32 @@ namespace CardBattle {
 				}
 				
 				if((filters & CardFilters.Hand) != 0) { // If filtering in Hand
-					if ((card.state & CardBase.State.InHand) != 0) { // Disable everything in hand!
+					if ((card.state & Card.CardBase.State.InHand) != 0) { // Disable everything in hand!
 						filteredCards.Add(card);
 						continue;
 					}
 				}
 				
 				if((filters & CardFilters.InPlay) != 0) { // If filtering in play
-					if ((card.state & CardBase.State.InPlay) != 0) { // Disable everything in play!
+					if ((card.state & Card.CardBase.State.InPlay) != 0) { // Disable everything in play!
 						filteredCards.Add(card);
 						continue;
 					}
 				}
 				
-				if((filters & CardFilters.Monster) != 0) { // If filtering monster cards
+				if((filters & CardFilters.MonsterImpl) != 0) { // If filtering monster cards
 					if (card is Card.MonsterCardBase) { // Disable all monster cards
 						filteredCards.Add(card);
 						continue;
 					}
 				}
 				
-				// if((filters & CardFilters.Equipment) != 0) { // If filtering equipment cards
-				// 	if (card is Card.EquipmentCardBase) { // Disable all equipment cards
-				// 		filteredCards.Add(card);
-				// 		continue;
-				// 	}
-				// }
+				if((filters & CardFilters.EquipmentImpl) != 0) { // If filtering equipment cards
+					if (card is Card.EquipmentCardBase) { // Disable all equipment cards
+						filteredCards.Add(card);
+						continue;
+					}
+				}
 				
 				if((filters & CardFilters.Action) != 0) { // If filtering action cards
 					if (card is Card.ActionCardBase) { // Disable all action cards
@@ -103,7 +103,7 @@ namespace CardBattle {
 					}
 				}
 
-				if (card is ActionCardBase aCard) {
+				if (card is Card.ActionCardBase aCard) {
 					if((filters & CardFilters.Affordable) != 0) { // If filtering affordable cards
 						if (PeopleJuice.CostAvailable(cgm.currentPeopleJuice, aCard.cost)) { // Disable all cards that can be afforded
 							filteredCards.Add(card);
