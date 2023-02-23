@@ -52,7 +52,7 @@ MonoBehaviour:
   _state: 2
   cardOwner: 0
   _name: Fire Cannon
-  _art: {fileID: 0}
+  _art: {fileID: 21300000, guid: a96f840c57f2c094ba619484ac3cb50c, type: 3}
   _rules: Fires the selected cannon, dealing {properties["primary"]} damage to everything
     in range.
   _properties:
@@ -84,7 +84,7 @@ MonoBehaviour:
     - primary
     _values:
     - tag: 0
-      value: 1
+      value: 5
   _cost:
     list: 00000000
 --- !u!65 &4430917359204932420
@@ -126,7 +126,7 @@ MonoBehaviour:
     type: 3}
   arrowPrefab: {fileID: 6722190504438028770, guid: e2e954b1ee2caff408b59a53e7370e2a,
     type: 3}
-  targetNeeded: 0
+  targetNeeded: 1
 --- !u!1001 &4487235728669804067
 PrefabInstance:
   m_ObjectHideFlags: 0

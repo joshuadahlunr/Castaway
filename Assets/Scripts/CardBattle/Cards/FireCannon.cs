@@ -1,4 +1,4 @@
-using System;
+using CardBattle.Card;
 
 namespace CardBattle {
 
@@ -6,9 +6,14 @@ namespace CardBattle {
         // Can't target anything but in play equipment...
         public override CardFilterer.CardFilters TargetingFilters => ~(CardFilterer.CardFilters.Equipment | CardFilterer.CardFilters.InPlay);
         
-
         public override void OnTarget(Card.CardBase _target) {
-            throw new NotImplementedException("TODO: Implement fire cannon");
+            if (_target is not EquipmentCardBase target) {
+                RefundAndReset();
+                return;
+            }
+            
+            foreach (var monster in target.GetCollidingCards<MonsterCardBase>()) 
+                monster.healthState = monster.healthState.ApplyDamage(properties["primary"]);
 
             SendToGraveyard();
         }

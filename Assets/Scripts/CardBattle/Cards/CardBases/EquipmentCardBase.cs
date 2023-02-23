@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+using CardBattle.Card.Renderers;
 using UnityEngine;
 
 namespace CardBattle.Card {
@@ -8,7 +10,6 @@ namespace CardBattle.Card {
 	/// <author>Joshua Dahl</author>
 	public class EquipmentCardBase : HealthCardBase {
 		public ActionCardBase associatedCardPrefab;
-		
 		public float arc;
 
 		public override void OnPlayed() {
@@ -25,7 +26,7 @@ namespace CardBattle.Card {
 			base.OnHealthStateChanged(oldHealth, newHealth);
 			
 			if (newHealth <= 0) {
-				Debug.Log($"Monster {name} defeated!");
+				Debug.Log($"Equipment {name} defeated!");
 				
 				// Mark the monster as defeated (disabled in Unity) and check if all monsters have been defeated
 				gameObject.SetActive(false);
@@ -34,5 +35,10 @@ namespace CardBattle.Card {
 			
 			Debug.Log($"{name} took {oldHealth - newHealth} damage");
 		}
+		
+		public T[] GetCollidingCards<T>() where T : CardBase {
+			return renderer is not Equipment equipment ? null : equipment.arcCollider.GetCollidingObjectsOfType<T>();
+		}
+		public CardBase[] GetCollidingCards() => GetCollidingCards<CardBase>();
 	}
 }
