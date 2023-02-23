@@ -299,7 +299,7 @@ public class CardGameManager : MonoBehaviour {
 	/// </summary>
 	public void OnlyEnableAffordableCards() {
 		// Enable all of the affordable cards in hand!
-		EnableCards(CardFilterer.FilterCards(~(CardFilterer.CardFilters.Affordable | CardFilterer.CardFilters.Hand)));
+		EnableCards(CardFilterer.FilterCards(~(CardFilterer.CardFilters.Affordable | CardFilterer.CardFilters.Hand | CardFilterer.CardFilters.Player | CardFilterer.CardFilters.Status | CardFilterer.CardFilters.Action)));
 		// Disable all of the unaffordable cards
 		CardFilterer.FilterAndDisableCards(CardFilterer.CardFilters.Unaffordable);
 	}
