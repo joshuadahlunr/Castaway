@@ -1,18 +1,16 @@
-using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Random = System.Random;
 
 /// <summary>
-/// @author: Jared White
 /// Swaps the scene depending on numbers generated randomly with probability
 /// </summary>
-
+/// <author>Jared White</author>
 public class SwapScene : MonoBehaviour {
 
     public virtual void SetScene() {
         // Sets the scene from the values given from DetermineNode()
-        int eventType =  DetermineNode(); 
+        int eventType =  DetermineNode();
         if(eventType == 1) {
             // Random
             SceneManager.LoadScene("RandomScene");
@@ -24,7 +22,7 @@ public class SwapScene : MonoBehaviour {
             SceneManager.LoadScene("BattleScene");
         } else {
             SceneManager.LoadScene("BattleScene");
-        }   
+        }
     }
 
 	/*public void SpawnNode() {
@@ -54,17 +52,17 @@ public class SwapScene : MonoBehaviour {
         // 60% spawn rate
         if  (nodeValue <= 5) {
             Debug.Log("Battle");
-            return 0; 
+            return 0;
         } else if (nodeValue > 5 || nodeValue <= 8){
         // If the value is 5-7, the event node type is Crewmate
         // 30% spawn rate (can occur as a random event)
             Debug.Log("Random");
-            return 1; 
+            return 1;
         } else if (nodeValue > 8 || nodeValue <= 9){
         // If the value is 8-9 the event node type is Battle
         // 10% spawn rate
             Debug.Log("Crewmate");
-            return 2; 
+            return 2;
         } else {
             Debug.Log("Battle");
             return 0;

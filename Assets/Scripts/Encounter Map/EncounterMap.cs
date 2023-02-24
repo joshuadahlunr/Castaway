@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Extensions;
@@ -7,16 +6,16 @@ using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 /// <summary>
-///     @author: Jared White & Joshua Dahl
 /// </summary>
+/// <author>Jared White & Joshua Dahl</author>
 public class EncounterMap : MonoBehaviour {
 	[FormerlySerializedAs("whiteDot")] public MapNode whiteDotPrefab;
 	public MapGeneration mapGenerationPrefab;
 	public LineRenderer dashedLinePrefab;
 
 	public MapGeneration currentGeneration;
-	
-	
+
+
 	// Start is called before the first frame update
 	private void Start() {
 		// Generate 5 generations at the start
@@ -29,7 +28,7 @@ public class EncounterMap : MonoBehaviour {
 		if (currentGeneration is null) {
 			currentGeneration = Instantiate(mapGenerationPrefab, transform);
 			currentGeneration.gameObject.name = "Genesis";
-			
+
 			currentGeneration.depth = 0;
 			var root = currentGeneration.AddNode(whiteDotPrefab);
 			root.transform.localPosition = Vector3.zero;
@@ -38,7 +37,7 @@ public class EncounterMap : MonoBehaviour {
 
 			return;
 		}
-		
+
 		// Construct a table representing how likely each type of branching
 		var flatten = new int[3][];
 		flatten[0] = new int [1] { 2 }.Replicate(7).ToArray(); // 2 = 7/12
@@ -56,11 +55,11 @@ public class EncounterMap : MonoBehaviour {
 		foreach (var (node, index) in currentGeneration.nodes.WithIndex()) {
 			// Find its position
 			var root = node.transform.position;
-			
+
 			// Pick a random number of children...
-			int numChildren = probability[Random.Range(0, probability.Length)]; 
+			int numChildren = probability[Random.Range(0, probability.Length)];
 			float angle = 90 - 90.0f / numChildren + 30 * (currentGeneration.nodes.Length / 2 - index);
-			for (int i = 0; i < numChildren; i++) { 
+			for (int i = 0; i < numChildren; i++) {
 				// Add each one to the graph
 				var child = nextGeneration.AddNode(whiteDotPrefab);
 				node.AddChild(child);
@@ -74,7 +73,7 @@ public class EncounterMap : MonoBehaviour {
 				if (Mathf.Abs(child.transform.position.y) > 200)
 					child.transform.position = new Vector3(child.transform.position.x,
 						Mathf.Sign(child.transform.position.y) * -50 + child.transform.position.y, child.transform.position.z);
-				
+
 				angle -= 90.0f / (numChildren - 1);
 			}
 		}
@@ -95,7 +94,7 @@ public class EncounterMap : MonoBehaviour {
 		foreach (var node in currentGeneration.nodes) {
 			node.children = node.children.Where(c => c != null).ToArray();
 			if (node.children.Length > 0) continue;
-			
+
 			// Find the first closest node
 			var minDist = float.MaxValue;
 			MapNode minNode = null;
@@ -107,7 +106,7 @@ public class EncounterMap : MonoBehaviour {
 				}
 			}
 			node.AddChild(minNode);
-			
+
 			// Find the second closest node
 			minDist = float.MaxValue;
 			MapNode minNode2 = null;
@@ -121,9 +120,9 @@ public class EncounterMap : MonoBehaviour {
 			}
 			node.AddChild(minNode2);
 		}
-		
+
 		// Draw lines between each new node and its parent(s)
-		foreach (var node in nextGeneration.nodes) 
+		foreach (var node in nextGeneration.nodes)
 			node.InitLine(dashedLinePrefab);
 
 		// Remove generations that are more than 5 generations old from memory
@@ -138,14 +137,14 @@ public class EncounterMap : MonoBehaviour {
 		// The current generation is now the next generation
 		currentGeneration = nextGeneration;
 	}
-	
-	
+
+
 
 
 	/* TO DOs:
 	    - Lerp/tween player icon to current location, remove previous icon if applicable (crewmate, battle, or random event)
 	    - Random event generation within certain bounds
 	    - Time movement between destinations
-	    - Move between 
+	    - Move between
 	*/
 }

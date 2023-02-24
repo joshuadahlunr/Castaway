@@ -4,8 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 
 /// <summary>
-/// @author: Jared White
 /// </summary>
+/// <author>Jared White</author>
 
 public class ChatText : MonoBehaviour {
 

@@ -4,8 +4,8 @@ using System.Diagnostics.Contracts;
 using UnityEngine;
 
 /// <summary>
-/// @author: Misha Desear
 /// </summary>
+/// <author>Misha Desear</author>
 public class Preference
 {
     private string _prefName;

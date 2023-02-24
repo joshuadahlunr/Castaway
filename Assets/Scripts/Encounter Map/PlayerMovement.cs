@@ -5,7 +5,8 @@ using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
 
 /// <summary>
-/// @author: Jared White
+/// </summary>
+/// <author>Jared White</author>
 /// </summary>
 
 public class PlayerMovement : MonoBehaviour, IPointerClickHandler

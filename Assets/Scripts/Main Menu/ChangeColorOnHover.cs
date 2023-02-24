@@ -6,8 +6,8 @@ using UnityEngine.UI;
 using TMPro;
 
 /// <summary>
-/// @author: Jared White
 /// </summary>
+/// <author>Jared White</author>
 
 public class ChangeColorOnHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {

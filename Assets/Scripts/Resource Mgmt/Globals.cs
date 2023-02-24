@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// @author: Misha Desear
 /// </summary>
+/// <author>Misha Desear</author>
 public class Globals
 {
     // Global resource value

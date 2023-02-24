@@ -2,8 +2,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 /// <summary>
-/// @author: Jared White
 /// </summary>
+/// <author>Jared White</author>
 
 public class ChangeScene : MonoBehaviour {
 

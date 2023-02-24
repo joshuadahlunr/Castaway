@@ -17,7 +17,6 @@ namespace CardBattle {
 			submit.action.performed += Submit;
 		}
 
-		// Update is called once per frame
 		private void Update() {
 			var mainCamera = Camera.main;
 			Vector2 pos = mainCamera.WorldToViewportPoint(CardGameManager.instance.ship.transform.position);

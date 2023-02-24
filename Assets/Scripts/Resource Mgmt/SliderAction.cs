@@ -5,8 +5,8 @@ using UnityEngine.UI;
 using TMPro;
 
 /// <summary>
-/// @author: Misha Desear
 /// </summary>
+/// <author>Misha Desear</author>
 public class SliderAction : MonoBehaviour
 {
     public TextMeshProUGUI sliderText;

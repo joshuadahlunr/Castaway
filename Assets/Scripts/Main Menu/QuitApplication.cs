@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// @author: Jared White
 /// </summary>
+/// <author>Jared White</author>
 
 public class QuitApplication : MonoBehaviour
 {

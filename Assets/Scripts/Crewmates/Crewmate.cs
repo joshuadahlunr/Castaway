@@ -8,8 +8,8 @@ using UnityEditor;
 using Unity.VisualScripting;
 
 /// <summary>
-/// @author: Misha Desear
 /// </summary>
+/// <author>Misha Desear</author>
 /// 
 public class Crewmate : MonoBehaviour
 {
