@@ -1,3 +1,6 @@
+using CardBattle.Card;
+using CardBattle.Containers;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace CardBattle
@@ -9,16 +12,37 @@ namespace CardBattle
     /// </summary>
     public class ElectricStatus : Card.StatusCardBase
     {
-        // Affects everything on the board, so don't filter out anything
-        public override CardFilterer.CardFilters TargetingFilters => CardFilterer.CardFilters.None;
-        
+
+        /// <summary>
+        /// Affects everything in play on the board, including the player
+        /// </summary>
+        /// 
+
+        public override CardFilterer.CardFilters TargetingFilters => ~(CardFilterer.CardFilters.Equipment |
+            CardFilterer.CardFilters.Monster | CardFilterer.CardFilters.InPlay);
+
         public override bool CanTargetPlayer => false;
-
         public override void OnDrawn() => StartCoroutine(
-            IndicationAnimation(()=> {
-                // TODO: do set amount of damage to every card on the board
+            IndicationAnimation(() => {
+                /// <summary>
+                /// Apply damage to the player
+                /// </summary>
+                CardGameManager.instance.playerHealthState = CardGameManager.instance.playerHealthState.ApplyDamage(properties["primary"]);
 
-                RemoveFromGame();
-        }));
+                /// <summary>
+                /// Apply damage to every monster and equipment card in play
+                /// </summary>
+                foreach (var card in CardFilterer.FilterCards(~(CardFilterer.CardFilters.Monster 
+                    | CardFilterer.CardFilters.Equipment | CardFilterer.CardFilters.InPlay)))
+                {
+                    var cardHealth = card.GetComponent<HealthCardBase>();
+                    cardHealth.healthState = cardHealth.healthState.ApplyDamage(properties["primary"]);
+                }
+
+                /// <summary>
+                /// Finally, remove from the game
+                /// </summary>
+                    RemoveFromGame();
+            }));
     }
 }
