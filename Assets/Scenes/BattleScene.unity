@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.3069224, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1475,7 +1475,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cards: []
   cardDB: {fileID: 11400000, guid: 5631e1aa1e5ef424e9af340e6b5cff49, type: 2}
-  injectCardPrototypes: []
+  injectCardPrototypes:
+  - {fileID: 5413654936612339483, guid: 9834e746bacf5844496ddcf81e2d4551, type: 3}
+  - {fileID: 2899929746517373117, guid: 79cc360886b28cc4bbddcd240bff6764, type: 3}
   arrowPrefab: {fileID: 7312326091448789263, guid: e2e954b1ee2caff408b59a53e7370e2a,
     type: 3}
 --- !u!4 &1030063323
@@ -2224,6 +2226,8 @@ MonoBehaviour:
   cardDB: {fileID: 11400000, guid: 5631e1aa1e5ef424e9af340e6b5cff49, type: 2}
   injectCardPrototypes:
   - {fileID: 1302548177074960351, guid: 7f64d2c389d671d45b0304aeed4e7fc3, type: 3}
+  - {fileID: 2899929746517373117, guid: 79cc360886b28cc4bbddcd240bff6764, type: 3}
+  - {fileID: 5413654936612339483, guid: 9834e746bacf5844496ddcf81e2d4551, type: 3}
 --- !u!1 &2027293939
 GameObject:
   m_ObjectHideFlags: 0

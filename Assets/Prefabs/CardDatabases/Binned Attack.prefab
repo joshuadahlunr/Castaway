@@ -113,7 +113,7 @@ MonoBehaviour:
   _state: 2
   cardOwner: 0
   _name: Binned Attack
-  _art: {fileID: 0}
+  _art: {fileID: 21300000, guid: 66a4d5992443d624eb240e88cf957ddb, type: 3}
   _rules: Deal <color=red>{properties["primary"]}</color> damage. Then destroy this
     card!
   _properties:
