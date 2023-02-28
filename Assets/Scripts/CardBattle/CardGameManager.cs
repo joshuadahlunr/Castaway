@@ -33,7 +33,7 @@ public class CardGameManager : MonoBehaviour {
 	public BurningRope rope;
 
 	public TMPro.TMP_Text PeopleJuiceText;
-	
+
 	// TODO: Improve
 	public BurningRope healthBar;
 	public GameObject losePanel;
@@ -43,7 +43,7 @@ public class CardGameManager : MonoBehaviour {
 	/// </summary>
 	public Confirmation confirmationPrefab;
 
-	
+
 	/// <summary>
 	/// The amount of time in a turn
 	/// </summary>
@@ -104,31 +104,55 @@ public class CardGameManager : MonoBehaviour {
 	public void Awake() {
 		// Setup singleton
 		instance = this;
-		
+
+		const string playerDeckName = "Player Deck";
+		const string sharkDeckName = "Shark Deck";
+
 		// If the player's deck hasn't been defined yet, create a deck which is just a bunch of prototype attacks
 		if (!DatabaseManager.GetOrCreateTable<Deck.DeckList>().Any()) {
-			DatabaseManager.database.InsertOrReplace(new Deck.DeckList() {
-				name = "Player Deck",
-				Cards = new[] { "Prototype AttackCard" }.Replicate(6).ToArray()
+			Debug.Log("Creating decklist table");
+			DatabaseManager.database.Insert(new Deck.DeckList() {
+				name = playerDeckName,
 			});
-			DatabaseManager.database.InsertOrReplace(new Deck.DeckList() {
-				name = "Shark Deck",
-				Cards = new[] { "Prototype AttackCard" }.Replicate(10).ToArray()
+			DatabaseManager.database.Insert(new Deck.DeckList() {
+				name = sharkDeckName,
 			});
 		}
 
+		if (!DatabaseManager.GetOrCreateTable<Deck.DeckListCard>().Any()) {
+			var playerDeckId = DatabaseManager.GetOrCreateTable<Deck.DeckList>()
+				.FirstOrDefault(l => l.name == playerDeckName).id;
+			var sharkDeckId = DatabaseManager.GetOrCreateTable<Deck.DeckList>()
+				.FirstOrDefault(l => l.name == sharkDeckName).id;
+
+			Debug.Log("Creating decklist cards table");
+			for (var i = 0; i < 10; i++) {
+				DatabaseManager.database.Insert(new Deck.DeckListCard() {
+					listID = playerDeckId,
+					name = "Attack",
+					level = 1,
+				});
+
+				DatabaseManager.database.Insert(new Deck.DeckListCard() {
+					listID = sharkDeckId,
+					name = "Attack",
+					level = 2,
+				});
+			}
+		}
+
 		// Load decks from SQL and assign the monster's cards to the appropriate monster
-		playerDeck.DatabaseLoad();
+		playerDeck.DatabaseLoad(playerDeckName);
 		for (var i = 0; i < monsters.Length; i++){
 			var monster = monsters[i];
 			monster.deck.DatabaseLoad("Shark Deck");
 			monster.deck.AssignOwnerToCards(i);
 		}
-		
+
 		// Invoke the turn start event
 		turnStart?.Invoke();
 	}
-	
+
 
 
 	/// <summary>
@@ -153,7 +177,7 @@ public class CardGameManager : MonoBehaviour {
 		healthBar.current = playerHealthState.health;
 
 		PeopleJuiceText.text = currentPeopleJuice.ToString();
-		
+
 		// If there is no longer any time left in the turn, end the turn!
 		if (turnTimer <= 0) {
 			turnTimer = turnTime;
@@ -168,27 +192,27 @@ public class CardGameManager : MonoBehaviour {
 		// Invoke the turn start event on all cards
 		foreach(var card in Card.CardBase.ActiveCards)
 			card.OnTurnStart();
-		
+
 		if (isPlayerTurn) {
 			// Reset their damage negation
 			playerHealthState = playerHealthState.SetTemporaryDamageReduction(0);
-			
+
 			// Refill the player's people juice
 			currentPeopleJuice = new PeopleJuice.Cost(resetPeopleJuice);
 			// Enable all of the cards in their hand that were disabled
 			EnableCards(CardFilterer.EnumerateAllCards()); // TODO: Should we be more specific with which cards are renabled?
-			
+
 			// Refill the player's hand
 			var missingCards = Math.Max(playerMaxHandSize - playerHand.Count, 0);
 			for (var i = 0; i < missingCards; i++)
 				DrawPlayerCard();
-		} else 
+		} else
 			foreach(var monster in monsters)
 				if ( !(monster?.Disabled ?? true) ) {
 					monster.healthState = monster.healthState.SetTemporaryDamageReduction(0); // Reset their damage negation
 					monster.deck.RevealCard();
 				}
-		
+
 		// Disable all of the unaffordable cards in the player's hand!
 		OnlyEnableAffordableCards();
 		turnStart?.Invoke();
@@ -213,7 +237,7 @@ public class CardGameManager : MonoBehaviour {
 
 		CheckWinLose();
 		turnEnd?.Invoke();
-		
+
 		// TODO: Show a turn transition screen here!
 		OnTurnStart();
 	}
@@ -229,7 +253,7 @@ public class CardGameManager : MonoBehaviour {
 		CheckWinLose();
 		playerHealthStateChange?.Invoke(oldHealth, newHealth);
 	}
-	
+
 	/// <summary>
 	/// Callback called when the player wins the game
 	/// </summary>
@@ -245,8 +269,8 @@ public class CardGameManager : MonoBehaviour {
 		losePanel.SetActive(true); // Display the lose panel
 		// TODO: Need to go back to the main menu or something...
 	}
-	
-	
+
+
 	/// <summary>
 	/// Function which draws a card for the player (shuffling the graveyard into their deck if necessary)
 	/// </summary>
@@ -257,11 +281,11 @@ public class CardGameManager : MonoBehaviour {
 			playerGraveyard.SendAllToContainer(playerDeck);
 			playerDeck.Shuffle();
 		}
-		
+
 		// Send a card from the player's deck to their hand
 		playerDeck.SendToContainer(0, playerHand);
-	} 
-	
+	}
+
 	/// <summary>
 	/// Check if the player has won (all monsters defeated) or lost (has 0 HP left) and invoke the appropriate events
 	/// </summary>
@@ -273,15 +297,15 @@ public class CardGameManager : MonoBehaviour {
 		if(allDead)
 			OnWin();
 	}
-	
-	
-	
+
+
+
 	/// <summary>
 	/// Function which disables all of the given cards
 	/// </summary>
 	/// <param name="cards">The cards to disable</param>
 	public static void DisableCards(IEnumerable<Card.CardBase> cards) {
-		foreach (var card in cards) 
+		foreach (var card in cards)
 			card.MarkDisabled();
 	}
 
@@ -303,8 +327,8 @@ public class CardGameManager : MonoBehaviour {
 		// Disable all of the unaffordable cards
 		CardFilterer.FilterAndDisableCards(CardFilterer.CardFilters.Unaffordable);
 	}
-	
-	
+
+
 
 
 	/// <summary>
@@ -327,7 +351,7 @@ public class CardGameManager : MonoBehaviour {
         /// Lock which prevents the player from creating multiple card confirmations...
         /// </summary>
         public bool activeConfirmationExists;
-	
+
 	/// <summary>
 	/// Creates a snap confirmation
 	/// </summary>
@@ -345,7 +369,7 @@ public class CardGameManager : MonoBehaviour {
 		activeConfirmationExists = true;
 		return confirm;
 	}
-	
+
 	/// <summary>
 	/// Creates a target confirmation
 	/// </summary>
@@ -367,7 +391,7 @@ public class CardGameManager : MonoBehaviour {
 		confirm.Cancel();
 		return null;
 	}
-	
+
 	/// <summary>
 	/// Creates a bin confirmation
 	/// </summary>

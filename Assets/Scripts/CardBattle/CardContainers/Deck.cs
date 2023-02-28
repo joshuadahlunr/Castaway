@@ -5,7 +5,6 @@ using SQLite;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-
 namespace CardBattle.Containers {
 	/// <summary>
 	/// Deck of cards which can be visualized in the world
@@ -22,26 +21,37 @@ namespace CardBattle.Containers {
 		/// </summary>
 		public class DeckList {
 			/// <summary>
+			/// The id of list, acts as an index into the DeckListCards table
+			/// </summary>
+			[PrimaryKey, Unique, AutoIncrement]
+			public int id { set; get; }
+
+			/// <summary>
 			/// Name of the decklist in the database
 			/// </summary>
-			/// <remarks>Acts as the primary key and must be unique</remarks>
-			[PrimaryKey, Unique]
+			public string name { set; get; }
+		}
+
+		/// <summary>
+		/// Type used to store all the cards in a decklist in the SQL database
+		/// </summary>
+		public class DeckListCard {
+			[PrimaryKey, Unique, AutoIncrement]
+			public int id { set; get; }
+
+			/// <summary>
+			/// The DeckList this card is associated with
+			/// </summary>
+			[NotNull]
+			public int listID { set; get; }
+
+			[NotNull]
 			public string name { set; get; }
 
-			/// <summary>
-			/// String representing the array of cards within the decklist (the array is deliminated by '~'s)
-			/// </summary>
-			public string cards { set; get; }
+			public string associatedCharacterName { set; get; }
 
-			/// <summary>
-			/// Property which transforms the <see cref="cards"/> string into an array of card names
-			/// </summary>
-			/// <remarks>Not added as a column in the database!</remarks>
-			[SQLite.Ignore]
-			public string[] Cards {
-				get => cards.Split("~");
-				set => cards = string.Join("~", value);
-			}
+			[NotNull]
+			public int level { set; get; }
 		}
 
 		/// <summary>
@@ -76,7 +86,7 @@ namespace CardBattle.Containers {
 #if UNITY_EDITOR
 		public void Update() {
 			if (injectCardPrototypes == null) return;
-			
+
 			// If there are any cards in the inject list, add them to the front of the deck
 			foreach(var cardPrototype in injectCardPrototypes)
 				AddCard(Instantiate(cardPrototype), 0);
@@ -92,22 +102,28 @@ namespace CardBattle.Containers {
 		/// <param name="name">The name of the decklist to load (defaults to "Player Deck")</param>
 		/// <param name="clear">If this parameter is true we will remove all cards currently in this deck before loading, if this is false we can additively load cards to the deck</param>
 		/// <exception cref="ArgumentException"></exception>
-		public virtual void DatabaseLoad(string name = "Player Deck", bool clear = true) {
+		public void DatabaseLoad(string name = "Player Deck", bool clear = true) {
 			// Get the table out of the database and find the decklist with the given name!
 			var deckList = DatabaseManager.GetOrCreateTable<DeckList>().FirstOrDefault(l => l.name == name);
 			if (deckList is null)
 				throw new ArgumentException($"The decklist {name} could not be found in the database!");
 
+			DatabaseLoad(deckList.id, clear);
+		}
+
+		public virtual void DatabaseLoad(int decklistID, bool clear = true) {
+			var cards = DatabaseManager.GetOrCreateTable<DeckListCard>().Where(card => card.listID == decklistID);
+
 			// If we are clearing, remove all of the cards currently in the deck
 			if (clear) RemoveAllCards();
-			
+
 			// If there are any cards in the inject list, add them to the front of the deck
 			foreach(var cardPrototype in injectCardPrototypes)
 				AddCard(Instantiate(cardPrototype), 0);
 			injectCardPrototypes = null;
 			// Use the associated cardDB to load the cards from the database
-			foreach (var card in deckList.Cards)
-				AddCard(cardDB.Instantiate(card));
+			foreach (var card in cards)
+				AddCard(cardDB.Instantiate(card.name));
 		}
 
 

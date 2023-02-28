@@ -36,6 +36,7 @@ MonoBehaviour:
     reqReferences: {fileID: 0}
     isExpanded: 1
     _keyValues:
+    - Attack
     - Binned Attack
     - Prototype AttackCard
     - Frozen
@@ -46,6 +47,7 @@ MonoBehaviour:
     - Lightning Spear
     - Electric
     _keys:
+    - Attack
     - Binned Attack
     - Prototype AttackCard
     - Frozen
@@ -56,7 +58,8 @@ MonoBehaviour:
     - Lightning Spear
     - Electric
     _values:
-    - {fileID: 2271024447710015734, guid: 8fba69ea9cabcfa4b89aaa763ac1bd82, type: 3}
+    - {fileID: 1798558198490400397, guid: 948a13693cf3aad4a9a0bd359cc158ef, type: 3}
+    - {fileID: -736188161015104388, guid: 8fba69ea9cabcfa4b89aaa763ac1bd82, type: 3}
     - {fileID: 4430917359204932427, guid: ffed5da40e94bbd4ba57c97a28388c0a, type: 3}
     - {fileID: 1427780925322784421, guid: 4ed95169b93d183459db567c5cee3ab7, type: 3}
     - {fileID: -874858629119296669, guid: b2014efdd714972479d08a574d4fa620, type: 3}
