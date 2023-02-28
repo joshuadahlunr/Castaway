@@ -81,7 +81,7 @@ MonoBehaviour:
     _keys: []
     _values: []
   _cost:
-    list: 00000000
+    list: 
 --- !u!65 &4753575742049232133
 BoxCollider:
   m_ObjectHideFlags: 0

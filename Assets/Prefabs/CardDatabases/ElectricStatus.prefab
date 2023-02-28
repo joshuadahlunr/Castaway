@@ -33,7 +33,7 @@ Transform:
   m_Children:
   - {fileID: 4221101432192640786}
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 27.115, y: -180, z: 0}
 --- !u!114 &-6176029271198475228
 MonoBehaviour:
@@ -47,8 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6781fc229e063314ba504e10d395570b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _renderer: {fileID: 2862726488666766045, guid: 6503f5b09f23cc948902e4d65b659bb7,
-    type: 3}
+  _renderer: {fileID: 2863152041444043562}
   container: {fileID: 0}
   _state: 2
   cardOwner: 0
@@ -87,7 +86,7 @@ MonoBehaviour:
     - tag: 0
       value: 0
   _cost:
-    list: 00000000
+    list: 
 --- !u!65 &4753575742049232133
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -256,6 +255,18 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6503f5b09f23cc948902e4d65b659bb7, type: 3}
+--- !u!114 &2863152041444043562 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2862726488666766045, guid: 6503f5b09f23cc948902e4d65b659bb7,
+    type: 3}
+  m_PrefabInstance: {fileID: 429970352607735}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20ba72226f434b609bb1bf1989430886, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &4221101432192640786 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4221520388030314213, guid: 6503f5b09f23cc948902e4d65b659bb7,

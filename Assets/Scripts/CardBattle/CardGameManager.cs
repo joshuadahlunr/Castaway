@@ -339,23 +339,6 @@ public class CardGameManager : MonoBehaviour {
 		return playerDeck.cardDB.Instantiate("Binned Attack");
 	}
 
-	/// <summary>
-	/// Function which creates an Electric card
-	/// </summary>
-	/// <returns>Reference to the newly created Electric card</returns>
-    public Card.CardBase InstantiateElectric() {
-		return playerDeck.cardDB.Instantiate("Electric");
-    }
-
-	/// <summary>
-	/// Function which creates a Burn card
-	/// </summary>
-	/// <returns>Reference to the newly created Burn card</returns>
-	public Card.CardBase InstantiateBurn()
-		{
-			return playerDeck.cardDB.Instantiate("Burn");
-		}
-
         /// <summary>
         /// Lock which prevents the player from creating multiple card confirmations...
         /// </summary>

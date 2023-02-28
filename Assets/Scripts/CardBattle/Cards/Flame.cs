@@ -1,18 +1,20 @@
 using UnityEngine;
 using System.Collections;
 using System.Drawing.Text;
+using CardBattle.Containers;
 
 namespace CardBattle
 {
 
     /// <summary>
-    /// Basic attack card
+    /// Flame attack, which damages the target and
+    /// shuffles a Burn into the deck; also has a 
+    /// chance to rotate the ship
     /// </summary>
-    /// <author>Joshua Dahl</author>
+    /// <author>Misha Desear</author>
     public class Flame : Card.ActionCardBase
     {
         public GameObject rotatorPrefab;
-        public static CardGameManager instance;
         private int rotateChance;
 
         // Can only target monsters and equipment
@@ -32,10 +34,10 @@ namespace CardBattle
             // Damage target (falling back to player if we are monster and not targeting anything!)
             DamageTargetOrPlayer(properties["primary"], target);
 
-            instance.InstantiateBurn();
-
             // RNG to determine if the ship rotates after using this card
             rotateChance = Random.Range(1, 10);
+
+            CardGameManager.instance.playerDeck.cardDB.Instantiate("Burn");
 
             if (rotateChance == 1)
             {
@@ -48,8 +50,8 @@ namespace CardBattle
                     CardGameManager.instance.ship.transform.rotation = Quaternion.Euler(0, angle, 0);
                 }
 
-                SendToGraveyard();
             }
+            SendToGraveyard();
         }
     }
 }

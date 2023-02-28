@@ -1,3 +1,4 @@
+using CardBattle.Containers;
 using System.Linq;
 
 namespace CardBattle
@@ -13,6 +14,7 @@ namespace CardBattle
         public override CardFilterer.CardFilters TargetingFilters =>
             ~(CardFilterer.CardFilters.Monster | CardFilterer.CardFilters.InPlay /*| CardFilterer.CardFilters.Equipment*/);
 
+        public Deck playerDeck;
         public override CardFilterer.CardFilters MonsterTargetingFilters =>
             TargetingFilters | CardFilterer.CardFilters.Monster;
 
@@ -75,8 +77,8 @@ namespace CardBattle
             // Damage target (falling back to player if we are monster and not targeting anything!)
             DamageTargetOrPlayer(properties["primary"], target);
 
-            instance.InstantiateElectric();
-            
+            CardGameManager.instance.playerDeck.cardDB.Instantiate("Electric");
+
             SendToGraveyard();
         }
 

@@ -13,8 +13,6 @@ namespace CardBattle
     /// </summary>
     public class BurnStatus : Card.StatusCardBase
     {
-        public static CardGameManager instance;
-
         /// <summary>
         /// Can't target anything
         /// </summary>
@@ -29,11 +27,12 @@ namespace CardBattle
                 /// </summary>
                 CardGameManager.instance.playerHealthState = CardGameManager.instance.playerHealthState.ApplyDamage(properties["primary"]);
 
-                instance.InstantiateBurn();
+                CardGameManager.instance.playerDeck.cardDB.Instantiate("Burn");
 
-                instance.DrawPlayerCard();
+                CardGameManager.instance.DrawPlayerCard();
 
                 SendToGraveyard();
+
             }));
     }
 }

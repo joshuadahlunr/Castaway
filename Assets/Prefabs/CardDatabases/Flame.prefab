@@ -47,8 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90e1c85b11ffae74ebf0648082c95286, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _renderer: {fileID: 5872751417051278285, guid: 5a1ba109fb2faf6459cc61ba4c4fb70c,
-    type: 3}
+  _renderer: {fileID: 8054100049657687534}
   container: {fileID: 0}
   _state: 2
   cardOwner: 0
@@ -269,3 +268,15 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 4487235728669804067}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8054100049657687534 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5872751417051278285, guid: 5a1ba109fb2faf6459cc61ba4c4fb70c,
+    type: 3}
+  m_PrefabInstance: {fileID: 4487235728669804067}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8ae351c1bc041f2ac1ecd5c7afdd156, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

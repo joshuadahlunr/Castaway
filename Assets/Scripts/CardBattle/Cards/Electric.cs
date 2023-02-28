@@ -18,9 +18,6 @@ namespace CardBattle
         /// </summary>
         /// 
 
-        public override CardFilterer.CardFilters TargetingFilters => ~(CardFilterer.CardFilters.Equipment |
-            CardFilterer.CardFilters.Monster | CardFilterer.CardFilters.InPlay);
-
         public override bool CanTargetPlayer => false;
         public override void OnDrawn() => StartCoroutine(
             IndicationAnimation(() => {
@@ -42,7 +39,9 @@ namespace CardBattle
                 /// <summary>
                 /// Finally, remove from the game
                 /// </summary>
-                    RemoveFromGame();
+                /// 
+                RemoveFromGame();
             }));
+
     }
 }
