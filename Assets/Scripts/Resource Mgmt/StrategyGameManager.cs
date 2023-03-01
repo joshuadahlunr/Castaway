@@ -60,7 +60,7 @@ public class StrategyGameManager : MonoBehaviour
     }
     public void FeedCrew()
     {
-        // TODO: fix so crewmates cannot be "overfed" past 0 hunger
+        Globals.SHIP_RESOURCE.AddAmount(-crewSlider.value);
         remainder = (int)crewSlider.value % GlobalCrew.CREW.Count; // Find remainder of slider value divided by crewmates
         evenNum = (int)crewSlider.value - remainder; // Subtract remainder from slider value to get evenly divisible number
         quotient = evenNum / GlobalCrew.CREW.Count;

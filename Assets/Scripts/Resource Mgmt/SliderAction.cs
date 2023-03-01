@@ -11,7 +11,8 @@ public class SliderAction : MonoBehaviour
 {
     public TextMeshProUGUI sliderText;
     public Slider slider;
-    public Slider[] sliderArr;
+    public Slider crewSlider;
+    public Slider[] sliderArr; 
 
     // Update is called once per frame
     void Update()
@@ -33,6 +34,7 @@ public class SliderAction : MonoBehaviour
         for (int i = 0; i < Globals.UPGRADE_DATA.Length; i++)
         {
             sliderTotals += sliderArr[i].value;
+            sliderTotals += crewSlider.value;
         }
 
         if (sliderTotals > Globals.SHIP_RESOURCE.Amount)
