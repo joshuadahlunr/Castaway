@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using ResourceMgmt;
 
 /// <summary>
 /// </summary>
@@ -8,7 +9,7 @@ using UnityEngine;
 public class Globals
 {
     // Global resource value
-    public static ShipResource SHIP_RESOURCE = new ShipResource(0);
+    public static ShipResource SHIP_RESOURCE = new(0);
 
     // Global upgrade info array
     public static UpgradeData[] UPGRADE_DATA = new UpgradeData[]
