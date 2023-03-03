@@ -60,9 +60,9 @@ namespace CardBattle.Containers {
 			revealHolder.transform.rotation *= Quaternion.Euler(90, 0, 0);
 			revealHolder.transform.position = transform.position + Vector3.up * .25f + Vector3.right * (revealedCards.Count - 1);
 			if (target is not null) {
-				var arrow = Instantiate(arrowPrefab.gameObject, revealHolder.transform).GetComponent<Arrow>();
+				var arrow = Instantiate(arrowPrefab.gameObject, revealHolderA.transform).GetComponent<Arrow>();
 				arrow.transform.localScale = new Vector3(.05f, .05f, .05f);
-				arrow.start.transform.position = revealedCards[^1].Item1.transform.position;
+				arrow.start.transform.position = revealHolder.transform.position;
 				arrow.end.transform.position = revealedCards[^1].Item2.transform.position;
 			}
 			
