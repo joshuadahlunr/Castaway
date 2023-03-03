@@ -42,7 +42,7 @@ namespace CardBattle.Containers {
 			if (cards[0].CanTargetPlayer)
 				targetableCards.Add(null); // If the player is targetable... null is a valid target!
 			var targets = targetableCards.Distinct().ToArray();
-			var target = targets[Random.Range(0, targets.Length)];
+			var target = targets.Length > 0 ? targets[Random.Range(0, targets.Length)] : null;
 
 			// Remove the revealed card from the deck
 			revealedCards.Add((cards[0], target));

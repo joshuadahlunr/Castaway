@@ -5,7 +5,8 @@ namespace CardBattle {
     public class FireCannon : Card.ActionCardBase {
         // Can't target anything but in play equipment...
         public override CardFilterer.CardFilters TargetingFilters => ~(CardFilterer.CardFilters.Equipment | CardFilterer.CardFilters.InPlay);
-        
+        public override bool CanTargetPlayer => false;
+
         public override void OnTarget(Card.CardBase _target) {
             if (_target is not EquipmentCardBase target) {
                 RefundAndReset();
