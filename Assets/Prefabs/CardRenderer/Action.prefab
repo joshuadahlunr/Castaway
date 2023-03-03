@@ -763,13 +763,19 @@ PrefabInstance:
     - target: {fileID: 1232506761614981826, guid: 43cdfc534094f1e4ab64aaacb3a6ccb9,
         type: 3}
       propertyPath: m_PresetInfoIsWorld
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1232506761614981831, guid: 43cdfc534094f1e4ab64aaacb3a6ccb9,
         type: 3}
       propertyPath: m_Name
       value: Action
       objectReference: {fileID: 0}
+    - target: {fileID: 1232506762896862250, guid: 43cdfc534094f1e4ab64aaacb3a6ccb9,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: a96f840c57f2c094ba619484ac3cb50c,
+        type: 3}
     - target: {fileID: 2600488289960765937, guid: 43cdfc534094f1e4ab64aaacb3a6ccb9,
         type: 3}
       propertyPath: m_IsActive
