@@ -283,7 +283,8 @@ public class CardGameManager : MonoBehaviour {
 		}
 
 		// Send a card from the player's deck to their hand
-		playerDeck.SendToContainer(0, playerHand);
+		if(playerDeck.Count > 0)
+			playerDeck.SendToContainer(0, playerHand);
 	}
 
 	/// <summary>
