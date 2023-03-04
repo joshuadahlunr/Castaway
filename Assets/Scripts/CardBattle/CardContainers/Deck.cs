@@ -122,8 +122,11 @@ namespace CardBattle.Containers {
 				AddCard(Instantiate(cardPrototype), 0);
 			injectCardPrototypes = null;
 			// Use the associated cardDB to load the cards from the database
-			foreach (var card in cards)
-				AddCard(cardDB.Instantiate(card.name));
+			foreach (var card in cards) {
+				var instantiated = cardDB.Instantiate(card.name);
+				// TODO: Add a level modifier to the instantiated card
+				AddCard(instantiated);
+			}
 		}
 
 

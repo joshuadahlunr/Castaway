@@ -3,7 +3,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
 namespace Extensions {
-	
+
 	// Additions to Linq
 	public static class Linq {
 		// Function that returns an iterator with the array index attached
@@ -26,7 +26,7 @@ namespace Extensions {
 			concatenatedData = concat.ToArray();
 		}
 
-		// Create an infinitely repeating view of the data stored within the range 
+		// Create an infinitely repeating view of the data stored within the range
 		public static IEnumerable<T> Replicate<T>([NotNull] this IEnumerable<T> data, bool indicator = true) {
 			using var enumerator = data.GetEnumerator();
 			while (true) {
@@ -36,9 +36,21 @@ namespace Extensions {
 			}
 		}
 
-		// Create a view of the data stored within the range that repeats <times> times 
+		// Create a view of the data stored within the range that repeats <times> times
 		public static IEnumerable<T> Replicate<T>([NotNull] this IEnumerable<T> data, int times) {
 			return data.Replicate().Take(data.Count() * times);
+		}
+
+		// Shuffles an IEnumerable and returns the results as a List
+		// From: https://www.programmingnotes.org/7398/cs-how-to-shuffle-randomize-an-array-list-ienumerable-using-cs/
+		public static IEnumerable<T> Shuffle<T>(this IEnumerable<T> list) {
+			var shuffled = list.ToList();
+			for (var index = 0; index < shuffled.Count; ++index) {
+				var randomIndex = UnityEngine.Random.Range(index, shuffled.Count);
+				if (index == randomIndex) continue;
+				(shuffled[index], shuffled[randomIndex]) = (shuffled[randomIndex], shuffled[index]);
+			}
+			return shuffled;
 		}
 	}
 }

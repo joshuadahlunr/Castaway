@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using CardBattle.Card;
 using CardBattle.Containers;
 using Extensions;
 using UnityEngine;
@@ -21,7 +22,17 @@ public class CardGameManager : MonoBehaviour {
 	/// <summary>
 	/// Variable set by the encounter map, used to determine how difficult this encounter should be!
 	/// </summary>
-	public static float encounterDifficulty;
+	public static float encounterDifficulty = 1;
+
+	/// <summary>
+	/// The type of encounter this is (normal or boss)
+	/// </summary>
+	public enum EncounterType {
+		Normal,
+		Boss,
+		FinalBoss
+	}
+	public static EncounterType encounterType = EncounterType.Normal;
 
 	/// <summary>
 	/// Reference to the main scene canvas
@@ -42,6 +53,8 @@ public class CardGameManager : MonoBehaviour {
 	/// Reference to the prefab for confirmation prompts
 	/// </summary>
 	public Confirmation confirmationPrefab;
+
+	public MonsterDatabase monsterDatabase, bossDatabase, finalBossDatabase;
 
 
 	/// <summary>
@@ -141,12 +154,27 @@ public class CardGameManager : MonoBehaviour {
 			}
 		}
 
+		// Spawn the encounter
+		for (var i = 0; i < 1; i++) { // TODO: spawn more monsters based on the difficulty
+			var monster = encounterType switch {
+				EncounterType.Normal => monsterDatabase.Instantiate(monsterDatabase.cards.Keys.Shuffle().First()),
+				EncounterType.Boss => bossDatabase.Instantiate(bossDatabase.cards.Keys.Shuffle().First()),
+				EncounterType.FinalBoss =>
+					finalBossDatabase.Instantiate(finalBossDatabase.cards.Keys.Shuffle().First()),
+				_ => throw new ArgumentOutOfRangeException()
+			};
+			// TODO: Position the monster in a circle around the ship
+			monster.transform.position = new Vector3(-0.0300000049f, 0.556999981f, 0.141000032f);
+			// TODO: Add a level modifier based on the difficulty
+			monsters = new List<MonsterCardBase>(monsters) { monster }.ToArray();
+		}
+
 		// Load decks from SQL and assign the monster's cards to the appropriate monster
 		playerDeck.DatabaseLoad(playerDeckName);
 		for (var i = 0; i < monsters.Length; i++){
-			var monster = monsters[i];
-			monster.deck.DatabaseLoad("Shark Deck");
-			monster.deck.AssignOwnerToCards(i);
+			var m = monsters[i];
+			// m.deck.DatabaseLoad("Shark Deck");
+			m.deck.AssignOwnerToCards(i);
 		}
 
 		// Invoke the turn start event
