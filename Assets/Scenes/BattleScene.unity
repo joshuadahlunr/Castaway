@@ -1945,6 +1945,7 @@ MonoBehaviour:
   cardDB: {fileID: 11400000, guid: 5631e1aa1e5ef424e9af340e6b5cff49, type: 2}
   injectCardPrototypes:
   - {fileID: 6534445929746580176, guid: 5cf1d068fa56c2e4db065e18bd27fbb8, type: 3}
+  - {fileID: 7484713053374070152, guid: 5e002bc146a90bb439b438cd6f690c60, type: 3}
 --- !u!1 &2027293939
 GameObject:
   m_ObjectHideFlags: 0
