@@ -60,14 +60,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.1764706, g: 0.1764706, b: 0.1764706, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 0}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -121,9 +121,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6004355297659537824, guid: aaf6ce6b827c54244b592d408d837640,
-          type: 3}
-        m_TargetAssemblyTypeName: SwapScene, Game
+      - m_Target: {fileID: 759968389672801720}
+        m_TargetAssemblyTypeName: MapNode, Game
         m_MethodName: SetScene
         m_Mode: 1
         m_Arguments:
@@ -147,7 +146,6 @@ GameObject:
   - component: {fileID: 5507579540208164952}
   - component: {fileID: 201814254626711613}
   - component: {fileID: 8694731678923544137}
-  - component: {fileID: 5860399485818124858}
   m_Layer: 0
   m_Name: WhiteDot
   m_TagString: Untagged
@@ -164,7 +162,7 @@ Transform:
   m_GameObject: {fileID: 8913173742837998190}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -80, y: 0, z: 80}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5911529081620365606}
@@ -186,6 +184,9 @@ MonoBehaviour:
   generation: {fileID: 0}
   parents: []
   children: []
+  battleSprite: {fileID: 21300000, guid: 128e756c398f9c6488e12fde99baa332, type: 3}
+  crewmateSprite: {fileID: 21300000, guid: 8401e679f1ce95f4897a14fe0b389203, type: 3}
+  randomSprite: {fileID: 21300000, guid: 46cbf062288d47848915666532beecb1, type: 3}
 --- !u!212 &5507579540208164952
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -371,7 +372,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -387,15 +388,3 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 5, y: 5}
   m_EdgeRadius: 0
---- !u!114 &5860399485818124858
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8913173742837998190}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 69d0b8705392fe749a4b21fca0746c08, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
