@@ -43,10 +43,11 @@ public class CardGameManager : MonoBehaviour {
 	/// </summary>
 	public BurningRope rope;
 
+	public TMPro.TMP_Text health;
+
 	public TMPro.TMP_Text PeopleJuiceText;
 
 	// TODO: Improve
-	public BurningRope healthBar;
 	public GameObject losePanel;
 
 	/// <summary>
@@ -163,6 +164,7 @@ public class CardGameManager : MonoBehaviour {
 					finalBossDatabase.Instantiate(finalBossDatabase.cards.Keys.Shuffle().First()),
 				_ => throw new ArgumentOutOfRangeException()
 			};
+			monster.transform.localScale *= 2;
 			// TODO: Position the monster in a circle around the ship
 			monster.transform.position = new Vector3(-0.0300000049f, 0.556999981f, 0.141000032f);
 			// TODO: Add a level modifier based on the difficulty
@@ -200,9 +202,8 @@ public class CardGameManager : MonoBehaviour {
 		rope.max = turnTime;
 		rope.current = turnTimer;
 
-		// Update the player's healthbar
-		healthBar.max = 10;
-		healthBar.current = playerHealthState.health;
+		// Update the player's health
+		health.text = "" + playerHealthState.health;
 
 		PeopleJuiceText.text = currentPeopleJuice.ToString();
 
