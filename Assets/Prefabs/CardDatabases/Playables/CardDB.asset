@@ -52,6 +52,7 @@ MonoBehaviour:
     - Squawk
     - OccultTwirl
     - Be A Cool Guy
+    - Douse
     _keys:
     - Attack
     - Binned Attack
@@ -69,6 +70,7 @@ MonoBehaviour:
     - Squawk
     - OccultTwirl
     - Be A Cool Guy
+    - Douse
     _values:
     - {fileID: 1798558198490400397, guid: 948a13693cf3aad4a9a0bd359cc158ef, type: 3}
     - {fileID: -736188161015104388, guid: 8fba69ea9cabcfa4b89aaa763ac1bd82, type: 3}
@@ -86,3 +88,4 @@ MonoBehaviour:
     - {fileID: 7484713053374070152, guid: 5e002bc146a90bb439b438cd6f690c60, type: 3}
     - {fileID: 720940868532831341, guid: 60b0e72c10495414bb1635a5a22a267c, type: 3}
     - {fileID: 5982055226416778362, guid: 7bb6504231ba1a14fb1c7a2bb75c2836, type: 3}
+    - {fileID: -4293880748526012951, guid: 34b534ebfd1f9be498b7db222a0c7055, type: 3}

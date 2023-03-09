@@ -14,7 +14,7 @@ public class CrewmateEncounter : MonoBehaviour
     public GameObject GenerateCrewmate()
     {
         GameObject crewmate;
-        crewmate = Instantiate(crewPrefab, new Vector2(Random.Range(-29f, 20f), 200f), Quaternion.identity);
+        crewmate = Instantiate(crewPrefab, new Vector2(Random.Range(-29f, 20f), 115f), Quaternion.identity);
         crewmate.SetActive(true);
         crewmate.GetComponent<SpriteRenderer>().color = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
         crewmate.GetComponent<Crewmate>().infoPrefab = GameObject.FindGameObjectWithTag("Info Panel");

@@ -29,7 +29,9 @@ namespace Crew
         //TODO: implement card type, likes, and dislikes (as class objects)
 
         private int defaultMorale = 50; // Between a range of 0-100?
-        private string[] randomNames = { "Jeff", "Joe", "Tommy", "Timmy", "David", "Josh", "Misha", "Jared", "Dana" };
+        private string[] randomNames = { "Jeff", "Joe", "Tommy", "Timmy", "David", 
+                                        "Josh", "Misha", "Jared", "Dana", "Dave",
+                                        "Rachel", "May", "Johnny", "Bridget", "Susan"};
         private string[] randomTypes = { "Wizard", "Navigator", "Entertainer", "Engineer",
                                         "Cook", "Occultist", "Mercenary", "Deckhand" };
 
