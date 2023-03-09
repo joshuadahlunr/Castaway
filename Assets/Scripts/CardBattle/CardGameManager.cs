@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using CardBattle.Card;
+using CardBattle.Card.Modifications.Generic;
 using CardBattle.Containers;
 using Extensions;
 using UnityEngine;
@@ -155,8 +156,16 @@ public class CardGameManager : MonoBehaviour {
 			}
 		}
 
+		int level = (int)Mathf.Round(encounterDifficulty);
+		if (level % 5 == 4)
+			encounterType = EncounterType.Boss;
+		// if (difficulty > 20)
+		// 	encounterType = EncounterType.FinalBoss;
+
+		var number = encounterType == EncounterType.Normal ? (level / 5 + 1) : 1;
+
 		// Spawn the encounter
-		for (var i = 0; i < 1; i++) { // TODO: spawn more monsters based on the difficulty
+		for (var i = 0; i < number; i++) { // TODO: spawn more monsters based on the difficulty
 			var monster = encounterType switch {
 				EncounterType.Normal => monsterDatabase.Instantiate(monsterDatabase.cards.Keys.Shuffle().First()),
 				EncounterType.Boss => bossDatabase.Instantiate(bossDatabase.cards.Keys.Shuffle().First()),
@@ -167,12 +176,17 @@ public class CardGameManager : MonoBehaviour {
 			monster.transform.localScale *= 2;
 			// TODO: Position the monster in a circle around the ship
 			monster.transform.position = new Vector3(-0.0300000049f, 0.556999981f, 0.141000032f);
-			// TODO: Add a level modifier based on the difficulty
+
+			// Adjusts the monster's difficulty based on the level!
+			foreach(var card in monster.deck)
+				card.AddModification(new LevelModification(level));
+			monster.AddModification(new LevelModification(level));
 			monsters = new List<MonsterCardBase>(monsters) { monster }.ToArray();
 		}
 
 		// Load decks from SQL and assign the monster's cards to the appropriate monster
 		playerDeck.DatabaseLoad(playerDeckName);
+		foreach(var card in playerDeck) card.AddModification(new LevelModification(level)); // TODO: Remove... simulates player progression!
 		for (var i = 0; i < monsters.Length; i++){
 			var m = monsters[i];
 			// m.deck.DatabaseLoad("Shark Deck");

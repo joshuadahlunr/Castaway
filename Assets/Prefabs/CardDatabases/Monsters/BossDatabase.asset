@@ -35,6 +35,18 @@ MonoBehaviour:
       elementIcon: {fileID: 0}
     reqReferences: {fileID: 0}
     isExpanded: 1
-    _keyValues: []
-    _keys: []
-    _values: []
+    _keyValues:
+    - Kraken
+    - Vinh
+    _keys:
+    - Kraken
+    - Vinh
+    _values:
+    - monsterCard: {fileID: 618883279989994325, guid: 531a547dfc03c914583f1555546d134e,
+        type: 3}
+      deckList: []
+      deckListString: 
+    - monsterCard: {fileID: 618883279989994325, guid: c2bc2b1a135728640b95a069a62a2496,
+        type: 3}
+      deckList: []
+      deckListString: 

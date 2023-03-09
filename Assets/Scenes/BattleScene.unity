@@ -1195,11 +1195,11 @@ MonoBehaviour:
   turnTime: 5
   playerMaxHandSize: 5
   _playerHealthState:
-    health: 10
+    health: 5
     permanentDamageReduction: 0
     temporaryDamageReduction: 0
   resetPeopleJuice:
-    list: 020000000000000000000000
+    list: 01000000010000000000000000000000
   currentPeopleJuice:
     list: 
   playerDeck: {fileID: 1911337661}
