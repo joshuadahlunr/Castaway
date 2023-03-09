@@ -161,7 +161,8 @@ public class CardGameManager : MonoBehaviour {
 			}
 		}
 
-		int level = (int)Mathf.Round(encounterDifficulty) + 1;
+		
+		int level = (int)Mathf.Max(Mathf.Round(encounterDifficulty), 0) + 1;
 		if (level % 5 == 4)
 			encounterType = EncounterType.Boss;
 		// if (level > 20)
