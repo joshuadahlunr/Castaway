@@ -51,4 +51,5 @@ MonoBehaviour:
         type: 3}
       deckList:
       - {fileID: 1798558198490400397, guid: 948a13693cf3aad4a9a0bd359cc158ef, type: 3}
+      - {fileID: 5982055226416778362, guid: 7bb6504231ba1a14fb1c7a2bb75c2836, type: 3}
       deckListString: 
