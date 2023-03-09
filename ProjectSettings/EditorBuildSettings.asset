@@ -35,4 +35,31 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/CreditsScene.unity
     guid: 0c88c2551fe80f946bbb7584de6c670c
+  - enabled: 1
+    path: Assets/Scenes/Tutorial/TutorialStart.unity
+    guid: cc96ea1e925327647a61380aefa6aeb7
+  - enabled: 1
+    path: Assets/Scenes/Tutorial/TutorialMapScene2.unity
+    guid: cdf61f87b2d250d4b8a03a8920f4aac5
+  - enabled: 1
+    path: Assets/Scenes/Tutorial/TutorialMapScene1.unity
+    guid: 327778ffadddf214aa9c2d88b871c60f
+  - enabled: 1
+    path: Assets/Scenes/Tutorial/TutorialMapScene.unity
+    guid: 2d10ca89ffa28674cb1c480e0aacc0ea
+  - enabled: 1
+    path: Assets/Scenes/Tutorial/TutorialEventScene.unity
+    guid: 4635addcc66b4fc4c8061e1d87885f9d
+  - enabled: 1
+    path: Assets/Scenes/Tutorial/TutorialEndScene.unity
+    guid: 1b96a08e1f6fcce46ac0d1dfab9f4616
+  - enabled: 1
+    path: Assets/Scenes/Tutorial/TutorialCrewmateScene.unity
+    guid: 9557181c533fcb74cb2a405412fd6c58
+  - enabled: 1
+    path: Assets/Scenes/Tutorial/TutorialBattleScene.unity
+    guid: f3051d9998f21d54492c815bc2f64dab
+  - enabled: 1
+    path: Assets/Scenes/Tutorial/TutorialCrewmate.unity
+    guid: a54fa7fcc2f43f44aa4dca887e2570a7
   m_configObjects: {}
