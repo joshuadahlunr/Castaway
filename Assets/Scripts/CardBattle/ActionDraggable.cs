@@ -18,7 +18,7 @@ namespace CardBattle {
 		public bool targetNeeded = true;
 
 		// Instance of the arrow prefab in this scene
-		private static Shapes.Arrow arrowPrefabInstance;
+		private Shapes.Arrow arrowPrefabInstance;
 
 		// The position initial position when we started dragging
 		public Vector3 initPosition { get; private set; }
