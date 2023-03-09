@@ -8,6 +8,9 @@ using Extensions;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
+using UnityEngine.UI;
+using UnityEngine.UI.Extensions;
 
 namespace CardBattle {
 	/// <summary>
@@ -46,7 +49,9 @@ public class CardGameManager : MonoBehaviour {
 
 	public TMPro.TMP_Text health;
 
-	public TMPro.TMP_Text PeopleJuiceText;
+	public FlowLayoutGroup PeopleJuiceHolder;
+	public PeopleJuice peopleJuiceIconDatabase;
+	public Image PeopleJuiceIconPrefab;
 
 	// TODO: Improve
 	public GameObject losePanel;
@@ -213,6 +218,7 @@ public class CardGameManager : MonoBehaviour {
 	/// <summary>
 	/// Every frame...
 	/// </summary>
+	private PeopleJuice.Cost oldCost = null;
 	public void Update() {
 		// Decrease the time left in the turn
 		turnTimer -= Time.deltaTime;
@@ -222,7 +228,19 @@ public class CardGameManager : MonoBehaviour {
 		// Update the player's health
 		health.text = "" + playerHealthState.health;
 
-		PeopleJuiceText.text = currentPeopleJuice.ToString();
+		if (oldCost != currentPeopleJuice) {
+			Debug.Log("People Juice Updated!");
+			// PeopleJuiceText.text = currentPeopleJuice.ToString();
+			foreach(Transform icon in PeopleJuiceHolder.transform as Transform)
+				Destroy(icon.gameObject);
+			foreach (var icon in currentPeopleJuice) {
+				var uiElement = Instantiate(PeopleJuiceIconPrefab.gameObject, PeopleJuiceHolder.transform).GetComponent<Image>();
+				uiElement.sprite = peopleJuiceIconDatabase.sprites[icon];
+			}
+
+			PeopleJuiceHolder.CalculateLayoutInputVertical();
+		}
+		oldCost = currentPeopleJuice;
 
 		// If there is no longer any time left in the turn, end the turn!
 		if (turnTimer <= 0) {
