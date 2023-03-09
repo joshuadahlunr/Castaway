@@ -30,12 +30,12 @@ public class CrewmateEncounter : MonoBehaviour
         {
             Debug.Log("No crew member found!");
         }
-        SceneManager.LoadScene("EncounterMap");
+        SceneManager.LoadScene("EncounterMapScene");
     }
 
     public void ReturnToMap()
     {
-        SceneManager.LoadScene("EncounterMap");
+        SceneManager.LoadScene("EncounterMapScene");
     }
 
     private void Awake()
