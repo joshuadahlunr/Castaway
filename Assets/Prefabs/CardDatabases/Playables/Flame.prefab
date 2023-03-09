@@ -84,7 +84,7 @@ MonoBehaviour:
     - primary
     _values:
     - tag: 0
-      value: 0
+      value: 1
   _cost:
     list: 01000000
   rotatorPrefab: {fileID: 6584222973753447178, guid: 664e951e102f32044b12d176f8099348,

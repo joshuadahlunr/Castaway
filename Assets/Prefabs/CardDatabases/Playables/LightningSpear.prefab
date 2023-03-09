@@ -84,9 +84,10 @@ MonoBehaviour:
     - primary
     _values:
     - tag: 0
-      value: 0
+      value: 2
   _cost:
     list: 01000000
+  playerDeck: {fileID: 0}
 --- !u!65 &4430917359204932420
 BoxCollider:
   m_ObjectHideFlags: 0

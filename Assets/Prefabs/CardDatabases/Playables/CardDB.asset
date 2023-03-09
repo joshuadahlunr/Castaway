@@ -51,6 +51,7 @@ MonoBehaviour:
     - Burn
     - Squawk
     - OccultTwirl
+    - Tentacle Grip
     _keys:
     - Attack
     - Binned Attack
@@ -67,6 +68,7 @@ MonoBehaviour:
     - Burn
     - Squawk
     - OccultTwirl
+    - Tentacle Grip
     _values:
     - {fileID: 1798558198490400397, guid: 948a13693cf3aad4a9a0bd359cc158ef, type: 3}
     - {fileID: -736188161015104388, guid: 8fba69ea9cabcfa4b89aaa763ac1bd82, type: 3}
@@ -77,9 +79,10 @@ MonoBehaviour:
     - {fileID: 1421373476609381672, guid: da9e3729d23487343a12a4ef49e503ca, type: 3}
     - {fileID: 8474119564818363157, guid: f674866313c09184a95e00b1074bc542, type: 3}
     - {fileID: 1302548177074960351, guid: 7f64d2c389d671d45b0304aeed4e7fc3, type: 3}
-    - {fileID: 1302548177074960351, guid: 7f64d2c389d671d45b0304aeed4e7fc3, type: 3}
-    - {fileID: 1302548177074960351, guid: 7f64d2c389d671d45b0304aeed4e7fc3, type: 3}
-    - {fileID: 1302548177074960351, guid: 7f64d2c389d671d45b0304aeed4e7fc3, type: 3}
-    - {fileID: 1302548177074960351, guid: 7f64d2c389d671d45b0304aeed4e7fc3, type: 3}
+    - {fileID: 5413654936612339483, guid: 9834e746bacf5844496ddcf81e2d4551, type: 3}
+    - {fileID: -6176029271198475228, guid: 3a94dc0aa6a120549b83d80ce09b64da, type: 3}
+    - {fileID: 2899929746517373117, guid: 79cc360886b28cc4bbddcd240bff6764, type: 3}
+    - {fileID: 2136001348172326070, guid: 950311418b7fbdc48b261eb5f5d3d287, type: 3}
     - {fileID: 7484713053374070152, guid: 5e002bc146a90bb439b438cd6f690c60, type: 3}
     - {fileID: 720940868532831341, guid: 60b0e72c10495414bb1635a5a22a267c, type: 3}
+    - {fileID: -846312056593021632, guid: 90c1a859d504373449a7a22ab6536f0b, type: 3}

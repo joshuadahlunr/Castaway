@@ -84,7 +84,7 @@ MonoBehaviour:
     - primary
     _values:
     - tag: 0
-      value: 0
+      value: 1
   _cost:
     list: 
 --- !u!65 &4753575742049232133

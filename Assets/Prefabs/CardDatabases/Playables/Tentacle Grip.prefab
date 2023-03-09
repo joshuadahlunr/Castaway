@@ -9,11 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4430917359204932422}
-  - component: {fileID: 8474119564818363157}
+  - component: {fileID: -846312056593021632}
   - component: {fileID: 4430917359204932420}
   - component: {fileID: 4430917359204932421}
   m_Layer: 0
-  m_Name: Scry
+  m_Name: Tentacle Grip
   m_TagString: Targetable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -35,7 +35,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8474119564818363157
+--- !u!114 &-846312056593021632
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -44,17 +44,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 4430917359204932423}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e1ef6b9e5934f148bae2d801ef60dff, type: 3}
+  m_Script: {fileID: 11500000, guid: 68f6e406c1c296746bfb9ba3bfc614b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _renderer: {fileID: 8054100049657687534}
+  _renderer: {fileID: 0}
   container: {fileID: 0}
   _state: 2
   cardOwner: 0
-  _name: Scry
-  _art: {fileID: 21300000, guid: a96f840c57f2c094ba619484ac3cb50c, type: 3}
-  _rules: Reveal the top card of a monster's deck. Decrease its effectiveness by
-    <color=green>{properties["reduction"]}</color> for <color=green>{properties["duration"]}</color>
+  _name: Tentacle Grip
+  _art: {fileID: 21300000, guid: 9e75a5d62a3b3e048b5c9164887726d6, type: 3}
+  _rules: Prevents the player from rotating the ship for <color=red>{properties["duration"]}</color>
     turns.
   _properties:
     reorderableList:
@@ -81,17 +80,13 @@ MonoBehaviour:
     isExpanded: 1
     _keyValues:
     - duration
-    - reduction
     _keys:
     - duration
-    - reduction
     _values:
     - tag: 4
       value: 2
-    - tag: 4
-      value: 1
   _cost:
-    list: 06000000
+    list: 
 --- !u!65 &4430917359204932420
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -284,15 +279,3 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 4487235728669804067}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &8054100049657687534 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5872751417051278285, guid: 5a1ba109fb2faf6459cc61ba4c4fb70c,
-    type: 3}
-  m_PrefabInstance: {fileID: 4487235728669804067}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d8ae351c1bc041f2ac1ecd5c7afdd156, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
