@@ -138,7 +138,7 @@ namespace EncounterMap {
             if (nodeType == 1) {
                 SceneManager.LoadScene("RandomScene");
             } else if (nodeType == 2) {
-                SceneManager.LoadScene("CrewmateScene");
+                SceneManager.LoadScene("CrewmateEncounterScene");
             } else if (nodeType == 0) {
                 SceneManager.LoadScene("BattleScene");
             } else {
