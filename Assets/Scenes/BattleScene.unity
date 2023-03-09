@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -255,7 +255,7 @@ RectTransform:
   m_GameObject: {fileID: 177758972}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.25, y: 1.25, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 115369222}
@@ -1862,8 +1862,10 @@ MonoBehaviour:
   cards: []
   cardDB: {fileID: 11400000, guid: 5631e1aa1e5ef424e9af340e6b5cff49, type: 2}
   injectCardPrototypes:
-  - {fileID: 6534445929746580176, guid: 5cf1d068fa56c2e4db065e18bd27fbb8, type: 3}
-  - {fileID: 7484713053374070152, guid: 5e002bc146a90bb439b438cd6f690c60, type: 3}
+  - {fileID: -874858629119296669, guid: b2014efdd714972479d08a574d4fa620, type: 3}
+  - {fileID: -176229504365669494, guid: 642e2f9917e32ef48beddc3d3576acd8, type: 3}
+  - {fileID: 134441627470835729, guid: d942d0a9d7ce2914c841ea09612a31ea, type: 3}
+  - {fileID: 5413654936612339483, guid: 9834e746bacf5844496ddcf81e2d4551, type: 3}
 --- !u!1 &2027293939
 GameObject:
   m_ObjectHideFlags: 0

@@ -21,6 +21,9 @@ EditorBuildSettings:
     path: Assets/Scenes/CrewmateScene.unity
     guid: b3b7e8e060bb268439f11b75237febaf
   - enabled: 1
+    path: Assets/Scenes/CrewmateEncounterScene.unity
+    guid: 228c3e4b8548d8144b63027c5f854e2b
+  - enabled: 1
     path: Assets/Scenes/BattleScene.unity
     guid: 8697964f0083e2f4d811d26f5f6cab66
   - enabled: 1

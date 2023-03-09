@@ -38,9 +38,19 @@ MonoBehaviour:
     _keyValues:
     - Shark
     - Pelican
+    - Goldfish
+    - Seal
+    - Narwhal
+    - Bass
+    - Groundhog
     _keys:
     - Shark
     - Pelican
+    - Goldfish
+    - Seal
+    - Narwhal
+    - Bass
+    - Groundhog
     _values:
     - monsterCard: {fileID: 618883279989994325, guid: 5aeb710868aee884382f22219ba092ce,
         type: 3}
@@ -53,4 +63,29 @@ MonoBehaviour:
       - {fileID: 7484713053374070152, guid: 5e002bc146a90bb439b438cd6f690c60, type: 3}
       - {fileID: 7484713053374070152, guid: 5e002bc146a90bb439b438cd6f690c60, type: 3}
       - {fileID: 6534445929746580176, guid: 5cf1d068fa56c2e4db065e18bd27fbb8, type: 3}
+      deckListString: 
+    - monsterCard: {fileID: 618883279989994325, guid: 261ee2c184aa5a741ae02f1c3277cded,
+        type: 3}
+      deckList:
+      - {fileID: 1798558198490400397, guid: 948a13693cf3aad4a9a0bd359cc158ef, type: 3}
+      deckListString: 
+    - monsterCard: {fileID: 618883279989994325, guid: 853d17fed4272ef4681b83cd093290fd,
+        type: 3}
+      deckList:
+      - {fileID: 1798558198490400397, guid: 948a13693cf3aad4a9a0bd359cc158ef, type: 3}
+      deckListString: 
+    - monsterCard: {fileID: 618883279989994325, guid: a04464879ed76324f892a2eed4bd5d92,
+        type: 3}
+      deckList:
+      - {fileID: 1798558198490400397, guid: 948a13693cf3aad4a9a0bd359cc158ef, type: 3}
+      deckListString: 
+    - monsterCard: {fileID: 618883279989994325, guid: 02137e06fdd4f904fa337e33436ad5ce,
+        type: 3}
+      deckList:
+      - {fileID: 1798558198490400397, guid: 948a13693cf3aad4a9a0bd359cc158ef, type: 3}
+      deckListString: 
+    - monsterCard: {fileID: 618883279989994325, guid: e934f5527bab0064084e875959d8ca67,
+        type: 3}
+      deckList:
+      - {fileID: 1798558198490400397, guid: 948a13693cf3aad4a9a0bd359cc158ef, type: 3}
       deckListString: 

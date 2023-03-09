@@ -53,6 +53,10 @@ MonoBehaviour:
     - OccultTwirl
     - Be A Cool Guy
     - Douse
+    - BailWater
+    - Poison
+    - TentacleGrip
+    - NauticalChart
     _keys:
     - Attack
     - Binned Attack
@@ -71,6 +75,10 @@ MonoBehaviour:
     - OccultTwirl
     - Be A Cool Guy
     - Douse
+    - BailWater
+    - Poison
+    - TentacleGrip
+    - NauticalChart
     _values:
     - {fileID: 1798558198490400397, guid: 948a13693cf3aad4a9a0bd359cc158ef, type: 3}
     - {fileID: -736188161015104388, guid: 8fba69ea9cabcfa4b89aaa763ac1bd82, type: 3}
@@ -89,3 +97,7 @@ MonoBehaviour:
     - {fileID: 720940868532831341, guid: 60b0e72c10495414bb1635a5a22a267c, type: 3}
     - {fileID: 5982055226416778362, guid: 7bb6504231ba1a14fb1c7a2bb75c2836, type: 3}
     - {fileID: -4293880748526012951, guid: 34b534ebfd1f9be498b7db222a0c7055, type: 3}
+    - {fileID: 134441627470835729, guid: d942d0a9d7ce2914c841ea09612a31ea, type: 3}
+    - {fileID: -5257259473322441926, guid: ae44472b46cbfa04da18e25e67fdc73f, type: 3}
+    - {fileID: -846312056593021632, guid: 90c1a859d504373449a7a22ab6536f0b, type: 3}
+    - {fileID: -176229504365669494, guid: 642e2f9917e32ef48beddc3d3576acd8, type: 3}

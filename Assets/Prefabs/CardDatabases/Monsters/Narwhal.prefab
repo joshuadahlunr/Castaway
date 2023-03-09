@@ -105,7 +105,7 @@ GameObject:
   - component: {fileID: 618883279989994154}
   - component: {fileID: 618883279989994325}
   m_Layer: 0
-  m_Name: Pelican
+  m_Name: Narwhal
   m_TagString: Targetable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -192,8 +192,8 @@ MonoBehaviour:
   container: {fileID: 0}
   _state: 4
   cardOwner: 1
-  _name: Pelican
-  _art: {fileID: 21300000, guid: 7f9f6e731d4b457439258791e16f6ac2, type: 3}
+  _name: Narwhal
+  _art: {fileID: 21300000, guid: a96f840c57f2c094ba619484ac3cb50c, type: 3}
   _rules: 
   _properties:
     reorderableList:
@@ -222,8 +222,8 @@ MonoBehaviour:
     _keys: []
     _values: []
   _health:
-    health: 2
-    maxHealth: 2
+    health: 5
+    maxHealth: 5
     permanentDamageReduction: 0
     temporaryDamageReduction: 0
   healthStateChanged:
@@ -378,6 +378,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 4.909973
+      objectReference: {fileID: 0}
+    - target: {fileID: 8705953693113563530, guid: b12620cf2bf3db14887538a945f8b6c3,
+        type: 3}
+      propertyPath: m_text
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

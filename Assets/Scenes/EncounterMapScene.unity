@@ -858,6 +858,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 18181216}
     m_Modifications:
+    - target: {fileID: 1111901802563362302, guid: 8f1f679ff0b13bd4585feba28317bbad,
+        type: 3}
+      propertyPath: m_GravityScale
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1111901802563362302, guid: 8f1f679ff0b13bd4585feba28317bbad,
+        type: 3}
+      propertyPath: m_SleepingMode
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 3370503712390379070, guid: 8f1f679ff0b13bd4585feba28317bbad,
         type: 3}
       propertyPath: m_RootOrder
