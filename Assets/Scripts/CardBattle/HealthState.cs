@@ -5,9 +5,10 @@ namespace CardBattle {
 	[Serializable]
 	public struct HealthState {
 		public int health;
-		
+		public int maxHealth;
+
 		public static implicit operator int(HealthState h) => h.health;
-		
+
 		public int permanentDamageReduction;
 		public int temporaryDamageReduction;
 
@@ -29,7 +30,7 @@ namespace CardBattle {
 		}
 
 		public HealthState ApplyHealing(int healing) {
-            if (healing < 0) 
+            if (healing < 0)
              	return ApplyDamage(-healing);;
 
 			health += healing;

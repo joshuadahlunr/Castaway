@@ -12,9 +12,9 @@ namespace CardBattle.Card {
 		/// Extension to modification which adds health
 		/// </summary>
 		public new class Modification : CardBase.Modification {
-			public virtual HealthState GetHealth(HealthState health) => health; 	
+			public virtual HealthState GetHealth(HealthState health) => health;
 		}
-		
+
 		/// <summary>
 		/// Backing memory for health
 		/// </summary>
@@ -32,7 +32,7 @@ namespace CardBattle.Card {
 				OnHealthStateChanged(_health, value);
 				_health = value;
 				healthCache = null;
-			} 
+			}
 			get {
 				healthCache ??= modifications.Aggregate(_health, (current, _mod) => {
 					if(_mod is Modification mod) return mod.GetHealth(current); // If the modification touches health then run that process!

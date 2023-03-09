@@ -159,7 +159,7 @@ public class CardGameManager : MonoBehaviour {
 		int level = (int)Mathf.Round(encounterDifficulty);
 		if (level % 5 == 4)
 			encounterType = EncounterType.Boss;
-		// if (difficulty > 20)
+		// if (level > 20)
 		// 	encounterType = EncounterType.FinalBoss;
 
 		var number = encounterType == EncounterType.Normal ? (level / 5 + 1) : 1;
@@ -178,8 +178,11 @@ public class CardGameManager : MonoBehaviour {
 			monster.transform.position = new Vector3(-0.0300000049f, 0.556999981f, 0.141000032f);
 
 			// Adjusts the monster's difficulty based on the level!
-			foreach(var card in monster.deck)
+			foreach (var card in monster.deck) {
+				Debug.Log($"Upgrading {card.name}");
 				card.AddModification(new LevelModification(level));
+			}
+
 			monster.AddModification(new LevelModification(level));
 			monsters = new List<MonsterCardBase>(monsters) { monster }.ToArray();
 		}

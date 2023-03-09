@@ -44,9 +44,11 @@ MonoBehaviour:
     _values:
     - monsterCard: {fileID: 618883279989994325, guid: 531a547dfc03c914583f1555546d134e,
         type: 3}
-      deckList: []
+      deckList:
+      - {fileID: 1798558198490400397, guid: 948a13693cf3aad4a9a0bd359cc158ef, type: 3}
       deckListString: 
     - monsterCard: {fileID: 618883279989994325, guid: c2bc2b1a135728640b95a069a62a2496,
         type: 3}
-      deckList: []
+      deckList:
+      - {fileID: 1798558198490400397, guid: 948a13693cf3aad4a9a0bd359cc158ef, type: 3}
       deckListString: 

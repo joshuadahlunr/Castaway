@@ -126,7 +126,7 @@ Transform:
   - {fileID: 6230448108640317226}
   - {fileID: 618883279643879283}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!65 &618883279989994326
 BoxCollider:
@@ -223,6 +223,7 @@ MonoBehaviour:
     _values: []
   _health:
     health: 1
+    maxHealth: 2
     permanentDamageReduction: 0
     temporaryDamageReduction: 0
   healthStateChanged:

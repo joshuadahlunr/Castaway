@@ -222,7 +222,8 @@ MonoBehaviour:
     _keys: []
     _values: []
   _health:
-    health: 5
+    health: 12
+    maxHealth: 12
     permanentDamageReduction: 0
     temporaryDamageReduction: 0
   healthStateChanged:

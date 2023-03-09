@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace CardBattle.Card.Modifications.Generic {
 	public class LevelModification : MultiplicationModification {
-		public LevelModification(int level, float multiplierPerLevel = .5f) {
+		public LevelModification(int level, float multiplierPerLevel = .25f) {
 			DamageMultiplier = 1 + (level - 1) * multiplierPerLevel;
 			HealthPropertiesMultiplier = 1 + (level - 1) * multiplierPerLevel;
 			HealthMultiplier = 1 + (level - 1) * multiplierPerLevel;
@@ -12,7 +12,7 @@ namespace CardBattle.Card.Modifications.Generic {
 			UtilityMultiplier = 1 + (level - 1) * multiplierPerLevel;
 		}
 	}
-	
+
 	public class ReductionModification : HealthCardBase.Modification {
 		public int DamageReductionAmount = 0;
 		public int HealthPropertiesReductionAmount = 0;
@@ -61,17 +61,17 @@ namespace CardBattle.Card.Modifications.Generic {
 
 	public class CostReductionModification : ActionCardBase.Modification {
 		public PeopleJuice.Cost deduction;
-		
+
 		public override PeopleJuice.Cost GetCost(PeopleJuice.Cost _cost) {
 			var cost = new PeopleJuice.Cost(_cost);
 			PeopleJuice.DeductCost(ref cost, deduction);
 			return cost;
 		}
 	}
-	
+
 	public class CostIncreaseModification : ActionCardBase.Modification {
 		public PeopleJuice.Cost increase;
-		
+
 		public override PeopleJuice.Cost GetCost(PeopleJuice.Cost _cost) {
 			var cost = new PeopleJuice.Cost(_cost);
 			cost.AddRange(increase);
@@ -86,7 +86,7 @@ namespace CardBattle.Card.Modifications.Generic {
 		public float BlockMultiplier = 1;
 		public float DrawMultiplier = 1;
 		public float UtilityMultiplier = 1;
-		
+
 		public override CardBase.PropertyDictionary GetProperties(CardBase.PropertyDictionary _props) {
 			// Copy of the properties dictionary, set to null until we find a property that needs to be modified
 			CardBase.PropertyDictionary props = _props.Clone();
@@ -120,11 +120,13 @@ namespace CardBattle.Card.Modifications.Generic {
 		}
 
 		public override HealthState GetHealth(HealthState health) {
-			health.health = (int)(health.health * HealthMultiplier);
+			// health.maxHealth = (int)(health.maxHealth * HealthMultiplier);
+			// health.health = (int)(health.health * HealthMultiplier);
+			// TODO: Not working!
 			return health;
 		}
 	}
-	
+
 	class NoCostModification : ActionCardBase.Modification {
 		public override PeopleJuice.Cost GetCost(PeopleJuice.Cost _) => new();
 	}
