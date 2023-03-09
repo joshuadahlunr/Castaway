@@ -195,17 +195,8 @@ namespace CardBattle.Containers {
 		/// Function which updates the deck's Y scale to match how many cards are currently within the deck
 		/// </summary>
 		protected void UpdateDeckHeight() {
-			// If there are no cards in the deck, don't render it!
-			if (cards.Count == 0) {
-				if (r is not null) r.enabled = false; // Null check the the mesh renderer to make sure one is present!
-				return;
-			}
-
-			// If there are cards in the deck, make sure it is being rendered!
-			if (r is not null) r.enabled = true;
-
 			var scale = transform.localScale;
-			scale.y = initalYScale * cards.Count;
+			scale.y = Mathf.Max(initalYScale * cards.Count, initalYScale);
 			transform.ChangeParentScale(scale);
 		}
 
