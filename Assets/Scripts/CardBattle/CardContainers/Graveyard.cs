@@ -1,15 +1,17 @@
-﻿namespace CardBattle.Containers {
+﻿using CardBattle.Card;
+
+namespace CardBattle.Containers {
 	/// <summary>
-	/// The Graveyard class represents a deck of cards that have been discarded by players.
+	///     The Graveyard class represents a deck of cards that have been discarded by players.
 	/// </summary>
 	/// <author>Joshua Dahl</author>
 	public class Graveyard : Deck {
 		/// <summary>
-		/// Adds a card to the graveyard deck.
+		///     Adds a card to the graveyard deck.
 		/// </summary>
 		/// <param name="card">The card to add to the deck.</param>
 		/// <param name="index">The index at which to insert the card. Default is -1, which means add to the end of the deck.</param>
-		public override void AddCard(Card.CardBase card, int index = -1) {
+		public override void AddCard(CardBase card, int index = -1) {
 			// Call the AddCard method from the base class Deck
 			base.AddCard(card, index);
 
@@ -26,7 +28,7 @@
 			// If no Confirmation component is found, return
 			if (confirm is null) return;
 			// If the card being added is the same as the card in the Confirmation component, cancel the confirmation
-			if(confirm.card == card) confirm.Cancel();
+			if (confirm.card == card) confirm.Cancel();
 		}
 	}
 }

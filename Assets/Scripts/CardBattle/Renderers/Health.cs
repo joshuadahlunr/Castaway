@@ -1,18 +1,19 @@
 ﻿using System.Collections.Generic;
+using TMPro;
 
 namespace CardBattle.Card.Renderers {
 	/// <summary>
-	/// Extension to the base renderer which adds health text
+	///     Extension to the base renderer which adds health text
 	/// </summary>
 	/// <author>Joshua Dahl</author>
-	public class Health: Base {
+	public class Health : Base {
 		/// <summary>
-		/// Reference to the health UI text
+		///     Reference to the health UI text
 		/// </summary>
-		public TMPro.TMP_Text health;
+		public TMP_Text health;
 
 		/// <summary>
-		/// Override of update which makes sure the health text is properly updated
+		///     Override of update which makes sure the health text is properly updated
 		/// </summary>
 		public new void Update() {
 			base.Update();
@@ -22,7 +23,7 @@ namespace CardBattle.Card.Renderers {
 		}
 
 		/// <summary>
-		/// Override which also adds in "{health}" as a replaceable placeholder
+		///     Override which also adds in "{health}" as a replaceable placeholder
 		/// </summary>
 		/// <returns>Dictionary mapping from replacement string to its replacement value</returns>
 		protected override Dictionary<string, object> CalculateReplacementParameters() {

@@ -1,28 +1,28 @@
-﻿using UnityEngine;
+﻿using CardBattle.Card;
+using UnityEngine;
 
 namespace CardBattle.Containers {
 	/// <summary>
-	/// Container representing the player's hand
+	///     Container representing the player's hand
 	/// </summary>
 	/// <author>Joshua Dahl</author>
 	public class Hand : CardContainerBase {
-
 		/// <summary>
-		/// Component added to cards in the hand which will automatically position them
+		///     Component added to cards in the hand which will automatically position them
 		/// </summary>
 		public class HandLayouter : MonoBehaviour {
 			/// <summary>
-			/// The hand which is currently managing the card
+			///     The hand which is currently managing the card
 			/// </summary>
 			public Hand owner;
 
 			/// <summary>
-			/// The card which is currently being managed
+			///     The card which is currently being managed
 			/// </summary>
-			public Card.CardBase card;
+			public CardBase card;
 
 			/// <summary>
-			/// Every frame position the card
+			///     Every frame position the card
 			/// </summary>
 			public void Update() {
 				var camera = Camera.main;
@@ -43,24 +43,24 @@ namespace CardBattle.Containers {
 
 
 		/// <summary>
-		/// Hands are face up containers
+		///     Hands are face up containers
 		/// </summary>
 		public override Facing facing => Facing.FaceUp;
 
 
 		/// <summary>
-		/// Override of AddCard that when cards are added to the hand, flags them as being in hand and adds a layout component to them!
+		///     Override of AddCard that when cards are added to the hand, flags them as being in hand and adds a layout component to them!
 		/// </summary>
 		/// <param name="card">The card to be added</param>
 		/// <param name="index">Optional index indicating where it should be inserted</param>
-		public override void AddCard(Card.CardBase card, int index = -1) {
+		public override void AddCard(CardBase card, int index = -1) {
 			base.AddCard(card, index);
 
 			card.transform.localPosition = Vector3.zero;
 			card.transform.localRotation = Quaternion.identity;
 
 			// Mark the card as now being in hand
-			card.state |= Card.CardBase.State.InHand;
+			card.state |= CardBase.State.InHand;
 			// Add the hand layout component to the card
 			var layout = card.gameObject.AddComponent<HandLayouter>();
 			layout.owner = this;
@@ -68,12 +68,12 @@ namespace CardBattle.Containers {
 		}
 
 		/// <summary>
-		/// Override of RemoveCard that removes the layout component and unflags the card as being in hand
+		///     Override of RemoveCard that removes the layout component and unflags the card as being in hand
 		/// </summary>
 		/// <param name="index">The index of the card to remove</param>
 		public override void RemoveCard(int index) {
 			// Mark the card as no longer being in hand
-			cards[index].state &= ~Card.CardBase.State.InHand;
+			cards[index].state &= ~CardBase.State.InHand;
 			// Remove the hand layout component to the card
 			Destroy(cards[index].GetComponent<HandLayouter>());
 

@@ -1,32 +1,33 @@
 // ReSharper disable Unity.NoNullPropagation
+
+using CardBattle.Card;
 using CardBattle.Containers;
 using UnityEngine;
 
 namespace CardBattle {
-
 	/// <summary>
-	/// Class that provides a smoothed card dragging and snapping to certain zones
+	///     Class that provides a smoothed card dragging and snapping to certain zones
 	/// </summary>
 	/// <author>Joshua Dahl</author>
-	[RequireComponent(typeof(Card.CardBase))]
+	[RequireComponent(typeof(CardBase))]
 	public class EquipmentDraggable : DraggableBase {
 		/// <summary>
-		/// How fast (in units/second) cards should move
+		///     How fast (in units/second) cards should move
 		/// </summary>
 		public float moveSpeed = .1f;
 
 		/// <summary>
-		/// How fast (in degrees/second) cards should rotate
+		///     How fast (in degrees/second) cards should rotate
 		/// </summary>
 		public float rotationSpeed = 20;
 
 		/// <summary>
-		/// The rotation of the card when we started dragging
+		///     The rotation of the card when we started dragging
 		/// </summary>
 		private Quaternion initialRotation;
 
 		/// <summary>
-		/// The position of the card when we started dragging
+		///     The position of the card when we started dragging
 		/// </summary>
 		private Vector3 resetPosition;
 
@@ -36,7 +37,7 @@ namespace CardBattle {
 
 
 		/// <summary>
-		/// Make sure the card's target position is wherever it was place in the editor when we start
+		///     Make sure the card's target position is wherever it was place in the editor when we start
 		/// </summary>
 		public void Start() {
 			targetPosition = transform.position;
@@ -44,7 +45,7 @@ namespace CardBattle {
 		}
 
 		/// <summary>
-		/// When we start dragging save the reset positions
+		///     When we start dragging save the reset positions
 		/// </summary>
 		public override void OnDragBegin() {
 			resetPosition = targetPosition;
@@ -52,7 +53,7 @@ namespace CardBattle {
 		}
 
 		/// <summary>
-		/// While we are dragging move the position of the card to the cursor or snap it to a snap zone
+		///     While we are dragging move the position of the card to the cursor or snap it to a snap zone
 		/// </summary>
 		/// <param name="hit_">The potential raycast hit (null if mouse not over anything relevant)</param>
 		/// <returns>Returns true if we are snapping, false otherwise</returns>
@@ -76,10 +77,10 @@ namespace CardBattle {
 		}
 
 		/// <summary>
-		/// When we finish dragging, if we aren't in a snap zone, snap the card back to the hand
+		///     When we finish dragging, if we aren't in a snap zone, snap the card back to the hand
 		/// </summary>
 		public override void OnDragEnd(bool shouldSnap) {
-			// If we are snapping to a card container, move the associated card to that container 
+			// If we are snapping to a card container, move the associated card to that container
 			if (shouldSnap) {
 				CardContainerBase container;
 				if ((container = snapObject.GetComponent<CardContainerBase>()) is not null) {
@@ -92,7 +93,7 @@ namespace CardBattle {
 		}
 
 		/// <summary>
-		/// Reset the card back to its initial position (interpolated)
+		///     Reset the card back to its initial position (interpolated)
 		/// </summary>
 		public override void Reset() {
 			targetPosition = resetPosition;
@@ -100,7 +101,7 @@ namespace CardBattle {
 		}
 
 		/// <summary>
-		/// Every frame move the card towards its target pose!
+		///     Every frame move the card towards its target pose!
 		/// </summary>
 		public void Update() {
 			transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed);

@@ -1,11 +1,11 @@
+using CardBattle.Card;
 
 namespace CardBattle {
-
 	/// <summary>
-	/// Basic prototype attack card used for testing
+	///     Basic prototype attack card used for testing
 	/// </summary>
 	/// <author>Joshua Dahl</author>
-	public class FrozenStatus : Card.StatusCardBase {
+	public class FrozenStatus : StatusCardBase {
 		// Can't target anything (filter out everything)!
 		public override CardFilterer.CardFilters TargetingFilters => CardFilterer.CardFilters.All;
 		public override bool CanTargetPlayer => false;
@@ -16,11 +16,11 @@ namespace CardBattle {
 				CardGameManager.instance.playerHand.SendAllToContainer(CardGameManager.instance.playerGraveyard);
 
 				// Max out the player's damage negation
-				CardGameManager.instance.playerHealthState = CardGameManager.instance.playerHealthState.SetTemporaryDamageReduction(int.MaxValue);
+				CardGameManager.instance.playerHealthState =
+					CardGameManager.instance.playerHealthState.SetTemporaryDamageReduction(int.MaxValue);
 
 				// Remove the card from the game!
 				RemoveFromGame();
 			}));
 	}
-
 }

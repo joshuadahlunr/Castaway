@@ -1,26 +1,27 @@
-namespace CardBattle {
+using CardBattle.Card;
 
+namespace CardBattle {
 	/// <summary>
-	/// Class for the basic Attack card
+	///     Class for the basic Attack card
 	/// </summary>
 	/// <author>Joshua Dahl</author>
-	public class Attack : Card.ActionCardBase {
-
+	public class Attack : ActionCardBase {
 		// Can only target monsters and equipment
-		public override CardFilterer.CardFilters TargetingFilters =>
-			~(CardFilterer.CardFilters.Monster | CardFilterer.CardFilters.InPlay/*| CardFilterer.CardFilters.Equipment*/);
+		public override CardFilterer.CardFilters TargetingFilters
+			=> ~(CardFilterer.CardFilters.Monster |
+			     CardFilterer.CardFilters.InPlay /*| CardFilterer.CardFilters.Equipment*/);
 
 		// Can target monsters in addition to everything allowed by TargetingFilters
-		public override CardFilterer.CardFilters MonsterTargetingFilters =>
-			TargetingFilters | CardFilterer.CardFilters.Monster;
+		public override CardFilterer.CardFilters MonsterTargetingFilters
+			=> TargetingFilters | CardFilterer.CardFilters.Monster;
 
 		/// <summary>
-		/// Called when the player targets something with this card
+		///     Called when the player targets something with this card
 		/// </summary>
 		/// <param name="_target">The target card</param>
-		public override void OnTarget(Card.CardBase _target) {
+		public override void OnTarget(CardBase _target) {
 			// Convert target to HealthCardBase
-			var target = _target?.GetComponent<Card.HealthCardBase>();
+			var target = _target?.GetComponent<HealthCardBase>();
 			// Return if the target is null or owned by the player
 			if (NullAndPlayerCheck(target)) return;
 
