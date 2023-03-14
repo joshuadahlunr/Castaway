@@ -1,10 +1,18 @@
 ﻿namespace Extensions {
 	/// <summary>
-	/// Simple type that contains a value and an associated count
+	///     Represents a value and an associated count.
 	/// </summary>
-	/// <typeparam name="T"></typeparam>
+	/// <author>Joshua Dahl</author>
+	/// <typeparam name="T">The type of the value.</typeparam>
 	public class Counted<T> {
+		/// <summary>
+		///     Holds the value.
+		/// </summary>
 		public T value;
+
+		/// <summary>
+		///     Holds the count of how many times the value occurs.
+		/// </summary>
 		public int count;
 	}
 }

@@ -10,11 +10,12 @@ public static class DatabaseManager {
 	/// Path to where the database can be located
 	/// </summary>
 	public static string DatabasePath => Application.persistentDataPath + "/castaway.db";
-	
+
 	/// <summary>
 	/// Backing memory for the database connection
 	/// </summary>
 	private static SQLiteConnection _database;
+
 	/// <summary>
 	/// Read only property that ensures a connection to the database is created the first time it is requested
 	/// </summary>
@@ -29,7 +30,7 @@ public static class DatabaseManager {
 			return _database;
 		}
 	}
-	
+
 	/// <summary>
 	/// Function which ensures that the requested table exists and returns a reference to it
 	/// </summary>

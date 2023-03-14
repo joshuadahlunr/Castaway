@@ -1,19 +1,19 @@
 using UnityEngine;
 
 namespace Shapes {
-	
 	/// <summary>
-	/// Creates a Cone mesh
+	///     Creates a Cone mesh
 	/// </summary>
 	/// <remarks>From: https://gist.github.com/gszauer/5718607</remarks>
 	/// <author>Wolfram Kresse + Joshua Dahl</author>
-	[RequireComponent(typeof(MeshRenderer)), RequireComponent(typeof(MeshFilter))]
-	[ExecuteInEditMode]
+	[RequireComponent(typeof(MeshRenderer)), RequireComponent(typeof(MeshFilter)), ExecuteInEditMode]
 	public class Cone : MonoBehaviour {
 		public int resolution = 10;
 		public float radiusTop;
 		public float radiusBottom = 1f;
+
 		public float length = 1f;
+
 		// if >0, create a cone with this angle by setting radiusTop to 0, and adjust radiusBottom according to length;
 		public float openingAngle;
 		public bool outside = true;
@@ -28,9 +28,7 @@ namespace Shapes {
 		}
 
 #if UNITY_EDITOR
-		private void Update() {
-			RegenerateCone();
-		}
+		private void Update() { RegenerateCone(); }
 #else
 		private void Start() {
 			RegenerateCone();
@@ -121,8 +119,7 @@ namespace Shapes {
 						else
 							tris[cnt++] = i + 1 + resolution;
 					}
-			}
-			else if (radiusBottom == 0) {
+			} else if (radiusBottom == 0) {
 				// bottom cone
 				tris = new int[resolution * 3 * multiplier];
 				if (outside)
@@ -144,8 +141,7 @@ namespace Shapes {
 						tris[cnt++] = i;
 						tris[cnt++] = i + resolution;
 					}
-			}
-			else {
+			} else {
 				// truncated cone
 				tris = new int[resolution * 6 * multiplier];
 				if (outside)

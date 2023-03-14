@@ -22,7 +22,7 @@ public class SQLDatabaseTest : MonoBehaviour {
 		db.CreateTable<Valuation>();
 
 		Debug.Log(Application.persistentDataPath + "/castaway.db");
-		
+
 		var stock = new Stock {
 			Symbol = "ABC"
 		};

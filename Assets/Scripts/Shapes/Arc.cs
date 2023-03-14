@@ -2,31 +2,31 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace Shapes {
-	
 	/// <summary>
-	/// Class which generates an arc mesh
+	///     Class which generates an arc mesh
 	/// </summary>
 	/// <author>Joshua Dahl</author>
-	[RequireComponent(typeof(MeshRenderer)), RequireComponent(typeof(MeshFilter))]
-	[ExecuteInEditMode] // Make sure arc is regenerated even in edit mode!
+	[RequireComponent(typeof(MeshRenderer)), RequireComponent(typeof(MeshFilter)), ExecuteInEditMode]
+	 // Make sure arc is regenerated even in edit mode!
 	public class Arc : MonoBehaviour {
 		// How many segments the arc should have
 		public int resolution = 32;
+
 		// How wide the arc should be
 		public float width;
+
 		// Positions where the arc should start and end
 		public Transform start, end;
 
 
 		// Mesh filter to store the generated mesh in
 		private MeshFilter filter;
+
 		// Find a reference to the filter on awake
 		private void Awake() => filter = GetComponent<MeshFilter>();
 
 		// Every frame update the curve of the arc
-		private void Update() {
-			RegenerateCurve();
-		}
+		private void Update() { RegenerateCurve(); }
 
 		// Function which updates the curve of the arc and generates a new mesh
 		public void RegenerateCurve() {
@@ -35,8 +35,8 @@ namespace Shapes {
 
 			// Index locations of the vertices in the last segment
 			int lastTopIndex = -1, lastBottomIndex = -1;
-			
-			// List of vertices, UVs, and indices 
+
+			// List of vertices, UVs, and indices
 			List<Vector3> vertices = new();
 			List<Vector2> UVs = new();
 			List<int> indices = new();
@@ -50,7 +50,9 @@ namespace Shapes {
 				var scale = transform.lossyScale;
 				var center = SampleParabola(start.transform.position, end.transform.position, height, t);
 				// Adjust te position of the plane to account for the scale of the object
-				center.x /= scale.x; center.y /= scale.y; center.z /= scale.z;
+				center.x /= scale.x;
+				center.y /= scale.y;
+				center.z /= scale.z;
 				var normal = (Camera.main.transform.position - center).normalized;
 				var cameraRight = Camera.main.transform.right.normalized;
 				var plane = new Plane(normal, center);
@@ -100,8 +102,7 @@ namespace Shapes {
 				var result = start + t * travelDirection;
 				result.y += (-parabolicT * parabolicT + 1) * height;
 				return result;
-			}
-			else {
+			} else {
 				//start and end are not level, gets more complicated
 				var travelDirection = end - start;
 				var levelDirecteion = end - new Vector3(start.x, end.y, start.z);
