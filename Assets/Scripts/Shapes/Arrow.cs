@@ -2,7 +2,7 @@
 
 namespace Shapes {
 	/// <summary>
-	/// Class which renders an arrow composed of an arc with a cone at its end 
+	///     Class which renders an arrow composed of an arc with a cone at its end
 	/// </summary>
 	/// <author>Joshua Dahl</author>
 	[RequireComponent(typeof(Arc))]
@@ -10,7 +10,7 @@ namespace Shapes {
 		public GameObject start, end;
 		public Arc arc;
 		public Cone cone;
-	
+
 		// On start, find/create the necessary children and configure them (if nessicary)
 		private void Awake() {
 			start ??= new GameObject { name = "start", transform = { parent = transform } };
@@ -25,7 +25,7 @@ namespace Shapes {
 				cone.resolution = arc.resolution;
 				cone.radiusBottom = .5f;
 				cone.RegenerateCone();
-				
+
 				// Link the cone's material to the the arrow's material
 				end.GetComponent<MeshRenderer>().materials = GetComponent<MeshRenderer>().materials;
 			}
