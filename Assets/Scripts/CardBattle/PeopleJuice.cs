@@ -7,6 +7,19 @@ using RotaryHeart.Lib.SerializableDictionary;
 using UnityEngine;
 
 namespace CardBattle {
+	/// <summary>
+	/// A scriptable object that represents different types of people juice and their associated costs. Each cost is a list of people juice types, and can be deducted from a people juice pool to perform actions in a card game. This class also includes a dictionary mapping each people juice type to an associated sprite icon.
+	/// </summary>
+	/// <author>Joshua Dahl</author>
+	/// <remarks>
+	/// This class contains several nested classes and enums, including:
+	/// - The Types enum, which enumerates the different types of people juice.
+	/// - The Cost class, which represents a people juice cost as a list of Types.
+	/// - The PeopleJuiceIconsDictionary class, which maps each people juice type to an associated sprite icon.
+	///
+	/// This class also includes several static helper functions, including:
+	/// - DeductCost, which deducts a cost from a people juice pool.
+	/// </remarks>
 	[CreateAssetMenu(fileName = "PeopleJuice", menuName = "ScriptableObjects/PeopleJuice Mapping")]
 	public class PeopleJuice : ScriptableObject {
 		/// <summary>
@@ -14,16 +27,16 @@ namespace CardBattle {
 		/// </summary>
 		[Serializable]
 		public enum Types {
-			Generic,
-			Wizard,
-			Navigator,
-			Entertainer,
-			Engineer,
-			Cook,
-			Occultist,
-			Mercenary,
-			Deckhand,
-			Max
+		    Generic,
+		    Wizard,
+		    Navigator,
+		    Entertainer,
+		    Engineer,
+		    Cook,
+		    Occultist,
+		    Mercenary,
+		    Deckhand,
+		    Max
 		}
 
 		/// <summary>
@@ -31,55 +44,101 @@ namespace CardBattle {
 		/// </summary>
 		[Serializable]
 		public class Cost : IEnumerable<Types> {
-			[SerializeField] private List<Types> list;
+		    /// <summary>
+		    /// The list of Types that represents the cost.
+		    /// </summary>
+		    [SerializeField] private List<Types> list;
 
-			public int Count => list.Count;
-			public int Value => Count;
+		    /// <summary>
+		    /// The number of elements in the list.
+		    /// </summary>
+		    public int Count => list.Count;
 
-			public Cost() => list = new List<Types>();
-			public Cost(IEnumerable<Types> iter) => list = new List<Types>(iter);
+		    /// <summary>
+		    /// The value of the cost (equal to the number of elements in the list).
+		    /// </summary>
+		    public int Value => Count;
 
-			public Types this[int index] {
-				get => list[index];
-				set => list[index] = value;
+		    /// <summary>
+		    /// Default constructor that initializes an empty list.
+		    /// </summary>
+		    public Cost() => list = new List<Types>();
+
+		    /// <summary>
+		    /// Constructor that takes an IEnumerable&lt;Types&gt; and initializes the list with its elements.
+		    /// </summary>
+		    /// <param name="iter">The collection of Types to initialize the list with.</param>
+		    public Cost(IEnumerable<Types> iter) => list = new List<Types>(iter);
+
+		    /// <summary>
+		    /// Indexer that allows accessing elements of the list using square bracket notation.
+		    /// </summary>
+		    /// <param name="index">The index of the element to access.</param>
+		    public Types this[int index] {
+		        get => list[index];
+		        set => list[index] = value;
+		    }
+
+		    /// <summary>
+		    /// IEnumerable&lt;Types&gt; implementation that allows iteration over the list.
+		    /// </summary>
+		    public IEnumerator<Types> GetEnumerator() => list.GetEnumerator();
+		    IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+
+		    /// <summary>
+		    /// Returns a list of Counted&lt;Types&gt; objects, each containing a Type and its count in the list.
+		    /// </summary>
+		    public IEnumerable<Counted<Types>> CountedForm() {
+		        return list.GroupBy(t => t)
+		            .Select(g => new Counted<Types> { value = g.Key, count = g.Count() });
+		    }
+
+		    /// <summary>
+		    /// Takes a list of Counted&lt;Types&gt; objects and returns a new Cost object with an expanded list of Types.
+		    /// </summary>
+		    /// <param name="counted">The list of Counted&lt;Types&gt; objects to expand.</param>
+		    public static Cost ExpandedForm(IEnumerable<Counted<Types>> counted) {
+		        var @out = new Cost();
+		        foreach(var count in counted)
+		            for(var i = 0; i < count.count; i++)
+		                @out.list.Add(count.value);
+		        return @out;
+		    }
+
+		    /// <summary>
+		    /// Returns a string representation of the list of Types.
+		    /// </summary>
+		    public override string ToString() {
+		        return list.Aggregate("", (current, type) => current + $"{{{type}}} ");
+		    }
+
+		    /// <summary>
+		    /// Sorts the list of Types.
+		    /// </summary>
+		    public Cost Sort() {
+		        list.Sort();
+		        return this;
+		    }
+
+		    /// <summary>
+		    /// Adds a single Type to the cost.
+		    /// </summary>
+		    /// <param name="symbol">The Type to add to the cost.</param>
+		    public Cost Add(Types symbol) {
+						list.Add(symbol);
+						return this;
 			}
-			
-			public IEnumerator<Types> GetEnumerator() => list.GetEnumerator();
-			IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
-			public IEnumerable<Counted<Types>> CountedForm() {
-				return list.GroupBy(t => t)
-					.Select(g => new Counted<Types> { value = g.Key, count = g.Count() });
-			}
-			
-			public static Cost ExpandedForm(IEnumerable<Counted<Types>> counted) {
-				var @out = new Cost();
-				foreach(var count in counted)
-					for(var i = 0; i < count.count; i++)
-						@out.list.Add(count.value);
-				return @out;
-			}
-
-			public override string ToString() {
-				return list.Aggregate("", (current, type) => current + $"{{{type}}} ");
-			}
-
-			public Cost Sort() {
-				list.Sort();
-				return this;
-			}
-
-			public Cost Add(Types symbol) {
-				list.Add(symbol);
-				return this;
-			}
-
+		    /// <summary>
+		    /// Adds a several Types to the cost.
+		    /// </summary>
+		    /// <param name="symbols">The Types to add to the cost.</param>
 			public Cost AddRange(IEnumerable<Types> symbols) {
 				list.AddRange(symbols);
 				return this;
 			}
 		}
-		
+
 		/// <summary>
 		/// Type which matches a people juice type to an associated icon
 		/// </summary>
@@ -90,9 +149,9 @@ namespace CardBattle {
 		/// Dictionary mapping the types of people juice to an associated sprite
 		/// </summary>
 		public PeopleJuiceIconsDictionary sprites;
-		
-		
-		
+
+
+
 		// ----- Static Helpers ------
 
 
@@ -127,7 +186,7 @@ namespace CardBattle {
 				var available = pool.WithIndex().FirstOrDefault(x => (int)x.item.value == i);
 				// available = [(x[1], j) for j, x in enumerate(pool) if x[0].value == i]
 				if (available.item is null) return false; // If not available, cost isn't available in pool
-				
+
 				// Cost is available in pool if we need more than is available
 				if (available.item.count < needed.count) return false;
 
@@ -145,7 +204,7 @@ namespace CardBattle {
 			needed = cost.FirstOrDefault(x => x.value == Types.Generic);
 			// needed = [x[1] for x in cost if x[0].value == Types.GENERIC.value]
 			if (needed == null) {
-				pool_ = ePool; // If no generic cost is needed, whats currently in the pool is finalized 
+				pool_ = ePool; // If no generic cost is needed, whats currently in the pool is finalized
 				return true;
 			}
 

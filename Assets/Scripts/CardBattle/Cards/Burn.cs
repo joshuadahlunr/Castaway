@@ -9,8 +9,8 @@ namespace CardBattle
     ///     Burn status effect, which deals damage to
     ///     the player, then shuffles another burn into
     ///     the deck and draws another card
-    ///     <author> Misha Desear </author>
     /// </summary>
+    /// <author> Misha Desear </author>
     public class BurnStatus : Card.StatusCardBase
     {
         /// <summary>

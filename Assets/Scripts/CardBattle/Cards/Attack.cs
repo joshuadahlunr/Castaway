@@ -1,27 +1,34 @@
 namespace CardBattle {
 
-    /// <summary>
-    /// Basic attack card
-    /// </summary>
-    /// <author>Joshua Dahl</author>
-    public class Attack : Card.ActionCardBase {
-        // Can only target monsters and equipment
-        public override CardFilterer.CardFilters TargetingFilters =>
-            ~(CardFilterer.CardFilters.Monster | CardFilterer.CardFilters.InPlay/*| CardFilterer.CardFilters.Equipment*/);
-        public override CardFilterer.CardFilters MonsterTargetingFilters =>
-            TargetingFilters | CardFilterer.CardFilters.Monster;
+	/// <summary>
+	/// Class for the basic Attack card
+	/// </summary>
+	/// <author>Joshua Dahl</author>
+	public class Attack : Card.ActionCardBase {
 
-        /// <summary>
-        /// When the player targets something, damage it (if it exists) and then send this card to the graveyard
-        /// </summary>
-        public override void OnTarget(Card.CardBase _target) {
-            var target = _target?.GetComponent<Card.HealthCardBase>();
-            if (NullAndPlayerCheck(target)) return; // Make sure the target isn't null if owned by the player
+		// Can only target monsters and equipment
+		public override CardFilterer.CardFilters TargetingFilters =>
+			~(CardFilterer.CardFilters.Monster | CardFilterer.CardFilters.InPlay/*| CardFilterer.CardFilters.Equipment*/);
 
-            // Damage target (falling back to player if we are monster and not targeting anything!)
-            DamageTargetOrPlayer(properties["primary"], target);
+		// Can target monsters in addition to everything allowed by TargetingFilters
+		public override CardFilterer.CardFilters MonsterTargetingFilters =>
+			TargetingFilters | CardFilterer.CardFilters.Monster;
 
-            SendToGraveyard();
-        }
-    }
+		/// <summary>
+		/// Called when the player targets something with this card
+		/// </summary>
+		/// <param name="_target">The target card</param>
+		public override void OnTarget(Card.CardBase _target) {
+			// Convert target to HealthCardBase
+			var target = _target?.GetComponent<Card.HealthCardBase>();
+			// Return if the target is null or owned by the player
+			if (NullAndPlayerCheck(target)) return;
+
+			// Damage target (falling back to player if we are monster and not targeting anything!)
+			DamageTargetOrPlayer(properties["primary"], target);
+
+			// Send this card to the graveyard
+			SendToGraveyard();
+		}
+	}
 }

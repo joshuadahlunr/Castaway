@@ -47,12 +47,12 @@ namespace CardBattle.Containers {
 			// Remove the revealed card from the deck
 			revealedCards.Add((cards[0], target));
 			RemoveCard(0);
-			
+
 			// Temporarily remove the cost of the card!
-			revealedCards[^1].Item1.AddModification(new NoCostModification() {
+			revealedCards[^1].Item1.AddModification(new RemoveCostModification() {
 				turnsRemaining = 1
 			});
-			
+
 			var revealHolderA = new GameObject { name = "RevealHolderOuter", transform = { parent = transform } }; // TODO: This is super inefficient and needs to be cached!
 			revealHolderA.transform.SetGlobalScale(Vector3.one);
 			var revealHolder = new GameObject{ transform =  { parent = revealHolderA.transform } };
@@ -65,7 +65,7 @@ namespace CardBattle.Containers {
 				arrow.start.transform.position = revealHolder.transform.position;
 				arrow.end.transform.position = revealedCards[^1].Item2.transform.position;
 			}
-			
+
 			revealedCards[^1].Item1.gameObject.SetActive(true);
 			revealedCards[^1].Item1.transform.parent = revealHolder.transform;
 			revealedCards[^1].Item1.transform.localPosition = Vector3.zero;
@@ -75,8 +75,8 @@ namespace CardBattle.Containers {
 			revealedCards[^1].Item1.OnMonsterReveal();
 		}
 
-		
-		
+
+
 		/// <summary>
 		/// Function which "plays" the currently revealed card
 		/// </summary>
@@ -93,7 +93,7 @@ namespace CardBattle.Containers {
 				// NOTE: On target should send the card back to the graveyard (aka bottom of deck)
 				revealedCard?.OnTarget(target);
 			}
-			
+
 			revealedCards.Clear();
 		}
 	}

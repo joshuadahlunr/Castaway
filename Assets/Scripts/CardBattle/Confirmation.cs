@@ -8,7 +8,7 @@ namespace CardBattle {
 	/// </summary>
 	/// <author>Joshua Dahl</author>
 	public class Confirmation : MonoBehaviour {
-		// Relevant references 
+		// Relevant references
 		public Card.CardBase card, target;
 		public Graveyard bin;
 		public CardContainerBase snapTarget;
@@ -28,9 +28,10 @@ namespace CardBattle {
 		/// </summary>
 		public bool TargetingGraveyard => bin is not null && snapTarget is null && target is null;
 
+		/// <summary>
+		/// Called when the object is created. Checks if a valid target has been passed and throws an exception if not
+		/// </summary>
 		public void Start() {
-			// if(true /* should auto confirm*/)
-			// 	Confirm();
 
 			// If nothing valid is targeted... immediately cancel and throw an exception
 			if (!TargetingZone && !TargetingCard && !TargetingGraveyard) {
@@ -39,21 +40,29 @@ namespace CardBattle {
 			}
 		}
 
-
 		/// <summary>
 		/// Callback called when the player confirms their choice
 		/// </summary>
 		public void Confirm() {
+
+			// Check the type of target and take the appropriate action
 			if (TargetingZone) {
+
+				// If targeting a zone, snap the card to the target and send it to the container
 				var draggable = card.GetComponent<EquipmentDraggable>();
 				draggable.targetPosition = snapTarget.transform.position;
 				draggable.targetRotation = snapTarget.transform.rotation;
-
 				card.container.SendToContainer(card, snapTarget);
 				card.OnPlayed();
-			} else if (TargetingGraveyard) 
+
+			} else if (TargetingGraveyard) {
+
+				// If targeting the graveyard, bin the card for attack
 				card.BinCardForAttack();
-			else {
+
+			} else {
+
+				// If targeting a card, call the OnTarget method of the card and the OnTargeted method of the target
 				if (card is Card.ActionCardBase aCard)
 					if (!PeopleJuice.DeductCost(ref CardGameManager.instance.currentPeopleJuice, aCard.cost))
 						throw new Exception("Attempted to play card when cost is not in the pool!");
@@ -61,7 +70,7 @@ namespace CardBattle {
 				card.OnTarget(target);
 				target.OnTargeted(card);
 			}
-			
+
 			// Disable all of the unaffordable cards
 			CardGameManager.instance.OnlyEnableAffordableCards();
 
@@ -74,6 +83,8 @@ namespace CardBattle {
 		/// Callback called when the player cancels their choice
 		/// </summary>
 		public void Cancel() {
+
+			// Reset the draggable position of the card and destroy the confirmation object
 			var draggable = card.GetComponent<DraggableBase>();
 			draggable.Reset();
 

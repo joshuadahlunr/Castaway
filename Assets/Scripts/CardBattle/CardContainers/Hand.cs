@@ -8,7 +8,7 @@ namespace CardBattle.Containers {
 	public class Hand : CardContainerBase {
 
 		/// <summary>
-		/// Component added to cards in the hand which will automatically position them 
+		/// Component added to cards in the hand which will automatically position them
 		/// </summary>
 		public class HandLayouter : MonoBehaviour {
 			/// <summary>
@@ -46,12 +46,6 @@ namespace CardBattle.Containers {
 		/// Hands are face up containers
 		/// </summary>
 		public override Facing facing => Facing.FaceUp;
-
-
-		// public void Awake() {
-		// 	foreach(var card in GetComponentsInChildren<CardBase>())
-		// 		AddCard(card);
-		// }
 
 
 		/// <summary>

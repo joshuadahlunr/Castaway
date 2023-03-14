@@ -6,17 +6,17 @@ using System.Linq;
 namespace CardBattle
 {
     /// <summary>
-    ///     Electric status effect, which does damage to 
+    ///     Electric status effect, which does damage to
     ///     everything, then is removed from the game
-    ///     <author> Misha Desear </author>
     /// </summary>
+    /// <author> Misha Desear </author>
     public class ElectricStatus : Card.StatusCardBase
     {
 
         /// <summary>
         /// Affects everything in play on the board, including the player
         /// </summary>
-        /// 
+        ///
 
         public override bool CanTargetPlayer => false;
         public override void OnDrawn() => StartCoroutine(
@@ -29,7 +29,7 @@ namespace CardBattle
                 /// <summary>
                 /// Apply damage to every monster and equipment card in play
                 /// </summary>
-                foreach (var card in CardFilterer.FilterCards(~(CardFilterer.CardFilters.Monster 
+                foreach (var card in CardFilterer.FilterCards(~(CardFilterer.CardFilters.Monster
                     | CardFilterer.CardFilters.Equipment | CardFilterer.CardFilters.InPlay)))
                 {
                     var cardHealth = card.GetComponent<HealthCardBase>();
@@ -39,7 +39,7 @@ namespace CardBattle
                 /// <summary>
                 /// Finally, remove from the game
                 /// </summary>
-                /// 
+                ///
                 RemoveFromGame();
             }));
 

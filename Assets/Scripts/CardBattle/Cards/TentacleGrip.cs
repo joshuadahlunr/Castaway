@@ -8,13 +8,13 @@ namespace CardBattle
     /// <summary>
     /// Tentacle Grip card: disables the player's ability to
     /// rotate the ship for a set duration of turns
-    /// <author>Misha Desear</author>
     /// </summary>
+    /// <author>Misha Desear</author>
     public class TentacleGrip : Card.ActionCardBase {
 
         // Can't target anything
         public override CardFilterer.CardFilters TargetingFilters => CardFilterer.CardFilters.All;
-        
+
         // On target, iterate through the player's deck and add Max to the cost of Rotate for x turns
         // (This should effectively disable the ability to rotate, unless there's a better way to do this...)
         public override void OnTarget(Card.CardBase _)

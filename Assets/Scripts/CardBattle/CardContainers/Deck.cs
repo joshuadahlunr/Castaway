@@ -33,25 +33,37 @@ namespace CardBattle.Containers {
 		}
 
 		/// <summary>
-		/// Type used to store all the cards in a decklist in the SQL database
+		/// Represents a card in a decklist stored in a SQL database.
 		/// </summary>
 		public class DeckListCard {
+			/// <summary>
+			/// Gets or sets the unique identifier of the card.
+			/// </summary>
 			[PrimaryKey, Unique, AutoIncrement]
 			public int id { set; get; }
 
 			/// <summary>
-			/// The DeckList this card is associated with
+			/// Gets or sets the identifier of the decklist to which this card belongs.
 			/// </summary>
 			[NotNull]
 			public int listID { set; get; }
 
+			/// <summary>
+			/// Gets or sets the name of the card.
+			/// </summary>
 			[NotNull]
 			public string name { set; get; }
 
-			public string associatedCharacterName { set; get; }
+			/// <summary>
+			/// Gets or sets the name of the character associated with this card.
+			/// </summary>
+			public string associatedCharacterName { set; get; } // TODO: Replace with character id?
 
+			/// <summary>
+			/// Gets or sets the level of the card.
+			/// </summary>
 			[NotNull]
-			public int level { set; get; }
+			public int level { set; get; } // TODO: Can we look this up from the character ID?
 		}
 
 		/// <summary>
@@ -111,7 +123,13 @@ namespace CardBattle.Containers {
 			DatabaseLoad(deckList.id, clear);
 		}
 
+		/// <summary>
+		/// Loads cards from the database with the given decklist ID and adds them to the deck.
+		/// </summary>
+		/// <param name="decklistID">The ID of the decklist to load cards from.</param>
+		/// <param name="clear">Whether to remove all existing cards in the deck before loading the new cards.</param>
 		public virtual void DatabaseLoad(int decklistID, bool clear = true) {
+			// Get all cards in the decklist with the given ID from the database
 			var cards = DatabaseManager.GetOrCreateTable<DeckListCard>().Where(card => card.listID == decklistID);
 
 			// If we are clearing, remove all of the cards currently in the deck
@@ -121,14 +139,18 @@ namespace CardBattle.Containers {
 			foreach(var cardPrototype in injectCardPrototypes)
 				AddCard(Instantiate(cardPrototype), 0);
 			injectCardPrototypes = null;
+
 			// Use the associated cardDB to load the cards from the database
 			foreach (var card in cards) {
+				// Instantiate the card from the associated cardDB
 				var instantiated = cardDB.Instantiate(card.name);
+
 				// TODO: Add a level modifier to the instantiated card
+
+				// Add the instantiated card to the deck
 				AddCard(instantiated);
 			}
 		}
-
 
 
 		/// <summary>

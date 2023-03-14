@@ -13,7 +13,7 @@ namespace CardBattle.Card {
 	/// </summary>
 	/// <author>Joshua Dahl</author>
 	public class CardBase : MonoBehaviour {
-		
+
 		/// <summary>
 		/// The renderer associated with this card
 		/// </summary>
@@ -23,12 +23,12 @@ namespace CardBattle.Card {
 		/// The collider associated with this card
 		/// </summary>
 		protected Collider collider;
-		
+
 		/// <summary>
 		/// The container the card is currently held within
 		/// </summary>
 		public CardContainerBase container;
-		
+
 		/// <summary>
 		/// Card property, has a tag indicating what it is used for and a value
 		/// </summary>
@@ -53,13 +53,13 @@ namespace CardBattle.Card {
 			/// The numeric value associated with this property
 			/// </summary>
 			public int value;
-			
+
 			/// <summary>
 			/// Properties can be implicitly converted to their value!
 			/// </summary>
 			public static implicit operator int(Property p) => p.value;
 		}
-		
+
 		/// <summary>
 		/// Serializable Dictionary that provides a list of properties relevant to the card's effect
 		/// </summary>
@@ -67,8 +67,8 @@ namespace CardBattle.Card {
 		public class PropertyDictionary : SerializableDictionaryBase<string, Property> {
 			public new PropertyDictionary Clone() => this.CloneViaSerialization();
 		}
-		
-		
+
+
 		/// <summary>
 		/// Class representing a change that has been applied to the card
 		/// </summary>
@@ -78,8 +78,8 @@ namespace CardBattle.Card {
 			/// The number of turns before this modification is removed from the card...
 			/// -1 turns remaining indicates that the modification is permanent
 			/// </summary>
-			public int turnsRemaining = -1;  
-			
+			public int turnsRemaining = -1;
+
 			/// <summary>
 			/// Returns a (potentially) modified version of the card's name
 			/// </summary>
@@ -102,8 +102,8 @@ namespace CardBattle.Card {
 		/// </summary>
 		protected List<Modification> modifications = new();
 
-		
-		
+
+
 		/// <summary>
 		/// List of valid states this card can be in
 		/// </summary>
@@ -114,7 +114,7 @@ namespace CardBattle.Card {
 			InPlay = 1 << 2, // When the card is on the field
 			InHand = 1 << 3 // When the card is in hand
 		}
-		
+
 		/// <summary>
 		/// Backing field for the state of the card
 		/// </summary>
@@ -144,12 +144,12 @@ namespace CardBattle.Card {
 		/// <remarks>The player is represented as a null target! If this is true null is added as a valid potential target!</remarks>
 		public virtual bool CanTargetPlayer => true;
 
-		
+
 		/// <summary>
 		/// Property which determines if the card is owned by the player or not
 		/// </summary>
 		public bool OwnedByPlayer => cardOwner == 0; // TODO: If we change the definition of who the player is, make sure to update this property!
-		
+
 		/// <summary>
 		/// Property which returns a reference to the monster which owns the card (null if owned by the player)
 		/// </summary>
@@ -160,7 +160,7 @@ namespace CardBattle.Card {
 		/// </summary>
 		/// <remarks>Index 0 represents the player, while index 1+ represnt all of the monsters in the <see cref="CardGameManager"/>'s monster list</remarks>
 		public int cardOwner;
-		
+
 		/// <summary>
 		/// Bool indicating if the card is disabled
 		/// </summary>
@@ -182,7 +182,7 @@ namespace CardBattle.Card {
 			set {
 				_name = value;
 				nameCache = null;
-			} 
+			}
 			get {
 				nameCache ??= modifications.Aggregate(_name, (current, mod) => mod.GetName(current));
 				return nameCache;
@@ -205,13 +205,13 @@ namespace CardBattle.Card {
 			set {
 				_art = value;
 				artCache = null;
-			} 
+			}
 			get {
 				artCache ??= modifications.Aggregate(_art, (current, mod) => mod.GetArt(current));
 				return artCache;
 			}
 		}
-		
+
 		/// <summary>
 		/// Backing memory for rules
 		/// </summary>
@@ -228,7 +228,7 @@ namespace CardBattle.Card {
 			set {
 				_rules = value;
 				rulesCache = null;
-			} 
+			}
 			get {
 				rulesCache ??= modifications.Aggregate(_rules, (current, mod) => mod.GetRules(current));
 				return rulesCache;
@@ -251,7 +251,7 @@ namespace CardBattle.Card {
 			set {
 				_properties = value;
 				propertiesCache = null;
-			} 
+			}
 			get {
 				propertiesCache ??= modifications.Aggregate(_properties, (current, mod) => mod.GetProperties(current));
 				return propertiesCache;
@@ -270,10 +270,10 @@ namespace CardBattle.Card {
 			// Since a new modification has been added, invalidate the caches
 			InvalidateCaches();
 		}
-		
+
 		// TODO: Add a way to invalidate the cache from the Unity UI
 		/// <summary>
-		/// Function which goes through all of the attributes which can be modified and invalidates their caches 
+		/// Function which goes through all of the attributes which can be modified and invalidates their caches
 		/// </summary>
 		public virtual void InvalidateCaches() {
 			nameCache = null;
@@ -285,7 +285,7 @@ namespace CardBattle.Card {
 		public virtual void MarkDisabled() {
 			renderer.disabled.SetActive(true);
 			if(collider is not null) collider.enabled = false;
-			
+
 			if ((state & State.InHand) == 0) return; // Don't deal with the draggable if not in hand!
 			var drag = GetComponent<DraggableBase>();
 			if(drag is not null) drag.enabled = false;
@@ -294,7 +294,7 @@ namespace CardBattle.Card {
 		public virtual void MarkEnabled() {
 			renderer.disabled.SetActive(false);
 			if(collider is not null) collider.enabled = true;
-			
+
 			if ((state & State.InHand) == 0) return; // Don't deal with the draggable if not in hand!
 			var drag = GetComponent<DraggableBase>();
 			if(drag is not null) drag.enabled = true;
@@ -312,7 +312,7 @@ namespace CardBattle.Card {
 				var ownerDeck = CardGameManager.instance.monsters[cardOwner - 1].deck;
 				if(container != null) container.SendToContainer(this, ownerDeck);
 				else ownerDeck.AddCard(this);
-				
+
 				// Once the card has been sent back to its owner's deck, shuffle its owner's deck
 				ownerDeck.Shuffle();
 			}
@@ -341,7 +341,7 @@ namespace CardBattle.Card {
 			}
 		}
 
-		
+
 		/// <summary>
 		/// Helper function which removes this card from the game!
 		/// </summary>
@@ -349,8 +349,8 @@ namespace CardBattle.Card {
 			container.RemoveCard(this);
 			Destroy(gameObject);
 		}
-		
-		
+
+
 		/// <summary>
 		/// Function called when the player targets their graveyard with this card... sends this card to their graveyard and adds a binned attack
 		/// </summary>
@@ -361,7 +361,7 @@ namespace CardBattle.Card {
 			SendToGraveyard();
 		}
 
-		// When a new card is enabled, add it to the list of cards... when it is disabled remove it from the list of cards 
+		// When a new card is enabled, add it to the list of cards... when it is disabled remove it from the list of cards
 		/// <summary>
 		/// This list of cards acts as a cache so that all of the cards currently in the scene can be found quickly!
 		/// </summary>
@@ -371,15 +371,18 @@ namespace CardBattle.Card {
 
 
 		/// <summary>
-		/// When the game starts make sure our renderer has a reference to us
+		/// Assigns the Collider component attached to the game object to a variable named collider.
 		/// </summary>
-		public void Awake() => collider = GetComponent<Collider>();
+		public void Awake() => collider = GetComponent<Collider>(); // Get the Collider component attached to this game object and assign it to the collider variable
 
+		/// <summary>
+		/// Assigns the game object itself to the card property of the renderer component, but only if the renderer property of the game object is not null.
+		/// </summary>
 		public void Start() {
-			if(renderer is not null) renderer.card = this;
+			if(renderer is not null) renderer.card = this; // If the renderer property of this game object is not null, assign this game object to the card property of the renderer component
 		}
 
-		
+
 		/// <summary>
 		/// Callback called when a turn starts
 		/// </summary>
@@ -394,7 +397,7 @@ namespace CardBattle.Card {
 				if (mod.turnsRemaining == 0) {
 					modifications.RemoveAt(i);
 					i--;
-				} else if (mod.turnsRemaining > 0) 
+				} else if (mod.turnsRemaining > 0)
 					mod.turnsRemaining--;
 			}
 		}
@@ -421,7 +424,6 @@ namespace CardBattle.Card {
 		/// </summary>
 		/// <param name="target">The card which was targeted</param>
 		public virtual void OnTarget(CardBase target) { }
-		// 
 		/// <summary>
 		/// Callback called when this card is targeted by something
 		/// </summary>
