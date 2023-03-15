@@ -53,13 +53,17 @@ namespace EncounterMap {
         public Sprite randomSprite;
 
         /// <summary>
-        /// The type of event that occurs on this node.
+        /// The different types of events
         /// </summary>
-        private int nodeType;
+        public enum NodeType {
+			Battle,
+			Crewmate,
+			Random
+		}
+
         /// <summary>
-        /// A value used to randomly determine the type of event that occurs on this node.
-        /// </summary>
-        private int randomNode;
+        /// Holds the type of event at this node
+        public NodeType nodeType;
 
         /// <summary>
         /// Unity method called when the object is created.
@@ -70,11 +74,11 @@ namespace EncounterMap {
             // Determine the sprite displayed based on the event type
             DetermineSprite(nodeType);
             // If the node is a random event, set the type of event that will occur
-            if (nodeType == 1) {
+            if (nodeType == NodeType.Random) {
                 SetRandomEvent();
             }
             // If the node is a battle event, pass the depth to the CardGameManager for difficulty calculation
-            if (nodeType == 0) {
+            if (nodeType == NodeType.Battle) {
                 CardGameManager.encounterDifficulty = Depth;
             }
             // Print the depth of the node to the console
@@ -139,7 +143,6 @@ namespace EncounterMap {
             }
         }
 
-
         // Determines the type of node/event
         // Spawn with probability
         public void SetNode() {
@@ -147,33 +150,30 @@ namespace EncounterMap {
             // If the value is 0-5, the event node type is Battle
             // 60% spawn rate
             if (value <= 5) {
-                Debug.Log("Battle");
-                nodeType = 0;
+                nodeType = NodeType.Battle;
             } else if (value > 5 || value <= 7) {
                 // If the value is 5-7, the event node type is Random
                 // 30% spawn rate
-                Debug.Log("Random");
-                nodeType = 1;
+                nodeType = NodeType.Random;
             } else if (value > 7 || value <= 9) {
                 // If the value is 8-9 the event node type is Crewmate
                 // 10% spawn rate (can occur as a random event)
-                Debug.Log("Crewmate");
-                nodeType = 2;
+                nodeType = NodeType.Crewmate;
             } else {
-                nodeType = 0;
+                nodeType = NodeType.Battle;
             }
         }
 
         // Takes value from SetNode() to determine what sprite should be displayed
-        public void DetermineSprite(int type) {
+        public void DetermineSprite(NodeType type) {
             switch (type) {
-                case 0:
+                case NodeType.Battle:
                     this.GetComponent<SpriteRenderer>().sprite = battleSprite;
                     break;
-                case 1:
+                case NodeType.Random:
                     this.GetComponent<SpriteRenderer>().sprite = randomSprite;
                     break;
-                case 2:
+                case NodeType.Crewmate:
                     this.GetComponent<SpriteRenderer>().sprite = crewmateSprite;
                     break;
                 default:
@@ -188,29 +188,26 @@ namespace EncounterMap {
             // If the value is 0-6, the event node type is Random
             // 70% spawn rate
             if  (randomVal <= 6) {
-                Debug.Log("Random");
-                nodeType = 1;
+                nodeType = NodeType.Random;
             } else if (randomVal > 6 || randomVal <= 7){
             // If the value is 7, the event node type is Crewmate
             // 10% spawn rate
-                Debug.Log("Crewmate - Random Subevent");
-                nodeType = 2;
+                nodeType = NodeType.Crewmate;
             } else if (randomVal > 7 || randomVal <= 9){
             // If the value is 8-9 the event node type is Battle
             // 20% spawn rate (can occur as a random event)
-                Debug.Log("Battle - Random Subevent");
-                nodeType = 0;
+                nodeType = NodeType.Battle;
             } else {
-                nodeType = 1;
+                nodeType = NodeType.Random;
             }
         }
 
         public void SetScene() {
-            if (nodeType == 1) {
+            if (nodeType == NodeType.Random) {
                 SceneManager.LoadScene("RandomScene");
-            } else if (nodeType == 2) {
+            } else if (nodeType == NodeType.Crewmate) {
                 SceneManager.LoadScene("CrewmateEncounterScene");
-            } else if (nodeType == 0) {
+            } else if (nodeType == NodeType.Battle) {
                 SceneManager.LoadScene("BattleScene");
             } else {
                 SceneManager.LoadScene("BattleScene");
