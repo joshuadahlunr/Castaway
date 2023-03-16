@@ -77,12 +77,6 @@ namespace EncounterMap {
             if (nodeType == NodeType.Random) {
                 SetRandomEvent();
             }
-            // If the node is a battle event, pass the depth to the CardGameManager for difficulty calculation
-            if (nodeType == NodeType.Battle) {
-                CardGameManager.encounterDifficulty = Depth;
-            }
-            // Print the depth of the node to the console
-            Debug.Log($"{Depth}");
         }
 
         /// <summary>
@@ -207,10 +201,9 @@ namespace EncounterMap {
                 SceneManager.LoadScene("RandomScene");
             } else if (nodeType == NodeType.Crewmate) {
                 SceneManager.LoadScene("CrewmateEncounterScene");
-            } else if (nodeType == NodeType.Battle) {
+            } else { // This case assumes that anything not listed above is a battle node!
                 SceneManager.LoadScene("BattleScene");
-            } else {
-                SceneManager.LoadScene("BattleScene");
+                CardGameManager.encounterDifficulty = Depth;
             }
         }
     }

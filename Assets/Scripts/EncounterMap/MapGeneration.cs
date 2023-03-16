@@ -57,6 +57,7 @@ namespace EncounterMap {
             // Instantiate the new node from the given prefab and add it as a child of
             // the current game object.
             var node = Instantiate(prefab, transform, true);
+            node.generation = this;
 
             // Add the new node to the nodes array. If the array already has elements,
             // create a new List instance from the existing nodes, add the new node to
