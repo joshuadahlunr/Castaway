@@ -88,8 +88,13 @@ namespace CardBattle {
 		/// </summary>
 		public virtual void Reset() { }
 
+		/// <summary>
+		/// Update the target position/rotation to match the current!
+		/// </summary>
+		public virtual void TargetCurrentTransform() { }
 
-		// ---- Behavior ----
+
+			// ---- Behavior ----
 
 
 		// On dis/enable un/register listeners for the click and pointer actions
