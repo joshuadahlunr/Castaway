@@ -52,7 +52,7 @@ MonoBehaviour:
   _state: 2
   cardOwner: 0
   _name: Scry
-  _art: {fileID: 21300000, guid: a96f840c57f2c094ba619484ac3cb50c, type: 3}
+  _art: {fileID: 21300000, guid: 206eeb00667ece443a7fd7f0d4e786a2, type: 3}
   _rules: Reveal the top card of a monster's deck. Decrease its effectiveness by
     <color=green>{properties["reduction"]}</color> for <color=green>{properties["duration"]}</color>
     turns.

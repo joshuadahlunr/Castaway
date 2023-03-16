@@ -1,4 +1,5 @@
-﻿using CardBattle.Card;
+﻿using System;
+using CardBattle.Card;
 using UnityEngine;
 
 namespace CardBattle.Containers {
@@ -10,6 +11,7 @@ namespace CardBattle.Containers {
 		/// <summary>
 		///     Component added to cards in the hand which will automatically position them
 		/// </summary>
+		[RequireComponent(typeof(DraggableBase))]
 		public class HandLayouter : MonoBehaviour {
 			/// <summary>
 			///     The hand which is currently managing the card
@@ -20,6 +22,9 @@ namespace CardBattle.Containers {
 			///     The card which is currently being managed
 			/// </summary>
 			public CardBase card;
+
+			private DraggableBase draggable;
+			public void Awake() => draggable = GetComponent<DraggableBase>();
 
 			/// <summary>
 			///     Every frame position the card
@@ -38,6 +43,9 @@ namespace CardBattle.Containers {
 				var pos = transform.position;
 				pos.x = Mathf.Lerp(min, max, (float)owner.Index(card) / owner.Count);
 				transform.position = pos;
+
+				if(!draggable.IsDragging)
+					draggable.TargetCurrentTransform();
 			}
 		}
 

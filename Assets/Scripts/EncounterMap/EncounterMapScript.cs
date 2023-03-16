@@ -3,27 +3,44 @@ using System.Linq;
 using Extensions;
 using UnityEngine;
 using UnityEngine.Serialization;
-using Random = UnityEngine.Random;
 
-/// <summary>
-/// </summary>
-/// <author>Jared White & Joshua Dahl</author>
 namespace EncounterMap {
+	/// <summary>
+	///     This class represents an encounter map generator that generates multiple generations of nodes
+	///     with randomized branching based on a predefined probability table.
+	/// </summary>
+	/// <author>Jared White &amp; Joshua Dahl</author>
 	public class EncounterMapScript : MonoBehaviour {
+		/// <summary>
+		///     The prefab representing the white dot that is used to construct map nodes.
+		/// </summary>
 		[FormerlySerializedAs("whiteDot")] public MapNode whiteDotPrefab;
+
+		/// <summary>
+		///     The prefab representing the map generation object used to generate nodes.
+		/// </summary>
 		public MapGeneration mapGenerationPrefab;
+
+		/// <summary>
+		///     The prefab representing the dashed line object used to draw lines between nodes.
+		/// </summary>
 		public LineRenderer dashedLinePrefab;
 
+		/// <summary>
+		///     The current map generation instance.
+		/// </summary>
 		public MapGeneration currentGeneration;
-
 
 		// Start is called before the first frame update
 		private void Start() {
 			// Generate 5 generations at the start
-			for(var i = 0; i < 5; i++)
+			for (var i = 0; i < 5; i++)
 				GenerateNextGeneration();
 		}
 
+		/// <summary>
+		///     Generates the next map generation instance with randomized branching based on a predefined probability table.
+		/// </summary>
 		public void GenerateNextGeneration() {
 			// If there are no generations... create a root node!
 			if (currentGeneration is null) {
@@ -58,22 +75,24 @@ namespace EncounterMap {
 				var root = node.transform.position;
 
 				// Pick a random number of children...
-				int numChildren = probability[Random.Range(0, probability.Length)];
-				float angle = 90 - 90.0f / numChildren + 30 * (currentGeneration.nodes.Length / 2 - index);
-				for (int i = 0; i < numChildren; i++) {
+				var numChildren = probability[Random.Range(0, probability.Length)];
+				var angle = 90 - 90.0f / numChildren + 30 * (currentGeneration.nodes.Length / 2 - index);
+				for (var i = 0; i < numChildren; i++) {
 					// Add each one to the graph
 					var child = nextGeneration.AddNode(whiteDotPrefab);
 					node.AddChild(child);
 
 					// Positioned in an array around their parent
 					float distance = Random.Range(30, 50); // TODO: Randomly generate
-					child.transform.position = root + Vector3.right * Mathf.Abs(Mathf.Cos(angle * Mathf.Deg2Rad)) * distance * 3 // We multiply x by 3, so their is a bias towards moving forward
-											+ Vector3.up * Mathf.Sin(angle * Mathf.Deg2Rad) * distance;
+					child.transform.position =
+						root + Vector3.right * Mathf.Abs(Mathf.Cos(angle * Mathf.Deg2Rad)) * distance * 3 // We multiply x by 3, so their is a bias towards moving forward
+						     + Vector3.up * Mathf.Sin(angle * Mathf.Deg2Rad) * distance;
 
 					// If the Y goes out of bounds clamp it back in
 					if (Mathf.Abs(child.transform.position.y) > 200)
 						child.transform.position = new Vector3(child.transform.position.x,
-							Mathf.Sign(child.transform.position.y) * -50 + child.transform.position.y, child.transform.position.z);
+							Mathf.Sign(child.transform.position.y) * -50 + child.transform.position.y,
+							child.transform.position.z);
 
 					angle -= 90.0f / (numChildren - 1);
 				}
@@ -82,12 +101,13 @@ namespace EncounterMap {
 			// If there are more than 40 nodes within a generation... remove every 5th node until there are less than 40
 			while (nextGeneration.nodes.Length > 40) {
 				var list = new List<MapNode>(nextGeneration.nodes);
-				for(int i = 0, count = 0; i < list.Count; i++, count++)
+				for (int i = 0, count = 0; i < list.Count; i++, count++)
 					if (count % 5 == 1) {
 						DestroyImmediate(list[i].gameObject);
 						list.RemoveAt(i);
 						i--;
 					}
+
 				nextGeneration.nodes = list.ToArray();
 			}
 

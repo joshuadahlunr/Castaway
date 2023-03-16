@@ -82,6 +82,7 @@ MonoBehaviour:
     _values: []
   _health:
     health: 15
+    maxHealth: 0
     permanentDamageReduction: 0
     temporaryDamageReduction: 0
   healthStateChanged:
@@ -131,6 +132,7 @@ MonoBehaviour:
   rotationSpeed: 20
   targetPosition: {x: 0, y: 0, z: 0}
   targetRotation: {x: 0, y: 0, z: 0, w: 0}
+  sphere: {fileID: 5395593827619395624, guid: 4332da1e1388b7a41bbc3fd8b6d59559, type: 3}
 --- !u!1001 &8733230420178235801
 PrefabInstance:
   m_ObjectHideFlags: 0

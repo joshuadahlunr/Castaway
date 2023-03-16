@@ -313,7 +313,7 @@ namespace CardBattle {
 				// If it's not the player's turn, reset the damage negation of all active monsters and reveal their top card
 				foreach (var monster in monsters)
 					if (!(monster?.Disabled ?? true)) {
-						monster.healthState = monster.healthState.SetTemporaryDamageReduction(0);
+						monster.healthState = monster.RawHealth.SetTemporaryDamageReduction(0);
 						monster.deck.RevealCard();
 					}
 

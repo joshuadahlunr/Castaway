@@ -39,10 +39,7 @@ namespace CardBattle {
 		/// <summary>
 		///     Make sure the card's target position is wherever it was place in the editor when we start
 		/// </summary>
-		public void Start() {
-			targetPosition = transform.position;
-			targetRotation = transform.rotation;
-		}
+		public void Start() => TargetCurrentTransform();
 
 		/// <summary>
 		///     When we start dragging save the reset positions
@@ -100,12 +97,20 @@ namespace CardBattle {
 			targetRotation = initialRotation;
 		}
 
+		/// <inheritdoc cref="DraggableBase"/>
+		public override void TargetCurrentTransform() {
+			targetPosition = transform.position;
+			targetRotation = transform.rotation;
+		}
+
 		/// <summary>
 		///     Every frame move the card towards its target pose!
 		/// </summary>
-		public void Update() {
-			transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed);
-			transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed);
+		public void LateUpdate() {
+			transform.position = targetPosition;
+			transform.rotation = targetRotation;
+			// transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed);
+			// transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed);
 		}
 	}
 }
