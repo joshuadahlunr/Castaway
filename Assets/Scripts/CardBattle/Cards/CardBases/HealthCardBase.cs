@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -19,6 +19,7 @@ namespace CardBattle.Card {
 		///     Backing memory for health
 		/// </summary>
 		[SerializeField] private HealthState _health;
+		public HealthState RawHealth => _health;
 
 		/// <summary>
 		///     Cache for modified health
