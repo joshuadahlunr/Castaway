@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1127,7 +1127,7 @@ MonoBehaviour:
   PeopleJuiceIconPrefab: {fileID: 1497151535789364905, guid: 41d43a00aca464e4485e3d9a723e5f3e,
     type: 3}
   losePanel: {fileID: 435326279}
-  confirmationPrefab: {fileID: 916742549020013938, guid: f063c1a5fe865b847baa675b47759856,
+  confirmationPrefab: {fileID: 6046074830972396742, guid: c75fd6e721f75d64b895d8954f63d234,
     type: 3}
   monsterDatabase: {fileID: 11400000, guid: 661d70e8572b2c84da626018448d76b8, type: 2}
   bossDatabase: {fileID: 11400000, guid: eacaa6c50a67d2f40ae32ec85bbf0e2a, type: 2}

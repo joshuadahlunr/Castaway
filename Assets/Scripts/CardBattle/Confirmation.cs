@@ -2,6 +2,7 @@ using System;
 using CardBattle.Card;
 using CardBattle.Containers;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace CardBattle {
 	/// <summary>
@@ -13,6 +14,8 @@ namespace CardBattle {
 		public CardBase card, target;
 		public Graveyard bin;
 		public CardContainerBase snapTarget;
+
+		public InputActionReference accept, cancel;
 
 		/// <summary>
 		///     Component which holds an action (card play or target) in a pending state until the player confirms the action
@@ -28,6 +31,20 @@ namespace CardBattle {
 		///     Bool indicating we are binning the card
 		/// </summary>
 		public bool TargetingGraveyard => bin is not null && snapTarget is null && target is null;
+
+		/// <summary>
+		/// Un/Register keyboard controls
+		/// </summary>
+		public void OnEnable() {
+			accept.action.Enable();
+			accept.action.performed += Confirm;
+			cancel.action.Enable();
+			cancel.action.performed += Cancel;
+		}
+		public void OnDisable() {
+			accept.action.performed -= Confirm;
+			cancel.action.performed -= Cancel;
+		}
 
 		/// <summary>
 		///     Called when the object is created. Checks if a valid target has been passed and throws an exception if not
@@ -72,6 +89,7 @@ namespace CardBattle {
 			CardGameManager.instance.activeConfirmationExists = false;
 			Destroy(gameObject);
 		}
+		public void Confirm(InputAction.CallbackContext _) => Confirm();
 
 		/// <summary>
 		///     Callback called when the player cancels their choice
@@ -85,5 +103,6 @@ namespace CardBattle {
 			CardGameManager.instance.activeConfirmationExists = false;
 			Destroy(gameObject);
 		}
+		public void Cancel(InputAction.CallbackContext _) => Cancel();
 	}
 }
