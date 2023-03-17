@@ -1,107 +1,131 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
+using System.Linq;
+using RotaryHeart.Lib.SerializableDictionary;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.InputSystem.Controls;
-using UnityEditor;
-using Unity.VisualScripting;
+using CardBattle.Card;
+using Crew.Globals;
+using TMPro;
+using Random = UnityEngine.Random;
 
-/// <summary>
-/// </summary>
-/// <author>Misha Desear</author>
-/// 
-
-namespace Crew
-{
-    public class Crewmate : MonoBehaviour
+namespace Crew {
+    /// <summary>
+    /// <author>Misha Desear</author>
+    /// </summary>
+    public class Crewmates : MonoBehaviour
     {
-        public GameObject infoPrefab;
-        [SerializeField]
-        private int _crewLevel, _xpNeeded, _currentXp, _morale;
-        [SerializeField]
-        private string _crewName, _crewType;
-        [SerializeField]
-        private bool _inCrew;
-        [SerializeField]
-        private Preference[] _preferences;
+        /// <summary>
+        /// Holds the prefab for the information panel to display stats
+        /// </summary>
+        [SerializeField] private GameObject _infoPanel;
 
-        //TODO: implement card type, likes, and dislikes (as class objects)
+        public Crew.Globals.Global global;
+        public GameObject infoPanel => _infoPanel; 
 
-        private int defaultMorale = 50; // Between a range of 0-100?
-        private string[] randomNames = { "Jeff", "Joe", "Tommy", "Timmy", "David", "Josh", "Misha", "Jared", "Dana" };
-        private string[] randomTypes = { "Wizard", "Navigator", "Entertainer", "Engineer",
-                                        "Cook", "Occultist", "Mercenary", "Deckhand" };
-
-        public Crewmate()
-        {
-        }
-
-        public Preference[] RandomPreferences()
-        {
-            Preference[] prefList = new Preference[4]; // Limit on # of preferences subject to change
-            for (int i = 0; i < prefList.Length; i++)
-            {
-                Preference pref = new Preference();
-                prefList[i] = pref;
+        [Serializable]
+        public struct Status {
+            public enum CrewTag {
+                NotInCrew,  // 0
+                WasInCrew,  // 1
+                InCrew      // 2
             }
-            return prefList;
+            public int value;
+            public static implicit operator int(Status s) => s.value;
+        }
+        [SerializeField] private Status.CrewTag _crewTag;
+        public Status.CrewTag CrewTag 
+        {
+            get => _crewTag;
+            set { _crewTag = value; }
         }
 
-        public string RandomTypes()
-        {
-            string newType = randomTypes[Random.Range(0, randomTypes.Length)];
-            return newType;
+        [Serializable]
+        public struct Class {
+            public enum Type {
+                Wizard,         // 0
+                Navigator,      // 1
+                Entertainer,    // 2
+                Engineer,       // 3
+                Cook,           // 4
+                Occultist,      // 5
+                Mercenary,      // 6
+                Deckhand        // 7
+
+            }
+            public int value;
+            public static T RandomEnumValue<T>()
+            {
+                var v = Enum.GetValues(typeof(T));
+                return (T) v.GetValue(Random.Range(0, 7));
+            }
         }
 
-        public string RandomName()
-        {
-            string newName = randomNames[Random.Range(0, randomNames.Length)];
-            return newName;
+        // TODO: implement preferences as enums rather than class objects
+
+        [SerializeField] private Class.Type _type;
+        public Class.Type type {
+            get => _type;
+            set { _type = value; }
         }
 
-        public void AddXP(int value)
+        [SerializeField] private string _name;
+        public string Name 
         {
-            _xpNeeded += value;
+            get => _name;
+            set { _name = value; }
         }
 
-        public void AddMorale(int moraleVal)
+        [SerializeField] private int _level;
+        public int Level 
         {
-            _morale += moraleVal;
+            get => _level;
+            set { _level = value; }
         }
 
-        public void IncreaseCrewLevel()
+        [SerializeField] private int _morale;
+        public int Morale
         {
-            _crewLevel += 1;
+            get => _morale;
+            set { _level = value; }
         }
 
-        public void IncreaseXPNeeded()
+        [SerializeField] private int _currentXp;
+        public int CurrentXP 
         {
-            _xpNeeded *= 2; // Subject to change
+            get => _currentXp;
+            set { _currentXp = value; }
         }
 
-        private void Awake()
+        [SerializeField] private int _xpNeeded;
+        public int XPNeeded
         {
-            _crewName = RandomName();
-            _inCrew = false;
-            _crewLevel = 0;
-            _currentXp = 0;
-            _xpNeeded = 10; // Subject to change
-            _preferences = RandomPreferences();
-            _crewType = RandomTypes();
-            _morale = defaultMorale;
-            GameObject.FindGameObjectWithTag("Info Panel").transform.localScale = new Vector3(0, 0, 0);
+            get => XPNeeded;
+            set { _xpNeeded = value; }
         }
+
+        [SerializeField] private Sprite _crewSprite;
+        public Sprite crewSprite
+        {
+            get => _crewSprite;
+            set { _crewSprite = value; }
+        }
+        
+        [SerializeField] private ActionCardBase _crewCard;
+        public ActionCardBase crewCard 
+        {
+            get => _crewCard;
+            set { _crewCard = value; }
+        } 
 
         public void ShowInfo()
         {
             GameObject.FindGameObjectWithTag("Info Panel").transform.localScale = new Vector3(1, 1, 1);
 
             GameObject displayName = GameObject.FindGameObjectWithTag("Crew Name");
-            displayName.GetComponent<TextMeshProUGUI>().text = _crewName.ToString();
-
-            GameObject displayType = GameObject.FindGameObjectWithTag("Crew Type");
-            displayType.GetComponent<TextMeshProUGUI>().text = "the " + _crewType.ToString();
+            displayName.GetComponent<TextMeshProUGUI>().text = "the " + _type.ToString();
 
             GameObject morale = GameObject.FindGameObjectWithTag("Morale");
             morale.GetComponent<TextMeshProUGUI>().text = "Morale: " + _morale.ToString();
@@ -109,24 +133,30 @@ namespace Crew
             moraleSlider.GetComponent<Slider>().value = _morale;
 
             GameObject level = GameObject.FindGameObjectWithTag("Level");
-            level.GetComponent<TextMeshProUGUI>().text = "Level: " + _crewLevel.ToString();
+            level.GetComponent<TextMeshProUGUI>().text = "Level " + _level.ToString() + " (" + _currentXp.ToString()
+                                                        + "/" + _xpNeeded.ToString() + ")";
 
             GameObject xpSlider = GameObject.FindGameObjectWithTag("XP Slider");
             xpSlider.GetComponent<Slider>().value = _currentXp;
             xpSlider.GetComponent<Slider>().maxValue = _xpNeeded;
         }
 
-        public void HideInfo()
+        public void HideInfo() 
         {
             GameObject.FindGameObjectWithTag("Info Panel").transform.localScale = new Vector3(0, 0, 0);
         }
 
-        public string CrewName { get { return _crewName; } set => _crewName = value; }
-        public string CrewType { get { return _crewType; } set => _crewType = value; }
-        public bool InCrew { get { return _inCrew; } set => _inCrew = value; }
-        public int CrewLevel { get { return _crewLevel; } }
-        public int XPNeeded { get { return _xpNeeded; } }
-        public Preference[] Preferences { get { return _preferences; } set => _preferences = value; }
-        public int Morale { get { return _morale; } set => _morale = value; }
+        public void GenerateNewCrewmate()
+        {
+            Crewmates newCrew = new();
+            newCrew._crewTag = 0;
+            newCrew._level = 1; 
+            newCrew._xpNeeded = 10;
+            newCrew._currentXp = 0;
+            newCrew._morale = 50;
+            newCrew._type = Class.RandomEnumValue<Class.Type>();
+            newCrew._crewSprite = null;
+            CardDatabase.Instantiate(newCrew);
+        }
     }
 }
