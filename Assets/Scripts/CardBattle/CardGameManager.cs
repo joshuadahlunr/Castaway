@@ -122,6 +122,7 @@ namespace CardBattle {
 		public Hand playerHand;
 		public CardContainerBase[] inPlayContainers;
 		public GameObject ship;
+		public GameObject ocean;
 
 		/// <summary>
 		///     References to all of the monsters
@@ -197,7 +198,6 @@ namespace CardBattle {
 
 			// Calculate the number of encounters to spawn based on the encounter type and level
 			var number = encounterType == EncounterType.Normal ? level / 5 + 1 : 1;
-
 			// Spawn the encounters
 			for (var i = 0; i < number; i++) {
 				var monster = encounterType switch {
@@ -208,7 +208,11 @@ namespace CardBattle {
 					_ => throw new ArgumentOutOfRangeException()
 				};
 				monster.transform.localScale *= 2;
-				monster.transform.position = new Vector3(-0.0300000049f, 0.556999981f, 0.141000032f);
+				var pos = ocean.transform.position;
+				var angle = UnityEngine.Random.Range(40, 140f);
+				pos.x += Mathf.Cos(angle * Mathf.Deg2Rad);
+				pos.z += Mathf.Sin(angle * Mathf.Deg2Rad);
+				monster.transform.position = pos; // TODO: Adjust so that monsters won't spawn on top of each-other!
 
 				// Add a modification to each card in the monster's deck to adjust its difficulty based on the level of the encounter
 				foreach (var card in monster.deck) {
@@ -238,8 +242,7 @@ namespace CardBattle {
 		/// <summary>
 		///     Variable tracking if it is the player's turn or not
 		/// </summary>
-		private bool
-			isPlayerTurn; // Since the turn owner immediately flips, start as monster's turn so that the player's turn will be next
+		private bool isPlayerTurn; // Since the turn owner immediately flips, start as monster's turn so that the player's turn will be next
 
 		/// <summary>
 		///     Variable tracking how much time remains in the turn
