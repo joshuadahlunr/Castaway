@@ -1136,6 +1136,10 @@ MonoBehaviour:
   losePanel: {fileID: 435326279}
   confirmationPrefab: {fileID: 6046074830972396742, guid: c75fd6e721f75d64b895d8954f63d234,
     type: 3}
+  playerTurnPrefab: {fileID: 4691017256377408628, guid: 90967e0a3371a1f48a767f712c23295b,
+    type: 3}
+  monsterTurnPrefab: {fileID: 4691017256377408628, guid: add757007a30b2e4092c271b5a6e81b5,
+    type: 3}
   monsterDatabase: {fileID: 11400000, guid: 661d70e8572b2c84da626018448d76b8, type: 2}
   bossDatabase: {fileID: 11400000, guid: eacaa6c50a67d2f40ae32ec85bbf0e2a, type: 2}
   finalBossDatabase: {fileID: 11400000, guid: f4b99712d3c924a4689378ba344d0c00, type: 2}

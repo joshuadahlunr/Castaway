@@ -26,7 +26,7 @@ namespace CardBattle {
 		/// <summary>
 		///     Variable set by the encounter map, used to determine how difficult this encounter should be!
 		/// </summary>
-		public static float encounterDifficulty = 1;
+		public static float encounterDifficulty = 5;
 
 		/// <summary>
 		///     The type of encounter this is (normal or boss)
@@ -36,7 +36,6 @@ namespace CardBattle {
 			Boss,
 			FinalBoss
 		}
-
 		public static EncounterType encounterType = EncounterType.Normal;
 
 		/// <summary>
@@ -79,6 +78,8 @@ namespace CardBattle {
 		///     Reference to the prefab for confirmation prompts
 		/// </summary>
 		public Confirmation confirmationPrefab;
+
+		public GameObject playerTurnPrefab, monsterTurnPrefab;
 
 		/// <summary>
 		///     Database of all monsters in the game
@@ -295,6 +296,8 @@ namespace CardBattle {
 				card.OnTurnStart();
 
 			if (isPlayerTurn) {
+				Instantiate(playerTurnPrefab, canvas.transform);
+
 				// Reset their damage negation
 				playerHealthState = playerHealthState.SetTemporaryDamageReduction(0);
 
@@ -309,13 +312,16 @@ namespace CardBattle {
 				var missingCards = Math.Max(playerMaxHandSize - playerHand.Count, 0);
 				for (var i = 0; i < missingCards; i++)
 					DrawPlayerCard();
-			} else
+			} else {
+				Instantiate(monsterTurnPrefab, canvas.transform);
+
 				// If it's not the player's turn, reset the damage negation of all active monsters and reveal their top card
 				foreach (var monster in monsters)
 					if (!(monster?.Disabled ?? true)) {
 						monster.healthState = monster.RawHealth.SetTemporaryDamageReduction(0);
 						monster.deck.RevealCard();
 					}
+			}
 
 			// Disable all of the unaffordable cards in the player's hand!
 			OnlyEnableAffordableCards();
