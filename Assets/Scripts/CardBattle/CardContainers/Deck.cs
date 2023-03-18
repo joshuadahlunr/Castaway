@@ -57,7 +57,7 @@ namespace CardBattle.Containers {
 			/// <summary>
 			///     Gets or sets the name of the character associated with this card.
 			/// </summary>
-			public string associatedCharacterName { set; get; } // TODO: Replace with character id?
+			public int associatedCharacterName { set; get; } // TODO: Replace with character id?
 
 			/// <summary>
 			///     Gets or sets the level of the card.
