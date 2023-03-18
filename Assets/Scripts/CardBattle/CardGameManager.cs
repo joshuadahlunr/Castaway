@@ -26,7 +26,7 @@ namespace CardBattle {
 		/// <summary>
 		///     Variable set by the encounter map, used to determine how difficult this encounter should be!
 		/// </summary>
-		public static float encounterDifficulty = 1;
+		public static float encounterDifficulty = 5;
 
 		/// <summary>
 		///     The type of encounter this is (normal or boss)
@@ -36,7 +36,6 @@ namespace CardBattle {
 			Boss,
 			FinalBoss
 		}
-
 		public static EncounterType encounterType = EncounterType.Normal;
 
 		/// <summary>
@@ -80,6 +79,8 @@ namespace CardBattle {
 		/// </summary>
 		public Confirmation confirmationPrefab;
 
+		public GameObject playerTurnPrefab, monsterTurnPrefab;
+
 		/// <summary>
 		///     Database of all monsters in the game
 		/// </summary>
@@ -121,6 +122,7 @@ namespace CardBattle {
 		public Hand playerHand;
 		public CardContainerBase[] inPlayContainers;
 		public GameObject ship;
+		public GameObject ocean;
 
 		/// <summary>
 		///     References to all of the monsters
@@ -196,7 +198,6 @@ namespace CardBattle {
 
 			// Calculate the number of encounters to spawn based on the encounter type and level
 			var number = encounterType == EncounterType.Normal ? level / 5 + 1 : 1;
-
 			// Spawn the encounters
 			for (var i = 0; i < number; i++) {
 				var monster = encounterType switch {
@@ -207,7 +208,11 @@ namespace CardBattle {
 					_ => throw new ArgumentOutOfRangeException()
 				};
 				monster.transform.localScale *= 2;
-				monster.transform.position = new Vector3(-0.0300000049f, 0.556999981f, 0.141000032f);
+				var pos = ocean.transform.position;
+				var angle = UnityEngine.Random.Range(40, 140f);
+				pos.x += Mathf.Cos(angle * Mathf.Deg2Rad);
+				pos.z += Mathf.Sin(angle * Mathf.Deg2Rad);
+				monster.transform.position = pos; // TODO: Adjust so that monsters won't spawn on top of each-other!
 
 				// Add a modification to each card in the monster's deck to adjust its difficulty based on the level of the encounter
 				foreach (var card in monster.deck) {
@@ -237,8 +242,7 @@ namespace CardBattle {
 		/// <summary>
 		///     Variable tracking if it is the player's turn or not
 		/// </summary>
-		private bool
-			isPlayerTurn; // Since the turn owner immediately flips, start as monster's turn so that the player's turn will be next
+		private bool isPlayerTurn; // Since the turn owner immediately flips, start as monster's turn so that the player's turn will be next
 
 		/// <summary>
 		///     Variable tracking how much time remains in the turn
@@ -295,6 +299,8 @@ namespace CardBattle {
 				card.OnTurnStart();
 
 			if (isPlayerTurn) {
+				Instantiate(playerTurnPrefab, canvas.transform);
+
 				// Reset their damage negation
 				playerHealthState = playerHealthState.SetTemporaryDamageReduction(0);
 
@@ -309,13 +315,16 @@ namespace CardBattle {
 				var missingCards = Math.Max(playerMaxHandSize - playerHand.Count, 0);
 				for (var i = 0; i < missingCards; i++)
 					DrawPlayerCard();
-			} else
+			} else {
+				Instantiate(monsterTurnPrefab, canvas.transform);
+
 				// If it's not the player's turn, reset the damage negation of all active monsters and reveal their top card
 				foreach (var monster in monsters)
 					if (!(monster?.Disabled ?? true)) {
 						monster.healthState = monster.RawHealth.SetTemporaryDamageReduction(0);
 						monster.deck.RevealCard();
 					}
+			}
 
 			// Disable all of the unaffordable cards in the player's hand!
 			OnlyEnableAffordableCards();
