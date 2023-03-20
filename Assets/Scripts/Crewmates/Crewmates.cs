@@ -43,7 +43,7 @@ namespace Crew {
         }
 
         [Serializable]
-        public struct Class {
+        public struct CrewClass {
             public enum Type {
                 Wizard,         // 0
                 Navigator,      // 1
@@ -56,17 +56,18 @@ namespace Crew {
 
             }
             public int value;
-            public static T RandomEnumValue<T>()
-            {
-                var v = Enum.GetValues(typeof(T));
-                return (T) v.GetValue(Random.Range(0, 7));
-            }
         }
+
+        /*public static T RandomEnumValue<T>()
+        {
+            var v = Enum.GetValues(typeof(T));
+            return (T) v.GetValue(Random.Range(0, 7));
+        }*/
 
         // TODO: implement preferences as enums rather than class objects
 
-        [SerializeField] private Class.Type _type;
-        public Class.Type type {
+        [SerializeField] private CrewClass.Type _type;
+        public CrewClass.Type Type {
             get => _type;
             set { _type = value; }
         }
@@ -113,8 +114,8 @@ namespace Crew {
             set { _crewSprite = value; }
         }
         
-        [SerializeField] private ActionCardBase _crewCard;
-        public ActionCardBase crewCard 
+        [SerializeField] private CardBase _crewCard;
+        public CardBase crewCard 
         {
             get => _crewCard;
             set { _crewCard = value; }
@@ -144,19 +145,6 @@ namespace Crew {
         public void HideInfo() 
         {
             GameObject.FindGameObjectWithTag("Info Panel").transform.localScale = new Vector3(0, 0, 0);
-        }
-
-        public void GenerateNewCrewmate()
-        {
-            Crewmates newCrew = new();
-            newCrew._crewTag = 0;
-            newCrew._level = 1; 
-            newCrew._xpNeeded = 10;
-            newCrew._currentXp = 0;
-            newCrew._morale = 50;
-            newCrew._type = Class.RandomEnumValue<Class.Type>();
-            newCrew._crewSprite = null;
-            CardDatabase.Instantiate(newCrew);
         }
     }
 }
