@@ -82,7 +82,7 @@ namespace Crew
             _xpNeeded *= 2; // Subject to change
         }
 
-        private void Awake()
+        private void GenerateCrewmate()
         {
             _crewName = RandomName();
             _inCrew = false;
