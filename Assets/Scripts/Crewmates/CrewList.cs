@@ -94,7 +94,7 @@ namespace Crew.Globals {
                 // If clearing, remove all crewmates currently in global list
                 if (clear) RemoveAllCrewmates();
 
-                // If there are any crew members in inject list, add them to front of global list
+                /*// If there are any crew members in inject list, add them to front of global list
                 foreach (var crewProto in injectCrewProtos) 
                     AddCrewMember(Instantiate(crewProto), 0);
                 injectCrewProtos = null;
@@ -104,7 +104,7 @@ namespace Crew.Globals {
                 {
                     var instantiated = crewDB.Instantiate(crewmates.name);
                     AddCrewMember(instantiated);
-                }
+                }*/
         }
     }
 }

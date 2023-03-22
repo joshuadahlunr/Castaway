@@ -9,7 +9,6 @@ using Crew;
 /// <remarks>Converts names in SQL to Unity objects</remarks>
 /// <author>Misha Desear</author>
 
-[CreateAssetMenu(fileName = "CrewDatabase", menuName = "ScriptableObjects/CrewDatabase")]
 public class CrewDatabase : ScriptableObject
 {
     [Serializable]

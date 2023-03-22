@@ -29,6 +29,9 @@ namespace Crew.Globals {
 
         public CrewList crewList; 
 
+        public GameObject crewPrefab;
+        public GameObject infoPrefab;
+
         /// <summary>
         /// When the game starts:
         /// </summary>
@@ -48,23 +51,17 @@ namespace Crew.Globals {
                 });
             }
 
-            if (!DatabaseManager.GetOrCreateTable<CrewList.CrewListMember>().Any())
-            {
-                var crewlistId = DatabaseManager.GetOrCreateTable<CrewList.GlobalCrewList>()
-                    .FirstOrDefault(l => l.name == crewListName).id;
-            }
-
             crewList.DatabaseLoad(crewListName);
         }
 
-        /// <summary>
+        /*/// <summary>
         /// Generates a new crewmate with starter level and stats, 
         /// as well as random type and corresponding card
         /// </summary>
         public Crewmates GenerateNewCrewmate() 
         {
             // TODO: correspond associated card with the crewmate's type
-            Crewmates newCrew = new();
+            newCrew.global = crewList;
             newCrew.CrewTag = 0;
             newCrew.Type = (Crewmates.CrewClass.Type)Random.Range(0,7); // Select a random enum for type
             newCrew.Name = crewNames[Random.Range(0, crewNames.Length)];
@@ -72,16 +69,37 @@ namespace Crew.Globals {
             newCrew.Morale = 50;
             newCrew.CurrentXP = 0;
             newCrew.XPNeeded = 10;
-            newCrew.crewSprite = crewSprites[Random.Range(0, crewSprites.Length)]; 
+            newCrew.crewSprite = crewSprites[Random.Range(0, crewSprites.Length)];
             newCrew.crewCard = cardDatabase.Instantiate(cardDatabase.cards.Keys.Shuffle().First()); // Currently, this just picks a random card from the DB
             return newCrew; // Return a reference to the new crewmate
+        }*/
+
+        public void SpawnNewCrewmate()
+        {
+            GameObject crewmate = Instantiate(crewPrefab, new Vector2(Random.Range(-29f, 20f), 115f), Quaternion.identity);
+
+            // Load data from generated crewmate into spawned prefab
+            crewmate.GetComponent<Crewmates>().global = crewList;
+            crewmate.GetComponent<Crewmates>().CrewTag = 0;
+            crewmate.GetComponent<Crewmates>().Type = (Crewmates.CrewClass.Type)Random.Range(0,7);
+            crewmate.GetComponent<Crewmates>().Name = crewNames[Random.Range(0, crewNames.Length)];
+            crewmate.GetComponent<Crewmates>().Level = 1;
+            crewmate.GetComponent<Crewmates>().Morale = 50;
+            crewmate.GetComponent<Crewmates>().CurrentXP = 0;
+            crewmate.GetComponent<Crewmates>().XPNeeded = 10;
+            crewmate.GetComponent<Crewmates>().crewSprite = crewSprites[Random.Range(0, crewSprites.Length)];
+            crewmate.GetComponent<Crewmates>().crewCard = cardDatabase.Instantiate(cardDatabase.cards.Keys.Shuffle().First());
+
+            crewmate.GetComponent<SpriteRenderer>().sprite = crewmate.GetComponent<Crewmates>().crewSprite;
+
+            crewList.AddCrewMember(crewmate.GetComponent<Crewmates>());
         }
 
         public void AddToCrew(Crewmates crew)
         {
             crew.CrewTag = (Crewmates.Status.CrewTag)2; // Change crewmate's crew tag to InCrew (2)
-            playerDeck.AddCard(crew.crewCard); // Add crewmate's associated card to the deck
-            // TODO: change the newly added card's associated character name in the DB
+            playerDeck.AddCard(Instantiate(crew.crewCard)); // Add crewmate's associated card to the deck
+            
         }
 
         public void RemoveFromCrew(Crewmates crew)

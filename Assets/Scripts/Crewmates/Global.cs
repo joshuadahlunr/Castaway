@@ -59,8 +59,8 @@ namespace Crew.Globals {
             if (index >= 0) crewmates.Insert(index, crewmate);
             else crewmates.Add(crewmate);
 
-            crewmate.transform.parent = transform;
-            if (index >= 0) crewmate.transform.SetSiblingIndex(index);
+            //crewmate.transform.parent = transform;
+            //if (index >= 0) crewmate.transform.SetSiblingIndex(index);
         }
 
         public virtual void RemoveCrewMember(int index) 

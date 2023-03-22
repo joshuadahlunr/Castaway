@@ -1,29 +1,31 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using RotaryHeart.Lib.SerializableDictionary;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using CardBattle.Card;
 using Crew.Globals;
 using TMPro;
-using Random = UnityEngine.Random;
 
 namespace Crew {
     /// <summary>
     /// <author>Misha Desear</author>
     /// </summary>
+
     public class Crewmates : MonoBehaviour
     {
-        /// <summary>
+        /*/// <summary>
         /// Holds the prefab for the information panel to display stats
         /// </summary>
         [SerializeField] private GameObject _infoPanel;
+        public GameObject InfoPanel
+        {
+            get => _infoPanel;
+            set { _infoPanel = value; }
+        }*/
 
-        public Crew.Globals.Global global;
-        public GameObject infoPanel => _infoPanel; 
+        public GameObject prefab;
+        public Global global;
+        
+        //public GameObject infoPanel => _infoPanel; 
 
         [Serializable]
         public struct Status {
