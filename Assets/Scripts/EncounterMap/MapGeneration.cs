@@ -17,6 +17,8 @@ namespace EncounterMap {
         /// </summary>
         public MapGeneration previous, next;
 
+        public int seed, nextSeed;
+
         /// <summary>
         /// The array of map nodes in this generation.
         /// </summary>
