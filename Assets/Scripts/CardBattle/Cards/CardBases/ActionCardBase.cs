@@ -49,7 +49,6 @@ namespace CardBattle.Card {
 		/// </summary>
 		public sealed override void OnPlayed() {
 			Debug.LogError("Action cards can't be played, they must target!");
-			var draggable = GetComponent<DraggableBase>();
 			draggable.Reset();
 		}
 
@@ -102,7 +101,7 @@ namespace CardBattle.Card {
 		/// </summary>
 		public void RefundAndReset() {
 			AddCostToPool(cost);
-			GetComponent<DraggableBase>().Reset();
+			draggable?.Reset();
 		}
 
 		/// <summary>

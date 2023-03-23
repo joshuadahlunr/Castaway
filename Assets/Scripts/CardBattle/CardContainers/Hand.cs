@@ -23,9 +23,6 @@ namespace CardBattle.Containers {
 			/// </summary>
 			public CardBase card;
 
-			private DraggableBase draggable;
-			public void Awake() => draggable = GetComponent<DraggableBase>();
-
 			/// <summary>
 			///     Every frame position the card
 			/// </summary>
@@ -44,8 +41,8 @@ namespace CardBattle.Containers {
 				pos.x = Mathf.Lerp(min, max, (float)owner.Index(card) / owner.Count);
 				transform.position = pos;
 
-				if(!draggable.IsDragging)
-					draggable.TargetCurrentTransform();
+				if(!card.draggable.IsDragging)
+					card.draggable.TargetCurrentTransform();
 			}
 		}
 

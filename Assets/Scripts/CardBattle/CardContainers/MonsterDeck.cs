@@ -28,8 +28,10 @@ namespace CardBattle.Containers {
 		/// <remarks>This is called by the <see cref="CardGameManager" /> during initialization</remarks>
 		/// <param name="ownerIndex">The index of the monster within the monster's array</param>
 		public void AssignOwnerToCards(int ownerIndex) {
-			foreach (var card in cards)
+			foreach (var card in cards) {
 				card.cardOwner = ownerIndex + 1; // Assign the card to the appropriate monster (index 0 is the player)
+				card.draggable.enabled = false; // Make sure monster cards can't be interacted with by the player!
+			}
 		}
 
 		/// <summary>
@@ -73,8 +75,7 @@ namespace CardBattle.Containers {
 			revealedCards[^1].Item1.transform.parent = revealHolder.transform;
 			revealedCards[^1].Item1.transform.localPosition = Vector3.zero;
 			revealedCards[^1].Item1.transform.localRotation = Quaternion.Euler(0, 0, 0);
-			revealedCards[^1].Item1.GetComponent<Collider>().enabled =
-				false; // Don't let the player interact with the revealed card!
+			revealedCards[^1].Item1.collider.enabled = false; // Don't let the player interact with the revealed card!
 
 			revealedCards[^1].Item1.OnMonsterReveal();
 		}
@@ -87,7 +88,7 @@ namespace CardBattle.Containers {
 		public void PlayRevealedCard() {
 			// Make sure the revealed card can be interacted with again!
 			foreach (var (revealedCard, target) in revealedCards) {
-				revealedCard.GetComponent<Collider>().enabled = true;
+				revealedCard.collider.enabled = true;
 
 				// Get rid of the temporary object used to reveal the card
 				var p = revealedCard.transform.parent.parent;

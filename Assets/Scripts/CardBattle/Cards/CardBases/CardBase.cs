@@ -18,14 +18,17 @@ namespace CardBattle.Card {
 		///     The renderer associated with this card
 		/// </summary>
 		[SerializeField] private Base _renderer;
+		public new Base renderer => _renderer; // Exposed as a property so that derived classes can cast it to different types
 
-		public new Base renderer
-			=> _renderer; // Exposed as a property so that derived classes can cast it to different types
+		/// <summary>
+		/// The draggable instance associated with this card
+		/// </summary>
+		public DraggableBase draggable;
 
 		/// <summary>
 		///     The collider associated with this card
 		/// </summary>
-		protected Collider collider;
+		public Collider collider;
 
 		/// <summary>
 		///     The container the card is currently held within
@@ -158,9 +161,7 @@ namespace CardBattle.Card {
 		/// <summary>
 		///     Property which determines if the card is owned by the player or not
 		/// </summary>
-		public bool OwnedByPlayer
-			=> cardOwner ==
-			   0; // TODO: If we change the definition of who the player is, make sure to update this property!
+		public bool OwnedByPlayer => cardOwner == 0; // TODO: If we change the definition of who the player is, make sure to update this property!
 
 		/// <summary>
 		///     Property which returns a reference to the monster which owns the card (null if owned by the player)
@@ -307,8 +308,7 @@ namespace CardBattle.Card {
 			if (collider is not null) collider.enabled = false;
 
 			if ((state & State.InHand) == 0) return; // Don't deal with the draggable if not in hand!
-			var drag = GetComponent<DraggableBase>();
-			if (drag is not null) drag.enabled = false;
+			if (draggable is not null) draggable.enabled = false;
 		}
 
 		public virtual void MarkEnabled() {
@@ -316,8 +316,7 @@ namespace CardBattle.Card {
 			if (collider is not null) collider.enabled = true;
 
 			if ((state & State.InHand) == 0) return; // Don't deal with the draggable if not in hand!
-			var drag = GetComponent<DraggableBase>();
-			if (drag is not null) drag.enabled = true;
+			if (draggable is not null) draggable.enabled = true;
 		}
 
 		/// <summary>
@@ -357,7 +356,7 @@ namespace CardBattle.Card {
 				StartCoroutine(DoMonsterDraw());
 			} else
 				throw new NotImplementedException();
-			// TODO: Can monsters draw cards?
+				// TODO: Can monsters draw multiple cards?
 		}
 
 
@@ -393,17 +392,17 @@ namespace CardBattle.Card {
 		/// <summary>
 		///     Assigns the Collider component attached to the game object to a variable named collider.
 		/// </summary>
-		public void Awake()
-			=> collider =
-				GetComponent<Collider>(); // Get the Collider component attached to this game object and assign it to the collider variable
+		public void Awake() {
+			collider = GetComponent<Collider>(); // Get the Collider component attached to this game object and assign it to the collider variable
+			draggable = GetComponent<DraggableBase>();
+		}
 
 		/// <summary>
 		///     Assigns the game object itself to the card property of the renderer component, but only if the renderer property of the game object is not null.
 		/// </summary>
 		public void Start() {
 			if (renderer is not null)
-				renderer.card =
-					this; // If the renderer property of this game object is not null, assign this game object to the card property of the renderer component
+				renderer.card = this; // If the renderer property of this game object is not null, assign this game object to the card property of the renderer component
 		}
 
 

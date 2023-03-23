@@ -16,8 +16,7 @@ namespace CardBattle.Containers {
 			base.AddCard(card, index);
 
 			// Check if the added card has an ActionDraggable component and if it's currently being dragged
-			var targeting = card.GetComponent<ActionDraggable>();
-			if (targeting is not null && targeting.IsDragging)
+			if (card.draggable is ActionDraggable { IsDragging: true } targeting)
 				// If so, call the OnDragEnd method of the component with the argument false
 				targeting.OnDragEnd(false);
 

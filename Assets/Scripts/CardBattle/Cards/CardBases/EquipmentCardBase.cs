@@ -19,16 +19,24 @@ namespace CardBattle.Card {
         public float arc;
 
         /// <summary>
+        /// Bool tracking if we should add the associated card, becomes false once the equipment has been played for the first time... it should only be able to add its card once per game!
+        /// </summary>
+        protected bool shouldAddCard = true;
+
+        /// <summary>
         ///     Called when the equipment card is played
         /// </summary>
         public override void OnPlayed() {
 			// If there is no associated card prefab, return without doing anything
 			if (associatedCardPrefab is null) return;
+			if (!shouldAddCard) return;
 
 			// Create an instance of the associated card prefab and add it to the player's hand
 			var spawned = Instantiate(associatedCardPrefab);
 			CardGameManager.instance.playerHand.AddCard(spawned);
-		}
+
+			shouldAddCard = false;
+        }
 
         /// <summary>
         ///     Called when the equipment card is targeting a card (which is not allowed for equipment cards)
