@@ -1,0 +1,6 @@
+version = 1
+
+exclude_patterns = ["Assets/Thirdparty/**"]
+
+[[analyzers]]
+name = "csharp"
