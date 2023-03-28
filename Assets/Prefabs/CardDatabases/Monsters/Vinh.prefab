@@ -103,7 +103,7 @@ GameObject:
   - component: {fileID: 618883279989994153}
   - component: {fileID: 618883279989994326}
   - component: {fileID: 618883279989994154}
-  - component: {fileID: 618883279989994325}
+  - component: {fileID: 3184793765692006890}
   m_Layer: 0
   m_Name: Vinh
   m_TagString: Targetable
@@ -176,7 +176,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &618883279989994325
+--- !u!114 &3184793765692006890
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -185,10 +185,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 618883279989994324}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b38178f1027a47e09c4e2ae118d40884, type: 3}
+  m_Script: {fileID: 11500000, guid: c4e4c3417ada40cc929d1fa6c5ad0602, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _renderer: {fileID: 210981424612027311}
+  draggable: {fileID: 0}
+  collider: {fileID: 0}
   container: {fileID: 0}
   _state: 4
   cardOwner: 1
@@ -230,7 +232,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   deck: {fileID: 618883279643879282}
-  selkieCard: {fileID: 0}
+  selkieCard: {fileID: 5982055226416778362, guid: 7bb6504231ba1a14fb1c7a2bb75c2836,
+    type: 3}
 --- !u!1001 &4079553918881396893
 PrefabInstance:
   m_ObjectHideFlags: 0

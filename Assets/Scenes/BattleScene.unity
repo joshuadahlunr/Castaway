@@ -1161,6 +1161,7 @@ MonoBehaviour:
   - {fileID: 1752742418}
   ship: {fileID: 2027293939}
   ocean: {fileID: 1284143414}
+  spawnSpecificMonster: 
   monsters: []
   turnStart:
     m_PersistentCalls:
@@ -1291,7 +1292,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1306255008
 GameObject:
@@ -1874,7 +1875,7 @@ MonoBehaviour:
   cards: []
   cardDB: {fileID: 11400000, guid: 5631e1aa1e5ef424e9af340e6b5cff49, type: 2}
   injectCardPrototypes:
-  - {fileID: -874858629119296669, guid: b2014efdd714972479d08a574d4fa620, type: 3}
+  - {fileID: 1421373476609381672, guid: da9e3729d23487343a12a4ef49e503ca, type: 3}
   - {fileID: -176229504365669494, guid: 642e2f9917e32ef48beddc3d3576acd8, type: 3}
   - {fileID: 134441627470835729, guid: d942d0a9d7ce2914c841ea09612a31ea, type: 3}
   - {fileID: 5413654936612339483, guid: 9834e746bacf5844496ddcf81e2d4551, type: 3}
@@ -1997,7 +1998,7 @@ PrefabInstance:
     - target: {fileID: 4271037107592622158, guid: 4332da1e1388b7a41bbc3fd8b6d59559,
         type: 3}
       propertyPath: m_RootOrder
-      value: 9
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 4271037107592622158, guid: 4332da1e1388b7a41bbc3fd8b6d59559,
         type: 3}
