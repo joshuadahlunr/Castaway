@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using CardBattle.Card.Renderers;
 using UnityEngine;
 
@@ -34,6 +35,13 @@ namespace CardBattle.Card {
 			// Create an instance of the associated card prefab and add it to the player's hand
 			var spawned = Instantiate(associatedCardPrefab);
 			CardGameManager.instance.playerHand.AddCard(spawned);
+
+			// Disable the associated draggable!
+			IEnumerator DisableNextFrame() {
+				yield return null;
+				draggable.enabled = false;
+			}
+			StartCoroutine(DisableNextFrame());
 
 			shouldAddCard = false;
         }
