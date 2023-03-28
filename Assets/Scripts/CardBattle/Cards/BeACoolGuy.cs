@@ -1,4 +1,5 @@
 using CardBattle.Card;
+using UnityEngine;
 
 namespace CardBattle {
     /// <summary>
@@ -23,16 +24,18 @@ namespace CardBattle {
 			if (OwnedByPlayer) {
 				// Reset the player's health to their maximum health
 				var state = CardGameManager.instance.playerHealthState;
-				state.health = CardGameManager.instance.playerHealthState.maxHealth;
+				state.health = Mathf.Max(CardGameManager.instance.playerHealthState.maxHealth, CardGameManager.instance.playerHealthState.health);
 				CardGameManager.instance.playerHealthState = state;
 			}
 			// Otherwise, the card is owned by a monster
 			else {
 				// Reset the monster's health to their maximum health
 				var state = OwningMonster.healthState;
-				state.health = OwningMonster.healthState.maxHealth;
+				state.health = Mathf.Max(OwningMonster.healthState.maxHealth, OwningMonster.healthState.health);
 				OwningMonster.healthState = state;
 			}
+
+			SendToGraveyard();
 		}
 	}
 }

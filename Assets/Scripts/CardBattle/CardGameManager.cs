@@ -125,6 +125,10 @@ namespace CardBattle {
 		public GameObject ocean;
 
 		/// <summary>
+		/// Bool that can disable monsters for testing purposes
+		/// </summary>
+		public string spawnSpecificMonster = "";
+		/// <summary>
 		///     References to all of the monsters
 		/// </summary>
 		public MonsterCardBase[] monsters;
@@ -193,20 +197,28 @@ namespace CardBattle {
 			var level = (int)Mathf.Max(Mathf.Round(encounterDifficulty), 0) + 1;
 			if (level % 5 == 4)
 				encounterType = EncounterType.Boss;
-			// if (level > 20)
-			// 	encounterType = EncounterType.FinalBoss;
+			if (level > 20)
+				encounterType = EncounterType.FinalBoss;
 
 			// Calculate the number of encounters to spawn based on the encounter type and level
 			var number = encounterType == EncounterType.Normal ? level / 5 + 1 : 1;
 			// Spawn the encounters
 			for (var i = 0; i < number; i++) {
-				var monster = encounterType switch {
-					EncounterType.Normal => monsterDatabase.Instantiate(monsterDatabase.cards.Keys.Shuffle().First()),
-					EncounterType.Boss => bossDatabase.Instantiate(bossDatabase.cards.Keys.Shuffle().First()),
-					EncounterType.FinalBoss =>
-						finalBossDatabase.Instantiate(finalBossDatabase.cards.Keys.Shuffle().First()),
-					_ => throw new ArgumentOutOfRangeException()
-				};
+				MonsterCardBase monster;
+				if (string.IsNullOrEmpty(spawnSpecificMonster)) {
+					monster = encounterType switch {
+						EncounterType.Normal => monsterDatabase.Instantiate(
+							monsterDatabase.cards.Keys.Shuffle().First()),
+						EncounterType.Boss => bossDatabase.Instantiate(bossDatabase.cards.Keys.Shuffle().First()),
+						EncounterType.FinalBoss => finalBossDatabase.Instantiate(finalBossDatabase.cards.Keys
+							.Shuffle()
+							.First()),
+						_ => throw new ArgumentOutOfRangeException()
+					};
+				} else monster = (monsterDatabase.Instantiate(spawnSpecificMonster)
+				                  ?? bossDatabase.Instantiate(spawnSpecificMonster))
+				                  ?? finalBossDatabase.Instantiate(spawnSpecificMonster);
+
 				monster.transform.localScale *= 2;
 				var pos = ocean.transform.position;
 				var angle = UnityEngine.Random.Range(40, 140f);
@@ -411,7 +423,7 @@ namespace CardBattle {
 			if (playerHealthState.health <= 0)
 				OnLose();
 
-			var allDead = monsters.All(monster => monster.Disabled);
+			var allDead = monsters.All(monster => monster.healthState.health <= 0);
 			if (allDead)
 				OnWin();
 		}
