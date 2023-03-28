@@ -23,27 +23,7 @@ namespace CardBattle.Card {
 		///     This property can be overridden in derived classes to indicate whether the monster is a swarm or not.
 		/// </remarks>
 		public virtual bool IsSwarm => false;
-
-		/// <summary>
-		///     The representative card prototype if this card is a selkie.
-		/// </summary>
-		/// <value>
-		///     A value of null indicates that this card is not a selkie.
-		/// </value>
-		/// <remarks>
-		///     A selkie is a type of monster in the game.
-		/// </remarks>
-		public CardBase selkieCard;
-
-		/// <summary>
-		///     Gets a value indicating whether this monster is a selkie.
-		/// </summary>
-		/// <value><c>true</c> if this instance is a selkie; otherwise, <c>false</c>.</value>
-		/// <remarks>
-		///     A selkie is a type of monster in the game. If this property returns <c>true</c>, it means that this monster is a selkie and the <see cref="selkieCard" /> property contains a reference to the representative card prototype for the selkie.
-		/// </remarks>
-		public bool IsSelkie => selkieCard != null;
-
+		
 
 		/// <summary>
 		///     Called when the monster's health state changes.

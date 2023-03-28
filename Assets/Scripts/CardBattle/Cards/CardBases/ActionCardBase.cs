@@ -43,6 +43,11 @@ namespace CardBattle.Card {
 			}
 		}
 
+		/// <summary>
+		/// The selkie that may be associated with this card
+		/// </summary>
+		public SelkieMonsterCardBase associatedSelkie = null;
+
 
 		/// <summary>
 		///     Error whenever an action card is played instead of targeted (should never happen)
@@ -69,6 +74,19 @@ namespace CardBattle.Card {
 		///     Provides convenient access to check if it is currently our turn or not
 		/// </summary>
 		public bool IsOurTurn => CardGameManager.instance.IsPlayerTurn;
+
+		/// <summary>
+		/// When this card is sent to the graveyard, if there is a selkie attached
+		/// </summary>
+		public override void SendToGraveyard() {
+			if (associatedSelkie != null) {
+				associatedSelkie.RestoreFromSelkie();
+				RemoveFromGame();
+				return;
+			}
+
+			base.SendToGraveyard();
+		}
 
 		/// <summary>
 		///     Utility function which handles dealing damage to a health card base or to the player if no health card base can be found
