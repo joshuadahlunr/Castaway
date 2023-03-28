@@ -516,6 +516,34 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "Player",
+            "id": "a8f7f27b-7186-434a-8aff-7d4093518f57",
+            "actions": [
+                {
+                    "name": "Move",
+                    "type": "Value",
+                    "id": "61192710-47fb-43ca-bb94-ea2bd9392763",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "9fa7c4d7-b59b-4a5e-9ae0-8ceba1f2976d",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [
