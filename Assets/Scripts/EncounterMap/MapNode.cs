@@ -51,7 +51,6 @@ namespace EncounterMap {
         /// The sprite used for the random event.
         /// </summary>
         public Sprite randomSprite;
-
         /// <summary>
         /// The different types of events
         /// </summary>
@@ -60,9 +59,9 @@ namespace EncounterMap {
 			Crewmate,
 			Random
 		}
-
         /// <summary>
         /// Holds the type of event at this node
+        /// </summary>
         public NodeType nodeType;
 
         /// <summary>
@@ -196,6 +195,7 @@ namespace EncounterMap {
             }
         }
 
+        // Sets the scene of that node
         public void SetScene() {
             if (nodeType == NodeType.Random) {
                 SceneManager.LoadScene("RandomScene");
@@ -203,8 +203,25 @@ namespace EncounterMap {
                 SceneManager.LoadScene("CrewmateEncounterScene");
             } else { // This case assumes that anything not listed above is a battle node!
                 SceneManager.LoadScene("BattleScene");
-                CardGameManager.encounterDifficulty = Depth;
+                // Sends the depth to the CGM to determine difficulty
+                CardGameManager.encounterDifficulty = Depth; 
             }
+        }
+
+        // Causes the scene to change to the relative node on collision
+        public void OnTriggerEnter2D(Collider2D collision) {
+            SetScene();
+        }
+
+        // Gets the position of the node
+        public void GetNodePosition() {
+            Vector3 nodePos = transform.position;
+            // Sets the z position to 0 since its 2D and we don't care about position!
+            nodePos.z = 0f;
+            // Passes the position of the node selected to the PlayerMovement targetPos variable
+            PlayerMovement.targetPos = (Vector2)nodePos;
+            // Check for position
+            Debug.Log(nodePos);
         }
     }
 }

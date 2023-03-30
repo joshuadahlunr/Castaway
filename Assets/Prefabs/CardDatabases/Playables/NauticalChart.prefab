@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4430917359204932422}
+  - component: {fileID: -176229504365669494}
   - component: {fileID: 4430917359204932420}
   - component: {fileID: 4430917359204932421}
-  - component: {fileID: -176229504365669494}
   m_Layer: 0
   m_Name: NauticalChart
   m_TagString: Targetable
@@ -35,46 +35,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &4430917359204932420
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4430917359204932423}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10, y: 0.02, z: 10}
-  m_Center: {x: 0, y: 0, z: 0.0000076293945}
---- !u!114 &4430917359204932421
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4430917359204932423}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bacaee4e85274ca5b1cb4c468f21b94f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pointerAction: {fileID: -1654692200621890270, guid: 2b1e799f00d5d624cbc25aa4c6f38c8e,
-    type: 3}
-  clickAction: {fileID: 3001919216989983466, guid: 2b1e799f00d5d624cbc25aa4c6f38c8e,
-    type: 3}
-  arrowPrefab: {fileID: 6722190504438028770, guid: e2e954b1ee2caff408b59a53e7370e2a,
-    type: 3}
-  targetNeeded: 0
 --- !u!114 &-176229504365669494
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -122,6 +82,46 @@ MonoBehaviour:
     _values: []
   _cost:
     list: 0800000000000000
+--- !u!65 &4430917359204932420
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4430917359204932423}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 10, y: 0.02, z: 10}
+  m_Center: {x: 0, y: 0, z: 0.0000076293945}
+--- !u!114 &4430917359204932421
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4430917359204932423}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bacaee4e85274ca5b1cb4c468f21b94f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pointerAction: {fileID: -1654692200621890270, guid: 2b1e799f00d5d624cbc25aa4c6f38c8e,
+    type: 3}
+  clickAction: {fileID: 3001919216989983466, guid: 2b1e799f00d5d624cbc25aa4c6f38c8e,
+    type: 3}
+  arrowPrefab: {fileID: 6722190504438028770, guid: e2e954b1ee2caff408b59a53e7370e2a,
+    type: 3}
+  targetNeeded: 1
 --- !u!1001 &2259767988615713628
 PrefabInstance:
   m_ObjectHideFlags: 0
