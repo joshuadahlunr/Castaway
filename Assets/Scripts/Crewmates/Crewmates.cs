@@ -2,7 +2,6 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 using CardBattle.Card;
-using Crew.Globals;
 using TMPro;
 
 namespace Crew {
@@ -21,9 +20,8 @@ namespace Crew {
             get => _infoPanel;
             set { _infoPanel = value; }
         }*/
-
-        public GameObject prefab;
-        public Global global;
+        
+        //public Global global;
         
         //public GameObject infoPanel => _infoPanel; 
 
@@ -105,19 +103,54 @@ namespace Crew {
         [SerializeField] private int _xpNeeded;
         public int XPNeeded
         {
-            get => XPNeeded;
+            get => _xpNeeded;
             set { _xpNeeded = value; }
         }
 
-        [SerializeField] private Sprite _crewSprite;
-        public Sprite crewSprite
+        [SerializeField] private Sprite _baseSprite;
+        public Sprite BaseSprite
         {
-            get => _crewSprite;
-            set { _crewSprite = value; }
+            get => _baseSprite;
+            set { _baseSprite = value; }
+        }
+
+        [SerializeField] private Sprite _hairSprite;
+        public Sprite HairSprite
+        {
+            get => _hairSprite;
+            set { _hairSprite = value; }
+        }
+
+        [SerializeField] private Sprite _eyeSprite;
+        public Sprite EyeSprite
+        {
+            get => _eyeSprite;
+            set { _eyeSprite = value; }
+        }
+
+        [SerializeField] private Sprite _browSprite;
+        public Sprite BrowSprite
+        {
+            get => _browSprite;
+            set { _browSprite = value; }
+        }
+
+        [SerializeField] private Sprite _mouthSprite;
+        public Sprite MouthSprite
+        {
+            get => _mouthSprite;
+            set { _mouthSprite = value; }
+        }
+
+        [SerializeField] private Sprite _clothesSprite;
+        public Sprite ClothesSprite
+        {
+            get => _clothesSprite;
+            set { _clothesSprite = value; }
         }
         
         [SerializeField] private CardBase _crewCard;
-        public CardBase crewCard 
+        public CardBase CrewCard 
         {
             get => _crewCard;
             set { _crewCard = value; }
