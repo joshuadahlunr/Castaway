@@ -90,7 +90,7 @@ namespace Crew {
         public int Morale
         {
             get => _morale;
-            set { _level = value; }
+            set { _morale = value; }
         }
 
         [SerializeField] private int _currentXp;
@@ -149,8 +149,8 @@ namespace Crew {
             set { _clothesSprite = value; }
         }
         
-        [SerializeField] private CardBase _crewCard;
-        public CardBase CrewCard 
+        [SerializeField] private string _crewCard;
+        public string CrewCard 
         {
             get => _crewCard;
             set { _crewCard = value; }

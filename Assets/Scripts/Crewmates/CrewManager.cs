@@ -6,11 +6,14 @@ using Random = UnityEngine.Random;
 
 namespace Crew {
     /// <summary>
-    /// Singleton manager responsible for handling all crew members
+    ///     Singleton manager responsible for handling all crew members
     /// </summary>
     /// <author>Misha Desear</author>
     public class CrewManager : MonoBehaviour
     {
+        /// <summary>
+        ///     Represents a single crewmate in the SQL database
+        /// </summary>
         public class CrewData 
         {
             [PrimaryKey, Unique, AutoIncrement]
@@ -93,21 +96,20 @@ namespace Crew {
         }
 
         /// <summary>
-        /// Singleton instance of this class
+        ///     Singleton instance of this class
         /// <summary>
         public static CrewManager instance;
 
-        [SerializeField] private string[] crewNames;
+        [SerializeField] private string[] crewNames, cookCards, deckhandCards, engineerCards, entertainerCards, mercenaryCards, occultistCards, wizardCards;
 
-        [SerializeField] private CardDatabase cardDatabase, wizardDB, navigatorDB, entertainerDB, engineerDB, cookDB, occultistDB, mercenaryDB, deckhandDB;
-        public Deck playerDeck;
+        [SerializeField] private CardDatabase cardDatabase;
 
         public List<Crewmates> crewList; 
 
         [SerializeField] private GameObject crewPrefab;
 
         /// <summary>
-        /// When the game starts:
+        ///     When the game starts:
         /// </summary>
         public void Awake() 
         {
@@ -119,7 +121,7 @@ namespace Crew {
         }
 
         /// <summary>
-        /// Converts crewmate data stored in SQL into Crewmates objects
+        ///     Converts crewmate data stored in SQL into Crewmates objects
         /// </summary> 
         public virtual void LoadCrew()
         {
@@ -138,6 +140,7 @@ namespace Crew {
                 loadedCrew.Morale = crewmate.morale;
                 loadedCrew.CurrentXP = crewmate.currentXp;
                 loadedCrew.XPNeeded = crewmate.xpNeeded;
+                loadedCrew.CrewCard = crewmate.cardName;
 
                 // Load the sprites for rendering the crewmate
                 loadedCrew.BaseSprite = Resources.Load<Sprite>(crewmate.basePath);
@@ -147,22 +150,19 @@ namespace Crew {
                 loadedCrew.MouthSprite = Resources.Load<Sprite>(crewmate.mouthPath);
                 loadedCrew.ClothesSprite = Resources.Load<Sprite>(crewmate.clothesPath);
 
-                // Obtain the CardBase of the card that matches the saved name
-                loadedCrew.CrewCard = cardDatabase.Instantiate(crewmate.cardName);
-
                 // Add the fully loaded crewmate to the crew list
                 crewList.Add(loadedCrew);
             }
         }
 
         /// <summary>
-        /// Spawn in a randomly generated crewmate for crewmate encounters
+        ///     Spawn in a randomly generated crewmate for crewmate encounters
         /// </summary>
         public void SpawnNewCrewmate()
         {
             // Instantiate the crewmate prefab
-            GameObject crewmate = Instantiate(crewPrefab, new Vector2(400, 200), Quaternion.identity);
-            crewmate.GetComponent<Crewmates>().transform.localScale = new Vector3(30,30,1);
+            GameObject crewmate = Instantiate(crewPrefab, new Vector2(0, 0), Quaternion.identity);
+            crewmate.GetComponent<Crewmates>().transform.localScale = new Vector3(1,1,1);
 
             // Generate starting crewmate data and load into spawned prefab
             crewmate.GetComponent<Crewmates>().CrewTag = 0;
@@ -173,58 +173,76 @@ namespace Crew {
             crewmate.GetComponent<Crewmates>().CurrentXP = 0;
             crewmate.GetComponent<Crewmates>().XPNeeded = 10;
 
+
             // Pick random sprites for each renderer!
             // Pick a random base
             Texture2D baseTexture = Resources.Load<Texture2D>("Crewmates/Bases/" + Random.Range(1,9).ToString()); 
-            crewmate.GetComponent<Crewmates>().BaseSprite = Sprite.Create(baseTexture, new Rect(0, 0, 500, 900), new Vector2(250, 450));
+            crewmate.GetComponent<Crewmates>().BaseSprite = Sprite.Create(baseTexture, new Rect(0.0f, 0.0f, baseTexture.width, baseTexture.height), new Vector2(0.5f, 0.5f), 100.0f);
             
             // If the crewmate is a wizard...
             if (crewmate.GetComponent<Crewmates>().CrewTag == 0) 
             {
                 // ...exclude the first hairstyle since bandana in Style 1 and wizard hat overlap strangely
-                crewmate.GetComponent<Crewmates>().HairSprite = Resources.Load<Sprite>("Crewmates/Hair/Style " + Random.Range(2,6).ToString() + "/" + Random.Range(1,4).ToString());
+                Texture2D hairTexture = Resources.Load<Texture2D>("Crewmates/Hair/Style " + Random.Range(2,6).ToString() + "/" + Random.Range(1,4).ToString());
+                crewmate.GetComponent<Crewmates>().HairSprite = Sprite.Create(hairTexture, new Rect(0.0f, 0.0f, hairTexture.width, hairTexture.height), new Vector2(0.5f, 0.5f), 100.0f);
             }
+
             else
             {
                 // Otherwise, pick any random hairstyle and random color
-                crewmate.GetComponent<Crewmates>().HairSprite = Resources.Load<Sprite>("Crewmates/Hair/Style " + Random.Range(1,6).ToString() + "/" + Random.Range(1,4).ToString());
+                Texture2D hairTexture = Resources.Load<Texture2D>("Crewmates/Hair/Style " + Random.Range(1,6).ToString() + "/" + Random.Range(1,4).ToString());
+                crewmate.GetComponent<Crewmates>().HairSprite = Sprite.Create(hairTexture, new Rect(0.0f, 0.0f, hairTexture.width, hairTexture.height), new Vector2(0.5f, 0.5f), 100.0f);
             }
+
             // Pick a random pair of eyes
-            crewmate.GetComponent<Crewmates>().EyeSprite = Resources.Load<Sprite>("Crewmates/Eyes/" + Random.Range(1,6).ToString());
+            Texture2D eyeTexture = Resources.Load<Texture2D>("Crewmates/Eyes/" + Random.Range(1,6).ToString());
+            crewmate.GetComponent<Crewmates>().EyeSprite = Sprite.Create(eyeTexture, new Rect(0.0f, 0.0f, eyeTexture.width, eyeTexture.height), new Vector2(0.5f, 0.5f), 100.0f);
+
             // Pick a random pair of brows
-            crewmate.GetComponent<Crewmates>().BrowSprite = Resources.Load<Sprite>("Crewmates/Eyebrows/" + Random.Range(1,10).ToString());
+            Texture2D browTexture = Resources.Load<Texture2D>("Crewmates/Eyebrows/" + Random.Range(1,10).ToString());
+            crewmate.GetComponent<Crewmates>().BrowSprite = Sprite.Create(browTexture, new Rect(0, 0, browTexture.width, browTexture.height), new Vector2(0.5f, 0.5f), 100.0f);
+
             // Pick a random mouth
-            crewmate.GetComponent<Crewmates>().MouthSprite = Resources.Load<Sprite>("Crewmates/Mouths/" + Random.Range(1,9).ToString());
+            Texture2D mouthTexture = Resources.Load<Texture2D>("Crewmates/Mouths/" + Random.Range(1,9).ToString());
+            crewmate.GetComponent<Crewmates>().MouthSprite = Sprite.Create(mouthTexture, new Rect(0, 0, mouthTexture.width, mouthTexture.height), new Vector2(0.5f, 0.5f), 100.0f);
 
             // Pick a random colored outfit based on crew member's type
             // TODO: un-comment other cases as clothes are completed
             switch (crewmate.GetComponent<Crewmates>().Type)
             {
                 case (Crewmates.CrewClass.Type)0: // For wizards
-                    crewmate.GetComponent<Crewmates>().ClothesSprite = Resources.Load<Sprite>("Crewmates/Clothes/Wizard/" + Random.Range(1,4).ToString());
+                    Texture2D clothesTexture = Resources.Load<Texture2D>("Crewmates/Clothes/Wizard/" + Random.Range(1,4).ToString());
+                    crewmate.GetComponent<Crewmates>().ClothesSprite = Sprite.Create(clothesTexture, new Rect(0, 0, clothesTexture.width, clothesTexture.height), new Vector2(0.5f, 0.5f), 100.0f);
                     break;
                 /*case (Crewmates.CrewClass.Type)1: // For navigators
-                    crewmate.GetComponent<Crewmates>().ClothesSprite = Resources.Load<Sprite>("Crewmates/Clothes/Navigator" + Random.Range(1,4).ToString());
+                    clothesTexture = Resources.Load<Texture2D>("Crewmates/Clothes/Navigator/" + Random.Range(1,4).ToString());
+                    crewmate.GetComponent<Crewmates>().ClothesSprite = Sprite.Create(clothesTexture, new Rect(0, 0, clothesTexture.width, clothesTexture.height), new Vector2(0.5f, 0.5f), 100.0f);
                     break;
                 case (Crewmates.CrewClass.Type)2: // For entertainers
-                    crewmate.GetComponent<Crewmates>().ClothesSprite = Resources.Load<Sprite>("Crewmates/Clothes/Entertainer" + Random.Range(1,4).ToString());
+                    clothesTexture = Resources.Load<Texture2D>("Crewmates/Clothes/Entertainer/" + Random.Range(1,4).ToString());
+                    crewmate.GetComponent<Crewmates>().ClothesSprite = Sprite.Create(clothesTexture, new Rect(0, 0, clothesTexture.width, clothesTexture.height), new Vector2(0.5f, 0.5f), 100.0f);
                     break;
                 case (Crewmates.CrewClass.Type)3: // For engineers
-                    crewmate.GetComponent<Crewmates>().ClothesSprite = Resources.Load<Sprite>("Crewmates/Clothes/Engineer" + Random.Range(1,4).ToString());
+                    clothesTexture = Resources.Load<Texture2D>("Crewmates/Clothes/Engineer/" + Random.Range(1,4).ToString());
+                    crewmate.GetComponent<Crewmates>().ClothesSprite = Sprite.Create(clothesTexture, new Rect(0, 0, clothesTexture.width, clothesTexture.height), new Vector2(0.5f, 0.5f), 100.0f);
                     break;
                 case (Crewmates.CrewClass.Type)4: // For cooks
-                    crewmate.GetComponent<Crewmates>().ClothesSprite = Resources.Load<Sprite>("Crewmates/Clothes/Cook" + Random.Range(1,4).ToString());
+                    clothesTexture = Resources.Load<Texture2D>("Crewmates/Clothes/Cook/" + Random.Range(1,4).ToString());
+                    crewmate.GetComponent<Crewmates>().ClothesSprite = Sprite.Create(clothesTexture, new Rect(0, 0, clothesTexture.width, clothesTexture.height), new Vector2(0.5f, 0.5f), 100.0f);
                     break;*/
                 case (Crewmates.CrewClass.Type)5: // For occultists
-                    crewmate.GetComponent<Crewmates>().ClothesSprite = Resources.Load<Sprite>("Crewmates/Clothes/Occultist" + Random.Range(1,4).ToString());
+                    clothesTexture = Resources.Load<Texture2D>("Crewmates/Clothes/Occultist/" + Random.Range(1,4).ToString());
+                    crewmate.GetComponent<Crewmates>().ClothesSprite = Sprite.Create(clothesTexture, new Rect(0, 0, clothesTexture.width, clothesTexture.height), new Vector2(0.5f, 0.5f), 100.0f);
                     break;
                 /*case (Crewmates.CrewClass.Type)6: // For mercenaries
-                    crewmate.GetComponent<Crewmates>().ClothesSprite = Resources.Load<Sprite>("Crewmates/Clothes/Mercenary" + Random.Range(1,4).ToString());
+                    clothesTexture = Resources.Load<Texture2D>("Crewmates/Clothes/Mercenary/" + Random.Range(1,4).ToString());
+                    crewmate.GetComponent<Crewmates>().ClothesSprite = Sprite.Create(clothesTexture, new Rect(0, 0, clothesTexture.width, clothesTexture.height), new Vector2(0.5f, 0.5f), 100.0f);
                     break;*/
                 case (Crewmates.CrewClass.Type)7: // For deckhands
-                    crewmate.GetComponent<Crewmates>().ClothesSprite = Resources.Load<Sprite>("Crewmates/Clothes/Deckhand" + Random.Range(1,4).ToString());
+                    clothesTexture = Resources.Load<Texture2D>("Crewmates/Clothes/Deckhand/" + Random.Range(1,4).ToString());
+                    crewmate.GetComponent<Crewmates>().ClothesSprite = Sprite.Create(clothesTexture, new Rect(0, 0, clothesTexture.width, clothesTexture.height), new Vector2(0.5f, 0.5f), 100.0f);
                     break;
-                default:
+                default: // If we can't load the appropriate resource, break (this means crewmate is naked :/)
                     break;
             }
             
@@ -240,17 +258,35 @@ namespace Crew {
             crewList.Add(crewmate.GetComponent<Crewmates>());
         }
 
+        /// <summary>
+        ///     Flags a crew member as currently in the player's crew and adds their card to the player deck database
+        /// </summary>
         public void AddToCrew(Crewmates crew)
         {
+            const string playerDeckName = "Player Deck";
             crew.CrewTag = (Crewmates.Status.CrewTag)2; // Change crewmate's crew tag to InCrew (2)
-            playerDeck.AddCard(Instantiate(crew.CrewCard)); // Add crewmate's associated card to the deck
-            
+            // Fetch the SQL table containing the player deck
+			var playerDeckId = DatabaseManager.GetOrCreateTable<Deck.DeckList>()
+				.FirstOrDefault(l => l.name == playerDeckName).id;
+            // Insert the crewmate's card into the database based on crewmate's attributes
+            DatabaseManager.database.Insert(new Deck.DeckListCard
+            {
+                listID = playerDeckId,
+                name = crew.CrewCard,
+                level = crew.Level
+            });
         }
 
+        /// <summary>
+        ///     Flags a crew member as formerly being in the player's crew and removes their card from the player deck database
+        /// </summary>
         public void RemoveFromCrew(Crewmates crew)
         {
+            const string playerDeckName = "Player Deck";
             crew.CrewTag = (Crewmates.Status.CrewTag)1; // Change crewmate's crew tag to WasInCrew(1)
-            playerDeck.RemoveCard(crew.CrewCard.name); // Remove the crewmate's associated card from the deck
+            var playerDeckId = DatabaseManager.GetOrCreateTable<Deck.DeckList>()
+                .FirstOrDefault(l => l.name == playerDeckName).id;
+            
         }
     }
 }

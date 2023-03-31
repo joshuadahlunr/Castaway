@@ -361,8 +361,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7389085795241617531}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 400, y: 200, z: 0}
-  m_LocalScale: {x: 30, y: 30, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7389085794583878110}
@@ -399,7 +399,7 @@ MonoBehaviour:
   _browSprite: {fileID: 0}
   _mouthSprite: {fileID: 0}
   _clothesSprite: {fileID: 0}
-  _crewCard: {fileID: 0}
+  _crewCard: 
 --- !u!1 &7389085795349322959
 GameObject:
   m_ObjectHideFlags: 0
