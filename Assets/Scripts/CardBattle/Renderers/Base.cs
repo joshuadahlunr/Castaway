@@ -55,8 +55,9 @@ namespace CardBattle.Card.Renderers {
 			var parameters = new Dictionary<string, object> {
 				{ "{name}", card.name }
 			};
-			foreach (var (name, prop) in card.properties)
-				parameters.Add($"{{properties[\"{name}\"]}}", prop.value);
+			if(card.properties != null)
+				foreach (var (name, prop) in card.properties)
+					parameters.Add($"{{properties[\"{name}\"]}}", prop.value);
 			return parameters;
 		}
 
@@ -67,7 +68,7 @@ namespace CardBattle.Card.Renderers {
 		protected void FormatRules(string rulesDescription) {
 			// Update the displayed text
 			rules.text = CalculateReplacementParameters()
-				.Aggregate(rulesDescription, (current, parameter)
+				.Aggregate(rulesDescription ?? "", (current, parameter)
 					=> current.Replace(parameter.Key, parameter.Value.ToString()));
 		}
 	}

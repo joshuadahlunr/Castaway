@@ -10,8 +10,6 @@ namespace CardBattle.Card {
 			public override string GetName(string name) => selkie.name + "'s " + name;
 		}
 
-		public ActionCardBase selkieCard;
-
 		protected Vector3 backupPosition, backupScale;
 		protected Quaternion backupRotation;
 

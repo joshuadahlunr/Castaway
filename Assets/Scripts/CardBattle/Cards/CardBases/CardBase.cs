@@ -17,7 +17,7 @@ namespace CardBattle.Card {
 		/// <summary>
 		///     The renderer associated with this card
 		/// </summary>
-		[SerializeField] private Base _renderer;
+		[SerializeField] protected Base _renderer;
 		public new Base renderer => _renderer; // Exposed as a property so that derived classes can cast it to different types
 
 		/// <summary>

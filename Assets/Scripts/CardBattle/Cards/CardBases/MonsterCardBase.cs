@@ -23,7 +23,12 @@ namespace CardBattle.Card {
 		///     This property can be overridden in derived classes to indicate whether the monster is a swarm or not.
 		/// </remarks>
 		public virtual bool IsSwarm => false;
-		
+
+		/// <summary>
+		/// Card this creatures becomes when a selkie
+		/// </summary>
+		public ActionCardBase selkieCard;
+
 
 		/// <summary>
 		///     Called when the monster's health state changes.
@@ -43,6 +48,45 @@ namespace CardBattle.Card {
 			}
 
 			Debug.Log($"{name} took {oldHealth - newHealth} damage");
+		}
+
+		public void Position() {
+			transform.localScale *= 2;
+			var pos = CardGameManager.instance.ocean.transform.position;
+			var angle = Random.Range(40, 140f);
+			pos.x += Mathf.Cos(angle * Mathf.Deg2Rad);
+			pos.z += Mathf.Sin(angle * Mathf.Deg2Rad);
+			transform.position = pos; // TODO: Adjust so that monsters won't spawn on top of each-other!
+		}
+
+
+		// Function which upgrades this card into its selkie form
+		public SelkieMonsterCardBase PromoteToSelkie() {
+			if (this is SelkieMonsterCardBase sThis) return sThis; // If we are already a selkie no need to promote!
+
+			var selkie = gameObject.AddComponent<SelkieMonsterCardBase>();
+			selkie.name = name;
+			selkie.art = art;
+			selkie.state = state;
+			selkie.collider = collider;
+			selkie.container = container;
+			selkie.deck = deck;
+			selkie.draggable = draggable;
+			selkie.modifications = modifications;
+			selkie.cardOwner = cardOwner;
+			selkie.selkieCard = selkieCard;
+			selkie.healthStateChanged = healthStateChanged;
+			selkie.properties = properties.Clone();
+			selkie._renderer = _renderer;
+			selkie.renderer.card = selkie;
+
+			if (container != null) {
+				container.AddCard(selkie, container.Index(this));
+				container.RemoveCard(this);
+			}
+
+			Destroy(this);
+			return selkie;
 		}
 	}
 }

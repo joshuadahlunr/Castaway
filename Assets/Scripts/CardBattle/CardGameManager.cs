@@ -219,12 +219,7 @@ namespace CardBattle {
 				                  ?? bossDatabase.Instantiate(spawnSpecificMonster))
 				                  ?? finalBossDatabase.Instantiate(spawnSpecificMonster);
 
-				monster.transform.localScale *= 2;
-				var pos = ocean.transform.position;
-				var angle = UnityEngine.Random.Range(40, 140f);
-				pos.x += Mathf.Cos(angle * Mathf.Deg2Rad);
-				pos.z += Mathf.Sin(angle * Mathf.Deg2Rad);
-				monster.transform.position = pos; // TODO: Adjust so that monsters won't spawn on top of each-other!
+				monster.Position();
 
 				// Add a modification to each card in the monster's deck to adjust its difficulty based on the level of the encounter
 				foreach (var card in monster.deck) {

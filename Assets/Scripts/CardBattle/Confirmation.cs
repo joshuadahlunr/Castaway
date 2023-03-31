@@ -99,7 +99,7 @@ namespace CardBattle {
 			var draggable = card.GetComponent<DraggableBase>();
 			draggable.Reset();
 
-			NotificationHolder.instance?.CreateNotification("Returned Card to Hand!");
+			NotificationHolder.instance?.CreateNotification("Returned Card to Hand!"); // TODO: Why is this called on success?
 
 			// Get rid of ourselves once an action has been chosen!
 			CardGameManager.instance.activeConfirmationExists = false;

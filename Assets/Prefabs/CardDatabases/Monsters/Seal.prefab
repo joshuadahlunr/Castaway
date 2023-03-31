@@ -189,6 +189,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _renderer: {fileID: 210981424612027311}
+  draggable: {fileID: 0}
+  collider: {fileID: 0}
   container: {fileID: 0}
   _state: 4
   cardOwner: 1
@@ -230,7 +232,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   deck: {fileID: 618883279643879282}
-  selkieCard: {fileID: 0}
+  selkieCard: {fileID: 1798558198490400397, guid: 948a13693cf3aad4a9a0bd359cc158ef,
+    type: 3}
 --- !u!1001 &4079553918881396893
 PrefabInstance:
   m_ObjectHideFlags: 0
