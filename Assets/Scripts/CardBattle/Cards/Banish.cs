@@ -36,6 +36,13 @@ namespace CardBattle {
 				return;
 			}
 
+			// It costs the player 1HP to cast the card!
+			if (OwnedByPlayer) {
+				var pHealth = CardGameManager.instance.playerHealthState;
+				pHealth.health -= 1; // We set the health manually since this is a cost... and should thus bypass block
+				CardGameManager.instance.playerHealthState = pHealth;
+			}
+
 			target.RemoveFromGame(); // remove the target from the game
 			SendToGraveyard(); // send the action card itself to the graveyard
 		}
