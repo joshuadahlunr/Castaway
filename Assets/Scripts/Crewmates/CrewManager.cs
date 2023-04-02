@@ -100,9 +100,9 @@ namespace Crew {
         /// <summary>
         public static CrewManager instance;
 
-        [SerializeField] private string[] crewNames, cookCards, deckhandCards, engineerCards, entertainerCards, mercenaryCards, occultistCards, wizardCards;
+        [SerializeField] private string[] crewNames;
 
-        [SerializeField] private CardDatabase cardDatabase;
+        [SerializeField] private CardDatabase cardDatabase, cookCards, deckhandCards, engineerCards, entertainerCards, mercenaryCards, occultistCards, wizardCards;
 
         public List<Crewmates> crewList; 
 
@@ -214,7 +214,7 @@ namespace Crew {
                     Texture2D clothesTexture = Resources.Load<Texture2D>("Crewmates/Clothes/Wizard/" + Random.Range(1,4).ToString());
                     crewmate.GetComponent<Crewmates>().ClothesSprite = Sprite.Create(clothesTexture, new Rect(0, 0, clothesTexture.width, clothesTexture.height), new Vector2(0.5f, 0.5f), 100.0f);
                     break;
-                /*case (Crewmates.CrewClass.Type)1: // For navigators
+                case (Crewmates.CrewClass.Type)1: // For navigators
                     clothesTexture = Resources.Load<Texture2D>("Crewmates/Clothes/Navigator/" + Random.Range(1,4).ToString());
                     crewmate.GetComponent<Crewmates>().ClothesSprite = Sprite.Create(clothesTexture, new Rect(0, 0, clothesTexture.width, clothesTexture.height), new Vector2(0.5f, 0.5f), 100.0f);
                     break;
@@ -226,7 +226,7 @@ namespace Crew {
                     clothesTexture = Resources.Load<Texture2D>("Crewmates/Clothes/Engineer/" + Random.Range(1,4).ToString());
                     crewmate.GetComponent<Crewmates>().ClothesSprite = Sprite.Create(clothesTexture, new Rect(0, 0, clothesTexture.width, clothesTexture.height), new Vector2(0.5f, 0.5f), 100.0f);
                     break;
-                case (Crewmates.CrewClass.Type)4: // For cooks
+                /*case (Crewmates.CrewClass.Type)4: // For cooks
                     clothesTexture = Resources.Load<Texture2D>("Crewmates/Clothes/Cook/" + Random.Range(1,4).ToString());
                     crewmate.GetComponent<Crewmates>().ClothesSprite = Sprite.Create(clothesTexture, new Rect(0, 0, clothesTexture.width, clothesTexture.height), new Vector2(0.5f, 0.5f), 100.0f);
                     break;*/
@@ -234,10 +234,10 @@ namespace Crew {
                     clothesTexture = Resources.Load<Texture2D>("Crewmates/Clothes/Occultist/" + Random.Range(1,4).ToString());
                     crewmate.GetComponent<Crewmates>().ClothesSprite = Sprite.Create(clothesTexture, new Rect(0, 0, clothesTexture.width, clothesTexture.height), new Vector2(0.5f, 0.5f), 100.0f);
                     break;
-                /*case (Crewmates.CrewClass.Type)6: // For mercenaries
+                case (Crewmates.CrewClass.Type)6: // For mercenaries
                     clothesTexture = Resources.Load<Texture2D>("Crewmates/Clothes/Mercenary/" + Random.Range(1,4).ToString());
                     crewmate.GetComponent<Crewmates>().ClothesSprite = Sprite.Create(clothesTexture, new Rect(0, 0, clothesTexture.width, clothesTexture.height), new Vector2(0.5f, 0.5f), 100.0f);
-                    break;*/
+                    break;
                 case (Crewmates.CrewClass.Type)7: // For deckhands
                     clothesTexture = Resources.Load<Texture2D>("Crewmates/Clothes/Deckhand/" + Random.Range(1,4).ToString());
                     crewmate.GetComponent<Crewmates>().ClothesSprite = Sprite.Create(clothesTexture, new Rect(0, 0, clothesTexture.width, clothesTexture.height), new Vector2(0.5f, 0.5f), 100.0f);
