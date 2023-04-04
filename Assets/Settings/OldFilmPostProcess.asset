@@ -45,7 +45,7 @@ MonoBehaviour:
     m_Value: 0.5
   fade:
     m_OverrideState: 1
-    m_Value: 0.5
+    m_Value: 0.3
   mask:
     m_OverrideState: 0
     m_Value: {fileID: 0}
@@ -71,7 +71,7 @@ MonoBehaviour:
     m_Value: 1
   intensity:
     m_OverrideState: 1
-    m_Value: 0.489
+    m_Value: 0.3
   response:
     m_OverrideState: 0
     m_Value: 0.8
