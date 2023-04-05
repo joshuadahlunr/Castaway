@@ -179,10 +179,10 @@ namespace Crew {
             Texture2D baseTexture = Resources.Load<Texture2D>("Crewmates/Bases/" + Random.Range(1,9).ToString()); 
             crewmate.GetComponent<Crewmates>().BaseSprite = Sprite.Create(baseTexture, new Rect(0.0f, 0.0f, baseTexture.width, baseTexture.height), new Vector2(0.5f, 0.5f), 100.0f);
             
-            // If the crewmate is a wizard...
-            if (crewmate.GetComponent<Crewmates>().CrewTag == 0) 
+            // If the crewmate is a wizard or chef...
+            if (crewmate.GetComponent<Crewmates>().Type == (Crewmates.CrewClass.Type)0 || crewmate.GetComponent<Crewmates>().Type == (Crewmates.CrewClass.Type)4) 
             {
-                // ...exclude the first hairstyle since bandana in Style 1 and wizard hat overlap strangely
+                // ...exclude the first hairstyle since bandana in Style 1 and hat overlap strangely
                 Texture2D hairTexture = Resources.Load<Texture2D>("Crewmates/Hair/Style " + Random.Range(2,6).ToString() + "/" + Random.Range(1,4).ToString());
                 crewmate.GetComponent<Crewmates>().HairSprite = Sprite.Create(hairTexture, new Rect(0.0f, 0.0f, hairTexture.width, hairTexture.height), new Vector2(0.5f, 0.5f), 100.0f);
             }
@@ -226,10 +226,10 @@ namespace Crew {
                     clothesTexture = Resources.Load<Texture2D>("Crewmates/Clothes/Engineer/" + Random.Range(1,4).ToString());
                     crewmate.GetComponent<Crewmates>().ClothesSprite = Sprite.Create(clothesTexture, new Rect(0, 0, clothesTexture.width, clothesTexture.height), new Vector2(0.5f, 0.5f), 100.0f);
                     break;
-                /*case (Crewmates.CrewClass.Type)4: // For cooks
+                case (Crewmates.CrewClass.Type)4: // For cooks
                     clothesTexture = Resources.Load<Texture2D>("Crewmates/Clothes/Cook/" + Random.Range(1,4).ToString());
                     crewmate.GetComponent<Crewmates>().ClothesSprite = Sprite.Create(clothesTexture, new Rect(0, 0, clothesTexture.width, clothesTexture.height), new Vector2(0.5f, 0.5f), 100.0f);
-                    break;*/
+                    break;
                 case (Crewmates.CrewClass.Type)5: // For occultists
                     clothesTexture = Resources.Load<Texture2D>("Crewmates/Clothes/Occultist/" + Random.Range(1,4).ToString());
                     crewmate.GetComponent<Crewmates>().ClothesSprite = Sprite.Create(clothesTexture, new Rect(0, 0, clothesTexture.width, clothesTexture.height), new Vector2(0.5f, 0.5f), 100.0f);
