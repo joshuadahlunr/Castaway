@@ -492,36 +492,14 @@ MonoBehaviour:
   - Mickey
   - Wayne
   - Holly
-  cookCards:
-  - Attack
-  - Bail Water
-  deckhandCards:
-  - Attack
-  - Bail Water
-  - Douse
-  - Nautical Chart
-  engineerCards:
-  - Attack
-  - Bail Water
-  entertainerCards:
-  - Attack
-  - Bail Water
-  mercenaryCards:
-  - Attack
-  - Bail Water
-  occultistCards:
-  - Attack
-  - Bail Water
-  - Scry
-  - Occult Twirl
-  wizardCards:
-  - Attack
-  - Bail Water
-  - Flame
-  - Freeze
-  - Lightning Spear
-  - Summoning
   cardDatabase: {fileID: 11400000, guid: 5631e1aa1e5ef424e9af340e6b5cff49, type: 2}
+  cookCards: {fileID: 0}
+  deckhandCards: {fileID: 0}
+  engineerCards: {fileID: 0}
+  entertainerCards: {fileID: 0}
+  mercenaryCards: {fileID: 0}
+  occultistCards: {fileID: 0}
+  wizardCards: {fileID: 0}
   crewList: []
   crewPrefab: {fileID: 999589076}
 --- !u!1 &907718730
@@ -998,6 +976,32 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7389085794859998702, guid: e6816e6f2cfac4242bdc36216fedf358,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: d8650c72d6cfaee41960b7e4991ba3a6,
+        type: 3}
+    - target: {fileID: 7389085794859998702, guid: e6816e6f2cfac4242bdc36216fedf358,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7389085794859998703, guid: e6816e6f2cfac4242bdc36216fedf358,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7389085794859998703, guid: e6816e6f2cfac4242bdc36216fedf358,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7389085795054203040, guid: e6816e6f2cfac4242bdc36216fedf358,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7389085795241617529, guid: e6816e6f2cfac4242bdc36216fedf358,
         type: 3}
       propertyPath: m_RootOrder

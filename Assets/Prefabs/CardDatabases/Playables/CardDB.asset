@@ -60,6 +60,7 @@ MonoBehaviour:
     - Become Selkie
     - Summoning
     - Fate Tie
+    - Jerry's Arcane Twirl
     _keys:
     - Attack
     - Binned Attack
@@ -85,6 +86,7 @@ MonoBehaviour:
     - Become Selkie
     - Summoning
     - Fate Tie
+    - Jerry's Arcane Twirl
     _values:
     - {fileID: 1798558198490400397, guid: 948a13693cf3aad4a9a0bd359cc158ef, type: 3}
     - {fileID: -736188161015104388, guid: 8fba69ea9cabcfa4b89aaa763ac1bd82, type: 3}
@@ -110,3 +112,4 @@ MonoBehaviour:
     - {fileID: 1028301194782096724, guid: 09fbb3d024a58464ea815f2e10452427, type: 3}
     - {fileID: 3977357017348899511, guid: 695721156c9fa5a49bb4d3c77095cea9, type: 3}
     - {fileID: 6126150281627410766, guid: 51c8c4b57b3807c4e9976f9916f25acc, type: 3}
+    - {fileID: -4917259886615291091, guid: 9eeedca544d5cac4083c46b206905cd2, type: 3}
