@@ -47,4 +47,6 @@ MonoBehaviour:
   depth: 0
   previous: {fileID: 0}
   next: {fileID: 0}
+  seed: 0
+  nextSeed: 0
   nodes: []

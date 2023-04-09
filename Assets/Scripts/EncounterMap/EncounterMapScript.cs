@@ -11,7 +11,7 @@ namespace EncounterMap {
 	///     This class represents an encounter map generator that generates multiple generations of nodes
 	///     with randomized branching based on a predefined probability table.
 	/// </summary>
-	/// <author>Jared White &amp; Joshua Dahl</author>
+	/// <author>Joshua Dahl</author>
 	public class EncounterMapScript : MonoBehaviour {
 		/// <summary>
 		///     Represents information about a game's encounter map for save purposes.

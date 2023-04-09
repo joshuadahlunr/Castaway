@@ -7,6 +7,9 @@ using UnityEngine.SceneManagement;
 using CardBattle;
 using Random = UnityEngine.Random;
 
+/// <summary>
+/// <author>Joshua Dahl & Jared White</author>
+/// </summary>
 namespace EncounterMap {
     /// <summary>
     /// Represents a single node in the encounter map.
@@ -211,6 +214,7 @@ namespace EncounterMap {
         // Causes the scene to change to the relative node on collision
         public void OnTriggerEnter2D(Collider2D collision) {
             SetScene();
+            this.enabled = !this.enabled;
         }
 
         // Gets the position of the node

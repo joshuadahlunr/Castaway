@@ -3,16 +3,19 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 /// <summary>
-/// </summary>
 /// <author>Jared White</author>
 /// </summary>
 namespace EncounterMap {
     public class PlayerMovement : MonoBehaviour {
         // Set the target node position from the MapNode script
         public static Vector2 targetPos;
+
+        public Animator animator;
         
-        private float speed = 2f;
-        private bool moving;
+        [SerializeField]
+        private float speed = 8f;
+        public bool moving = false;
+        private float vertical, horizontal;
 
         MapNode[] nodes;
         // Used to track player progression
@@ -21,6 +24,28 @@ namespace EncounterMap {
         private Camera mainCamera;
         private Rigidbody2D playerRB;
         private BoxCollider2D playerCol;
+        private Vector2 movementInput;
+
+        void Awake() {
+            playerRB = GetComponent<Rigidbody2D>();
+        }
+
+        void FixedUpdate() {
+            playerRB.velocity = movementInput * speed;
+            if(playerRB.velocity == Vector2.zero) {
+                moving = false;
+            }
+            animator.SetBool("Moving", moving);
+        }
+
+        private void OnMove(InputValue inputVal) {
+            movementInput = inputVal.Get<Vector2>();
+            moving = true;
+        }
+
+        void OnCollisionEnter2D(Collision2D col) {
+            Debug.Log("Collision with event");
+        }
 
     /*    void Start() { 
             // Set the Rigidbody to the player GameObject
