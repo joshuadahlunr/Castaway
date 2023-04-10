@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Eyes
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings: []
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 1
+      enableAlphaDilation: 0
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 102900000, guid: c081294cb37e8a44bb3bf57a7ea6cb7f, type: 3}
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+    packedSpriteRenderDataKeys:
+    - b498fe503a4d9c74983972aeb8db1dc9: 21300000
+    - 838e0422269e8e44aa5bf41a1edbb626: 21300000
+    - 0fbfd5d621ba9ca428cba595de0a3dea: 21300000
+    - a04ead07f85d447429bd1124b5a6453a: 21300000
+    - 68a664895bdfdcc41bf110fbccd1a5c8: 21300000
+    - ef2add2ab5951ef44802d0f4332b62ca: 21300000
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: b498fe503a4d9c74983972aeb8db1dc9, type: 3}
+  - {fileID: 21300000, guid: 838e0422269e8e44aa5bf41a1edbb626, type: 3}
+  - {fileID: 21300000, guid: 0fbfd5d621ba9ca428cba595de0a3dea, type: 3}
+  - {fileID: 21300000, guid: a04ead07f85d447429bd1124b5a6453a, type: 3}
+  - {fileID: 21300000, guid: 68a664895bdfdcc41bf110fbccd1a5c8, type: 3}
+  - {fileID: 21300000, guid: ef2add2ab5951ef44802d0f4332b62ca, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - v1
+  - v6
+  - v4
+  - v2
+  - v5
+  - v3
+  m_RenderDataMap: {}
+  m_Tag: Eyes
+  m_IsVariant: 0

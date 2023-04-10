@@ -493,13 +493,20 @@ MonoBehaviour:
   - Wayne
   - Holly
   cardDatabase: {fileID: 11400000, guid: 5631e1aa1e5ef424e9af340e6b5cff49, type: 2}
-  cookCards: {fileID: 0}
-  deckhandCards: {fileID: 0}
-  engineerCards: {fileID: 0}
-  entertainerCards: {fileID: 0}
-  mercenaryCards: {fileID: 0}
-  occultistCards: {fileID: 0}
-  wizardCards: {fileID: 0}
+  cookCards: {fileID: 11400000, guid: d710809db5c4efa479fa27fa253604ae, type: 2}
+  deckhandCards: {fileID: 11400000, guid: c7ccfb8049d802242a95633c5ce58049, type: 2}
+  engineerCards: {fileID: 11400000, guid: 43fe87a83a6072c4aa7ea1c47d512629, type: 2}
+  entertainerCards: {fileID: 11400000, guid: 8be467006e802bf499c5de6719c867df, type: 2}
+  mercenaryCards: {fileID: 11400000, guid: 1374ba01f237ece4593736732ec71ad6, type: 2}
+  navigatorCards: {fileID: 11400000, guid: be099970c262bb84abd3f2b1f801caa7, type: 2}
+  occultistCards: {fileID: 11400000, guid: 82a9fd1276420254e8addeba2ba6d543, type: 2}
+  wizardCards: {fileID: 11400000, guid: 6bdbbaa2d04703943b5ec3d06c87bf11, type: 2}
+  baseTextures: {fileID: 11400000, guid: 70984b31665b3b0488e955a9dec32331, type: 2}
+  browTextures: {fileID: 11400000, guid: aa783d2bb6137ee458b773efda7df324, type: 2}
+  eyeTextures: {fileID: 11400000, guid: 1725a557102227045929e2bcd11e482c, type: 2}
+  mouthTextures: {fileID: 11400000, guid: 58f2a23ce71a0d04cb2ec6e18d84718b, type: 2}
+  hairTextures: {fileID: 11400000, guid: 7df97a8e50cef384f9664b460d23260b, type: 2}
+  clothesTextures: {fileID: 11400000, guid: 4673442856322364591eea0129f6260e, type: 2}
   crewList: []
   crewPrefab: {fileID: 999589076}
 --- !u!1 &907718730
@@ -976,15 +983,31 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7389085794583878109, guid: e6816e6f2cfac4242bdc36216fedf358,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: be57dc0d77fe2d348885a496b6c83d64,
+        type: 3}
+    - target: {fileID: 7389085794583878109, guid: e6816e6f2cfac4242bdc36216fedf358,
+        type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7389085794859998702, guid: e6816e6f2cfac4242bdc36216fedf358,
         type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: d8650c72d6cfaee41960b7e4991ba3a6,
+      objectReference: {fileID: 21300000, guid: 7fdcc6db96f3cd84dac622cf488b9cdc,
         type: 3}
     - target: {fileID: 7389085794859998702, guid: e6816e6f2cfac4242bdc36216fedf358,
         type: 3}
       propertyPath: m_SortingOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7389085794859998702, guid: e6816e6f2cfac4242bdc36216fedf358,
+        type: 3}
+      propertyPath: m_WasSpriteAssigned
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7389085794859998703, guid: e6816e6f2cfac4242bdc36216fedf358,
@@ -997,10 +1020,32 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7389085795002537252, guid: e6816e6f2cfac4242bdc36216fedf358,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: e51ce4bbae63e844f9765f724b48a475,
+        type: 3}
+    - target: {fileID: 7389085795002537252, guid: e6816e6f2cfac4242bdc36216fedf358,
+        type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7389085795054203040, guid: e6816e6f2cfac4242bdc36216fedf358,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 015fd565289de1b44a69d71ba2e52995,
+        type: 3}
     - target: {fileID: 7389085795054203040, guid: e6816e6f2cfac4242bdc36216fedf358,
         type: 3}
       propertyPath: m_SortingOrder
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7389085795054203040, guid: e6816e6f2cfac4242bdc36216fedf358,
+        type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7389085795241617529, guid: e6816e6f2cfac4242bdc36216fedf358,
         type: 3}
@@ -1061,6 +1106,28 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Crewmate
+      objectReference: {fileID: 0}
+    - target: {fileID: 7389085795349322957, guid: e6816e6f2cfac4242bdc36216fedf358,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 838e0422269e8e44aa5bf41a1edbb626,
+        type: 3}
+    - target: {fileID: 7389085795349322957, guid: e6816e6f2cfac4242bdc36216fedf358,
+        type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7389085795845019025, guid: e6816e6f2cfac4242bdc36216fedf358,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: d85fe05ae6f313643859c24d9d83c2cc,
+        type: 3}
+    - target: {fileID: 7389085795845019025, guid: e6816e6f2cfac4242bdc36216fedf358,
+        type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

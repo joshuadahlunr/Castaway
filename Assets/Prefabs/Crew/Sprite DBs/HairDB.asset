@@ -1,0 +1,64 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba7b483ad9a19b241908bc747a11f4c5, type: 3}
+  m_Name: HairDB
+  m_EditorClassIdentifier: 
+  sprites:
+    reorderableList:
+      canAdd: 1
+      canRemove: 1
+      draggable: 1
+      expandable: 1
+      multipleSelection: 1
+      isExpanded: 1
+      label:
+        m_Text: Keys
+        m_Image: {fileID: 0}
+        m_Tooltip: 
+      headerHeight: 18
+      footerHeight: 13
+      slideEasing: 0.15
+      verticalSpacing: 2
+      showDefaultBackground: 1
+      elementDisplayType: 0
+      elementNameProperty: 
+      elementNameOverride: 
+      elementIcon: {fileID: 0}
+    reqReferences: {fileID: 0}
+    isExpanded: 1
+    _keyValues: 000000000100000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000c0000000d0000000e0000000f0000001000000011000000120000001300000014000000150000001600000017000000
+    _keys: 000000000100000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000c0000000d0000000e0000000f0000001000000011000000120000001300000014000000150000001600000017000000
+    _values:
+    - {fileID: 2800000, guid: c8c48a492548bd74c807543622d937c0, type: 3}
+    - {fileID: 2800000, guid: 7e817ddfc296f1b489495dab5bd1f634, type: 3}
+    - {fileID: 2800000, guid: e668996b26f22624e82dfafb08330677, type: 3}
+    - {fileID: 2800000, guid: 44e69f4a691ac0b4d807c6f1f61f9b0e, type: 3}
+    - {fileID: 2800000, guid: 2c2d1e03fb4d2a94891272c6ed5f2548, type: 3}
+    - {fileID: 2800000, guid: 7ae78771ec9d3cd4599ee5ab82d145e3, type: 3}
+    - {fileID: 2800000, guid: 20ae793e54582394198eba090e8f26d1, type: 3}
+    - {fileID: 2800000, guid: 015fd565289de1b44a69d71ba2e52995, type: 3}
+    - {fileID: 2800000, guid: 9a038ddb270d1034aa1dfd1f540f58c9, type: 3}
+    - {fileID: 2800000, guid: 71848d191a3b5a64c9ad470c36c26386, type: 3}
+    - {fileID: 2800000, guid: 20776f86c5ca6854597292cdd89b38c8, type: 3}
+    - {fileID: 2800000, guid: 3ef65893e2f67334b84536240167d692, type: 3}
+    - {fileID: 2800000, guid: 423bd0bc5d096574bbbacb693ee9ecc4, type: 3}
+    - {fileID: 2800000, guid: bd5ac7deebd07084dbbe895d878c6242, type: 3}
+    - {fileID: 2800000, guid: 0a616120f1e4eb84db6ee859d8ea1fe6, type: 3}
+    - {fileID: 2800000, guid: 73b6bf2143c753a4393d77e491b7074c, type: 3}
+    - {fileID: 2800000, guid: a2b211edb997b7a40ab98139017e7451, type: 3}
+    - {fileID: 2800000, guid: 882d124dcc4fa3d4ca31d020afcc1563, type: 3}
+    - {fileID: 2800000, guid: 3dcb28d19cd265c4987234958734dd06, type: 3}
+    - {fileID: 2800000, guid: 2cd708e7715d0a7429dfeb3dec0ba3d4, type: 3}
+    - {fileID: 2800000, guid: 7bc52132771939c4cb874ffd236d61b6, type: 3}
+    - {fileID: 2800000, guid: 72ea2feecf1b9d94394529448ed40b0e, type: 3}
+    - {fileID: 2800000, guid: 0157a3d5e4b5dcd45bd1eb48a42d492a, type: 3}
+    - {fileID: 2800000, guid: e1f48fb8fc48a1442b119c238b9221a0, type: 3}

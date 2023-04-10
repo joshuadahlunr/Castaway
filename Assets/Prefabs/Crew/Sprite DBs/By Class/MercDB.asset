@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba7b483ad9a19b241908bc747a11f4c5, type: 3}
+  m_Name: MercDB
+  m_EditorClassIdentifier: 
+  sprites:
+    reorderableList:
+      canAdd: 1
+      canRemove: 1
+      draggable: 1
+      expandable: 1
+      multipleSelection: 1
+      isExpanded: 1
+      label:
+        m_Text: Keys
+        m_Image: {fileID: 0}
+        m_Tooltip: 
+      headerHeight: 18
+      footerHeight: 13
+      slideEasing: 0.15
+      verticalSpacing: 2
+      showDefaultBackground: 1
+      elementDisplayType: 0
+      elementNameProperty: 
+      elementNameOverride: 
+      elementIcon: {fileID: 0}
+    reqReferences: {fileID: 0}
+    isExpanded: 1
+    _keyValues:
+    - 1
+    - 2
+    - 3
+    - 4
+    _keys:
+    - 1
+    - 2
+    - 3
+    - 4
+    _values:
+    - {fileID: 2800000, guid: 55e22111719a44c488a60609275c831c, type: 3}
+    - {fileID: 2800000, guid: f7ca253df76bd0e4fa51b7c057d380ca, type: 3}
+    - {fileID: 2800000, guid: 4cd883e877290fd4c812d7ad779a0a3b, type: 3}
+    - {fileID: 2800000, guid: abdf8f5397fa81f4c92d3777d3277f58, type: 3}

@@ -107,43 +107,43 @@ namespace Crew {
             set { _xpNeeded = value; }
         }
 
-        [SerializeField] private Sprite _baseSprite;
-        public Sprite BaseSprite
+        [SerializeField] private Texture2D _baseSprite;
+        public Texture2D BaseSprite
         {
             get => _baseSprite;
             set { _baseSprite = value; }
         }
 
-        [SerializeField] private Sprite _hairSprite;
-        public Sprite HairSprite
+        [SerializeField] private Texture2D _hairSprite;
+        public Texture2D HairSprite
         {
             get => _hairSprite;
             set { _hairSprite = value; }
         }
 
-        [SerializeField] private Sprite _eyeSprite;
-        public Sprite EyeSprite
+        [SerializeField] private Texture2D _eyeSprite;
+        public Texture2D EyeSprite
         {
             get => _eyeSprite;
             set { _eyeSprite = value; }
         }
 
-        [SerializeField] private Sprite _browSprite;
-        public Sprite BrowSprite
+        [SerializeField] private Texture2D _browSprite;
+        public Texture2D BrowSprite
         {
             get => _browSprite;
             set { _browSprite = value; }
         }
 
-        [SerializeField] private Sprite _mouthSprite;
-        public Sprite MouthSprite
+        [SerializeField] private Texture2D _mouthSprite;
+        public Texture2D MouthSprite
         {
             get => _mouthSprite;
             set { _mouthSprite = value; }
         }
 
-        [SerializeField] private Sprite _clothesSprite;
-        public Sprite ClothesSprite
+        [SerializeField] private Texture2D _clothesSprite;
+        public Texture2D ClothesSprite
         {
             get => _clothesSprite;
             set { _clothesSprite = value; }

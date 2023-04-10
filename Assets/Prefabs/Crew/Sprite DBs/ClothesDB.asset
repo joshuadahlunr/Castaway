@@ -1,0 +1,72 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba7b483ad9a19b241908bc747a11f4c5, type: 3}
+  m_Name: ClothesDB
+  m_EditorClassIdentifier: 
+  sprites:
+    reorderableList:
+      canAdd: 1
+      canRemove: 1
+      draggable: 1
+      expandable: 1
+      multipleSelection: 1
+      isExpanded: 1
+      label:
+        m_Text: Keys
+        m_Image: {fileID: 0}
+        m_Tooltip: 
+      headerHeight: 18
+      footerHeight: 13
+      slideEasing: 0.15
+      verticalSpacing: 2
+      showDefaultBackground: 1
+      elementDisplayType: 0
+      elementNameProperty: 
+      elementNameOverride: 
+      elementIcon: {fileID: 0}
+    reqReferences: {fileID: 0}
+    isExpanded: 1
+    _keyValues: 000000000100000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000c0000000d0000000e0000000f000000100000001100000012000000130000001400000015000000160000001700000018000000190000001a0000001b0000001c0000001d0000001e0000001f000000
+    _keys: 000000000100000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000c0000000d0000000e0000000f000000100000001100000012000000130000001400000015000000160000001700000018000000190000001a0000001b0000001c0000001d0000001e0000001f000000
+    _values:
+    - {fileID: 2800000, guid: 7fdcc6db96f3cd84dac622cf488b9cdc, type: 3}
+    - {fileID: 2800000, guid: 83e39823c841429428f3d8f90310ab64, type: 3}
+    - {fileID: 2800000, guid: aed4e16b4e73a104d8ca588317f5785f, type: 3}
+    - {fileID: 2800000, guid: 740fc31e097fdd14b97cf2fb1a1458d5, type: 3}
+    - {fileID: 2800000, guid: dbc496ae1988b8e4dbf622aadfb108e9, type: 3}
+    - {fileID: 2800000, guid: 5f8f52bf02ac2554dbe5a95c2132938b, type: 3}
+    - {fileID: 2800000, guid: 9c2a991f942be5c4caa2393fcacac19c, type: 3}
+    - {fileID: 2800000, guid: dc7bd73da531a0a48aa044b0cdc3ba66, type: 3}
+    - {fileID: 2800000, guid: 709c8046538a11c41a19a12f05ba3baa, type: 3}
+    - {fileID: 2800000, guid: 8f93f500248739a41866dede9dbb2c2f, type: 3}
+    - {fileID: 2800000, guid: 5a1e3dbf5dbef594a94dec139591145d, type: 3}
+    - {fileID: 2800000, guid: 6267ea204c8deca42926c872ce40c5ed, type: 3}
+    - {fileID: 2800000, guid: f45a5f4a67b050f42a15ef9e97346457, type: 3}
+    - {fileID: 2800000, guid: bee1ea9101d93404c98e16ea1c2f78b6, type: 3}
+    - {fileID: 2800000, guid: 84f05ce145b109a4683288cb7a39d763, type: 3}
+    - {fileID: 2800000, guid: 75824c906ae4607458eda95c228ffe7e, type: 3}
+    - {fileID: 2800000, guid: 55e22111719a44c488a60609275c831c, type: 3}
+    - {fileID: 2800000, guid: f7ca253df76bd0e4fa51b7c057d380ca, type: 3}
+    - {fileID: 2800000, guid: 4cd883e877290fd4c812d7ad779a0a3b, type: 3}
+    - {fileID: 2800000, guid: abdf8f5397fa81f4c92d3777d3277f58, type: 3}
+    - {fileID: 2800000, guid: 3b9b9dcbcc4e1f0478010312e0dd6424, type: 3}
+    - {fileID: 2800000, guid: b642603b0c13c0b41b00ca7147c0c3dc, type: 3}
+    - {fileID: 2800000, guid: 55d43414007bfe44babb95f34b6ce318, type: 3}
+    - {fileID: 2800000, guid: 96eb9f2e5cf67ee4dbeb16d50b2eaf2d, type: 3}
+    - {fileID: 2800000, guid: 12ed96f8ecef70b4988adaecd5cfa3e4, type: 3}
+    - {fileID: 2800000, guid: 723741c403658164ea25a6d3efb4febe, type: 3}
+    - {fileID: 2800000, guid: 3850fd939c0707544b4883d3dad830a9, type: 3}
+    - {fileID: 2800000, guid: b4eebc71675f710408634e1440d2b45d, type: 3}
+    - {fileID: 2800000, guid: 82841de432c325545be0a66ce190bd49, type: 3}
+    - {fileID: 2800000, guid: 53408f8646ac1fc419d43178c7a39478, type: 3}
+    - {fileID: 2800000, guid: 8da924a6b107be2438465f1aad35acdc, type: 3}
+    - {fileID: 2800000, guid: eb60fcb018170c54ebcb4350b6fbc675, type: 3}

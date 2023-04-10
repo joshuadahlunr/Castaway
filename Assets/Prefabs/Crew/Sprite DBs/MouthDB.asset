@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba7b483ad9a19b241908bc747a11f4c5, type: 3}
+  m_Name: MouthDB
+  m_EditorClassIdentifier: 
+  sprites:
+    reorderableList:
+      canAdd: 1
+      canRemove: 1
+      draggable: 1
+      expandable: 1
+      multipleSelection: 1
+      isExpanded: 1
+      label:
+        m_Text: Keys
+        m_Image: {fileID: 0}
+        m_Tooltip: 
+      headerHeight: 18
+      footerHeight: 13
+      slideEasing: 0.15
+      verticalSpacing: 2
+      showDefaultBackground: 1
+      elementDisplayType: 0
+      elementNameProperty: 
+      elementNameOverride: 
+      elementIcon: {fileID: 0}
+    reqReferences: {fileID: 0}
+    isExpanded: 1
+    _keyValues: 000000000100000002000000030000000400000005000000060000000700000008000000
+    _keys: 000000000100000002000000030000000400000005000000060000000700000008000000
+    _values:
+    - {fileID: 2800000, guid: a49e1807b4e895547b33e2e0804d8488, type: 3}
+    - {fileID: 2800000, guid: 8263ec43c6c2b124ab00726875d73d22, type: 3}
+    - {fileID: 2800000, guid: e51ce4bbae63e844f9765f724b48a475, type: 3}
+    - {fileID: 2800000, guid: 075bb1fdf48308c488fa956aee563f6b, type: 3}
+    - {fileID: 2800000, guid: 4aaa007c5ddd85a4db2cc30b3db8a568, type: 3}
+    - {fileID: 2800000, guid: 265f179f49c40ff4e99580ee5ba87553, type: 3}
+    - {fileID: 2800000, guid: 67184a03293c1b247ab4f47c350e5e30, type: 3}
+    - {fileID: 2800000, guid: 4ac53bc7dfcf1dd4cb534706221a0a8f, type: 3}
+    - {fileID: 2800000, guid: 889739189bc69ca4c95247ae7a44ff01, type: 3}
