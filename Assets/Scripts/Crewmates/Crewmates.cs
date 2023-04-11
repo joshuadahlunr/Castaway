@@ -161,7 +161,10 @@ namespace Crew {
             GameObject.FindGameObjectWithTag("Info Panel").transform.localScale = new Vector3(1, 1, 1);
 
             GameObject displayName = GameObject.FindGameObjectWithTag("Crew Name");
-            displayName.GetComponent<TextMeshProUGUI>().text = "the " + _type.ToString();
+            displayName.GetComponent<TextMeshProUGUI>().text = _name.ToString();
+
+            GameObject typeName = GameObject.FindGameObjectWithTag("Crew Type");
+            typeName.GetComponent<TextMeshProUGUI>().text = "the " + _type.ToString();
 
             GameObject morale = GameObject.FindGameObjectWithTag("Morale");
             morale.GetComponent<TextMeshProUGUI>().text = "Morale: " + _morale.ToString();
@@ -169,8 +172,8 @@ namespace Crew {
             moraleSlider.GetComponent<Slider>().value = _morale;
 
             GameObject level = GameObject.FindGameObjectWithTag("Level");
-            level.GetComponent<TextMeshProUGUI>().text = "Level " + _level.ToString() + " (" + _currentXp.ToString()
-                                                        + "/" + _xpNeeded.ToString() + ")";
+            level.GetComponent<TextMeshProUGUI>().text = "Level " + _level.ToString() + ": " + _currentXp.ToString()
+                                                        + "/" + _xpNeeded.ToString() + " XP";
 
             GameObject xpSlider = GameObject.FindGameObjectWithTag("XP Slider");
             xpSlider.GetComponent<Slider>().value = _currentXp;

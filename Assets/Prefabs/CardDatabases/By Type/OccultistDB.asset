@@ -37,15 +37,15 @@ MonoBehaviour:
     isExpanded: 1
     _keyValues:
     - Attack
-    - BailWater
+    - Bail Water
     - Scry
-    - OccultTwirl
+    - Occult Twirl
     - Fate Tie
     _keys:
     - Attack
-    - BailWater
+    - Bail Water
     - Scry
-    - OccultTwirl
+    - Occult Twirl
     - Fate Tie
     _values:
     - {fileID: 1798558198490400397, guid: 948a13693cf3aad4a9a0bd359cc158ef, type: 3}

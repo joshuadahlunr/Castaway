@@ -1,50 +1,35 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Crew;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class CrewmateEncounter : MonoBehaviour
-{
-    public GameObject crewPrefab;
-    private GameObject newCrew;
-
-    // TODO: once crewmate DB has been implemented, allow crewmates from previous runs to be encountered
-    public GameObject GenerateCrewmate()
+namespace Crew {
+    public class CrewmateEncounter : MonoBehaviour
     {
-        GameObject crewmate;
-        crewmate = Instantiate(crewPrefab, new Vector2(Random.Range(-29f, 20f), 115f), Quaternion.identity);
-        crewmate.SetActive(true);
-        crewmate.GetComponent<SpriteRenderer>().color = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
-        crewmate.GetComponent<Crewmate>().infoPrefab = GameObject.FindGameObjectWithTag("Info Panel");
-        return crewmate;
-    }
-
-    public void AddToCrew()
-    {
-        if (newCrew != null)
+        private Crewmates newCrew = null;
+        public void ReturnToMap()
         {
-            GlobalCrew.CREW.Add(newCrew.GetComponent<Crewmate>());
-        } else
-        {
-            Debug.Log("No crew member found!");
+            SceneManager.LoadScene("EncounterMapScene");
         }
-        SceneManager.LoadScene("EncounterMapScene");
-    }
 
-    public void ReturnToMap()
-    {
-        SceneManager.LoadScene("EncounterMapScene");
-    }
+        public void AddCrewmate()
+        {
+            CrewManager.instance.AddToCrew(newCrew);
+            NotificationHolder.instance.CreateNotification("New card obtained: " + newCrew.CrewCard + "!");
+            StartCoroutine(ReturnToMap(3f));
+        }
 
-    private void Awake()
-    {
-        newCrew = GenerateCrewmate();
-    }
+        IEnumerator ReturnToMap(float waitTime)
+        {
+            yield return new WaitForSeconds(waitTime);
+            SceneManager.LoadScene("EncounterMapScene");
+        }
 
-    private void Start()
-    {
-        newCrew.GetComponent<Crewmate>().ShowInfo();
+        private void Start()
+        {
+            newCrew = CrewManager.instance.SpawnNewCrewmate();
+            newCrew.ShowInfo();
+        }
     }
 }

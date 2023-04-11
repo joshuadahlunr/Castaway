@@ -37,14 +37,14 @@ MonoBehaviour:
     isExpanded: 1
     _keyValues:
     - Attack
-    - BailWater
+    - Bail Water
     - Douse
-    - NauticalChart
+    - Nautical Chart
     _keys:
     - Attack
-    - BailWater
+    - Bail Water
     - Douse
-    - NauticalChart
+    - Nautical Chart
     _values:
     - {fileID: 1798558198490400397, guid: 948a13693cf3aad4a9a0bd359cc158ef, type: 3}
     - {fileID: 134441627470835729, guid: d942d0a9d7ce2914c841ea09612a31ea, type: 3}

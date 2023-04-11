@@ -37,11 +37,11 @@ MonoBehaviour:
     isExpanded: 1
     _keyValues:
     - Attack
-    - BailWater
+    - Bail Water
     - Rotate
     _keys:
     - Attack
-    - BailWater
+    - Bail Water
     - Rotate
     _values:
     - {fileID: 1798558198490400397, guid: 948a13693cf3aad4a9a0bd359cc158ef, type: 3}

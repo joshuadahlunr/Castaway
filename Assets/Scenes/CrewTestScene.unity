@@ -487,11 +487,64 @@ MonoBehaviour:
   - Anne
   - Mary
   - Edward
-  - Izzy
+  - Israel
   - Steve
   - Mickey
   - Wayne
   - Holly
+  - Ulysses
+  - Alistair
+  - Mason
+  - Miles
+  - Robin
+  - William
+  - Jack
+  - Cornelius
+  - Peter
+  - Grace
+  - Pedro
+  - Jean
+  - Vincenzo
+  - Charlotte
+  - Chevalier
+  - Sanji
+  - Brook
+  - Samuel
+  - Phineas
+  - Ned
+  - Hamidou
+  - Joseph
+  - Flora
+  - Maria
+  - Sadie
+  - Hezekiah
+  - Catherine
+  - Dahlia
+  - Andrew
+  - Tabitha
+  - Eddie
+  - Rahmah
+  - Narciso
+  - Rachel
+  - June
+  - August
+  - Abdulla
+  - Limahong
+  - Zhi
+  - Eli
+  - Jebediah
+  - Judas
+  - Roman
+  - Gustavo
+  - Phoebe
+  - Rafael
+  - Matsura
+  - Kenki
+  - Jing
+  - Yi
+  - Min
+  - Felix
+  - Dan
   cardDatabase: {fileID: 11400000, guid: 5631e1aa1e5ef424e9af340e6b5cff49, type: 2}
   cookCards: {fileID: 11400000, guid: d710809db5c4efa479fa27fa253604ae, type: 2}
   deckhandCards: {fileID: 11400000, guid: c7ccfb8049d802242a95633c5ce58049, type: 2}

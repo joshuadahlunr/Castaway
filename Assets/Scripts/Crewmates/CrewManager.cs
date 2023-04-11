@@ -187,6 +187,8 @@ namespace Crew {
         /// </summary>
         public void SaveCrew()
         {
+            var newList = crewList;
+            newList.RemoveAll(x => x.CrewTag == Crewmates.Status.CrewTag.NotInCrew);
             var crewmates = DatabaseManager.GetOrCreateTable<CrewData>();
             crewmates.Delete(_ => true);
 
@@ -216,11 +218,12 @@ namespace Crew {
         /// <summary>
         ///     Spawn in a random crewmate that was in a previous run for crewmate encounters
         /// </summary>
-        public void SpawnOldCrewmate()
+        public Crewmates SpawnOldCrewmate()
         {
-            GameObject crewmate = Instantiate(crewPrefab, new Vector2(0, 0), Quaternion.identity);
-            crewmate.transform.localScale = new Vector3(1,1,1);
-
+            // Instantiate the crewmate prefab
+            GameObject crewmate = Instantiate(crewPrefab, new Vector3(0, -2, 10), Quaternion.identity);
+            crewmate.transform.localScale = new Vector3(1.5f,1.5f,1f);
+            
             List<Crewmates> shuffledCrew = crewList;
             shuffledCrew.Shuffle();
 
@@ -233,6 +236,7 @@ namespace Crew {
             crewmate.GetComponent<Crewmates>().Morale = randomCrewmate.Morale;
             crewmate.GetComponent<Crewmates>().CurrentXP = randomCrewmate.CurrentXP;
             crewmate.GetComponent<Crewmates>().XPNeeded = randomCrewmate.XPNeeded;
+            crewmate.GetComponent<Crewmates>().CrewCard = randomCrewmate.CrewCard;
 
             crewmate.GetComponent<Crewmates>().BaseSprite = randomCrewmate.BaseSprite;
             crewmate.GetComponent<Crewmates>().HairSprite = randomCrewmate.HairSprite;
@@ -258,16 +262,18 @@ namespace Crew {
 
             Texture2D mouthTexture = crewmate.GetComponent<Crewmates>().MouthSprite;
             crewmate.transform.GetChild(5).GetComponent<SpriteRenderer>().sprite = Sprite.Create(mouthTexture, new Rect(0, 0, mouthTexture.width, mouthTexture.height), new Vector2(0.5f, 0.5f), 100.0f);
+
+            return crewmate.GetComponent<Crewmates>();
         }
 
         /// <summary>
         ///     Spawn in a randomly generated crewmate for crewmate encounters
         /// </summary>
-        public void SpawnNewCrewmate()
+        public Crewmates SpawnNewCrewmate()
         {
             // Instantiate the crewmate prefab
-            GameObject crewmate = Instantiate(crewPrefab, new Vector2(0, 0), Quaternion.identity);
-            crewmate.transform.localScale = new Vector3(1,1,1);
+            GameObject crewmate = Instantiate(crewPrefab, new Vector3(0, -2, 10), Quaternion.identity);
+            crewmate.transform.localScale = new Vector3(1.5f,1.5f,1f);
 
             // Generate starting crewmate data and load into spawned prefab
             crewmate.GetComponent<Crewmates>().CrewTag = (Crewmates.Status.CrewTag)0;
@@ -282,36 +288,36 @@ namespace Crew {
             switch (crewmate.GetComponent<Crewmates>().Type)
             {
                 case (Crewmates.CrewClass.Type)0: // For wizards
-                    var randomCard = wizardCards.Instantiate(wizardCards.cards.Keys.Shuffle().First());
-                    crewmate.GetComponent<Crewmates>().CrewCard = randomCard.name;
+                    var randomCard = wizardCards.cards.Keys.Shuffle().First();
+                    crewmate.GetComponent<Crewmates>().CrewCard = randomCard;
                     break;
                 case (Crewmates.CrewClass.Type)1: // For navigators
-                    randomCard = navigatorCards.Instantiate(navigatorCards.cards.Keys.Shuffle().First());
-                    crewmate.GetComponent<Crewmates>().CrewCard = randomCard.name;
+                    randomCard = navigatorCards.cards.Keys.Shuffle().First();
+                    crewmate.GetComponent<Crewmates>().CrewCard = randomCard;
                     break;
                 case (Crewmates.CrewClass.Type)2: // For entertainers
-                    randomCard = entertainerCards.Instantiate(entertainerCards.cards.Keys.Shuffle().First());
-                    crewmate.GetComponent<Crewmates>().CrewCard = randomCard.name;
+                    randomCard = entertainerCards.cards.Keys.Shuffle().First();
+                    crewmate.GetComponent<Crewmates>().CrewCard = randomCard;
                     break;
                 case (Crewmates.CrewClass.Type)3: // For engineers
-                    randomCard = engineerCards.Instantiate(engineerCards.cards.Keys.Shuffle().First());
-                    crewmate.GetComponent<Crewmates>().CrewCard = randomCard.name;
+                    randomCard = engineerCards.cards.Keys.Shuffle().First();
+                    crewmate.GetComponent<Crewmates>().CrewCard = randomCard;
                     break;
                 case (Crewmates.CrewClass.Type)4: // For cooks
-                    randomCard = cookCards.Instantiate(cookCards.cards.Keys.Shuffle().First());
-                    crewmate.GetComponent<Crewmates>().CrewCard = randomCard.name;
+                    randomCard = cookCards.cards.Keys.Shuffle().First();
+                    crewmate.GetComponent<Crewmates>().CrewCard = randomCard;
                     break;
                 case (Crewmates.CrewClass.Type)5: // For occultists
-                    randomCard = occultistCards.Instantiate(occultistCards.cards.Keys.Shuffle().First());
-                    crewmate.GetComponent<Crewmates>().CrewCard = randomCard.name;
+                    randomCard = occultistCards.cards.Keys.Shuffle().First();
+                    crewmate.GetComponent<Crewmates>().CrewCard = randomCard;
                     break;
                 case (Crewmates.CrewClass.Type)6: // For mercenaries 
-                    randomCard = mercenaryCards.Instantiate(mercenaryCards.cards.Keys.Shuffle().First());
-                    crewmate.GetComponent<Crewmates>().CrewCard = randomCard.name;
+                    randomCard = mercenaryCards.cards.Keys.Shuffle().First();
+                    crewmate.GetComponent<Crewmates>().CrewCard = randomCard;
                     break;
                 case (Crewmates.CrewClass.Type)7: // For deckhands
-                    randomCard = deckhandCards.Instantiate(deckhandCards.cards.Keys.Shuffle().First());
-                    crewmate.GetComponent<Crewmates>().CrewCard = randomCard.name;
+                    randomCard = deckhandCards.cards.Keys.Shuffle().First();
+                    crewmate.GetComponent<Crewmates>().CrewCard = randomCard;
                     break; 
                 default: // If we can't find the crewmate's type, break
                     break;
@@ -397,6 +403,9 @@ namespace Crew {
 
             // Add crewmates component into crew list
             crewList.Add(crewmate.GetComponent<Crewmates>());
+
+            // Return a reference to this new crewmate
+            return crewmate.GetComponent<Crewmates>();
         }
 
         /// <summary>

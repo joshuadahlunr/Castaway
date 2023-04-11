@@ -37,18 +37,18 @@ MonoBehaviour:
     isExpanded: 1
     _keyValues:
     - Attack
-    - BailWater
+    - Bail Water
     - Lightning Spear
     - Flame
-    - ArcaneTwirl
+    - Arcane Twirl
     - Jerry's Arcane Twirl
     - Summoning
     _keys:
     - Attack
-    - BailWater
+    - Bail Water
     - Lightning Spear
     - Flame
-    - ArcaneTwirl
+    - Arcane Twirl
     - Jerry's Arcane Twirl
     - Summoning
     _values:
