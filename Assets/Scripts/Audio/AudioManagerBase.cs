@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using Extensions;
 using UnityEngine;
 
 public class AudioManagerBase : Core.Utilities.PersistentSingleton<AudioManagerBase> {
-	
-	
+
+
 	// -- NamedAudioClip --
 
 
@@ -285,12 +287,12 @@ public class AudioManagerBase : Core.Utilities.PersistentSingleton<AudioManagerB
 		// Function which starts cycling between the tracks in this player
 		// Allows running through the cycle <once> or indefinitely, as well as setting the <fadeDuration> between tracks
 		Coroutine trackCycle = null; // Coroutine representing the track cycling
-		public void CycleTracks(bool once = false, float fadeDuration = 0){
+		public void CycleTracks(bool once = false, bool random = true, float fadeDuration = 0, int trackRepeats = 1){
 			// Cancel the ongoing track cycle
 			CancelCycleTracks();
 
 			// Start the new track cycle
-			trackCycle = owner.StartCoroutine(trackCycler(once, fadeDuration));
+			trackCycle = owner.StartCoroutine(trackCycler(once, random, fadeDuration, trackRepeats));
 		}
 
 		// Function which cancels the current cycle
@@ -304,23 +306,26 @@ public class AudioManagerBase : Core.Utilities.PersistentSingleton<AudioManagerB
 
 		// Coroutine which cycles through all of the tracks
 		bool trackCycler_SavedLoop; // Looping state of the source before we began
-		IEnumerator trackCycler(bool once, float fadeDuration){
+		IEnumerator trackCycler(bool once, bool random, float fadeDuration, int trackRepeats){
 			// Save the loop state and set that tracks aren't looping
 			trackCycler_SavedLoop = source.loop;
 			source.loop = false;
 
 			// For each track...
-			foreach (string name in tracks.Keys){
-				// Switch to that track
-				SwitchTrack(name, fadeDuration, /*Don't cancel track cycling*/ false);
+			var tracks = random ? this.tracks.Keys.Shuffle() : this.tracks.Keys;
+			foreach (string name in tracks){
+				for (int i = 0; i < trackRepeats; i++) { // Play each track 3 times (fading between each)
+					// Switch to that track
+					SwitchTrack(name, fadeDuration, /*Don't cancel track cycling*/ false);
 
-				// Wait for the fade to finish
-				while(!(trackFade is null))
-					yield return null; 
+					// Wait for the fade to finish
+					while (trackFade is not null)
+						yield return null;
 
-				// Wait for the track to be fadeDuration away from being finished playing
-				while(source.clip.length - source.time > fadeDuration)
-					yield return null; 
+					// Wait for the track to be fadeDuration away from being finished playing
+					while (source.clip.length - source.time > fadeDuration)
+						yield return null;
+				}
 			}
 
 			// Restore the saved loop state
@@ -328,7 +333,7 @@ public class AudioManagerBase : Core.Utilities.PersistentSingleton<AudioManagerB
 
 			// If we should run indefinitely restart the coroutine
 			if(!once)
-				CycleTracks(once, fadeDuration);
+				CycleTracks(once, random, fadeDuration, trackRepeats);
 		}
 	}
 

@@ -4,25 +4,26 @@ using UnityEngine;
 
 public class AudioManager : AudioManagerBase {
 	// List of music clips
-	public NamedAudioClip[] musicClips;
+	public NamedAudioClip[] battleMusicClips, calmMusicClips;
 	// List of ui sound effect clips
 	public NamedAudioClip[] uiSoundFxClips;
 	// List of sound effect clips
 	public NamedAudioClip[] soundFxClips;
 
-	// References to the players we create
-	public AudioManagerBase.AudioPlayer musicPlayer, uiSoundFXPlayer, soundFXPlayer;
+	// References to the audio players we create
+	public AudioManagerBase.AudioPlayer battleMusicPlayer, calmMusicPlayer, uiSoundFXPlayer, soundFXPlayer;
 
-	// Override instance to represent the Whitehat type
-	new static public AudioManager instance {
-		get => AudioManagerBase.instance as AudioManager;
-	}
+	public new static AudioManager instance => AudioManagerBase.instance as AudioManager;
 
 	void Start(){
 		// Create a music player and set it off cycling through the music tracks indefinitely
-		musicPlayer = CreateAudioPlayer("music", musicClips);
-		musicPlayer.volume = .8f;
-		musicPlayer.CycleTracks(/*once*/ false, 10);
+		battleMusicPlayer = CreateAudioPlayer("battleMusic", battleMusicClips);
+		battleMusicPlayer.volume = 0;
+		battleMusicPlayer.CycleTracks(/*once*/ false, true, 5); // Since our tracks are kinda short, play each track 3 times before switching to a new one!
+
+		calmMusicPlayer = CreateAudioPlayer("music", calmMusicClips);
+		calmMusicPlayer.volume = .1f;
+		calmMusicPlayer.CycleTracks(/*once*/ false, true,5, 3); // Since our tracks are kinda short, play each track 3 times before switching to a new one!
 
 		// Create a UI SoundFX player
 		uiSoundFXPlayer = CreateAudioPlayer("uiSoundFX", uiSoundFxClips);
@@ -31,5 +32,18 @@ public class AudioManager : AudioManagerBase {
 		// Create a SoundFX player
 		soundFXPlayer = CreateAudioPlayer("soundFX", soundFxClips);
 		soundFXPlayer.source.loop = false;
+	}
+
+	public void PlayBattleMusic(float fadeDuration = 3) => StartCoroutine(PlayMusicImpl(.8f, 0, fadeDuration));
+	public void PlayCalmMusic(float fadeDuration = 3) => StartCoroutine(PlayMusicImpl(0, .1f, fadeDuration));
+
+	private IEnumerator PlayMusicImpl(float targetBattleVolume, float targetCalmVolume, float fadeDuration = 3) {
+		float initialBattleVolume = battleMusicPlayer.volume;
+		float initialCalmVolume = calmMusicPlayer.volume;
+		for (float time = 0; time < 1; time += Time.deltaTime / fadeDuration) { // The divide by 3 means it will take 3 seconds to fade
+			yield return null;
+			battleMusicPlayer.volume = Mathf.Lerp(initialBattleVolume, targetBattleVolume, time);
+			calmMusicPlayer.volume = Mathf.Lerp(initialCalmVolume, targetCalmVolume, time);
+		}
 	}
 }
