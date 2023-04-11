@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-/// <summary> Loads Tutorial Intro </summary>
+/// <summary> Loads Tutorial Ending </summary>
 /// <author> Dana Conley </author>
 
-public class MainStory : MonoBehaviour
+public class TutorialEnd : MonoBehaviour
 {
     void OnEnable()
     {
-        SceneManager.LoadScene("TutorialMapScene", LoadSceneMode.Single);
+        SceneManager.LoadScene("TutorialEndScene", LoadSceneMode.Single);
     }
 }

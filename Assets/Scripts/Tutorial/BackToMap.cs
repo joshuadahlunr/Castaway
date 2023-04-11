@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-/// <summary> Loads Tutorial Intro </summary>
+/// <summary> Loads Tutorial Map after battle </summary>
 /// <author> Dana Conley </author>
 
-public class MainStory : MonoBehaviour
+public class BackToMap : MonoBehaviour
 {
     void OnEnable()
     {
-        SceneManager.LoadScene("TutorialMapScene", LoadSceneMode.Single);
+        SceneManager.LoadScene("TutorialMapScene2", LoadSceneMode.Single);
     }
 }

@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-/// <summary> Loads Tutorial Intro </summary>
+/// <summary> Loads Menu after Tutorial </summary>
 /// <author> Dana Conley </author>
 
-public class MainStory : MonoBehaviour
+public class BackToMenu : MonoBehaviour
 {
     void OnEnable()
     {
-        SceneManager.LoadScene("TutorialMapScene", LoadSceneMode.Single);
+        SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
     }
 }

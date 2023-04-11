@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-/// <summary> Loads Tutorial Intro </summary>
+/// <summary> Loads Actual Battle After Intro </summary>
 /// <author> Dana Conley </author>
 
-public class MainStory : MonoBehaviour
+public class ToRealBattle : MonoBehaviour
 {
     void OnEnable()
     {
-        SceneManager.LoadScene("TutorialMapScene", LoadSceneMode.Single);
+        SceneManager.LoadScene("TutorialBattleScene", LoadSceneMode.Single);
     }
 }
