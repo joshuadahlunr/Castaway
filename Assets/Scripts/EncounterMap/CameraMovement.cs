@@ -10,7 +10,7 @@ namespace EncounterMap {
     /// as it moves across the screen 
     public class CameraMovement : MonoBehaviour {
         // The offset between the Camera and Target so the camera stays at the same z value
-        private Vector3 camOffset = new Vector3(0f, 0f, -50f);
+        private Vector3 camOffset = new Vector3(0f, 0f, -100f);
         private float time = 0.25f;
         private Vector3 velocity = Vector3.zero;
         [SerializeField] private Transform target;
