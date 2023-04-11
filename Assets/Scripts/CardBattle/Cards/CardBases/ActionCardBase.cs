@@ -118,6 +118,9 @@ namespace CardBattle.Card {
 		///     Utility function which refunds the cost of the card and moves it back into the player's hand!
 		/// </summary>
 		public void RefundAndReset() {
+			AudioManager.instance?.uiSoundFXPlayer?.PlayTrackImmediate("Failure");
+			NotificationHolder.instance?.CreateNotification("Returned Card to Hand!");
+
 			AddCostToPool(cost);
 			draggable?.Reset();
 		}

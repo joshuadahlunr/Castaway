@@ -45,6 +45,8 @@ namespace CardBattle {
 		///     When we start dragging save the reset positions
 		/// </summary>
 		public override void OnDragBegin() {
+			AudioManager.instance?.uiSoundFXPlayer?.PlayTrackImmediate("Interact");
+
 			resetPosition = targetPosition;
 			initialRotation = targetRotation;
 		}

@@ -69,6 +69,8 @@ namespace CardBattle {
 				draggable.targetRotation = snapTarget.transform.rotation;
 				card.container.SendToContainer(card, snapTarget);
 				card.OnPlayed();
+
+				AudioManager.instance?.soundFXPlayer?.PlayTrackImmediate("Equipment");
 			} else if (TargetingGraveyard)
 				// If targeting the graveyard, bin the card for attack
 				card.BinCardForAttack();
@@ -80,6 +82,8 @@ namespace CardBattle {
 
 				card.OnTarget(target);
 				target.OnTargeted(card);
+
+				AudioManager.instance?.soundFXPlayer?.PlayTrackImmediate("Cast");
 			}
 
 			// Disable all of the unaffordable cards
@@ -94,12 +98,15 @@ namespace CardBattle {
 		/// <summary>
 		///     Callback called when the player cancels their choice
 		/// </summary>
-		public void Cancel() {
+		public void Cancel(bool notify = true) {
 			// Reset the draggable position of the card and destroy the confirmation object
 			var draggable = card.GetComponent<DraggableBase>();
 			draggable.Reset();
 
-			NotificationHolder.instance?.CreateNotification("Returned Card to Hand!"); // TODO: Why is this called on success?
+			if (notify) {
+				AudioManager.instance?.uiSoundFXPlayer?.PlayTrackImmediate("Failure");
+				NotificationHolder.instance?.CreateNotification("Returned Card to Hand!");
+			}
 
 			// Get rid of ourselves once an action has been chosen!
 			CardGameManager.instance.activeConfirmationExists = false;

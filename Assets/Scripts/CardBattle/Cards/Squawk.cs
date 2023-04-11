@@ -10,8 +10,6 @@ namespace CardBattle {
 		// Override the CanTargetPlayer property to always return false
 		public override bool CanTargetPlayer => false;
 
-		// Declare a public AudioSource variable named "squawk"
-		public AudioSource squawk;
 
         /// <summary>
         ///     Plays the squawk audio clip, logs a message to the console, and sends the card to the graveyard.
@@ -19,7 +17,7 @@ namespace CardBattle {
         /// <param name="_">Unused.</param>
         public override void OnTarget(CardBase _) {
 			// Play the squawk audio clip
-			squawk.Play();
+			AudioManager.instance.soundFXPlayer.PlayTrackImmediate("Squawk");
 
 			// Log a message to the console
 			Debug.Log("Squawk");

@@ -36,7 +36,10 @@ namespace CardBattle {
 		/// <summary>
 		///     Called when dragging begins. Saves the initial position of the card.
 		/// </summary>
-		public override void OnDragBegin() { initPosition = transform.position; }
+		public override void OnDragBegin() {
+			AudioManager.instance?.uiSoundFXPlayer?.PlayTrackImmediate("Interact");
+			initPosition = transform.position;
+		}
 
 		/// <summary>
 		///     Called while dragging. If we hit something targetable, create an arrow pointing to it. Also move the card slightly to provide a little bit of feedback! Returns true if we are snapping, false otherwise.

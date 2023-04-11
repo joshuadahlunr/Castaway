@@ -25,6 +25,8 @@ namespace CardBattle {
 			// Return if the target is null or owned by the player
 			if (NullAndPlayerCheck(target)) return;
 
+			AudioManager.instance.soundFXPlayer.PlayTrackImmediate("Attack");
+
 			// Damage target (falling back to player if we are monster and not targeting anything!)
 			DamageTargetOrPlayer(properties["primary"], target);
 

@@ -245,6 +245,10 @@ namespace CardBattle {
 			turnStart?.Invoke();
 		}
 
+		public void Start() {
+			AudioManager.instance.PlayBattleMusic();
+		}
+
 
 		/// <summary>
 		///     Variable tracking if it is the player's turn or not
@@ -363,10 +367,14 @@ namespace CardBattle {
 			// Invoke the turn end event
 			turnEnd?.Invoke();
 
-			// TODO: Show a turn transition screen here!
 			// Start the next turn
 			OnTurnStart();
 		}
+
+		/// <summary>
+		/// Helper method used as a callback to UI hover events
+		/// </summary>
+		public void PlayUISound(string sound = "Interact") => AudioManager.instance?.uiSoundFXPlayer?.PlayTrackImmediate(sound);
 
 		/// <summary>
 		///     Callback called whenever the player's health changes

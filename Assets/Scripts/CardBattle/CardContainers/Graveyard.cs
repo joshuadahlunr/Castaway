@@ -27,7 +27,7 @@ namespace CardBattle.Containers {
 			// If no Confirmation component is found, return
 			if (confirm is null) return;
 			// If the card being added is the same as the card in the Confirmation component, cancel the confirmation
-			if (confirm.card == card) confirm.Cancel();
+			if (confirm.card == card) confirm.Cancel(false);
 		}
 	}
 }

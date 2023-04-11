@@ -74,7 +74,7 @@ MonoBehaviour:
   soundFxClips:
   - name: Cast
     clip: {fileID: 8300000, guid: 9f0b86deec602b8408bd5e3a57b7c092, type: 3}
-  - name: Sqawk
+  - name: Squawk
     clip: {fileID: 8300000, guid: 445d47d7b5455b94bbc75e16702dfaf9, type: 3}
   - name: Attack
     clip: {fileID: 8300000, guid: f8c051b38a2a7e04d9245e0e5320bb2d, type: 3}
