@@ -1,9 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 /// <summary>
-/// Class for storing upgrade information (code, 
+/// Class for storing upgrade information (resources, 
 /// resource cost, progress towards upgrade, and
 /// current upgrade level)
 /// </summary>
@@ -11,23 +10,34 @@ using UnityEngine;
 
 namespace ResourceMgmt
 {
-    public class UpgradeData
+    public class UpgradeData : MonoBehaviour
     {
-        private string _code;
-        private float _cost;
-        private float _progress;
-        private float _level;
-        public UpgradeData(string code, float cost, float progress, float level)
+        [SerializeField] private int _resources;
+        public int Resources
         {
-            _code = code; // To refer to a certain part of the ship
-            _cost = cost; // How many resources are needed for an upgrade
-            _progress = progress; // Progress made towards upgrade
-            _level = level; // Current upgrade level
+            get => _resources;
+            set { _resources = value; } 
         }
 
-        public void AddProgress(float value)
+        [SerializeField] private int _cost;
+        public int Cost
         {
-            _progress += value;
+            get => _cost;
+            set { _cost = value; }
+        }
+
+        [SerializeField] private int _progress;
+        public int Progress
+        {
+            get => _progress;
+            set { _progress = value; }
+        }
+
+        [SerializeField] private int _level;
+        public int Level
+        {
+            get => _level;
+            set { _level = value; }
         }
 
         public void ResetProgress()
@@ -46,28 +56,13 @@ namespace ResourceMgmt
             }
         }
 
-        public void IncreaseCost()
-        {
-            _cost *= 2;
-        }
-
-        public void IncreaseLevel()
-        {
-            _level += 1;
-        }
-
         public bool CanBuy()
         {
-            if (Globals.SHIP_RESOURCE.Amount < _cost)
+            if (_resources < _cost)
             {
                 return false;
             }
             return true;
         }
-
-        public string Code { get => _code; }
-        public float Cost { get => _cost; }
-        public float Progress { get => _progress; }
-        public float Level { get => _level; }
     }
 }

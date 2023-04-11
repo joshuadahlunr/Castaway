@@ -8,7 +8,7 @@ using TMPro;
 /// </summary>
 /// <author>Misha Desear</author>
 
-namespace ResourceMgmt
+/*namespace ResourceMgmt
 {
     public class StrategyGameManager : MonoBehaviour
     {
@@ -90,4 +90,4 @@ namespace ResourceMgmt
                 Globals.SHIP_RESOURCE.Amount.ToString() + " resources in total. How would you like to allocate them?";
         }
     }
-}
+}*/

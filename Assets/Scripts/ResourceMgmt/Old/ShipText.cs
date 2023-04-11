@@ -14,7 +14,7 @@ namespace ResourceMgmt
         {
             for (int i = 0; i < textArr.Length; i++)
             {
-                textArr[i].text = Globals.UPGRADE_DATA[i].Code.ToString() + ": Level " + Globals.UPGRADE_DATA[i].Level.ToString();
+                //textArr[i].text = Globals.UPGRADE_DATA[i].Code.ToString() + ": Level " + Globals.UPGRADE_DATA[i].Level.ToString();
             }
         }
     }

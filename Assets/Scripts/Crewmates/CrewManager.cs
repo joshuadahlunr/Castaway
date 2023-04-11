@@ -14,10 +14,6 @@ namespace Crew {
     /// <author>Misha Desear</author>
     public class CrewManager : MonoBehaviour
     {
-        public class GlobalCrewList
-        {
-            
-        }
         /// <summary>
         ///     Represents a single crewmate in the SQL database
         /// </summary>

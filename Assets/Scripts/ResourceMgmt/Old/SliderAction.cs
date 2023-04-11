@@ -9,7 +9,7 @@ using TMPro;
 /// <author>Misha Desear</author>
 
 namespace ResourceMgmt
-{
+{/*
     public class SliderAction : MonoBehaviour
     {
         public TextMeshProUGUI sliderText;
@@ -45,5 +45,5 @@ namespace ResourceMgmt
                 slider.value = currentVal;
             }
         }
-    }
+    }*/
 }

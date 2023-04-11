@@ -8,7 +8,7 @@ using ResourceMgmt;
 /// <author>Misha Desear</author>
 public class Globals
 {
-    // Global resource value
+    /*// Global resource value
     public static ShipResource SHIP_RESOURCE = new(0);
 
     // Global upgrade info array
@@ -20,5 +20,5 @@ public class Globals
         new UpgradeData("Cargo Hold", 10, 0, 0),
         new UpgradeData("Gun Deck", 10, 0, 0),
         new UpgradeData("Forecastle", 10, 0, 0)
-    };
+    };*/
 }
