@@ -48,11 +48,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _renderer: {fileID: 8054100049657687534}
+  draggable: {fileID: 0}
+  collider: {fileID: 0}
   container: {fileID: 0}
   _state: 2
   cardOwner: 0
   _name: Fire Cannon
-  _art: {fileID: 21300000, guid: a96f840c57f2c094ba619484ac3cb50c, type: 3}
+  _art: {fileID: 21300000, guid: ed991f7417094854d9448728ee5640e4, type: 3}
   _rules: Fires the selected cannon, dealing {properties["primary"]} damage to everything
     in range.
   _properties:
@@ -87,6 +89,7 @@ MonoBehaviour:
       value: 5
   _cost:
     list: 00000000
+  associatedSelkie: {fileID: 0}
 --- !u!65 &4430917359204932420
 BoxCollider:
   m_ObjectHideFlags: 0
