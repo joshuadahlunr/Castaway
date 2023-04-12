@@ -48,11 +48,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _renderer: {fileID: 4822052698991740723}
+  draggable: {fileID: 0}
+  collider: {fileID: 0}
   container: {fileID: 0}
   _state: 2
   cardOwner: 0
   _name: Cannon
-  _art: {fileID: 21300000, guid: a96f840c57f2c094ba619484ac3cb50c, type: 3}
+  _art: {fileID: 21300000, guid: 9c5260f686cbd0e438ca0ac806660700, type: 3}
   _rules: Adds a `Fire Cannon`.
   _properties:
     reorderableList:
@@ -132,7 +134,6 @@ MonoBehaviour:
   rotationSpeed: 20
   targetPosition: {x: 0, y: 0, z: 0}
   targetRotation: {x: 0, y: 0, z: 0, w: 0}
-  sphere: {fileID: 5395593827619395624, guid: 4332da1e1388b7a41bbc3fd8b6d59559, type: 3}
 --- !u!1001 &8733230420178235801
 PrefabInstance:
   m_ObjectHideFlags: 0
