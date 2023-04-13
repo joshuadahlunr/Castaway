@@ -8,6 +8,7 @@ using Extensions;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.UI.Extensions;
@@ -49,6 +50,11 @@ namespace CardBattle {
 		public BurningRope rope;
 
 		/// <summary>
+		///		Reference to the post processing volume which makes the game look like an old film
+		/// </summary>
+		public Volume OldFilmPostProcessing;
+
+		/// <summary>
 		///     Text field showing the player's health
 		/// </summary>
 		public TMP_Text health;
@@ -69,12 +75,6 @@ namespace CardBattle {
 		public Image PeopleJuiceIconPrefab;
 
 		/// <summary>
-		///     Panel displayed when the player loses the game
-		/// </summary>
-		// TODO: Improve
-		public GameObject losePanel;
-
-		/// <summary>
 		///     Reference to the prefab for confirmation prompts
 		/// </summary>
 		public Confirmation confirmationPrefab;
@@ -89,7 +89,8 @@ namespace CardBattle {
 		/// <summary>
 		///     The amount of time in a turn
 		/// </summary>
-		public float turnTime = 30;
+		public float playerTurnTime = 30;
+		public float monsterTurnTime = 5;
 
 		/// <summary>
 		///     The maximum number of cards in the player's hand
@@ -269,7 +270,7 @@ namespace CardBattle {
 			// Decrease the time left in the turn
 			turnTimer -= Time.deltaTime;
 			// Update the rope UI element to reflect the remaining turn time
-			rope.max = turnTime;
+			rope.max = isPlayerTurn ? playerTurnTime : monsterTurnTime;
 			rope.current = turnTimer;
 
 			// Update the player's health UI element
@@ -296,7 +297,7 @@ namespace CardBattle {
 
 			// If the turn timer has reached zero, end the turn
 			if (turnTimer <= 0) {
-				turnTimer = turnTime;
+				turnTimer = isPlayerTurn ? monsterTurnTime : playerTurnTime;
 				OnTurnEnd();
 			}
 		}
@@ -310,6 +311,7 @@ namespace CardBattle {
 				card.OnTurnStart();
 
 			if (isPlayerTurn) {
+				OldFilmPostProcessing.enabled = false;
 				Instantiate(playerTurnPrefab, canvas.transform);
 
 				// Reset their damage negation
@@ -327,6 +329,7 @@ namespace CardBattle {
 				for (var i = 0; i < missingCards; i++)
 					DrawPlayerCard();
 			} else {
+				OldFilmPostProcessing.enabled = true;
 				Instantiate(monsterTurnPrefab, canvas.transform);
 
 				// If it's not the player's turn, reset the damage negation of all active monsters and reveal their top card
@@ -391,16 +394,12 @@ namespace CardBattle {
 		/// <summary>
 		///     Callback called when the player wins the game
 		/// </summary>
-		public void OnWin() { SceneManager.LoadScene("Scenes/ResourceMgmtScene"); }
+		public void OnWin() => SceneManager.LoadScene("Scenes/ResourceMgmtScene");
 
 		/// <summary>
 		///     Callback called when the player loses the game
 		/// </summary>
-		public void OnLose() {
-			Time.timeScale = 0; // Pause
-			losePanel.SetActive(true); // Display the lose panel
-			// TODO: Need to go back to the main menu or something...
-		}
+		public void OnLose() => SceneManager.LoadScene("Scenes/LoseScene");
 
 
 		/// <summary>
