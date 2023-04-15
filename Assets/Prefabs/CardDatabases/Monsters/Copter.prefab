@@ -105,7 +105,7 @@ GameObject:
   - component: {fileID: 618883279989994154}
   - component: {fileID: 618883279989994325}
   m_Layer: 0
-  m_Name: Bass
+  m_Name: Copter
   m_TagString: Targetable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -194,8 +194,8 @@ MonoBehaviour:
   container: {fileID: 0}
   _state: 4
   cardOwner: 1
-  _name: Bass
-  _art: {fileID: 21300000, guid: ff286d917e36cd14cbb5421ba4f3e531, type: 3}
+  _name: Dave
+  _art: {fileID: 21300000, guid: 347235655a37db1478438d60fbf92050, type: 3}
   _rules: 
   _properties:
     reorderableList:
@@ -224,8 +224,8 @@ MonoBehaviour:
     _keys: []
     _values: []
   _health:
-    health: 3
-    maxHealth: 3
+    health: 12
+    maxHealth: 12
     permanentDamageReduction: 0
     temporaryDamageReduction: 0
   healthStateChanged:
@@ -380,11 +380,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 4.909973
-      objectReference: {fileID: 0}
-    - target: {fileID: 8705953693113563530, guid: b12620cf2bf3db14887538a945f8b6c3,
-        type: 3}
-      propertyPath: m_text
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

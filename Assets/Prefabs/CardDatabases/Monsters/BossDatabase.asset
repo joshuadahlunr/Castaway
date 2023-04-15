@@ -38,9 +38,11 @@ MonoBehaviour:
     _keyValues:
     - Kraken
     - Vinh
+    - Copter
     _keys:
     - Kraken
     - Vinh
+    - Copter
     _values:
     - monsterCard: {fileID: 618883279989994325, guid: 531a547dfc03c914583f1555546d134e,
         type: 3}
@@ -54,4 +56,9 @@ MonoBehaviour:
       - {fileID: 1028301194782096724, guid: 09fbb3d024a58464ea815f2e10452427, type: 3}
       - {fileID: 1798558198490400397, guid: 948a13693cf3aad4a9a0bd359cc158ef, type: 3}
       - {fileID: 5982055226416778362, guid: 7bb6504231ba1a14fb1c7a2bb75c2836, type: 3}
+      deckListString: 
+    - monsterCard: {fileID: 618883279989994325, guid: 927c294453189dc4e896ea99eed86556,
+        type: 3}
+      deckList:
+      - {fileID: 1798558198490400397, guid: 948a13693cf3aad4a9a0bd359cc158ef, type: 3}
       deckListString: 
