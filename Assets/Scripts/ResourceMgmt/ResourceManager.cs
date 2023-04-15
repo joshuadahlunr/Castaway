@@ -29,7 +29,7 @@ namespace ResourceMgmt
 
             public int currentResources { get; set; }
         }
-        
+
         public static ResourceManager instance;
 
         [SerializeField] private Slider shipSlider, crewSlider;
@@ -63,7 +63,7 @@ namespace ResourceMgmt
             if (DatabaseManager.GetOrCreateTable<UpgradeInfo>().Any())
             {
                 LoadUpgradeInfo();
-            } 
+            }
             else
             {
                 upgradeData.Level = 1;
@@ -174,7 +174,7 @@ namespace ResourceMgmt
             {
                 case >= 10:
                     Sprite lvlThreeShip = shipLevels[2];
-                    ship.sprite = lvlThreeShip;               
+                    ship.sprite = lvlThreeShip;
                     break;
                 case >= 5:
                     Sprite lvlTwoShip = shipLevels[1];
@@ -196,7 +196,7 @@ namespace ResourceMgmt
             upgradeData.Level = @out.currentLvl;
             upgradeData.Progress = @out.currentProgress;
             upgradeData.Cost = @out.lvlCost;
-            upgradeData.Resources = @out.currentResources;         
+            upgradeData.Resources = @out.currentResources;
         }
 
         public void SaveUpgradeInfo()

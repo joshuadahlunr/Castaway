@@ -5,6 +5,7 @@ using CardBattle.Card;
 using CardBattle.Card.Modifications.Generic;
 using CardBattle.Containers;
 using Extensions;
+using ResourceMgmt;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
@@ -38,6 +39,9 @@ namespace CardBattle {
 			FinalBoss
 		}
 		public static EncounterType encounterType = EncounterType.Normal;
+
+		public static int numberOfMonstersKilled;
+		public static int monsterLevel;
 
 		/// <summary>
 		///     Reference to the main scene canvas
@@ -172,9 +176,9 @@ namespace CardBattle {
 			}
 
 			// If the player's deck doesn't have any cards in it yet, add 10 "Attack" cards to the player's deck and 10 "Attack" cards to the shark's deck
+			var playerDeckId = DatabaseManager.GetOrCreateTable<Deck.DeckList>()
+				.FirstOrDefault(l => l.name == playerDeckName).id;
 			if (!DatabaseManager.GetOrCreateTable<Deck.DeckListCard>().Any()) {
-				var playerDeckId = DatabaseManager.GetOrCreateTable<Deck.DeckList>()
-					.FirstOrDefault(l => l.name == playerDeckName).id;
 				var sharkDeckId = DatabaseManager.GetOrCreateTable<Deck.DeckList>()
 					.FirstOrDefault(l => l.name == sharkDeckName).id;
 
@@ -183,28 +187,46 @@ namespace CardBattle {
 					DatabaseManager.database.Insert(new Deck.DeckListCard {
 						listID = playerDeckId,
 						name = "Attack",
-						level = 1
+						level = 1,
+						associatedCrewmateID = null
 					});
 
 					DatabaseManager.database.Insert(new Deck.DeckListCard {
 						listID = sharkDeckId,
 						name = "Attack",
-						level = 2
+						level = 2,
+						associatedCrewmateID = null
 					});
 				}
 			}
 
+			var shipUpgradeInfo = DatabaseManager.GetOrCreateTable<ResourceManager.UpgradeInfo>().FirstOrDefault();
+			var shipLevel = shipUpgradeInfo?.currentLvl ?? 0; // TODO: Spawn proper ship upgrade using this
+
+
+			// Update Jerry's cards to have the same level as the ship
+			var playerCards = DatabaseManager.GetOrCreateTable<Deck.DeckListCard>()
+				.Where(card => card.listID == playerDeckId);
+			foreach(var card in playerCards)
+				if (card.associatedCrewmateID == null) {
+					Debug.Log(card.id);
+					card.level = shipLevel;
+					DatabaseManager.database.InsertOrReplace(card); // TODO: is this mass duplicating cards in the database?
+				}
+
+
 			// Determine the level of the encounter based on the difficulty, and if it's a multiple of 5 - 1, set the encounter type to "Boss"
-			var level = (int)Mathf.Max(Mathf.Round(encounterDifficulty), 0) + 1;
-			if (level % 5 == 4)
+			monsterLevel = (int)Mathf.Max(Mathf.Round(encounterDifficulty), 0) + 1;
+			if (monsterLevel % 5 == 4)
 				encounterType = EncounterType.Boss;
-			if (level > 20)
+			if (monsterLevel > 20)
 				encounterType = EncounterType.FinalBoss;
 
+
 			// Calculate the number of encounters to spawn based on the encounter type and level
-			var number = encounterType == EncounterType.Normal ? level / 5 + 1 : 1;
+			numberOfMonstersKilled = encounterType == EncounterType.Normal ? monsterLevel / 5 + 1 : 1;
 			// Spawn the encounters
-			for (var i = 0; i < number; i++) {
+			for (var i = 0; i < numberOfMonstersKilled; i++) {
 				MonsterCardBase monster;
 				if (string.IsNullOrEmpty(spawnSpecificMonster)) {
 					monster = encounterType switch {
@@ -225,20 +247,18 @@ namespace CardBattle {
 				// Add a modification to each card in the monster's deck to adjust its difficulty based on the level of the encounter
 				foreach (var card in monster.deck) {
 					Debug.Log($"Upgrading {card.name}");
-					card.AddModification(new LevelModification(level));
+					card.AddModification(new LevelModification(monsterLevel));
 				}
 
-				monster.AddModification(new LevelModification(level));
+				monster.AddModification(new LevelModification(monsterLevel));
 				monsters = new List<MonsterCardBase>(monsters) { monster }.ToArray();
 			}
 
-			// Load the player's deck from SQL and add a modification to each card to adjust its difficulty based on the level of the encounter
+			// Load the player's deck from SQL
 			playerDeck.DatabaseLoad();
-			foreach (var card in playerDeck)
-				card.AddModification(new LevelModification(level)); // TODO: Remove... simulates player progression!
+			// Assign the monster cards to their monster
 			for (var i = 0; i < monsters.Length; i++) {
 				var m = monsters[i];
-				// m.deck.DatabaseLoad("Shark Deck");
 				m.deck.AssignOwnerToCards(i);
 			}
 

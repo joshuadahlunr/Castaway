@@ -1200,13 +1200,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canvas: {fileID: 115369221}
   rope: {fileID: 1696576803}
+  OldFilmPostProcessing: {fileID: 1439854249}
   health: {fileID: 589900438}
   PeopleJuiceHolder: {fileID: 177758974}
   peopleJuiceIconDatabase: {fileID: 11400000, guid: 8c136e78ce6618d469a76ab7d765f10e,
     type: 2}
   PeopleJuiceIconPrefab: {fileID: 1497151535789364905, guid: 41d43a00aca464e4485e3d9a723e5f3e,
     type: 3}
-  losePanel: {fileID: 435326279}
   confirmationPrefab: {fileID: 6046074830972396742, guid: c75fd6e721f75d64b895d8954f63d234,
     type: 3}
   playerTurnPrefab: {fileID: 4691017256377408628, guid: 90967e0a3371a1f48a767f712c23295b,
@@ -1216,7 +1216,8 @@ MonoBehaviour:
   monsterDatabase: {fileID: 11400000, guid: 661d70e8572b2c84da626018448d76b8, type: 2}
   bossDatabase: {fileID: 11400000, guid: eacaa6c50a67d2f40ae32ec85bbf0e2a, type: 2}
   finalBossDatabase: {fileID: 11400000, guid: f4b99712d3c924a4689378ba344d0c00, type: 2}
-  turnTime: 5
+  playerTurnTime: 30
+  monsterTurnTime: 5
   playerMaxHandSize: 5
   _playerHealthState:
     health: 10

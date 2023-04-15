@@ -175,6 +175,11 @@ namespace CardBattle.Card {
 		public int cardOwner;
 
 		/// <summary>
+		///		Index representing the ID of the crewmate associated with this card in the databse
+		/// </summary>
+		public int? associatedCrewmate = null;
+
+		/// <summary>
 		///     Bool indicating if the card is disabled
 		/// </summary>
 		public bool Disabled => !isActiveAndEnabled && !renderer.disabled.activeInHierarchy;

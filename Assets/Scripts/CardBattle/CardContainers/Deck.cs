@@ -1,5 +1,6 @@
 ﻿using System;
 using CardBattle.Card;
+using CardBattle.Card.Modifications.Generic;
 using Extensions;
 using SQLite;
 using UnityEngine;
@@ -57,7 +58,7 @@ namespace CardBattle.Containers {
 			/// <summary>
 			///     Gets or sets the name of the character associated with this card.
 			/// </summary>
-			public int associatedCharacterName { set; get; } // TODO: Replace with character id?
+			public int? associatedCrewmateID { set; get; } // TODO: Replace with character id?
 
 			/// <summary>
 			///     Gets or sets the level of the card.
@@ -145,7 +146,11 @@ namespace CardBattle.Containers {
 				// Instantiate the card from the associated cardDB
 				var instantiated = cardDB.Instantiate(card.name);
 
-				// TODO: Add a level modifier to the instantiated card
+				// Associate the card with a crewmate (if the database says it should be!)
+				instantiated.associatedCrewmate = card.associatedCrewmateID;
+
+				// Add a level modification to the card
+				instantiated.AddModification(new LevelModification(card.level));
 
 				// Add the instantiated card to the deck
 				AddCard(instantiated);
