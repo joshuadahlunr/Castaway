@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using CardBattle.Card;
 using CardBattle.Card.Modifications.Generic;
 using Extensions;

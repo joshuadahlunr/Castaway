@@ -183,17 +183,34 @@ namespace CardBattle {
 					.FirstOrDefault(l => l.name == sharkDeckName).id;
 
 				Debug.Log("Creating decklist cards table");
-				for (var i = 0; i < 10; i++) {
+				for (var i = 0; i < 2; i++) {
 					DatabaseManager.database.Insert(new Deck.DeckListCard {
 						listID = playerDeckId,
 						name = "Attack",
-						level = 1,
+						level = 2,
 						associatedCrewmateID = null
 					});
-
+					// DatabaseManager.database.Insert(new Deck.DeckListCard {
+					// 	listID = playerDeckId,
+					// 	name = "Swarm Block",
+					// 	level = 2,
+					// 	associatedCrewmateID = null
+					// });
+					// DatabaseManager.database.Insert(new Deck.DeckListCard {
+					// 	listID = playerDeckId,
+					// 	name = "Damaged Harpoon",
+					// 	level = 2,
+					// 	associatedCrewmateID = null
+					// });
 					DatabaseManager.database.Insert(new Deck.DeckListCard {
-						listID = sharkDeckId,
-						name = "Attack",
+						listID = playerDeckId,
+						name = "Bail Water",
+						level = 2,
+						associatedCrewmateID = null
+					});
+					DatabaseManager.database.Insert(new Deck.DeckListCard {
+						listID = playerDeckId,
+						name = "Jerry's Arcane Twirl",
 						level = 2,
 						associatedCrewmateID = null
 					});
