@@ -17,7 +17,7 @@ namespace Crew {
         /// <summary>
         ///     Represents a single crewmate in the SQL database
         /// </summary>
-        public class CrewData
+        public class CrewData 
         {
             [PrimaryKey, Unique, AutoIncrement]
             /// <summary>
@@ -66,7 +66,7 @@ namespace Crew {
             ///     Gets or sets the database index for the base texture
             /// </summary>
             public int baseIndex { set; get; }
-
+            
             /// <summary>
             ///     Gets or sets the database index for the hair texture
             /// </summary>
@@ -82,7 +82,7 @@ namespace Crew {
             /// </summary>
             public int browIndex { set; get; }
 
-            /// <summary>
+            ///             var remainder = (int)crewSlider.value;<summary>
             ///     Gets or sets the database index for the mouth texture
             /// </summary>
             public int mouthIndex { set; get; }
@@ -108,15 +108,15 @@ namespace Crew {
         [SerializeField] private CardDatabase cardDatabase, cookCards, deckhandCards, engineerCards, entertainerCards, mercenaryCards, navigatorCards, occultistCards, wizardCards;
 
         [SerializeField] private SpriteDatabase baseTextures, browTextures, eyeTextures, mouthTextures, hairTextures, clothesTextures;
-
-        public List<Crewmates> crewList;
+        
+        public List<Crewmates> crewList; 
 
         [SerializeField] private GameObject crewPrefab;
 
         /// <summary>
         ///     When the game starts:
         /// </summary>
-        public void Awake()
+        public void Awake() 
         {
             // Set up singleton
             instance = this;
@@ -136,12 +136,12 @@ namespace Crew {
 
         /// <summary>
         ///     Converts crewmate data stored in SQL into Crewmates objects for use in crewmate interaction
-        /// </summary>
+        /// </summary> 
         public virtual void LoadCrew()
         {
             var crewmates = DatabaseManager.GetOrCreateTable<CrewData>();
 
-            foreach (var crewmate in crewmates)
+            foreach (var crewmate in crewmates) 
             {
                 // Create new Crewmates object to store loaded attributes
                 GameObject obj = new GameObject("obj");
@@ -181,14 +181,15 @@ namespace Crew {
         /// <summary>
         ///     Saves data in the crew list to the SQL table containing crew information
         /// </summary>
-        public void SaveCrew()
+        public static void SaveCrew()
         {
-            var newList = crewList;
+            var newList = instance.crewList;
             newList.RemoveAll(x => x.CrewTag == Crewmates.Status.CrewTag.NotInCrew);
+
             var crewmates = DatabaseManager.GetOrCreateTable<CrewData>();
             crewmates.Delete(_ => true);
 
-            foreach (var crewmate in crewList)
+            foreach (var crewmate in instance.crewList) 
             {
                 DatabaseManager.database.Insert(new CrewData
                 {
@@ -200,13 +201,13 @@ namespace Crew {
                     currentXp = crewmate.CurrentXP,
                     xpNeeded = crewmate.XPNeeded,
                     cardName = crewmate.CrewCard,
-
-                    baseIndex = baseTextures.sprites.Where(pair => pair.Value == crewmate.BaseSprite).Select(pair => pair.Key).FirstOrDefault(),
-                    hairIndex = hairTextures.sprites.Where(pair => pair.Value == crewmate.HairSprite).Select(pair => pair.Key).FirstOrDefault(),
-                    eyeIndex = eyeTextures.sprites.Where(pair => pair.Value == crewmate.EyeSprite).Select(pair => pair.Key).FirstOrDefault(),
-                    browIndex = browTextures.sprites.Where(pair => pair.Value == crewmate.BrowSprite).Select(pair => pair.Key).FirstOrDefault(),
-                    mouthIndex = mouthTextures.sprites.Where(pair => pair.Value == crewmate.MouthSprite).Select(pair => pair.Key).FirstOrDefault(),
-                    clothesIndex = clothesTextures.sprites.Where(pair => pair.Value == crewmate.ClothesSprite).Select(pair => pair.Key).FirstOrDefault()
+                    
+                    baseIndex = instance.baseTextures.sprites.Where(pair => pair.Value == crewmate.BaseSprite).Select(pair => pair.Key).FirstOrDefault(),
+                    hairIndex = instance.hairTextures.sprites.Where(pair => pair.Value == crewmate.HairSprite).Select(pair => pair.Key).FirstOrDefault(),
+                    eyeIndex = instance.eyeTextures.sprites.Where(pair => pair.Value == crewmate.EyeSprite).Select(pair => pair.Key).FirstOrDefault(),
+                    browIndex = instance.browTextures.sprites.Where(pair => pair.Value == crewmate.BrowSprite).Select(pair => pair.Key).FirstOrDefault(),
+                    mouthIndex = instance.mouthTextures.sprites.Where(pair => pair.Value == crewmate.MouthSprite).Select(pair => pair.Key).FirstOrDefault(),
+                    clothesIndex = instance.clothesTextures.sprites.Where(pair => pair.Value == crewmate.ClothesSprite).Select(pair => pair.Key).FirstOrDefault()
                 });
             }
         }
@@ -219,7 +220,7 @@ namespace Crew {
             // Instantiate the crewmate prefab
             GameObject crewmate = Instantiate(crewPrefab, new Vector3(0, -2, 10), Quaternion.identity);
             crewmate.transform.localScale = new Vector3(1.5f,1.5f,1f);
-
+            
             List<Crewmates> shuffledCrew = crewList;
             shuffledCrew.Shuffle();
 
@@ -253,7 +254,7 @@ namespace Crew {
             Texture2D eyeTexture = crewmate.GetComponent<Crewmates>().EyeSprite;
             crewmate.transform.GetChild(3).GetComponent<SpriteRenderer>().sprite = Sprite.Create(eyeTexture, new Rect(0, 0, eyeTexture.width, eyeTexture.height), new Vector2(0.5f, 0.5f), 100.0f);
 
-            Texture2D browTexture = crewmate.GetComponent<Crewmates>().BrowSprite;
+            Texture2D browTexture = crewmate.GetComponent<Crewmates>().BrowSprite; 
             crewmate.transform.GetChild(4).GetComponent<SpriteRenderer>().sprite = Sprite.Create(browTexture, new Rect(0, 0, browTexture.width, browTexture.height), new Vector2(0.5f, 0.5f), 100.0f);
 
             Texture2D mouthTexture = crewmate.GetComponent<Crewmates>().MouthSprite;
@@ -307,14 +308,14 @@ namespace Crew {
                     randomCard = occultistCards.cards.Keys.Shuffle().First();
                     crewmate.GetComponent<Crewmates>().CrewCard = randomCard;
                     break;
-                case (Crewmates.CrewClass.Type)6: // For mercenaries
+                case (Crewmates.CrewClass.Type)6: // For mercenaries 
                     randomCard = mercenaryCards.cards.Keys.Shuffle().First();
                     crewmate.GetComponent<Crewmates>().CrewCard = randomCard;
                     break;
                 case (Crewmates.CrewClass.Type)7: // For deckhands
                     randomCard = deckhandCards.cards.Keys.Shuffle().First();
                     crewmate.GetComponent<Crewmates>().CrewCard = randomCard;
-                    break;
+                    break; 
                 default: // If we can't find the crewmate's type, break
                     break;
             }
@@ -322,9 +323,9 @@ namespace Crew {
             // Pick random sprites for each renderer!
             // Pick a random base
             crewmate.GetComponent<Crewmates>().BaseSprite = baseTextures.sprites.ElementAt(Random.Range(0, baseTextures.sprites.Count)).Value;
-
+            
             // If the crewmate is a wizard or chef...
-            if (crewmate.GetComponent<Crewmates>().Type == (Crewmates.CrewClass.Type)0 || crewmate.GetComponent<Crewmates>().Type == (Crewmates.CrewClass.Type)4)
+            if (crewmate.GetComponent<Crewmates>().Type == (Crewmates.CrewClass.Type)0 || crewmate.GetComponent<Crewmates>().Type == (Crewmates.CrewClass.Type)4) 
             {
                 // ...exclude the first hairstyle since bandana in Style 1 and hats in outfits overlap strangely
                 crewmate.GetComponent<Crewmates>().HairSprite = hairTextures.sprites.ElementAt(Random.Range(4, hairTextures.sprites.Count)).Value;
@@ -376,7 +377,7 @@ namespace Crew {
                 default: // If we can't load the appropriate resource, break (this means crewmate is naked :/)
                     break;
             }
-
+            
             // Load sprites from attributes into corresponding sprite renderers
 
             Texture2D baseTexture = crewmate.GetComponent<Crewmates>().BaseSprite;
@@ -391,7 +392,7 @@ namespace Crew {
             Texture2D eyeTexture = crewmate.GetComponent<Crewmates>().EyeSprite;
             crewmate.transform.GetChild(3).GetComponent<SpriteRenderer>().sprite = Sprite.Create(eyeTexture, new Rect(0, 0, eyeTexture.width, eyeTexture.height), new Vector2(0.5f, 0.5f), 100.0f);
 
-            Texture2D browTexture = crewmate.GetComponent<Crewmates>().BrowSprite;
+            Texture2D browTexture = crewmate.GetComponent<Crewmates>().BrowSprite; 
             crewmate.transform.GetChild(4).GetComponent<SpriteRenderer>().sprite = Sprite.Create(browTexture, new Rect(0, 0, browTexture.width, browTexture.height), new Vector2(0.5f, 0.5f), 100.0f);
 
             Texture2D mouthTexture = crewmate.GetComponent<Crewmates>().MouthSprite;
@@ -427,6 +428,7 @@ namespace Crew {
             {
                 crewList[listIndex] = crew; // ...update that crewmate in the list!
             }
+            SaveCrew();
         }
 
         /// <summary>
@@ -444,10 +446,73 @@ namespace Crew {
                 .FirstOrDefault(c => c.associatedCrewmateID == listIndex && c.listID == playerDeckId);
             DatabaseManager.database.Delete(cardMatch); // Delete it!
             crew.CrewTag = (Crewmates.Status.CrewTag)1; // Change crewmate's crew tag to WasInCrew (1)
-            if (listIndex != 1) // If we were able to find a valid index...
+            if (listIndex != 1) // If we were able to find a valid index... 
             {
                 crewList[listIndex] = crew; // ...update that crewmate in the list!
             }
+            SaveCrew();
+        }
+
+        /// <summary>
+        ///     Flags a crew member as formerly being in player's crew and removes card from player deck DB
+        /// </summary>
+        /// <param name="crewmateID">The ID of the crewmate to be removed</param> 
+        public static void RemoveWithId(int crewmateID)
+        {
+            const string playerDeckName = "Player Deck"; // Obtain the crewmate's index in crew list
+            // Fetch the ID of the SQL table containing the player deck
+            var playerDeckId = DatabaseManager.GetOrCreateTable<Deck.DeckList>()
+                .FirstOrDefault(l => l.name == playerDeckName).id;
+            // Find the matching card in the player's deck that shares the same index
+            var cardMatch = DatabaseManager.GetOrCreateTable<Deck.DeckListCard>()
+                .FirstOrDefault(c => c.associatedCrewmateID == crewmateID && c.listID == playerDeckId);
+            DatabaseManager.database.Delete(cardMatch); // Delete it!
+            instance.crewList[crewmateID].CrewTag = (Crewmates.Status.CrewTag)1; // Change crewmate's crew tag to WasInCrew (1)
+            SaveCrew(); // Save the newly updated crew list to SQL
+        }
+
+        /// <summary>
+        ///     Flags all members of crew as formerly being in player's crew and removes their cards from player deck DB
+        /// </summary>
+        public static void SetAllCrewToFormer()
+        {
+            const string playerDeckName = "Player Deck"; // Obtain the crewmate's index in crew list
+            // Fetch the ID of the SQL table containing the player deck
+            var playerDeckId = DatabaseManager.GetOrCreateTable<Deck.DeckList>()
+                .FirstOrDefault(l => l.name == playerDeckName).id;
+            // For each member in the crew list...
+            for (int i = 0; i > instance.crewList.Count; i++)
+            {
+                // Find the matching card in the player's deck that shares the same index
+                var cardMatch = DatabaseManager.GetOrCreateTable<Deck.DeckListCard>()
+                    .FirstOrDefault(c => c.associatedCrewmateID == i && c.listID == playerDeckId);
+                DatabaseManager.database.Delete(cardMatch); // Delete it!
+                instance.crewList[i].CrewTag = (Crewmates.Status.CrewTag)1; // Change crewmate's crew tag to WasInCrew(1)
+            }
+            SaveCrew(); // Save the newly updated crew list to SQL
+        }
+
+        /// <summary>
+        ///     Flags a crew member as no longer being in player's crew and removes card from player deck DB
+        /// </summary>
+        /// <remarks>This makes it impossible for the specified crew member to be encountered in other runs!</remarks>
+        /// <param name="crewmateID">The ID of the crewmate to be removed</param>
+        public static void KillCrewmate(int crewmateID)
+        {
+            const string playerDeckName = "Player Deck"; // Obtain the crewmate's index in crew list
+            // Fetch the ID of the SQL table containing the player deck
+            var playerDeckId = DatabaseManager.GetOrCreateTable<Deck.DeckList>()
+                .FirstOrDefault(l => l.name == playerDeckName).id;
+            // For each member in the crew list...
+            for (int i = 0; i > instance.crewList.Count; i++)
+            {
+                // Find the matching card in the player's deck that shares the same index
+                var cardMatch = DatabaseManager.GetOrCreateTable<Deck.DeckListCard>()
+                    .FirstOrDefault(c => c.associatedCrewmateID == i && c.listID == playerDeckId);
+                DatabaseManager.database.Delete(cardMatch); // Delete it!
+                instance.crewList[i].CrewTag = (Crewmates.Status.CrewTag)0; // Change crewmate's crew tag to NotInCrew(0)
+            }
+            SaveCrew(); // TODO: does this create any problems with crewmate indexing?
         }
 
         /// <summary>
@@ -458,7 +523,7 @@ namespace Crew {
             const string playerDeckName = "Player Deck";
             int listIndex = crewList.FindIndex(c => c == crew); // Obtain the crewmate's index in crew list
             crew.Level += 1; // Increase level attribute by 1
-            // Fetch the ID of the SQL table containing the player deck
+            // Fetch the ID of the SQL table contianing the player deck
             var playerDeckId = DatabaseManager.GetOrCreateTable<Deck.DeckList>()
                 .FirstOrDefault(l => l.name == playerDeckName).id;
             // Find the matching card in the player's deck that shares the same index
@@ -473,6 +538,7 @@ namespace Crew {
                 level = crew.Level,
                 associatedCrewmateID = listIndex
             });
+            SaveCrew(); // Save the newly updated crew list to SQL
         }
     }
 }

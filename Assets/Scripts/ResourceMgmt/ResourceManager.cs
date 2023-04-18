@@ -137,6 +137,7 @@ namespace ResourceMgmt
             var currentCrew = CrewManager.instance.crewList;
             currentCrew.RemoveAll(x => x.CrewTag != Crewmates.Status.CrewTag.InCrew);
             if (currentCrew == null) return;
+            if (crewSlider.value == 0) return;
 
             int count = 0;
             upgradeData.Resources -= (int)crewSlider.value;
