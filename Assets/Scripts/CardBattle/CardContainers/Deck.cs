@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using CardBattle.Card;
 using CardBattle.Card.Modifications.Generic;
 using Extensions;
@@ -143,6 +143,7 @@ namespace CardBattle.Containers {
 
 			// Use the associated cardDB to load the cards from the database
 			foreach (var card in cards) {
+				Debug.Log(card.name);
 				// Instantiate the card from the associated cardDB
 				var instantiated = cardDB.Instantiate(card.name);
 

@@ -59,6 +59,16 @@ namespace CardBattle {
 		public Volume OldFilmPostProcessing;
 
 		/// <summary>
+		///	Ship sprites that get swapped out every 5 levels
+		/// </summary>
+		public Material material0, material5, material10;
+
+		/// <summary>
+		///		Equipment slots that get unlocked every 3 levels
+		/// </summary>
+		public GameObject slot3, slot6, slot9;
+
+		/// <summary>
 		///     Text field showing the player's health
 		/// </summary>
 		public TMP_Text health;
@@ -126,7 +136,7 @@ namespace CardBattle {
 		public Deck playerDeck, playerGraveyard;
 		public Hand playerHand;
 		public CardContainerBase[] inPlayContainers;
-		public GameObject ship;
+		public MeshRenderer ship;
 		public GameObject ocean;
 
 		/// <summary>
@@ -217,8 +227,20 @@ namespace CardBattle {
 				}
 			}
 
+			// Calculate the ship level
 			var shipUpgradeInfo = DatabaseManager.GetOrCreateTable<ResourceManager.UpgradeInfo>().FirstOrDefault();
 			var shipLevel = shipUpgradeInfo?.currentLvl ?? 0; // TODO: Spawn proper ship upgrade using this
+			shipLevel = 3;
+
+			// Set the material of the ship to track its upgrades
+			ship.material = material0;
+			if (shipLevel >= 5) ship.material = material5;
+			if (shipLevel >= 10) ship.material = material10;
+
+			// Set the number of slots based on the ship level
+			slot3.SetActive(shipLevel >= 3);
+			slot6.SetActive(shipLevel >= 6);
+			slot9.SetActive(shipLevel >= 10);
 
 
 			// Update Jerry's cards to have the same level as the ship
