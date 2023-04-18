@@ -20,10 +20,10 @@ namespace Crew {
             get => _infoPanel;
             set { _infoPanel = value; }
         }*/
-        
+
         //public Global global;
-        
-        //public GameObject infoPanel => _infoPanel; 
+
+        //public GameObject infoPanel => _infoPanel;
 
         [Serializable]
         public struct Status {
@@ -36,7 +36,7 @@ namespace Crew {
             public static implicit operator int(Status s) => s.value;
         }
         [SerializeField] private Status.CrewTag _crewTag;
-        public Status.CrewTag CrewTag 
+        public Status.CrewTag CrewTag
         {
             get => _crewTag;
             set { _crewTag = value; }
@@ -45,14 +45,15 @@ namespace Crew {
         [Serializable]
         public struct CrewClass {
             public enum Type {
-                Wizard,         // 0
-                Navigator,      // 1
-                Entertainer,    // 2
-                Engineer,       // 3
-                Cook,           // 4
-                Occultist,      // 5
-                Mercenary,      // 6
-                Deckhand        // 7
+                Invalid,
+                Wizard,         // 1
+                Navigator,      // 2
+                Entertainer,    // 3
+                Engineer,       // 4
+                Cook,           // 5
+                Occultist,      // 6
+                Mercenary,      // 7
+                Deckhand        // 8
 
             }
             public int value;
@@ -73,14 +74,14 @@ namespace Crew {
         }
 
         [SerializeField] private string _name;
-        public string Name 
+        public string Name
         {
             get => _name;
             set { _name = value; }
         }
 
         [SerializeField] private int _level;
-        public int Level 
+        public int Level
         {
             get => _level;
             set { _level = value; }
@@ -94,7 +95,7 @@ namespace Crew {
         }
 
         [SerializeField] private int _currentXp;
-        public int CurrentXP 
+        public int CurrentXP
         {
             get => _currentXp;
             set { _currentXp = value; }
@@ -148,13 +149,13 @@ namespace Crew {
             get => _clothesSprite;
             set { _clothesSprite = value; }
         }
-        
+
         [SerializeField] private string _crewCard;
-        public string CrewCard 
+        public string CrewCard
         {
             get => _crewCard;
             set { _crewCard = value; }
-        } 
+        }
 
         public void ShowInfo()
         {
@@ -180,7 +181,7 @@ namespace Crew {
             xpSlider.GetComponent<Slider>().maxValue = _xpNeeded;
         }
 
-        public void HideInfo() 
+        public void HideInfo()
         {
             GameObject.FindGameObjectWithTag("Info Panel").transform.localScale = new Vector3(0, 0, 0);
         }

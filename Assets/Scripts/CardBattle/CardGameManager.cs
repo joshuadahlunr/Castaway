@@ -242,7 +242,6 @@ namespace CardBattle {
 			slot6.SetActive(shipLevel >= 6);
 			slot9.SetActive(shipLevel >= 10);
 
-
 			// Update Jerry's cards to have the same level as the ship
 			var playerCards = DatabaseManager.GetOrCreateTable<Deck.DeckListCard>()
 				.Where(card => card.listID == playerDeckId);
@@ -253,6 +252,7 @@ namespace CardBattle {
 					DatabaseManager.database.InsertOrReplace(card); // TODO: is this mass duplicating cards in the database?
 				}
 
+			// TODO: Set reset people juice to match the current crewmates
 
 			// Determine the level of the encounter based on the difficulty, and if it's a multiple of 5 - 1, set the encounter type to "Boss"
 			monsterLevel = (int)Mathf.Max(Mathf.Round(encounterDifficulty), 0) + 1;
