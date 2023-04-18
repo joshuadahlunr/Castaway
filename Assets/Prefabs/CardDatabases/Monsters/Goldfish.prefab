@@ -189,11 +189,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _renderer: {fileID: 210981424612027311}
+  draggable: {fileID: 0}
+  collider: {fileID: 0}
   container: {fileID: 0}
   _state: 4
   cardOwner: 1
   _name: Goldfish
-  _art: {fileID: 21300000, guid: a96f840c57f2c094ba619484ac3cb50c, type: 3}
+  _art: {fileID: 21300000, guid: 5e0e3aedf357d0346a6b575776f06655, type: 3}
   _rules: 
   _properties:
     reorderableList:

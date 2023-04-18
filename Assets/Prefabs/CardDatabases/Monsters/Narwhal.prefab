@@ -189,11 +189,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _renderer: {fileID: 210981424612027311}
+  draggable: {fileID: 0}
+  collider: {fileID: 0}
   container: {fileID: 0}
   _state: 4
   cardOwner: 1
   _name: Narwhal
-  _art: {fileID: 21300000, guid: a96f840c57f2c094ba619484ac3cb50c, type: 3}
+  _art: {fileID: 21300000, guid: 885b353c3677fa04aba640b57678528d, type: 3}
   _rules: 
   _properties:
     reorderableList:

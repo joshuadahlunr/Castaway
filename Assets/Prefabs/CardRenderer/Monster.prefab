@@ -254,7 +254,7 @@ PrefabInstance:
     - target: {fileID: 1232506761614981826, guid: 43cdfc534094f1e4ab64aaacb3a6ccb9,
         type: 3}
       propertyPath: m_PresetInfoIsWorld
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1232506761614981827, guid: 43cdfc534094f1e4ab64aaacb3a6ccb9,
         type: 3}
@@ -282,7 +282,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 07cbbd7c519f41f47a0f9cb1c08ff2e5,
+      objectReference: {fileID: 21300000, guid: 4b638752ac5df9648adaff8b876f1025,
         type: 3}
     - target: {fileID: 6466231282346409730, guid: 43cdfc534094f1e4ab64aaacb3a6ccb9,
         type: 3}
