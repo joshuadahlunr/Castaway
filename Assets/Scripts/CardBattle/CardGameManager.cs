@@ -28,7 +28,7 @@ namespace CardBattle {
 		/// <summary>
 		///     Variable set by the encounter map, used to determine how difficult this encounter should be!
 		/// </summary>
-		public static float encounterDifficulty = 5;
+		public static float encounterDifficulty;
 
 		/// <summary>
 		///     The type of encounter this is (normal or boss)

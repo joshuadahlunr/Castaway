@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4430917359204932422}
-  - component: {fileID: 8474119564818363157}
   - component: {fileID: 1507604627182355238}
   - component: {fileID: 4430917359204932420}
   - component: {fileID: 4430917359204932421}
@@ -36,66 +35,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8474119564818363157
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4430917359204932423}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e1ef6b9e5934f148bae2d801ef60dff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _renderer: {fileID: 8054100049657687534}
-  draggable: {fileID: 0}
-  collider: {fileID: 0}
-  container: {fileID: 0}
-  _state: 2
-  cardOwner: 0
-  _name: Scry
-  _art: {fileID: 21300000, guid: 206eeb00667ece443a7fd7f0d4e786a2, type: 3}
-  _rules: Reveal the top card of a monster's deck. Decrease its effectiveness by
-    <color=green>{properties["reduction"]}</color> for <color=green>{properties["duration"]}</color>
-    turns.
-  _properties:
-    reorderableList:
-      canAdd: 1
-      canRemove: 1
-      draggable: 1
-      expandable: 1
-      multipleSelection: 1
-      isExpanded: 1
-      label:
-        m_Text: Keys
-        m_Image: {fileID: 0}
-        m_Tooltip: 
-      headerHeight: 18
-      footerHeight: 13
-      slideEasing: 0.15
-      verticalSpacing: 2
-      showDefaultBackground: 1
-      elementDisplayType: 0
-      elementNameProperty: 
-      elementNameOverride: 
-      elementIcon: {fileID: 0}
-    reqReferences: {fileID: 0}
-    isExpanded: 1
-    _keyValues:
-    - duration
-    - reduction
-    _keys:
-    - duration
-    - reduction
-    _values:
-    - tag: 4
-      value: 2
-    - tag: 4
-      value: 1
-  _cost:
-    list: 06000000
-  associatedSelkie: {fileID: 0}
 --- !u!114 &1507604627182355238
 MonoBehaviour:
   m_ObjectHideFlags: 0

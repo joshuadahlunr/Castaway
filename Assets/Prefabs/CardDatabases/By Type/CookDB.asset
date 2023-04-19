@@ -38,9 +38,12 @@ MonoBehaviour:
     _keyValues:
     - Attack
     - Bail Water
+    - Mystic Stew
     _keys:
     - Attack
     - Bail Water
+    - Mystic Stew
     _values:
     - {fileID: 1798558198490400397, guid: 948a13693cf3aad4a9a0bd359cc158ef, type: 3}
     - {fileID: 134441627470835729, guid: d942d0a9d7ce2914c841ea09612a31ea, type: 3}
+    - {fileID: 243502958652505102, guid: c56a60aba5b76d445a05a38f2d589a38, type: 3}

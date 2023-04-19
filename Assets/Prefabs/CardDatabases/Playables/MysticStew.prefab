@@ -9,12 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4430917359204932422}
-  - component: {fileID: 7484713053374070152}
+  - component: {fileID: 243502958652505102}
   - component: {fileID: 4430917359204932420}
   - component: {fileID: 4430917359204932421}
-  - component: {fileID: 7390993962272175646}
   m_Layer: 0
-  m_Name: Squawk
+  m_Name: MysticStew
   m_TagString: Targetable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -36,7 +35,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7484713053374070152
+--- !u!114 &243502958652505102
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -45,7 +44,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4430917359204932423}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e97052dcb1bf4ff3be78a95fbc50af14, type: 3}
+  m_Script: {fileID: 11500000, guid: 28396e68fe4800a43bef803924c5d5d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _renderer: {fileID: 8054100049657687534}
@@ -54,9 +53,9 @@ MonoBehaviour:
   container: {fileID: 0}
   _state: 2
   cardOwner: 0
-  _name: Squawk
-  _art: {fileID: 21300000, guid: ae28b4b8f48eabd4abe3c1a298d0c1fd, type: 3}
-  _rules: Squawks!
+  _name: Mystic Stew
+  _art: {fileID: 21300000, guid: 0a22859c9f8f058438f8cfcb42a001a7, type: 3}
+  _rules: Restore <color=red>{properties["primary"]}</color> health to the ship!
   _properties:
     reorderableList:
       canAdd: 1
@@ -64,7 +63,7 @@ MonoBehaviour:
       draggable: 1
       expandable: 1
       multipleSelection: 1
-      isExpanded: 0
+      isExpanded: 1
       label:
         m_Text: Keys
         m_Image: {fileID: 0}
@@ -79,12 +78,16 @@ MonoBehaviour:
       elementNameOverride: 
       elementIcon: {fileID: 0}
     reqReferences: {fileID: 0}
-    isExpanded: 0
-    _keyValues: []
-    _keys: []
-    _values: []
+    isExpanded: 1
+    _keyValues:
+    - primary
+    _keys:
+    - primary
+    _values:
+    - tag: 1
+      value: 1
   _cost:
-    list: 
+    list: 0500000001000000
   associatedSelkie: {fileID: 0}
 --- !u!65 &4430917359204932420
 BoxCollider:
@@ -126,102 +129,6 @@ MonoBehaviour:
   arrowPrefab: {fileID: 6722190504438028770, guid: e2e954b1ee2caff408b59a53e7370e2a,
     type: 3}
   targetNeeded: 0
---- !u!82 &7390993962272175646
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4430917359204932423}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 445d47d7b5455b94bbc75e16702dfaf9, type: 3}
-  m_PlayOnAwake: 0
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 1000
-  Pan2D: 0
-  rolloffMode: 1
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
 --- !u!1001 &4487235728669804067
 PrefabInstance:
   m_ObjectHideFlags: 0
