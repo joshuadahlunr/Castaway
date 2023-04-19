@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -399,7 +399,7 @@ PrefabInstance:
     - target: {fileID: 159255110440306791, guid: c3e8001a36395dc4887554d1539c9897,
         type: 3}
       propertyPath: m_RootOrder
-      value: 10
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 159255110440306791, guid: c3e8001a36395dc4887554d1539c9897,
         type: 3}
@@ -1538,7 +1538,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1306255008
 GameObject:
@@ -1823,6 +1823,79 @@ MonoBehaviour:
   blendDistance: 0
   weight: 1
   sharedProfile: {fileID: 11400000, guid: 0723e03f90f11a443bcfda4f9b3af138, type: 2}
+--- !u!1001 &1546500154
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1332034598241135442, guid: 8f1942f38b2d5bb4cb73069a0294abd4,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1332034598241135442, guid: 8f1942f38b2d5bb4cb73069a0294abd4,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1332034598241135442, guid: 8f1942f38b2d5bb4cb73069a0294abd4,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1332034598241135442, guid: 8f1942f38b2d5bb4cb73069a0294abd4,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1332034598241135442, guid: 8f1942f38b2d5bb4cb73069a0294abd4,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1332034598241135442, guid: 8f1942f38b2d5bb4cb73069a0294abd4,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1332034598241135442, guid: 8f1942f38b2d5bb4cb73069a0294abd4,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1332034598241135442, guid: 8f1942f38b2d5bb4cb73069a0294abd4,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1332034598241135442, guid: 8f1942f38b2d5bb4cb73069a0294abd4,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1332034598241135442, guid: 8f1942f38b2d5bb4cb73069a0294abd4,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1332034598241135442, guid: 8f1942f38b2d5bb4cb73069a0294abd4,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7837087396185056524, guid: 8f1942f38b2d5bb4cb73069a0294abd4,
+        type: 3}
+      propertyPath: m_Name
+      value: Fire
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 8f1942f38b2d5bb4cb73069a0294abd4, type: 3}
 --- !u!1 &1660230830
 GameObject:
   m_ObjectHideFlags: 0
@@ -2400,7 +2473,7 @@ PrefabInstance:
     - target: {fileID: 4271037107592622158, guid: 4332da1e1388b7a41bbc3fd8b6d59559,
         type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 4271037107592622158, guid: 4332da1e1388b7a41bbc3fd8b6d59559,
         type: 3}
