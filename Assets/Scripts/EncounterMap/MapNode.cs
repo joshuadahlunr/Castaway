@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -55,6 +54,10 @@ namespace EncounterMap {
         /// </summary>
         public Sprite randomSprite;
         /// <summary>
+        /// The sprite used for the completed events.
+        /// </summary>
+        public Sprite flagSprite;
+        /// <summary>
         /// The different types of events
         /// </summary>
         public enum NodeType {
@@ -68,9 +71,22 @@ namespace EncounterMap {
         public NodeType nodeType;
 
         /// <summary>
+        /// Holds the index for the current node
+        /// </summary>
+        public int currentIndex;
+
+        /// <summary>
+        /// Counter for the index
+        /// </summary>
+        private static int i;
+
+        /// <summary>
         /// Unity method called when the object is created.
         /// </summary>
         public void Awake() {
+            // Set the index of this node
+            currentIndex = i;
+            i = i + 1;
             // Set the type of event that occurs on this node
             SetNode();
             // Determine the sprite displayed based on the event type
@@ -207,14 +223,23 @@ namespace EncounterMap {
             } else { // This case assumes that anything not listed above is a battle node!
                 SceneManager.LoadScene("BattleScene");
                 // Sends the depth to the CGM to determine difficulty
-                CardGameManager.encounterDifficulty = Depth; 
+                CardGameManager.encounterDifficulty = Depth;
+                MysticCharge.encounterDifficulty = Depth; 
             }
         }
 
         // Causes the scene to change to the relative node on collision
         public void OnTriggerEnter2D(Collider2D collision) {
             SetScene();
-            this.enabled = !this.enabled;
+            Debug.Log(currentIndex);
+            //EncounterMapScript.shipsChildIndex = currentIndex;
+            //this.enabled = !this.enabled;
+        }
+
+        public void OnTriggerExit2D(Collider2D collision) {
+            this.GetComponent<SpriteRenderer>().sprite = flagSprite;
+            //EncounterMapScript.shipsChildIndex = currentIndex;
+            //this.enabled = !this.enabled;
         }
 
         // Gets the position of the node
