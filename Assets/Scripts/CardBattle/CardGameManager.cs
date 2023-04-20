@@ -4,6 +4,7 @@ using System.Linq;
 using CardBattle.Card;
 using CardBattle.Card.Modifications.Generic;
 using CardBattle.Containers;
+using Crew;
 using Extensions;
 using ResourceMgmt;
 using TMPro;
@@ -132,6 +133,11 @@ namespace CardBattle {
 		/// </summary>
 		public PeopleJuice.Cost resetPeopleJuice, currentPeopleJuice;
 
+		/// <summary>
+		/// Variable which when set causes people juice to not get loaded from the database!
+		/// </summary>
+		public bool debugPeopleJuice = false;
+
 		// References to the player's deck, graveyard, hand, containers, and ship
 		public Deck playerDeck, playerGraveyard;
 		public Hand playerHand;
@@ -245,14 +251,25 @@ namespace CardBattle {
 			// Update Jerry's cards to have the same level as the ship
 			var playerCards = DatabaseManager.GetOrCreateTable<Deck.DeckListCard>()
 				.Where(card => card.listID == playerDeckId);
-			foreach(var card in playerCards)
+			foreach (var card in playerCards)
 				if (card.associatedCrewmateID == null) {
 					Debug.Log(card.id);
 					card.level = shipLevel;
-					DatabaseManager.database.InsertOrReplace(card); // TODO: is this mass duplicating cards in the database?
+					DatabaseManager.database
+						.InsertOrReplace(card); // TODO: is this mass duplicating cards in the database?
 				}
 
-			// TODO: Set reset people juice to match the current crewmates
+			// Set reset people juice to match the current crewmates
+			if (!debugPeopleJuice) {
+				var reset = new PeopleJuice.Cost { PeopleJuice.Types.Wizard }; // Jerry gives a wizard
+
+				var crewmates = DatabaseManager.GetOrCreateTable<CrewManager.CrewData>();
+				foreach (var crewmate in crewmates)
+					reset.Add((PeopleJuice.Types)crewmate.type);
+
+				// Update all the juices to match
+				currentPeopleJuice = resetPeopleJuice = reset;
+			}
 
 			// Determine the level of the encounter based on the difficulty, and if it's a multiple of 5 - 1, set the encounter type to "Boss"
 			monsterLevel = (int)Mathf.Max(Mathf.Round(encounterDifficulty), 0) + 1;
