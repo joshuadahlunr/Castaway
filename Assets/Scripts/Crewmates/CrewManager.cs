@@ -100,6 +100,7 @@ namespace Crew {
             public string cardName { set; get; }
         }
 
+
         /// <summary>
         ///     Singleton instance of this class
         /// <summary>
@@ -129,11 +130,6 @@ namespace Crew {
             {
                 LoadCrew();
             }
-        }
-
-        public void Start()
-        {
-            XPGain();
         }
 
         void OnDestroy()

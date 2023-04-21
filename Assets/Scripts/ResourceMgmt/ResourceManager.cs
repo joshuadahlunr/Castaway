@@ -3,6 +3,7 @@ using TMPro;
 using System.Linq;
 using SQLite;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using CardBattle;
 using Crew;
@@ -84,7 +85,7 @@ namespace ResourceMgmt
 
         private void Start()
         {
-            if (CrewManager.instance.crewList.Count == 0) 
+            if (CrewManager.instance.crewList.Count == 0 || CrewManager.instance.crewList == null) 
             {
                 crewSlider.enabled = false;
             } 
@@ -132,6 +133,8 @@ namespace ResourceMgmt
             }
             LevelUp();
             LoadShip();
+
+            ReturnToMap(3f);
         }
 
         public void LevelUp()
@@ -151,7 +154,10 @@ namespace ResourceMgmt
             var currentCrew = CrewManager.instance.crewList;
             currentCrew.RemoveAll(x => x.CrewTag != Crewmates.Status.CrewTag.InCrew);
             if (currentCrew == null) return;
-            if (crewSlider.value == 0) return;
+            if (crewSlider.value == 0)
+            {
+                ReturnToMap(3f);
+            };
 
             int count = 0;
             upgradeData.Resources -= (int)crewSlider.value;
@@ -181,6 +187,8 @@ namespace ResourceMgmt
             }
 
             NotificationHolder.instance.CreateNotification("Your crew consumed " + crewSlider.value.ToString() + " resources!", 3f);
+
+            ReturnToMap(3f);
         }
 
         public void LoadShip()
@@ -225,6 +233,12 @@ namespace ResourceMgmt
                 lvlCost = upgradeData.Cost,
                 currentResources = upgradeData.Resources
             });
+        }
+
+        IEnumerator ReturnToMap(float waitTime)
+        {
+            yield return new WaitForSeconds(waitTime);
+            SceneManager.LoadScene("EncounterMapScene");
         }
     }
 }
