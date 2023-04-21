@@ -159,17 +159,17 @@ namespace EncounterMap {
         // Spawn with probability
         public void SetNode() {
             int value = Random.Range(0, 9);
-            // If the value is 0-5, the event node type is Battle
-            // 60% spawn rate
-            if (value <= 5) {
+            // If the value is 0-4, the event node type is Battle
+            // 50% spawn rate
+            if (value <= 4) {
                 nodeType = NodeType.Battle;
-            } else if (value > 5 || value <= 7) {
+            } else if (value > 4 || value <= 7) {
                 // If the value is 5-7, the event node type is Random
                 // 30% spawn rate
                 nodeType = NodeType.Random;
             } else if (value > 7 || value <= 9) {
                 // If the value is 8-9 the event node type is Crewmate
-                // 10% spawn rate (can occur as a random event)
+                // 20% spawn rate (can occur as a random event)
                 nodeType = NodeType.Crewmate;
             } else {
                 nodeType = NodeType.Battle;
