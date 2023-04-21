@@ -59,7 +59,7 @@ namespace ResourceMgmt
             shipSlider.onValueChanged.AddListener(delegate { ValidateResources(); });
 
             var table = DatabaseManager.GetOrCreateTable<UpgradeInfo>();
-            table.Delete(_ => true);
+            //table.Delete(_ => true);
 
             if (DatabaseManager.GetOrCreateTable<UpgradeInfo>().Any())
             {

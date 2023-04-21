@@ -190,6 +190,10 @@ namespace Crew {
         /// </summary>
         public static void SaveCrew()
         {
+            if (instance.crewList == null || instance.crewList.Count == 0)
+            {
+                return;
+            }
             var newList = instance.crewList;
             newList.RemoveAll(x => x.CrewTag == Crewmates.Status.CrewTag.NotInCrew);
 
