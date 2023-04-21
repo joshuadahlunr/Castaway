@@ -136,6 +136,14 @@ namespace Crew {
             SaveCrew();
         }
 
+        void Update()
+        {
+            if (CardGameManager.instance.monsters.All(monster => monster.healthState.health <= 0))
+            {
+                XPGain();
+            }
+        }
+
         /// <summary>
         ///     Converts crewmate data stored in SQL into Crewmates objects for use in crewmate interaction
         /// </summary> 
