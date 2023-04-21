@@ -281,7 +281,7 @@ namespace Crew {
 
             // Generate starting crewmate data and load into spawned prefab
             crewmate.GetComponent<Crewmates>().CrewTag = (Crewmates.Status.CrewTag)0;
-            crewmate.GetComponent<Crewmates>().Type = (Crewmates.CrewClass.Type)Random.Range(0,7);
+            crewmate.GetComponent<Crewmates>().Type = (Crewmates.CrewClass.Type)Random.Range(1,8);
             crewmate.GetComponent<Crewmates>().Name = crewNames[Random.Range(0, crewNames.Length)];
             crewmate.GetComponent<Crewmates>().Level = 1;
             crewmate.GetComponent<Crewmates>().Morale = 50;
@@ -291,35 +291,35 @@ namespace Crew {
             // Select a random card for the generated crewmate based on their type
             switch (crewmate.GetComponent<Crewmates>().Type)
             {
-                case (Crewmates.CrewClass.Type)0: // For wizards
+                case (Crewmates.CrewClass.Type)1: // For wizards
                     var randomCard = wizardCards.cards.Keys.Shuffle().First();
                     crewmate.GetComponent<Crewmates>().CrewCard = randomCard;
                     break;
-                case (Crewmates.CrewClass.Type)1: // For navigators
+                case (Crewmates.CrewClass.Type)2: // For navigators
                     randomCard = navigatorCards.cards.Keys.Shuffle().First();
                     crewmate.GetComponent<Crewmates>().CrewCard = randomCard;
                     break;
-                case (Crewmates.CrewClass.Type)2: // For entertainers
+                case (Crewmates.CrewClass.Type)3: // For entertainers
                     randomCard = entertainerCards.cards.Keys.Shuffle().First();
                     crewmate.GetComponent<Crewmates>().CrewCard = randomCard;
                     break;
-                case (Crewmates.CrewClass.Type)3: // For engineers
+                case (Crewmates.CrewClass.Type)4: // For engineers
                     randomCard = engineerCards.cards.Keys.Shuffle().First();
                     crewmate.GetComponent<Crewmates>().CrewCard = randomCard;
                     break;
-                case (Crewmates.CrewClass.Type)4: // For cooks
+                case (Crewmates.CrewClass.Type)5: // For cooks
                     randomCard = cookCards.cards.Keys.Shuffle().First();
                     crewmate.GetComponent<Crewmates>().CrewCard = randomCard;
                     break;
-                case (Crewmates.CrewClass.Type)5: // For occultists
+                case (Crewmates.CrewClass.Type)6: // For occultists
                     randomCard = occultistCards.cards.Keys.Shuffle().First();
                     crewmate.GetComponent<Crewmates>().CrewCard = randomCard;
                     break;
-                case (Crewmates.CrewClass.Type)6: // For mercenaries 
+                case (Crewmates.CrewClass.Type)7: // For mercenaries 
                     randomCard = mercenaryCards.cards.Keys.Shuffle().First();
                     crewmate.GetComponent<Crewmates>().CrewCard = randomCard;
                     break;
-                case (Crewmates.CrewClass.Type)7: // For deckhands
+                case (Crewmates.CrewClass.Type)8: // For deckhands
                     randomCard = deckhandCards.cards.Keys.Shuffle().First();
                     crewmate.GetComponent<Crewmates>().CrewCard = randomCard;
                     break; 
@@ -357,28 +357,28 @@ namespace Crew {
             // TODO: un-comment other cases as clothes are completed
             switch (crewmate.GetComponent<Crewmates>().Type)
             {
-                case (Crewmates.CrewClass.Type)0: // For wizards
+                case (Crewmates.CrewClass.Type)1: // For wizards
                     crewmate.GetComponent<Crewmates>().ClothesSprite = clothesTextures.sprites.ElementAt(Random.Range(28, 31)).Value;
                     break;
-                case (Crewmates.CrewClass.Type)1: // For navigators
+                case (Crewmates.CrewClass.Type)2: // For navigators
                     crewmate.GetComponent<Crewmates>().ClothesSprite = clothesTextures.sprites.ElementAt(Random.Range(20, 23)).Value;
                     break;
-                case (Crewmates.CrewClass.Type)2: // For entertainers
+                case (Crewmates.CrewClass.Type)3: // For entertainers
                     crewmate.GetComponent<Crewmates>().ClothesSprite = clothesTextures.sprites.ElementAt(Random.Range(12, 15)).Value;
                     break;
-                case (Crewmates.CrewClass.Type)3: // For engineers
+                case (Crewmates.CrewClass.Type)4: // For engineers
                     crewmate.GetComponent<Crewmates>().ClothesSprite = clothesTextures.sprites.ElementAt(Random.Range(8, 11)).Value;
                     break;
-                case (Crewmates.CrewClass.Type)4: // For cooks
+                case (Crewmates.CrewClass.Type)5: // For cooks
                     crewmate.GetComponent<Crewmates>().ClothesSprite = clothesTextures.sprites.ElementAt(Random.Range(0, 3)).Value;
                     break;
-                case (Crewmates.CrewClass.Type)5: // For occultists
+                case (Crewmates.CrewClass.Type)6: // For occultists
                     crewmate.GetComponent<Crewmates>().ClothesSprite = clothesTextures.sprites.ElementAt(Random.Range(24, 27)).Value;
                     break;
-                case (Crewmates.CrewClass.Type)6: // For mercenaries
+                case (Crewmates.CrewClass.Type)7: // For mercenaries
                     crewmate.GetComponent<Crewmates>().ClothesSprite = clothesTextures.sprites.ElementAt(Random.Range(16, 19)).Value;
                     break;
-                case (Crewmates.CrewClass.Type)7: // For deckhands
+                case (Crewmates.CrewClass.Type)8: // For deckhands
                     crewmate.GetComponent<Crewmates>().ClothesSprite = clothesTextures.sprites.ElementAt(Random.Range(4, 7)).Value;
                     break;
                 default: // If we can't load the appropriate resource, break (this means crewmate is naked :/)
