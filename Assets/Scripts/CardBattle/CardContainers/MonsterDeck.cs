@@ -92,11 +92,10 @@ namespace CardBattle.Containers {
 
 				// Get rid of the temporary object used to reveal the card
 				var p = revealedCard.transform.parent.parent;
-				revealedCard.transform.parent = null;
-				Destroy(p.gameObject);
 
 				// NOTE: On target should send the card back to the graveyard (aka bottom of deck)
 				revealedCard?.OnTarget(target);
+				Destroy(p.gameObject);
 			}
 
 			revealedCards.Clear();
