@@ -51,8 +51,8 @@ MonoBehaviour:
   generation: {fileID: 0}
   parents: []
   children: []
-  battleSprite: {fileID: 21300000, guid: 128e756c398f9c6488e12fde99baa332, type: 3}
-  crewmateSprite: {fileID: 21300000, guid: 8401e679f1ce95f4897a14fe0b389203, type: 3}
+  battleSprite: {fileID: 21300000, guid: f8999152bfd16ab499dcdd20d505eb8a, type: 3}
+  crewmateSprite: {fileID: 21300000, guid: 30be290a50b90c7448c3bd2c9b658b06, type: 3}
   randomSprite: {fileID: 21300000, guid: 46cbf062288d47848915666532beecb1, type: 3}
   flagSprite: {fileID: 21300000, guid: f11626cbf86bd7c41bf5534ce5194b12, type: 3}
   nodeType: 0
