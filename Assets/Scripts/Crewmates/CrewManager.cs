@@ -552,28 +552,46 @@ namespace Crew {
         /// </summary>
         public static void XPGain()
         {
-            // If no crew members, end the function
-            if (instance.crewList == null || instance.crewList.Count == 0)
+            if (!DatabaseManager.GetOrCreateTable<CrewData>().Any())
             {
                 return;
             }
+
+            var crewmates = DatabaseManager.GetOrCreateTable<CrewData>();
             // Iterate over the crew list
-            for (int i = 0; i > instance.crewList.Count; i++)
+            foreach (var crewmate in crewmates)
             {
                 // If the crew member is currently in the crew...
-                if (instance.crewList[i].CrewTag == (Crewmates.Status.CrewTag)2) {
-                    instance.crewList[i].Morale -= 10 * CardGameManager.monsterLevel; // ...decrease their morale based on how difficult the encounter was
-                    if (instance.crewList[i].Morale <= 0) // If their morale has dropped to or below 0....
+                if (crewmate.status == 2) {
+                    crewmate.morale -= 10 * CardGameManager.monsterLevel; // ...decrease their morale based on how difficult the encounter was
+                    if (crewmate.morale <= 0) // If their morale has dropped to or below 0....
                     {
-                        KillCrewmate(i); // ...kill them off (replace this with corresponding event trigger(s) later)
+                        KillCrewmate(crewmate.id); // ...kill them off (replace this with corresponding event trigger(s) later)
                         return;
                     }
+                    float morale = crewmate.morale;
                     // Otherwise, increase XP based on encounter difficulty, monsters killed, and current morale
-                    instance.crewList[i].CurrentXP = (CardGameManager.numberOfMonstersKilled * CardGameManager.monsterLevel) /
-                                                    (instance.crewList[i].Morale / 100);
-                    if (instance.crewList[i].CurrentXP >= instance.crewList[i].XPNeeded) // If current XP is at or exceeds XP needed for next level...
+                    crewmate.currentXp = (int)((CardGameManager.numberOfMonstersKilled * CardGameManager.monsterLevel) /
+                                                    (morale / 100));
+                    if (crewmate.currentXp >= crewmate.xpNeeded) // If current XP is at or exceeds XP needed for next level...
                     {
-                        instance.LevelUp(instance.crewList[i]); // ...level up!
+                        const string playerDeckName = "Player Deck";
+                        var playerDeckId = DatabaseManager.GetOrCreateTable<Deck.DeckList>()
+                            .FirstOrDefault(l => l.name == playerDeckName).id;
+                        var cardMatch = DatabaseManager.GetOrCreateTable<Deck.DeckListCard>()
+                            .FirstOrDefault(c => c.associatedCrewmateID == crewmate.id && c.listID == playerDeckId);
+                        DatabaseManager.database.Delete(cardMatch); // Delete it!
+                        // Insert the leveled up version of the crew member's card into the database
+                        DatabaseManager.database.Insert(new Deck.DeckListCard
+                        {
+                            listID = playerDeckId,
+                            name = crewmate.cardName,
+                            level = crewmate.level,
+                            associatedCrewmateID = crewmate.id
+                        });
+                        crewmate.level += 1; // ...level up!
+                        crewmate.currentXp -= crewmate.xpNeeded; // Subtract the amount of XP needed for the next level from current XP
+                        crewmate.xpNeeded *= 2; // Multiply XP needed for next level by two
                     }
                 }
             }
