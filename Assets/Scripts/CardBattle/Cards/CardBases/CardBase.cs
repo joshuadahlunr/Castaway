@@ -182,7 +182,7 @@ namespace CardBattle.Card {
 		/// <summary>
 		///     Bool indicating if the card is disabled
 		/// </summary>
-		public bool Disabled => !isActiveAndEnabled && !renderer.disabled.activeInHierarchy;
+		public bool Disabled => !isActiveAndEnabled || renderer.disabled.activeInHierarchy;
 
 		/// <summary>
 		///     Backing memory for name

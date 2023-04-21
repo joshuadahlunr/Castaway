@@ -340,7 +340,7 @@ namespace CardBattle {
 		///     Every frame...
 		/// </summary>
 		private PeopleJuice.Cost oldCost;
-
+		private int disabledCounter = 0;
 		public void Update() {
 			// Decrease the time left in the turn
 			turnTimer -= Time.deltaTime;
@@ -370,8 +370,12 @@ namespace CardBattle {
 			// Store the current "People Juice" values for comparison in the next frame
 			oldCost = currentPeopleJuice;
 
-			// If the turn timer has reached zero, end the turn
-			if (turnTimer <= 0) {
+			// While all the cards in the player's hand are disabled increase disabled counter, if it is high for a few frames the player has no playable cards in hand!
+			if (playerHand.All(card => card.Disabled) && isPlayerTurn)
+				disabledCounter++;
+
+			// If the turn timer has reached zero or the player has no playable cards remaining, end the turn
+			if (turnTimer <= 0 || disabledCounter >= 60) {
 				turnTimer = isPlayerTurn ? monsterTurnTime : playerTurnTime;
 				OnTurnEnd();
 			}
@@ -384,6 +388,8 @@ namespace CardBattle {
 			// Invoke the turn start event on all cards
 			foreach (var card in CardBase.ActiveCards)
 				card.OnTurnStart();
+
+			disabledCounter = 0;
 
 			if (isPlayerTurn) {
 				OldFilmPostProcessing.enabled = false;
