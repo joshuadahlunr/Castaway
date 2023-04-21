@@ -4,6 +4,7 @@ using System.Linq;
 using SQLite;
 using UnityEngine;
 using UnityEngine.UI;
+using CardBattle;
 using Crew;
 
 namespace ResourceMgmt
@@ -42,7 +43,7 @@ namespace ResourceMgmt
 
         [SerializeField] private TextMeshProUGUI shipSliderTxt, crewSliderTxt, winTxt;
 
-        [SerializeField] private int resourcesWon;
+        private int resourcesWon;
 
         private readonly float currentVal;
 
@@ -72,12 +73,25 @@ namespace ResourceMgmt
                 upgradeData.Progress = 0;
             }
 
+            resourcesWon = CardGameManager.numberOfMonstersKilled * CardGameManager.monsterLevel * 10;
             upgradeData.Resources += resourcesWon;
 
             winTxt.text = ("Congratulations! You've earned " + resourcesWon.ToString() + " resources for your ship and crew. You have "
                         + upgradeData.Resources.ToString() + " in total. How would you like to allocate them?");
 
             LoadShip();
+        }
+
+        private void Start()
+        {
+            if (CrewManager.instance.crewList.Count == 0) 
+            {
+                crewSlider.enabled = false;
+            } 
+            else 
+            {
+                crewSlider.enabled = true;
+            }
         }
 
         void Update()

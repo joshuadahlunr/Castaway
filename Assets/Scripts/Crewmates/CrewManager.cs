@@ -131,17 +131,14 @@ namespace Crew {
             }
         }
 
+        public void Start()
+        {
+            XPGain();
+        }
+
         void OnDestroy()
         {
             SaveCrew();
-        }
-
-        void Update()
-        {
-            if (CardGameManager.instance.monsters.All(monster => monster.healthState.health <= 0))
-            {
-                XPGain();
-            }
         }
 
         /// <summary>
@@ -555,6 +552,11 @@ namespace Crew {
         /// </summary>
         public static void XPGain()
         {
+            // If no crew members, end the function
+            if (instance.crewList == null || instance.crewList.Count == 0)
+            {
+                return;
+            }
             // Iterate over the crew list
             for (int i = 0; i > instance.crewList.Count; i++)
             {
