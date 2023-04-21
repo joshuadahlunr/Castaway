@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using SQLite;
 using Extensions;
+using CardBattle;
 using CardBattle.Containers;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -14,6 +15,7 @@ namespace Crew {
     /// <author>Misha Desear</author>
     public class CrewManager : MonoBehaviour
     {
+        
         /// <summary>
         ///     Represents a single crewmate in the SQL database
         /// </summary>
@@ -503,15 +505,11 @@ namespace Crew {
             // Fetch the ID of the SQL table containing the player deck
             var playerDeckId = DatabaseManager.GetOrCreateTable<Deck.DeckList>()
                 .FirstOrDefault(l => l.name == playerDeckName).id;
-            // For each member in the crew list...
-            for (int i = 0; i > instance.crewList.Count; i++)
-            {
-                // Find the matching card in the player's deck that shares the same index
-                var cardMatch = DatabaseManager.GetOrCreateTable<Deck.DeckListCard>()
-                    .FirstOrDefault(c => c.associatedCrewmateID == i && c.listID == playerDeckId);
-                DatabaseManager.database.Delete(cardMatch); // Delete it!
-                instance.crewList[i].CrewTag = (Crewmates.Status.CrewTag)0; // Change crewmate's crew tag to NotInCrew(0)
-            }
+            // Find the matching card in the player's deck that shares the same index
+            var cardMatch = DatabaseManager.GetOrCreateTable<Deck.DeckListCard>()
+                .FirstOrDefault(c => c.associatedCrewmateID == crewmateID && c.listID == playerDeckId);
+            DatabaseManager.database.Delete(cardMatch); // Delete it!
+            instance.crewList[crewmateID].CrewTag = (Crewmates.Status.CrewTag)0; // Change crewmate's crew tag to NotInCrew(0)
             SaveCrew(); // TODO: does this create any problems with crewmate indexing?
         }
 
@@ -522,6 +520,8 @@ namespace Crew {
         {
             const string playerDeckName = "Player Deck";
             int listIndex = crewList.FindIndex(c => c == crew); // Obtain the crewmate's index in crew list
+            crew.CurrentXP = crew.CurrentXP - crew.XPNeeded; // Subtract current XP by the amount of XP needed for the level upgrade
+            crew.XPNeeded *= 2; // Multiply the amount of XP needed for next level by 2
             crew.Level += 1; // Increase level attribute by 1
             // Fetch the ID of the SQL table contianing the player deck
             var playerDeckId = DatabaseManager.GetOrCreateTable<Deck.DeckList>()
@@ -539,6 +539,34 @@ namespace Crew {
                 associatedCrewmateID = listIndex
             });
             SaveCrew(); // Save the newly updated crew list to SQL
+        }
+
+        /// <summary>
+        ///     Increases the XP of each crew member currently in the crew by the number of monsters killed
+        ///     times monster level, divided by morale as a multiplier
+        /// </summary>
+        public static void XPGain()
+        {
+            // Iterate over the crew list
+            for (int i = 0; i > instance.crewList.Count; i++)
+            {
+                // If the crew member is currently in the crew...
+                if (instance.crewList[i].CrewTag == (Crewmates.Status.CrewTag)2) {
+                    instance.crewList[i].Morale -= 10 * CardGameManager.monsterLevel; // ...decrease their morale based on how difficult the encounter was
+                    if (instance.crewList[i].Morale <= 0) // If their morale has dropped to or below 0....
+                    {
+                        KillCrewmate(i); // ...kill them off (replace this with corresponding event trigger(s) later)
+                        return;
+                    }
+                    // Otherwise, increase XP based on encounter difficulty, monsters killed, and current morale
+                    instance.crewList[i].CurrentXP = (CardGameManager.numberOfMonstersKilled * CardGameManager.monsterLevel) /
+                                                    (instance.crewList[i].Morale / 100);
+                    if (instance.crewList[i].CurrentXP >= instance.crewList[i].XPNeeded) // If current XP is at or exceeds XP needed for next level...
+                    {
+                        instance.LevelUp(instance.crewList[i]); // ...level up!
+                    }
+                }
+            }
         }
     }
 }

@@ -224,7 +224,7 @@ namespace EncounterMap {
                 SceneManager.LoadScene("BattleScene");
                 // Sends the depth to the CGM to determine difficulty
                 CardGameManager.encounterDifficulty = Depth;
-                MysticCharge.encounterDifficulty = Depth; 
+                // MysticCharge.encounterDifficulty = Depth; 
             }
         }
 

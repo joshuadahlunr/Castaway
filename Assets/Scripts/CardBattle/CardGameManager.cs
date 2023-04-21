@@ -503,6 +503,7 @@ namespace CardBattle {
 
 			var allDead = monsters.All(monster => monster.healthState.health <= 0);
 			if (allDead)
+				CrewManager.XPGain();
 				OnWin();
 		}
 
