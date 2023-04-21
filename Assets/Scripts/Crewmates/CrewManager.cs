@@ -580,7 +580,10 @@ namespace Crew {
                             .FirstOrDefault(l => l.name == playerDeckName).id;
                         var cardMatch = DatabaseManager.GetOrCreateTable<Deck.DeckListCard>()
                             .FirstOrDefault(c => c.associatedCrewmateID == crewmate.id && c.listID == playerDeckId);
-                        DatabaseManager.database.Delete(cardMatch); // Delete it!
+                        if (cardMatch != null)
+                        {
+                            DatabaseManager.database.Delete(cardMatch); // Delete it!
+                        }
                         // Insert the leveled up version of the crew member's card into the database
                         DatabaseManager.database.Insert(new Deck.DeckListCard
                         {
