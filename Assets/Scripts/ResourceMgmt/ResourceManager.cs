@@ -134,7 +134,7 @@ namespace ResourceMgmt
             LevelUp();
             LoadShip();
 
-            ReturnToMap(3f);
+            StartCoroutine(ReturnToMap(3f));
         }
 
         public void LevelUp()
@@ -156,7 +156,7 @@ namespace ResourceMgmt
             if (currentCrew == null) return;
             if (crewSlider.value == 0)
             {
-                ReturnToMap(3f);
+                StartCoroutine(ReturnToMap(3f));
             };
 
             int count = 0;
@@ -188,7 +188,7 @@ namespace ResourceMgmt
 
             NotificationHolder.instance.CreateNotification("Your crew consumed " + crewSlider.value.ToString() + " resources!", 3f);
 
-            ReturnToMap(3f);
+            StartCoroutine(ReturnToMap(3f));
         }
 
         public void LoadShip()
