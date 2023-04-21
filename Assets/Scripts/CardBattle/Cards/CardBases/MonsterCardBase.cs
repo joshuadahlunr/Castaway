@@ -1,4 +1,6 @@
-﻿using CardBattle.Containers;
+﻿using System.Collections;
+using System.Collections.Generic;
+using CardBattle.Containers;
 using UnityEngine;
 
 namespace CardBattle.Card {
@@ -42,9 +44,15 @@ namespace CardBattle.Card {
 			if (newHealth <= 0) {
 				Debug.Log($"Monster {name} defeated!");
 
-				// Mark the monster as defeated (disabled in Unity) and check if all monsters have been defeated
+				// Mark the monster as defeated (disabled in Unity)
 				gameObject.SetActive(false);
-				CardGameManager.instance.CheckWinLose();
+
+				// Next frame (after health has had time to settle, check if the monster has been defeated)
+				IEnumerator CheckWinLoseNextFrame() {
+					yield return null;
+					CardGameManager.instance.CheckWinLose();
+				}
+				CardGameManager.instance.StartCoroutine(CheckWinLoseNextFrame());
 			}
 
 			Debug.Log($"{name} took {oldHealth - newHealth} damage");

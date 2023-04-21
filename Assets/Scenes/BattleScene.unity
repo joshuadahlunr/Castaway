@@ -1385,6 +1385,8 @@ MonoBehaviour:
     type: 3}
   monsterTurnPrefab: {fileID: 4691017256377408628, guid: add757007a30b2e4092c271b5a6e81b5,
     type: 3}
+  playerWinPrefab: {fileID: 4691017256377408628, guid: 34ca7078c90e3b9419e377493d3223ab,
+    type: 3}
   monsterDatabase: {fileID: 11400000, guid: 661d70e8572b2c84da626018448d76b8, type: 2}
   bossDatabase: {fileID: 11400000, guid: eacaa6c50a67d2f40ae32ec85bbf0e2a, type: 2}
   finalBossDatabase: {fileID: 11400000, guid: f4b99712d3c924a4689378ba344d0c00, type: 2}
@@ -1400,6 +1402,7 @@ MonoBehaviour:
     list: 00000000000000000100000001000000
   currentPeopleJuice:
     list: 
+  debugPeopleJuice: 0
   playerDeck: {fileID: 1911337661}
   playerGraveyard: {fileID: 396847612}
   playerHand: {fileID: 385885770}

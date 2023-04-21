@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using CardBattle.Card;
@@ -94,7 +95,7 @@ namespace CardBattle {
 		/// </summary>
 		public Confirmation confirmationPrefab;
 
-		public GameObject playerTurnPrefab, monsterTurnPrefab;
+		public GameObject playerTurnPrefab, monsterTurnPrefab, playerWinPrefab;
 
 		/// <summary>
 		///     Database of all monsters in the game
@@ -253,10 +254,8 @@ namespace CardBattle {
 				.Where(card => card.listID == playerDeckId);
 			foreach (var card in playerCards)
 				if (card.associatedCrewmateID == null) {
-					Debug.Log(card.id);
 					card.level = shipLevel;
-					DatabaseManager.database
-						.InsertOrReplace(card); // TODO: is this mass duplicating cards in the database?
+					DatabaseManager.database.InsertOrReplace(card);
 				}
 
 			// Set reset people juice to match the current crewmates
@@ -470,7 +469,17 @@ namespace CardBattle {
 		/// <summary>
 		///     Callback called when the player wins the game
 		/// </summary>
-		public void OnWin() => SceneManager.LoadScene("Scenes/ResourceMgmtScene");
+		public void OnWin() {
+			IEnumerator WinCoroutine() {
+				var winScreen = Instantiate(playerWinPrefab, canvas.transform);
+				while (winScreen != null)
+					yield return null;
+				SceneManager.LoadScene("Scenes/ResourceMgmtScene");
+			}
+
+			StartCoroutine(WinCoroutine());
+			CrewManager.XPGain();
+		}
 
 		/// <summary>
 		///     Callback called when the player loses the game
@@ -503,7 +512,6 @@ namespace CardBattle {
 
 			var allDead = monsters.All(monster => monster.healthState.health <= 0);
 			if (allDead)
-				CrewManager.XPGain();
 				OnWin();
 		}
 
