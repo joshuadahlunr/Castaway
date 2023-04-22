@@ -48,11 +48,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _renderer: {fileID: 8054100049657687534}
+  draggable: {fileID: 0}
+  collider: {fileID: 0}
   container: {fileID: 0}
   _state: 2
   cardOwner: 0
   _name: Douse
-  _art: {fileID: 21300000, guid: a96f840c57f2c094ba619484ac3cb50c, type: 3}
+  _art: {fileID: 21300000, guid: b6b9651ee7df1de44aea2f9242145652, type: 3}
   _rules: Removes <color=green>{properties["duration"]}</color> Burn or Frozen cards
     from the owner's deck.
   _properties:
@@ -87,6 +89,7 @@ MonoBehaviour:
       value: 2
   _cost:
     list: 08000000
+  associatedSelkie: {fileID: 0}
 --- !u!65 &4430917359204932420
 BoxCollider:
   m_ObjectHideFlags: 0

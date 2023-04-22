@@ -69,11 +69,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _renderer: {fileID: 8054100049657687534}
+  draggable: {fileID: 0}
+  collider: {fileID: 0}
   container: {fileID: 0}
   _state: 2
   cardOwner: 0
   _name: Be A Cool Guy
-  _art: {fileID: 0}
+  _art: {fileID: 21300000, guid: 576eb61e5e2546d498729d1dd6c9c913, type: 3}
   _rules: Completely Refills Your Health!
   _properties:
     reorderableList:
@@ -103,6 +105,7 @@ MonoBehaviour:
     _values: []
   _cost:
     list: 0000000000000000
+  associatedSelkie: {fileID: 0}
 --- !u!114 &4430917359204932421
 MonoBehaviour:
   m_ObjectHideFlags: 0

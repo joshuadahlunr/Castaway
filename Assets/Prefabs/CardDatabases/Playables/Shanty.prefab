@@ -54,7 +54,7 @@ MonoBehaviour:
   _state: 2
   cardOwner: 0
   _name: Shanty
-  _art: {fileID: 21300000, guid: a96f840c57f2c094ba619484ac3cb50c, type: 3}
+  _art: {fileID: 21300000, guid: 77bc4f874f3770241ba18ad2e1a0e9cc, type: 3}
   _rules: Multiplies the damage of cards in your hand by <color=green>{properties["multiplier"]}</color>
     for <color=green>{properties["duration"]}</color> turns.
   _properties:
