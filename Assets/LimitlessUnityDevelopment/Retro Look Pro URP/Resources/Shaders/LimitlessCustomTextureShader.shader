@@ -20,8 +20,8 @@
 
 	float4 Frag(Varyings i) : SV_Target
 	{
-		float4 col = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex,i.uv);
-		float4 col2 = SAMPLE_TEXTURE2D(_CustomTex, sampler_CustomTex, i.uv);
+		float4 col = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex,i.texcoord);
+		float4 col2 = SAMPLE_TEXTURE2D(_CustomTex, sampler_CustomTex, i.texcoord);
 		return lerp(col, col2, col2.a*fade);
 	}
 
