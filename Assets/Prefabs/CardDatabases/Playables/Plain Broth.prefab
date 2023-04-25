@@ -54,7 +54,7 @@ MonoBehaviour:
   _state: 2
   cardOwner: 0
   _name: Plain Broth
-  _art: {fileID: 21300000, guid: a96f840c57f2c094ba619484ac3cb50c, type: 3}
+  _art: {fileID: 21300000, guid: 7f326a66e7286594cbf4a1b5517c14ff, type: 3}
   _rules: Restore <color=blue>{properties["toRestore"]}</color> generic.
   _properties:
     reorderableList:
