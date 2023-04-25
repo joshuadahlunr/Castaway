@@ -63,6 +63,7 @@ MonoBehaviour:
     - Jerry's Arcane Twirl
     - Mystic Stew
     - Oracle
+    - Plain Broth
     _keys:
     - Prototype AttackCard
     - Attack
@@ -91,6 +92,7 @@ MonoBehaviour:
     - Jerry's Arcane Twirl
     - Mystic Stew
     - Oracle
+    - Plain Broth
     _values:
     - {fileID: 4430917359204932427, guid: ffed5da40e94bbd4ba57c97a28388c0a, type: 3}
     - {fileID: 1798558198490400397, guid: 948a13693cf3aad4a9a0bd359cc158ef, type: 3}
@@ -119,3 +121,4 @@ MonoBehaviour:
     - {fileID: -4917259886615291091, guid: 9eeedca544d5cac4083c46b206905cd2, type: 3}
     - {fileID: 243502958652505102, guid: c56a60aba5b76d445a05a38f2d589a38, type: 3}
     - {fileID: -2165165948327342399, guid: dd64c36d80187684499199611a34cd15, type: 3}
+    - {fileID: 4262471276244866899, guid: a4ef5334815c64046ae492e5c5402967, type: 3}
