@@ -490,7 +490,12 @@ namespace CardBattle {
 		/// <summary>
 		///     Callback called when the player loses the game
 		/// </summary>
-		public void OnLose() => SceneManager.LoadScene("Scenes/LoseScene");
+		public void OnLose() {
+			// Create a new save!
+			DatabaseManager.ResetToNewSave();
+
+			SceneManager.LoadScene("Scenes/LoseScene");
+		}
 
 
 		/// <summary>

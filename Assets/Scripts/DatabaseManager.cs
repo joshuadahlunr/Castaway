@@ -1,4 +1,7 @@
-﻿using SQLite;
+﻿using System.Linq;
+using CardBattle.Containers;
+using Crew;
+using SQLite;
 using UnityEngine;
 
 /// <summary>
@@ -23,7 +26,9 @@ public static class DatabaseManager {
 		get {
 			SQLiteConnection CreateConnection() {
 				Debug.Log($"Established a connection with the database located at {DatabasePath}");
-				return new SQLiteConnection(DatabasePath);
+				var db = new SQLiteConnection(DatabasePath);
+				db.EnableWriteAheadLogging();
+				return db;
 			}
 
 			_database ??= CreateConnection();
@@ -40,4 +45,20 @@ public static class DatabaseManager {
 		database.CreateTable<T>();
 		return database.Table<T>();
 	}
+
+	/// <summary>
+	/// Resets the database for a new "Save"
+	/// </summary>
+	public static void ResetToNewSave() {
+		// Marks all the crewmates as no longer being in the deck
+		CrewManager.SetAllCrewToFormer();
+
+		// Removes the decklist table from the database
+		database.DropTable<Deck.DeckListCard>();
+	}
+
+	/// <summary>
+	/// Bool indicating if a save currently exists
+	/// </summary>
+	public static bool SaveExists => GetOrCreateTable<Deck.DeckListCard>().Any();
 }
