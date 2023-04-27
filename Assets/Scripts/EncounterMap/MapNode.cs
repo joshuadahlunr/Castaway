@@ -71,22 +71,20 @@ namespace EncounterMap {
         public NodeType nodeType;
 
         /// <summary>
-        /// Holds the index for the current node
+        /// Holds the index for the current node from MapGeneration script
         /// </summary>
-        public int currentIndex;
+        public static int currentIndex;
 
         /// <summary>
-        /// Counter for the index
+        /// Access variable for the currentIndex
         /// </summary>
-        private static int i;
+        public int index;
 
         /// <summary>
         /// Unity method called when the object is created.
         /// </summary>
         public void Awake() {
-            // Set the index of this node
-            currentIndex = i;
-            i = i + 1;
+            index = currentIndex;
             // Set the type of event that occurs on this node
             SetNode();
             // Determine the sprite displayed based on the event type
@@ -159,15 +157,19 @@ namespace EncounterMap {
         // Spawn with probability
         public void SetNode() {
             int value = Random.Range(0, 9);
-            // If the value is 0-4, the event node type is Battle
-            // 50% spawn rate
-            if (value <= 4) {
+            if (Depth >= 20 && value <= 9) {
+                // If the depth of the map is greater/equal to 20, all nodes will be battle nodes
+                // This forces the player to encounter the final boss rather than avoiding the boss battle
                 nodeType = NodeType.Battle;
-            } else if (value > 4 || value <= 7) {
+            } else if (Depth < 20 && value <= 4) {
+                // If the value is 0-4, the event node type is Battle
+                // 50% spawn rate
+                nodeType = NodeType.Battle;
+            } else if (Depth < 20 && value > 4 || Depth < 20 && value <= 7) {
                 // If the value is 5-7, the event node type is Random
                 // 30% spawn rate
                 nodeType = NodeType.Random;
-            } else if (value > 7 || value <= 9) {
+            } else if (Depth < 20 && value > 7 ||Depth < 20 && value <= 9) {
                 // If the value is 8-9 the event node type is Crewmate
                 // 20% spawn rate (can occur as a random event)
                 nodeType = NodeType.Crewmate;
@@ -231,26 +233,26 @@ namespace EncounterMap {
         // Causes the scene to change to the relative node on collision
         public void OnTriggerEnter2D(Collider2D collision) {
             SetScene();
-            Debug.Log(currentIndex);
-            //EncounterMapScript.shipsChildIndex = currentIndex;
-            //this.enabled = !this.enabled;
+            //EncounterMapScript.nodeIndex = index;
+            GetNodePosition();
         }
 
         public void OnTriggerExit2D(Collider2D collision) {
-            this.GetComponent<SpriteRenderer>().sprite = flagSprite;
+            GetComponent<SpriteRenderer>().sprite = flagSprite;
             //EncounterMapScript.shipsChildIndex = currentIndex;
             //this.enabled = !this.enabled;
         }
 
         // Gets the position of the node
         public void GetNodePosition() {
-            Vector3 nodePos = transform.position;
-            // Sets the z position to 0 since its 2D and we don't care about position!
-            nodePos.z = 0f;
-            // Passes the position of the node selected to the PlayerMovement targetPos variable
-            PlayerMovement.targetPos = (Vector2)nodePos;
-            // Check for position
-            Debug.Log(nodePos);
+            // Pass the position of the node collided with to the PlayerMovement script
+            // x offset by 16f so the player doesn't spawn on the node
+            // z is always a value of 90f to keep the player in their original position on the z axis since this doesn't need to be changed
+            PlayerMovement.playerPos = new Vector3(transform.position.x + 16f, transform.position.y, 90f); 
+            CameraMovement.followPlayer = new Vector3(transform.position.x + 16f, transform.position.y, -10f);
+            // Check the position of the node and check that the playerPosition is a modified version of the node position
+            Debug.Log(transform.position);
+            Debug.Log(PlayerMovement.playerPos);
         }
     }
 }

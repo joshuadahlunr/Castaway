@@ -2188,6 +2188,7 @@ GameObject:
   - component: {fileID: 1402824395}
   - component: {fileID: 1402824400}
   - component: {fileID: 1402824399}
+  - component: {fileID: 1402824402}
   - component: {fileID: 1402824398}
   - component: {fileID: 1402824397}
   - component: {fileID: 1402824396}
@@ -2393,7 +2394,6 @@ MonoBehaviour:
   animator: {fileID: 1402824401}
   speed: 8
   moving: 0
-  currentNode: 0
 --- !u!212 &1402824400
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2466,6 +2466,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
+--- !u!114 &1402824402
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1402824394}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be788ae2c11f9484e88cd5897e90d4df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1404170627
 GameObject:
   m_ObjectHideFlags: 0
@@ -2493,7 +2505,7 @@ RectTransform:
   m_GameObject: {fileID: 1404170627}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 10, y: 10, z: 1}
+  m_LocalScale: {x: 9, y: 10, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 723862414}

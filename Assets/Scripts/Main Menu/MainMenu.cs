@@ -23,6 +23,8 @@ public class MainMenu : MonoBehaviour {
 
     public void NewGame() {
         DatabaseManager.ResetToNewSave();
+        EncounterMap.PlayerMovement.ResetPosition();
+        EncounterMap.CameraMovement.ResetCamPosition();
         SceneManager.LoadScene("EncounterMapScene");
     }
 

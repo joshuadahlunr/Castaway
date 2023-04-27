@@ -60,7 +60,8 @@ namespace EncounterMap {
             // the current game object.
             var node = Instantiate(prefab, transform, true);
             node.generation = this;
-
+            // Set node index
+            MapNode.currentIndex = nodes.Length;
             // Add the new node to the nodes array. If the array already has elements,
             // create a new List instance from the existing nodes, add the new node to
             // the list, and then convert the list back to an array. Otherwise, create
