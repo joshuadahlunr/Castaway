@@ -37,7 +37,10 @@ namespace CardBattle
             // RNG to determine if the ship rotates after using this card
             rotateChance = Random.Range(1, 10);
 
-            CardGameManager.instance.playerDeck.cardDB.Instantiate("Burn");
+            if (OwnedByPlayer) 
+            {
+                CardGameManager.instance.playerDeck.cardDB.Instantiate("Burn");
+            }
 
             if (rotateChance == 1)
             {

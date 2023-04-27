@@ -474,7 +474,9 @@ namespace Crew {
             var cardMatch = DatabaseManager.GetOrCreateTable<Deck.DeckListCard>()
                 .FirstOrDefault(c => c.associatedCrewmateID == crewmateID && c.listID == playerDeckId);
             DatabaseManager.database.Delete(cardMatch); // Delete it!
-            instance.crewList[crewmateID].CrewTag = (Crewmates.Status.CrewTag)1; // Change crewmate's crew tag to WasInCrew (1)
+            var crewmate = DatabaseManager.GetOrCreateTable<CrewData>()
+                .FirstOrDefault(c => c.id == crewmateID);
+            crewmate.id = 1; // Change to WasInCrew(1)
             SaveCrew(); // Save the newly updated crew list to SQL
         }
 
@@ -487,16 +489,21 @@ namespace Crew {
             // Fetch the ID of the SQL table containing the player deck
             var playerDeckId = DatabaseManager.GetOrCreateTable<Deck.DeckList>()
                 .FirstOrDefault(l => l.name == playerDeckName).id;
+            var crew = DatabaseManager.GetOrCreateTable<CrewData>();
             // For each member in the crew list...
-            for (int i = 0; i > instance.crewList.Count; i++)
+            for (int i = 0; i > crew.Count(); i++)
             {
                 // Find the matching card in the player's deck that shares the same index
                 var cardMatch = DatabaseManager.GetOrCreateTable<Deck.DeckListCard>()
                     .FirstOrDefault(c => c.associatedCrewmateID == i && c.listID == playerDeckId);
                 DatabaseManager.database.Delete(cardMatch); // Delete it!
-                instance.crewList[i].CrewTag = (Crewmates.Status.CrewTag)1; // Change crewmate's crew tag to WasInCrew(1)
+                var crewmate = DatabaseManager.GetOrCreateTable<CrewData>()
+                    .FirstOrDefault(c => c.id == i); 
+                if (crewmate.status == 2) // If the crewmate was in the crew...
+                {
+                    crewmate.status = 1; // ...change crewmate's crew tag to WasInCrew(1)
+                }
             }
-            SaveCrew(); // Save the newly updated crew list to SQL
         }
 
         /// <summary>
@@ -514,8 +521,9 @@ namespace Crew {
             var cardMatch = DatabaseManager.GetOrCreateTable<Deck.DeckListCard>()
                 .FirstOrDefault(c => c.associatedCrewmateID == crewmateID && c.listID == playerDeckId);
             DatabaseManager.database.Delete(cardMatch); // Delete it!
-            instance.crewList[crewmateID].CrewTag = (Crewmates.Status.CrewTag)0; // Change crewmate's crew tag to NotInCrew(0)
-            SaveCrew(); // TODO: does this create any problems with crewmate indexing?
+            var crewmate = DatabaseManager.GetOrCreateTable<CrewData>()
+                .FirstOrDefault(c => c.id == crewmateID); 
+            crewmate.status = 0; // Change crewmate's crew tag to NotInCrew(0)
         }
 
         /// <summary>
