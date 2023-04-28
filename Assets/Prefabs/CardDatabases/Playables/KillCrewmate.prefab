@@ -54,7 +54,7 @@ MonoBehaviour:
   _state: 2
   cardOwner: 0
   _name: Kill Crewmate
-  _art: {fileID: 21300000, guid: a96f840c57f2c094ba619484ac3cb50c, type: 3}
+  _art: {fileID: 21300000, guid: c54ccf0ce2a5ec94993b5daffabf0e29, type: 3}
   _rules: Kill target crewmate
   _properties:
     reorderableList:
