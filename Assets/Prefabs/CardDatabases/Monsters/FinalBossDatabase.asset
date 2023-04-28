@@ -44,5 +44,11 @@ MonoBehaviour:
         type: 3}
       deckList:
       - {fileID: 1798558198490400397, guid: 948a13693cf3aad4a9a0bd359cc158ef, type: 3}
-      - {fileID: 134441627470835729, guid: d942d0a9d7ce2914c841ea09612a31ea, type: 3}
+      - {fileID: 1421373476609381672, guid: da9e3729d23487343a12a4ef49e503ca, type: 3}
+      - {fileID: 1798558198490400397, guid: 948a13693cf3aad4a9a0bd359cc158ef, type: 3}
+      - {fileID: 5413654936612339483, guid: 9834e746bacf5844496ddcf81e2d4551, type: 3}
+      - {fileID: 1798558198490400397, guid: 948a13693cf3aad4a9a0bd359cc158ef, type: 3}
+      - {fileID: -3729829161630295540, guid: 288438a0a61877146b839b93277f3cf3, type: 3}
+      - {fileID: 1798558198490400397, guid: 948a13693cf3aad4a9a0bd359cc158ef, type: 3}
+      - {fileID: 4740916913306936747, guid: 8f5342357c31fd541ae0afd3d9a65292, type: 3}
       deckListString: 
