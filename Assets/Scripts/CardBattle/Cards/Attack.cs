@@ -9,7 +9,7 @@ namespace CardBattle {
 		// Can only target monsters and equipment
 		public override CardFilterer.CardFilters TargetingFilters
 			=> ~(CardFilterer.CardFilters.Monster |
-			     CardFilterer.CardFilters.InPlay /*| CardFilterer.CardFilters.Equipment*/);
+			     CardFilterer.CardFilters.InPlay | CardFilterer.CardFilters.Equipment);
 
 		// Can target monsters in addition to everything allowed by TargetingFilters
 		public override CardFilterer.CardFilters MonsterTargetingFilters
