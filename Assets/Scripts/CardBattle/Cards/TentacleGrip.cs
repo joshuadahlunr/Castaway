@@ -30,7 +30,7 @@ namespace CardBattle
 
             for (int i = 0; i < playerDeck.Count; i++)
             {
-                if (playerDeck[i].name == "Rotate")
+                if (playerDeck[i].name == "Rotate" || playerDeck[i].name == "Occult Twirl" || playerDeck[i].name == "Jerry's Arcane Twirl")
                 {
                     playerDeck[i].AddModification(costincrease);
                 }
