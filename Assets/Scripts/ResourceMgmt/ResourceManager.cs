@@ -40,7 +40,7 @@ namespace ResourceMgmt
 
         [SerializeField] private Button confirmBtn;
 
-        [SerializeField] private UpgradeData upgradeData;
+        [SerializeField] private UpgradeInfo upgradeData;
 
         [SerializeField] private Sprite[] shipLevels;
 
@@ -70,17 +70,18 @@ namespace ResourceMgmt
             }
             else
             {
-                upgradeData.Level = 1;
-                upgradeData.Cost = 10;
-                upgradeData.Resources = 0;
-                upgradeData.Progress = 0;
+                upgradeData.currentLvl = 1;
+                upgradeData.lvlCost = 10;
+                upgradeData.currentResources = 0;
+                upgradeData.currentProgress = 0;
+                upgradeData.currentShipHealth = 10;
             }
 
             resourcesWon = CardGameManager.numberOfMonstersKilled * CardGameManager.monsterLevel * 10;
-            upgradeData.Resources += resourcesWon;
+            upgradeData.currentResources += resourcesWon;
 
             winTxt.text = ("Congratulations! You've earned " + resourcesWon.ToString() + " resources for your ship and crew. You have "
-                        + upgradeData.Resources.ToString() + " in total. How would you like to allocate them?");
+                        + upgradeData.currentResources.ToString() + " in total. How would you like to allocate them?");
 
             LoadShip();
         }
@@ -111,7 +112,7 @@ namespace ResourceMgmt
         public void ValidateResources()
         {
             int sliderTotal = (int)shipSlider.value + (int)crewSlider.value;
-            if (sliderTotal > upgradeData.Resources)
+            if (sliderTotal > upgradeData.currentResources)
             {
                 shipSlider.value = currentVal;
                 crewSlider.value = currentVal;
@@ -123,10 +124,10 @@ namespace ResourceMgmt
             Slider[] sliderArr = { shipSlider, crewSlider };
             for (int i = 0; i < sliderArr.Length; i++)
             {
-                if (upgradeData.CanBuy())
+                if (upgradeData.currentResources >= upgradeData.lvlCost)
                 {
-                    upgradeData.Resources -= (int)sliderArr[i].value;
-                    upgradeData.Progress += (int)sliderArr[i].value;
+                    upgradeData.currentResources -= (int)sliderArr[i].value;
+                    upgradeData.currentProgress += (int)sliderArr[i].value;
                 }
                 else
                 {
@@ -141,13 +142,14 @@ namespace ResourceMgmt
 
         public void LevelUp()
         {
-            if (upgradeData.Progress >= upgradeData.Cost)
+            if (upgradeData.currentResources >= upgradeData.lvlCost)
             {
-                upgradeData.Cost *= 2;
-                upgradeData.Level += 1;
-                upgradeData.ResetProgress();
-                shipSlider.maxValue = upgradeData.Cost;
-                NotificationHolder.instance.CreateNotification("Level up! Ship is now Level " + upgradeData.Level.ToString() + "!", 3f);
+                upgradeData.lvlCost *= 2;
+                upgradeData.currentLvl += 1;
+                upgradeData.currentProgress = 0;
+                upgradeData.currentShipHealth += 2;
+                shipSlider.maxValue = upgradeData.lvlCost;
+                NotificationHolder.instance.CreateNotification("Level up! Ship is now Level " + upgradeData.currentLvl.ToString() + "!", 3f);
             }
         }
 
@@ -162,7 +164,7 @@ namespace ResourceMgmt
             };
 
             int count = 0;
-            upgradeData.Resources -= (int)crewSlider.value;
+            upgradeData.currentResources -= (int)crewSlider.value;
             foreach (var crewmate in CrewManager.instance.crewList)
             {
                 if (crewmate.CrewTag == Crewmates.Status.CrewTag.InCrew)
@@ -195,7 +197,7 @@ namespace ResourceMgmt
 
         public void LoadShip()
         {
-            switch (upgradeData.Level)
+            switch (upgradeData.currentLvl)
             {
                 case >= 10:
                     Sprite lvlThreeShip = shipLevels[2];
@@ -212,17 +214,14 @@ namespace ResourceMgmt
 
         public void LoadUpgradeInfo()
         {
-            GameObject obj = new GameObject("obj");
-            obj.AddComponent<UpgradeData>();
-
             var @out = DatabaseManager.GetOrCreateTable<UpgradeInfo>().First();
             if (@out is null) return;
 
-            upgradeData.Level = @out.currentLvl;
-            upgradeData.Progress = @out.currentProgress;
-            upgradeData.Cost = @out.lvlCost;
-            upgradeData.Resources = @out.currentResources;
-            upgradeData.CurrentShipHealth = @out.currentShipHealth;
+            upgradeData.currentLvl = @out.currentLvl;
+            upgradeData.currentProgress = @out.currentProgress;
+            upgradeData.lvlCost = @out.lvlCost;
+            upgradeData.currentResources = @out.currentResources;
+            upgradeData.currentShipHealth = @out.currentShipHealth;
         }
 
         public void SaveUpgradeInfo()
@@ -231,11 +230,11 @@ namespace ResourceMgmt
             table.Delete(_ => true);
             DatabaseManager.database.Insert(new UpgradeInfo {
                 id = 0,
-                currentLvl = upgradeData.Level,
-                currentProgress = upgradeData.Progress,
-                lvlCost = upgradeData.Cost,
-                currentResources = upgradeData.Resources,
-                currentShipHealth = upgradeData.CurrentShipHealth
+                currentLvl = upgradeData.currentLvl,
+                currentProgress = upgradeData.currentProgress,
+                lvlCost = upgradeData.lvlCost,
+                currentResources = upgradeData.currentResources,
+                currentShipHealth = upgradeData.currentShipHealth
             });
         }
 
