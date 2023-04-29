@@ -222,6 +222,7 @@ namespace ResourceMgmt
             upgradeData.Progress = @out.currentProgress;
             upgradeData.Cost = @out.lvlCost;
             upgradeData.Resources = @out.currentResources;
+            upgradeData.CurrentShipHealth = @out.currentShipHealth;
         }
 
         public void SaveUpgradeInfo()
@@ -233,7 +234,8 @@ namespace ResourceMgmt
                 currentLvl = upgradeData.Level,
                 currentProgress = upgradeData.Progress,
                 lvlCost = upgradeData.Cost,
-                currentResources = upgradeData.Resources
+                currentResources = upgradeData.Resources,
+                currentShipHealth = upgradeData.CurrentShipHealth
             });
         }
 

@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 
 /// <summary>
-/// Class for storing upgrade information (resources, 
+/// Class for storing upgrade information (resources,
 /// resource cost, progress towards upgrade, and
 /// current upgrade level)
 /// </summary>
@@ -16,7 +16,7 @@ namespace ResourceMgmt
         public int Resources
         {
             get => _resources;
-            set { _resources = value; } 
+            set { _resources = value; }
         }
 
         [SerializeField] private int _cost;
@@ -38,6 +38,13 @@ namespace ResourceMgmt
         {
             get => _level;
             set { _level = value; }
+        }
+
+        [SerializeField] private int _currentShipHealth;
+        public int CurrentShipHealth
+        {
+            get => _currentShipHealth;
+            set { _currentShipHealth = value; }
         }
 
         public void ResetProgress()
