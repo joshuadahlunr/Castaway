@@ -369,7 +369,7 @@ namespace CardBattle.Card {
 		///     Helper function which removes this card from the game!
 		/// </summary>
 		public void RemoveFromGame() {
-			container.RemoveCard(this);
+			container?.RemoveCard(this);
 			Destroy(gameObject);
 		}
 
