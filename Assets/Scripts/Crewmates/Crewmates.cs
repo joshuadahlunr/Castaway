@@ -159,7 +159,7 @@ namespace Crew {
 
         public void ShowInfo()
         {
-            GameObject.FindGameObjectWithTag("Info Panel").transform.localScale = new Vector3(1, 1, 1);
+            GameObject.FindGameObjectWithTag("Info Panel").transform.localScale = new Vector3(2, 2, 1);
 
             GameObject displayName = GameObject.FindGameObjectWithTag("Crew Name");
             displayName.GetComponent<TextMeshProUGUI>().text = _name.ToString();

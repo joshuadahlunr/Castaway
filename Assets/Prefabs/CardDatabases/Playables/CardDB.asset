@@ -60,7 +60,6 @@ MonoBehaviour:
     - Become Selkie
     - Summoning
     - Fate Tie
-    - Jerry's Arcane Twirl
     - Mystic Stew
     - Oracle
     - Plain Broth
@@ -93,7 +92,6 @@ MonoBehaviour:
     - Become Selkie
     - Summoning
     - Fate Tie
-    - Jerry's Arcane Twirl
     - Mystic Stew
     - Oracle
     - Plain Broth
@@ -126,7 +124,6 @@ MonoBehaviour:
     - {fileID: 1028301194782096724, guid: 09fbb3d024a58464ea815f2e10452427, type: 3}
     - {fileID: 3977357017348899511, guid: 695721156c9fa5a49bb4d3c77095cea9, type: 3}
     - {fileID: 6126150281627410766, guid: 51c8c4b57b3807c4e9976f9916f25acc, type: 3}
-    - {fileID: -4917259886615291091, guid: 9eeedca544d5cac4083c46b206905cd2, type: 3}
     - {fileID: 243502958652505102, guid: c56a60aba5b76d445a05a38f2d589a38, type: 3}
     - {fileID: -2165165948327342399, guid: dd64c36d80187684499199611a34cd15, type: 3}
     - {fileID: 4262471276244866899, guid: a4ef5334815c64046ae492e5c5402967, type: 3}
