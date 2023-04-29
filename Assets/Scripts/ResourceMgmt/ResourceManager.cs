@@ -153,7 +153,7 @@ namespace ResourceMgmt
         {
             var currentCrew = CrewManager.instance.crewList;
             currentCrew.RemoveAll(x => x.CrewTag != Crewmates.Status.CrewTag.InCrew);
-            if (currentCrew == null) return;
+            if (currentCrew == null || currentCrew.Count == 0) return;
             if (crewSlider.value == 0)
             {
                 StartCoroutine(ReturnToMap(3f));
