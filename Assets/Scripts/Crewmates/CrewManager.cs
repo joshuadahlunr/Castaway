@@ -520,7 +520,9 @@ namespace Crew {
             // Find the matching card in the player's deck that shares the same index
             var cardMatch = DatabaseManager.GetOrCreateTable<Deck.DeckListCard>()
                 .FirstOrDefault(c => c.associatedCrewmateID == crewmateID && c.listID == playerDeckId);
-            DatabaseManager.database.Delete(cardMatch); // Delete it!
+            if (cardMatch != null) {
+                DatabaseManager.database.Delete(cardMatch); // Delete it!
+            }
             var crewmate = DatabaseManager.GetOrCreateTable<CrewData>()
                 .FirstOrDefault(c => c.id == crewmateID); 
             crewmate.status = 0; // Change crewmate's crew tag to NotInCrew(0)
