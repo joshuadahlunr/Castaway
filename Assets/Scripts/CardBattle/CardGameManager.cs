@@ -239,6 +239,8 @@ namespace CardBattle {
 			_playerHealthState.health = shipUpgradeInfo.currentShipHealth; // Get the current ship health
 			var shipLevel = shipUpgradeInfo?.currentLvl ?? 0;
 
+			Debug.Log("Ship's level" + shipLevel);
+
 			// Set the material of the ship to track its upgrades
 			ship.material = material0;
 			_playerHealthState.maxHealth = 10;
