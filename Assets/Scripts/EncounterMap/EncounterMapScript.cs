@@ -333,5 +333,43 @@ namespace EncounterMap {
 		}
 
 		public int RandomInt() => Random.Range(int.MinValue, int.MaxValue);
+
+		public MapGeneration[] EnumerateGenerations(){
+			var generations = new List<MapGeneration> { currentGeneration };
+			MapGeneration cur = currentGeneration.previous;
+			while(cur != null){
+				generations.Add(cur);
+				cur = cur.previous;
+			}
+
+			cur = currentGeneration.next;
+			while(cur != null){
+				generations.Add(cur);
+				cur = cur.next;
+			}
+
+			return generations.ToArray();
+		}
+
+		public MapNode[] EnumerateNodes() {
+			var generations = EnumerateGenerations();
+
+			return generations.SelectMany(gen => gen.nodes).ToArray();
+		}
+
+		public MapNode ClosestNode(Vector3 pos) {
+			var nodes = EnumerateNodes();
+
+			var closestDist = Mathf.Infinity;
+			MapNode closest = null;
+			foreach(var node in nodes){
+				var dist = (node.transform.position - pos).magnitude;
+				if (!(dist < closestDist)) continue;
+				closestDist = dist;
+				closest = node;
+			}
+			return closest;
+		}
+
 	}
 }
