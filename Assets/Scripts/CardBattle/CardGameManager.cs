@@ -236,13 +236,20 @@ namespace CardBattle {
 
 			// Calculate the ship level
 			var shipUpgradeInfo = DatabaseManager.GetOrCreateTable<ResourceManager.UpgradeInfo>().FirstOrDefault();
-			var shipLevel = shipUpgradeInfo?.currentLvl ?? 0; // TODO: Spawn proper ship upgrade using this
-			shipLevel = 3;
+			_playerHealthState.health = shipUpgradeInfo.currentShipHealth; // Get the current ship health
+			var shipLevel = shipUpgradeInfo?.currentLvl ?? 0;
 
 			// Set the material of the ship to track its upgrades
 			ship.material = material0;
-			if (shipLevel >= 5) ship.material = material5;
-			if (shipLevel >= 10) ship.material = material10;
+			_playerHealthState.maxHealth = 10;
+			if (shipLevel >= 5) {
+				ship.material = material5;
+				_playerHealthState.maxHealth = 20;
+			}
+			if (shipLevel >= 10) {
+				ship.material = material10;
+				_playerHealthState.maxHealth = 40;
+			}
 
 			// Set the number of slots based on the ship level
 			slot3.SetActive(shipLevel >= 3);
@@ -485,6 +492,9 @@ namespace CardBattle {
 			}
 
 			StartCoroutine(WinCoroutine());
+			var shipUpgradeInfo = DatabaseManager.GetOrCreateTable<ResourceManager.UpgradeInfo>().FirstOrDefault();
+			shipUpgradeInfo.currentShipHealth = playerHealthState.health;
+			DatabaseManager.database.InsertOrReplace(shipUpgradeInfo);
 			CrewManager.XPGain();
 		}
 

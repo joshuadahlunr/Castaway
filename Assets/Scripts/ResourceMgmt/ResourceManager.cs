@@ -30,6 +30,8 @@ namespace ResourceMgmt
             public int lvlCost { get; set; }
 
             public int currentResources { get; set; }
+
+            public int currentShipHealth { get; set; }
         }
 
         public static ResourceManager instance;
@@ -85,11 +87,11 @@ namespace ResourceMgmt
 
         private void Start()
         {
-            if (CrewManager.instance.crewList.Count == 0 || CrewManager.instance.crewList == null) 
+            if (CrewManager.instance.crewList.Count == 0 || CrewManager.instance.crewList == null)
             {
                 crewSlider.enabled = false;
-            } 
-            else 
+            }
+            else
             {
                 crewSlider.enabled = true;
             }

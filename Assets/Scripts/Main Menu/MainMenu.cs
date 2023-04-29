@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using ResourceMgmt;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -23,6 +24,12 @@ public class MainMenu : MonoBehaviour {
 
     public void NewGame() {
         DatabaseManager.ResetToNewSave();
+
+        // The player starts every new game with 10 HP
+        var shipUpgradeInfo = DatabaseManager.GetOrCreateTable<ResourceManager.UpgradeInfo>().FirstOrDefault();
+        shipUpgradeInfo.currentShipHealth = 10;
+        DatabaseManager.database.InsertOrReplace(shipUpgradeInfo);
+
         EncounterMap.PlayerMovement.ResetPosition();
         EncounterMap.CameraMovement.ResetCamPosition();
         SceneManager.LoadScene("EncounterMapScene");
