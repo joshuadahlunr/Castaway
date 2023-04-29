@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using CardBattle.Containers;
 using Crew;
+using ResourceMgmt;
 using SQLite;
 using UnityEngine;
 
@@ -52,6 +53,16 @@ public static class DatabaseManager {
 	public static void ResetToNewSave() {
 		// Marks all the crewmates as no longer being in the deck
 		CrewManager.SetAllCrewToFormer();
+
+		// The player starts every new game with 10 HP
+		var shipUpgradeInfo = GetOrCreateTable<ResourceManager.UpgradeInfo>().FirstOrDefault();
+		shipUpgradeInfo.currentShipHealth = 10;
+		// Reset ship level to 0
+		shipUpgradeInfo.currentLvl = 0;
+		shipUpgradeInfo.currentProgress = 0;
+		shipUpgradeInfo.lvlCost = 0;
+		shipUpgradeInfo.currentResources = 0;
+		database.InsertOrReplace(shipUpgradeInfo);
 
 		// Removes the decklist table from the database
 		database.DropTable<Deck.DeckListCard>();
