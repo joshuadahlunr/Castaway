@@ -410,8 +410,7 @@ namespace CardBattle {
 				currentPeopleJuice = new PeopleJuice.Cost(resetPeopleJuice);
 
 				// Enable all of the cards in their hand that were disabled
-				EnableCards(CardFilterer
-					.EnumerateAllCards()); // TODO: Should we be more specific with which cards are renabled?
+				EnableCards(CardFilterer.EnumerateAllCards()); // TODO: Should we be more specific with which cards are renabled?
 
 				// Refill the player's hand
 				var missingCards = Math.Max(playerMaxHandSize - playerHand.Count, 0);
@@ -532,6 +531,7 @@ namespace CardBattle {
 			if (playerHealthState.health <= 0)
 				OnLose();
 
+			if (monsters.Length <= 0) return;
 			var allDead = monsters.All(monster => monster.healthState.health <= 0);
 			if (allDead)
 				OnWin();
