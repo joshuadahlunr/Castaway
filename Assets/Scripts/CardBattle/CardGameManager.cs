@@ -264,7 +264,8 @@ namespace CardBattle {
 
 				var crewmates = DatabaseManager.GetOrCreateTable<CrewManager.CrewData>();
 				foreach (var crewmate in crewmates)
-					reset.Add((PeopleJuice.Types)crewmate.type);
+					if(crewmate.status == (int)Crewmates.Status.CrewTag.InCrew)
+						reset.Add((PeopleJuice.Types)crewmate.type);
 
 				// Update all the juices to match
 				currentPeopleJuice = resetPeopleJuice = reset;
