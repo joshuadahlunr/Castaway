@@ -5,6 +5,7 @@ using SQLite;
 using Extensions;
 using CardBattle;
 using CardBattle.Containers;
+using ResourceMgmt;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -26,6 +27,11 @@ namespace Crew {
             ///     Gets or sets the unique identifier of the crewmate
             /// </summary>
             public int id { set; get; }
+
+            /// <summary>
+            ///     Gets or sets unique code for the crewmate
+            /// </summary>
+            public int code { set; get; }
 
             /// <summary>
             ///     Gets or sets the type of the crewmate
@@ -84,7 +90,7 @@ namespace Crew {
             /// </summary>
             public int browIndex { set; get; }
 
-            ///             var remainder = (int)crewSlider.value;<summary>
+            /// <summary>
             ///     Gets or sets the database index for the mouth texture
             /// </summary>
             public int mouthIndex { set; get; }
@@ -153,6 +159,7 @@ namespace Crew {
                 Crewmates loadedCrew = obj.GetComponent<Crewmates>();
 
                 // Load the data of the crewmate
+                loadedCrew.Code = crewmate.code;
                 loadedCrew.Type = (Crewmates.CrewClass.Type)crewmate.type;
                 loadedCrew.Name = crewmate.name;
                 loadedCrew.CrewTag = (Crewmates.Status.CrewTag)crewmate.status;
@@ -200,6 +207,7 @@ namespace Crew {
             {
                 DatabaseManager.database.Insert(new CrewData
                 {
+                    code = crewmate.Code,
                     type = (int) crewmate.Type,
                     name = crewmate.Name,
                     status = (int) crewmate.CrewTag,
@@ -233,6 +241,7 @@ namespace Crew {
 
             var randomCrewmate = shuffledCrew.Find(c => c.CrewTag == (Crewmates.Status.CrewTag)1);
 
+            crewmate.GetComponent<Crewmates>().Code = randomCrewmate.Code;
             crewmate.GetComponent<Crewmates>().CrewTag = randomCrewmate.CrewTag;
             crewmate.GetComponent<Crewmates>().Type = randomCrewmate.Type;
             crewmate.GetComponent<Crewmates>().Name = randomCrewmate.Name;
@@ -287,6 +296,9 @@ namespace Crew {
             crewmate.GetComponent<Crewmates>().Morale = 50;
             crewmate.GetComponent<Crewmates>().CurrentXP = 0;
             crewmate.GetComponent<Crewmates>().XPNeeded = 10;
+
+            var rnd = Enumerable.Range(10000000, 99999999).Shuffle().FirstOrDefault();
+            crewmate.GetComponent<Crewmates>().Code = rnd;
 
             // Select a random card for the generated crewmate based on their type
             switch (crewmate.GetComponent<Crewmates>().Type)
@@ -428,7 +440,7 @@ namespace Crew {
                 listID = playerDeckId,
                 name = crew.CrewCard,
                 level = crew.Level,
-                associatedCrewmateID = crewList.FindIndex(c => c == crew)
+                associatedCrewmateID = crew.Code
             });
             crew.CrewTag = (Crewmates.Status.CrewTag)2; // Change crewmate's crew tag to InCrew (2)
             if (listIndex != 1) // If we were able to find a valid index...
@@ -450,7 +462,7 @@ namespace Crew {
                 .FirstOrDefault(l => l.name == playerDeckName).id;
             // Find the matching card in the player's deck that shares the same index
             var cardMatch = DatabaseManager.GetOrCreateTable<Deck.DeckListCard>()
-                .FirstOrDefault(c => c.associatedCrewmateID == listIndex && c.listID == playerDeckId);
+                .FirstOrDefault(c => c.associatedCrewmateID == crew.Code && c.listID == playerDeckId);
             DatabaseManager.database.Delete(cardMatch); // Delete it!
             crew.CrewTag = (Crewmates.Status.CrewTag)1; // Change crewmate's crew tag to WasInCrew (1)
             if (listIndex != 1) // If we were able to find a valid index... 
@@ -475,8 +487,8 @@ namespace Crew {
                 .FirstOrDefault(c => c.associatedCrewmateID == crewmateID && c.listID == playerDeckId);
             DatabaseManager.database.Delete(cardMatch); // Delete it!
             var crewmate = DatabaseManager.GetOrCreateTable<CrewData>()
-                .FirstOrDefault(c => c.id == crewmateID);
-            crewmate.id = 1; // Change to WasInCrew(1)
+                .FirstOrDefault(c => c.code == crewmateID);
+            crewmate.status = 1; // Change to WasInCrew(1)
             SaveCrew(); // Save the newly updated crew list to SQL
         }
 
@@ -487,18 +499,23 @@ namespace Crew {
         {
             const string playerDeckName = "Player Deck"; // Obtain the crewmate's index in crew list
             // Fetch the ID of the SQL table containing the player deck
+			var deckList = DatabaseManager.GetOrCreateTable<Deck.DeckList>().FirstOrDefault(l => l.name == playerDeckName);
+            if (deckList is null) { return; } // If no such table exists, return
             var playerDeckId = DatabaseManager.GetOrCreateTable<Deck.DeckList>()
                 .FirstOrDefault(l => l.name == playerDeckName).id;
             var crew = DatabaseManager.GetOrCreateTable<CrewData>();
             // For each member in the crew list...
             for (int i = 0; i > crew.Count(); i++)
             {
-                // Find the matching card in the player's deck that shares the same index
-                var cardMatch = DatabaseManager.GetOrCreateTable<Deck.DeckListCard>()
-                    .FirstOrDefault(c => c.associatedCrewmateID == i && c.listID == playerDeckId);
-                DatabaseManager.database.Delete(cardMatch); // Delete it!
+                // Obtain crewmate at this index
                 var crewmate = DatabaseManager.GetOrCreateTable<CrewData>()
                     .FirstOrDefault(c => c.id == i); 
+                if (crewmate == null) { continue; } // If no crewmate exists at this index value, skip
+                // Find the matching card in the player's deck that shares the same index
+                var cardMatch = DatabaseManager.GetOrCreateTable<Deck.DeckListCard>()
+                    .FirstOrDefault(c => c.associatedCrewmateID == crewmate.code && c.listID == playerDeckId);
+                if (cardMatch == null) { continue; } // If for some reason we can't pull up a card match, skip
+                DatabaseManager.database.Delete(cardMatch); // Otherwise, delete it!
                 if (crewmate.status == 2) // If the crewmate was in the crew...
                 {
                     crewmate.status = 1; // ...change crewmate's crew tag to WasInCrew(1)
@@ -510,8 +527,8 @@ namespace Crew {
         ///     Flags a crew member as no longer being in player's crew and removes card from player deck DB
         /// </summary>
         /// <remarks>This makes it impossible for the specified crew member to be encountered in other runs!</remarks>
-        /// <param name="crewmateID">The ID of the crewmate to be removed</param>
-        public static void KillCrewmate(int crewmateID)
+        /// <param name="crewmateID">The code of the crewmate to be removed</param>
+        public static void KillCrewmate(int crewmateCode)
         {
             const string playerDeckName = "Player Deck"; // Obtain the crewmate's index in crew list
             // Fetch the ID of the SQL table containing the player deck
@@ -519,12 +536,12 @@ namespace Crew {
                 .FirstOrDefault(l => l.name == playerDeckName).id;
             // Find the matching card in the player's deck that shares the same index
             var cardMatch = DatabaseManager.GetOrCreateTable<Deck.DeckListCard>()
-                .FirstOrDefault(c => c.associatedCrewmateID == crewmateID && c.listID == playerDeckId);
+                .FirstOrDefault(c => c.associatedCrewmateID == crewmateCode && c.listID == playerDeckId);
             if (cardMatch != null) {
                 DatabaseManager.database.Delete(cardMatch); // Delete it!
             }
             var crewmate = DatabaseManager.GetOrCreateTable<CrewData>()
-                .FirstOrDefault(c => c.id == crewmateID); 
+                .FirstOrDefault(c => c.code == crewmateCode); 
             crewmate.status = 0; // Change crewmate's crew tag to NotInCrew(0)
         }
 
@@ -534,7 +551,6 @@ namespace Crew {
         public void LevelUp(Crewmates crew)
         {
             const string playerDeckName = "Player Deck";
-            int listIndex = crewList.FindIndex(c => c == crew); // Obtain the crewmate's index in crew list
             crew.CurrentXP = crew.CurrentXP - crew.XPNeeded; // Subtract current XP by the amount of XP needed for the level upgrade
             crew.XPNeeded *= 2; // Multiply the amount of XP needed for next level by 2
             crew.Level += 1; // Increase level attribute by 1
@@ -543,7 +559,7 @@ namespace Crew {
                 .FirstOrDefault(l => l.name == playerDeckName).id;
             // Find the matching card in the player's deck that shares the same index
             var cardMatch = DatabaseManager.GetOrCreateTable<Deck.DeckListCard>()
-                .FirstOrDefault(c => c.associatedCrewmateID == listIndex && c.listID == playerDeckId);
+                .FirstOrDefault(c => c.associatedCrewmateID == crew.Code && c.listID == playerDeckId);
             DatabaseManager.database.Delete(cardMatch); // Delete it!
             // Insert the leveled up version of the crew member's card into the database
             DatabaseManager.database.Insert(new Deck.DeckListCard
@@ -551,7 +567,7 @@ namespace Crew {
                 listID = playerDeckId,
                 name = crew.CrewCard,
                 level = crew.Level,
-                associatedCrewmateID = listIndex
+                associatedCrewmateID = crew.Code
             });
             SaveCrew(); // Save the newly updated crew list to SQL
         }
@@ -576,7 +592,9 @@ namespace Crew {
                     crewmate.morale -= 10 * CardGameManager.monsterLevel; // ...decrease their morale based on how difficult the encounter was
                     if (crewmate.morale <= 0) // If their morale has dropped to or below 0....
                     {
-                        KillCrewmate(crewmate.id); // ...kill them off (replace this with corresponding event trigger(s) later)
+                        KillCrewmate(crewmate.code); // ...kill them off (replace this with corresponding event trigger(s) later)
+                        NotificationHolder.instance.CreateNotification(crewmate.name + " has died due to lack of morale!");
+
                         return;
                     }
                     float morale = crewmate.morale;
@@ -589,7 +607,7 @@ namespace Crew {
                         var playerDeckId = DatabaseManager.GetOrCreateTable<Deck.DeckList>()
                             .FirstOrDefault(l => l.name == playerDeckName).id;
                         var cardMatch = DatabaseManager.GetOrCreateTable<Deck.DeckListCard>()
-                            .FirstOrDefault(c => c.associatedCrewmateID == crewmate.id && c.listID == playerDeckId);
+                            .FirstOrDefault(c => c.associatedCrewmateID == crewmate.code && c.listID == playerDeckId);
                         if (cardMatch != null)
                         {
                             DatabaseManager.database.Delete(cardMatch); // Delete it!
@@ -600,7 +618,7 @@ namespace Crew {
                             listID = playerDeckId,
                             name = crewmate.cardName,
                             level = crewmate.level,
-                            associatedCrewmateID = crewmate.id
+                            associatedCrewmateID = crewmate.code
                         });
                         crewmate.level += 1; // ...level up!
                         crewmate.currentXp -= crewmate.xpNeeded; // Subtract the amount of XP needed for the next level from current XP

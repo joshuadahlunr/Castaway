@@ -6,25 +6,21 @@ using TMPro;
 
 namespace Crew {
     /// <summary>
-    /// <author>Misha Desear</author>
+    ///     Class for crewmates storing associated information such as name, status, crew card, etc.
     /// </summary>
+    /// <author> Misha Desear </author>
 
     public class Crewmates : MonoBehaviour
     {
-        /*/// <summary>
-        /// Holds the prefab for the information panel to display stats
-        /// </summary>
-        [SerializeField] private GameObject _infoPanel;
-        public GameObject InfoPanel
+        // Numeric code generated upon spawn for keeping track of card
+        [SerializeField] private int _code;
+        public int Code
         {
-            get => _infoPanel;
-            set { _infoPanel = value; }
-        }*/
+            get => _code;
+            set { _code = value; }
+        }
 
-        //public Global global;
-
-        //public GameObject infoPanel => _infoPanel;
-
+        // Enum denoting status of crewmate with regards to whether or not they are part of the crew
         [Serializable]
         public struct Status {
             public enum CrewTag {
@@ -35,6 +31,7 @@ namespace Crew {
             public int value;
             public static implicit operator int(Status s) => s.value;
         }
+
         [SerializeField] private Status.CrewTag _crewTag;
         public Status.CrewTag CrewTag
         {
@@ -42,6 +39,7 @@ namespace Crew {
             set { _crewTag = value; }
         }
 
+        // Enum denoting type of crewmate to ensure appropriate associated card/uniform
         [Serializable]
         public struct CrewClass {
             public enum Type {
@@ -59,20 +57,13 @@ namespace Crew {
             public int value;
         }
 
-        /*public static T RandomEnumValue<T>()
-        {
-            var v = Enum.GetValues(typeof(T));
-            return (T) v.GetValue(Random.Range(0, 7));
-        }*/
-
-        // TODO: implement preferences as enums rather than class objects
-
         [SerializeField] private CrewClass.Type _type;
         public CrewClass.Type Type {
             get => _type;
             set { _type = value; }
         }
 
+        // The crewmate's name
         [SerializeField] private string _name;
         public string Name
         {
@@ -80,6 +71,7 @@ namespace Crew {
             set { _name = value; }
         }
 
+        // The crewmate's current level
         [SerializeField] private int _level;
         public int Level
         {
@@ -87,6 +79,7 @@ namespace Crew {
             set { _level = value; }
         }
 
+        // The crewmate's current morale
         [SerializeField] private int _morale;
         public int Morale
         {
@@ -94,6 +87,7 @@ namespace Crew {
             set { _morale = value; }
         }
 
+        // The crewmate's current amount of XP
         [SerializeField] private int _currentXp;
         public int CurrentXP
         {
@@ -101,6 +95,7 @@ namespace Crew {
             set { _currentXp = value; }
         }
 
+        // The amount of XP needed for the crewmate to reach the next level
         [SerializeField] private int _xpNeeded;
         public int XPNeeded
         {
@@ -108,6 +103,7 @@ namespace Crew {
             set { _xpNeeded = value; }
         }
 
+        // The texture of the crewmate's base
         [SerializeField] private Texture2D _baseSprite;
         public Texture2D BaseSprite
         {
@@ -115,6 +111,7 @@ namespace Crew {
             set { _baseSprite = value; }
         }
 
+        // The texture of the crewmate's hair
         [SerializeField] private Texture2D _hairSprite;
         public Texture2D HairSprite
         {
@@ -122,6 +119,7 @@ namespace Crew {
             set { _hairSprite = value; }
         }
 
+        // The texture of the crewmate's eyes
         [SerializeField] private Texture2D _eyeSprite;
         public Texture2D EyeSprite
         {
@@ -129,6 +127,7 @@ namespace Crew {
             set { _eyeSprite = value; }
         }
 
+        // The texture of the crewmate's eyebrows
         [SerializeField] private Texture2D _browSprite;
         public Texture2D BrowSprite
         {
@@ -136,6 +135,7 @@ namespace Crew {
             set { _browSprite = value; }
         }
 
+        // The texture of the crewmate's mouth
         [SerializeField] private Texture2D _mouthSprite;
         public Texture2D MouthSprite
         {
@@ -143,6 +143,7 @@ namespace Crew {
             set { _mouthSprite = value; }
         }
 
+        // The texture of the crewmate's clothes
         [SerializeField] private Texture2D _clothesSprite;
         public Texture2D ClothesSprite
         {
@@ -150,6 +151,7 @@ namespace Crew {
             set { _clothesSprite = value; }
         }
 
+        // The crewmate's associated card to be added to the deck
         [SerializeField] private string _crewCard;
         public string CrewCard
         {
@@ -157,6 +159,10 @@ namespace Crew {
             set { _crewCard = value; }
         }
 
+        /// <summary>
+        ///     Shows the crewmate's information (e.g., name, type, level, current XP and morale) 
+        ///     using the information panel prefab in the scene
+        /// </summary>
         public void ShowInfo()
         {
             GameObject.FindGameObjectWithTag("Info Panel").transform.localScale = new Vector3(2, 2, 1);
@@ -181,6 +187,9 @@ namespace Crew {
             xpSlider.GetComponent<Slider>().maxValue = _xpNeeded;
         }
 
+        /// <summary>
+        ///     Hides the information panel prefab in the scene
+        /// </summary>
         public void HideInfo()
         {
             GameObject.FindGameObjectWithTag("Info Panel").transform.localScale = new Vector3(0, 0, 0);
