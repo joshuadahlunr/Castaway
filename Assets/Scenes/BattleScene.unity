@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2209,10 +2209,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cards: []
   cardDB: {fileID: 11400000, guid: 5631e1aa1e5ef424e9af340e6b5cff49, type: 2}
-  injectCardPrototypes:
-  - {fileID: -3729829161630295540, guid: 288438a0a61877146b839b93277f3cf3, type: 3}
-  - {fileID: -628711727757717840, guid: 304e50ce826acd54bba93b86078c4c34, type: 3}
-  - {fileID: 4740916913306936747, guid: 8f5342357c31fd541ae0afd3d9a65292, type: 3}
+  injectCardPrototypes: []
 --- !u!1 &1923953376
 GameObject:
   m_ObjectHideFlags: 0
