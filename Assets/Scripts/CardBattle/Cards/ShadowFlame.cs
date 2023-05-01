@@ -13,18 +13,28 @@ namespace CardBattle
     /// </author>
     public class ShadowFlame : Card.ActionCardBase
     {
-        // Can target monsters or equipment
-        public override CardFilterer.CardFilters TargetingFilters =>
-            ~(CardFilterer.CardFilters.Monster | CardFilterer.CardFilters.InPlay);
-        public override CardFilterer.CardFilters MonsterTargetingFilters =>
-            TargetingFilters | CardFilterer.CardFilters.Monster;
+        // Can target player and equipment
+        //public override CardFilterer.CardFilters TargetingFilters
+        //    => ~(CardFilterer.CardFilters.Player |
+        //         CardFilterer.CardFilters.InPlay);
+        //public override CardFilterer.CardFilters PlayerTargetingFilters
+        //    => TargetingFilters | CardFilterer.CardFilters.Player;
+
+        // Can target anything but monsters
+        public override CardFilterer.CardFilters TargetingFilters => CardFilterer.CardFilters.Monster;
+        public override CardFilterer.CardFilters MonsterTargetingFilters => CardFilterer.CardFilters.Monster;
+        public override bool CanTargetPlayer => false;
 
         /// Damages target
         public override void OnTarget(Card.CardBase _target)
         {
             var target = _target?.GetComponent<Card.HealthCardBase>();
             // Target cannot be null
-            if (NullAndPlayerCheck(target)) return;
+            if (target is null)
+            {
+                RefundAndReset();
+                return;
+            }
 
             // Damage target or player if used by monster
             DamageTargetOrPlayer(properties["primary"], target);
