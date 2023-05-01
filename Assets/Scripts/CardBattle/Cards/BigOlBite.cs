@@ -1,6 +1,7 @@
-using UnityEngine;
+using CardBattle.Card;
 using System.Collections;
-using System.Drawing.Text;
+using System.Collections.Generic;
+using UnityEngine;
 using CardBattle.Containers;
 
 namespace CardBattle
@@ -14,20 +15,29 @@ namespace CardBattle
     public class BigOlBite : Card.ActionCardBase
     {
         // Can target player and equipment
-        public override CardFilterer.CardFilters TargetingFilters
-            => ~(CardFilterer.CardFilters.Player |
-                 CardFilterer.CardFilters.InPlay);
-        public override CardFilterer.CardFilters PlayerTargetingFilters
-            => TargetingFilters | CardFilterer.CardFilters.Player;
+        //public override CardFilterer.CardFilters TargetingFilters
+        //    => ~(CardFilterer.CardFilters.Player |
+        //         CardFilterer.CardFilters.InPlay);
+        //public override CardFilterer.CardFilters PlayerTargetingFilters
+        //    => TargetingFilters | CardFilterer.CardFilters.Player;
+
+        // Can target anything but monsters
+        public override CardFilterer.CardFilters TargetingFilters => CardFilterer.CardFilters.Monster;
+        public override CardFilterer.CardFilters MonsterTargetingFilters => CardFilterer.CardFilters.Monster;
+        public override bool CanTargetPlayer => false;
 
         /// Damages target
         public override void OnTarget(Card.CardBase _target)
         {
             var target = _target?.GetComponent<Card.HealthCardBase>();
             // Target cannot be null
-            if (NullAndMonsterCheck(target)) return;
+            if (target is null)
+            {
+                RefundAndReset();
+                return;
+            }
 
-            DamagePlayerOrMonster(properties["primary"], target);
+            DamageTargetOrPlayer(properties["primary"], target);
 
             SendToGraveyard();
         }
