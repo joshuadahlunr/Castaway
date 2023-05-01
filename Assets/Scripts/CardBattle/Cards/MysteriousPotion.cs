@@ -18,10 +18,18 @@ namespace CardBattle
         /// <summary>
         public override void OnTarget(CardBase _target)
         {
+            if (OwnedByPlayer)
+            {
                 var target = _target?.GetComponent<Card.MonsterCardBase>();
                 if (NullAndPlayerCheck(target)) return; // Make sure the target isn't null if owned by the player
 
                 target.deck.cardDB.Instantiate("Poison"); 
+            }
+
+            else 
+            {
+                CardGameManager.instance.playerDeck.cardDB.Instantiate("Poison");
+            }
 
                 SendToGraveyard();
         }
