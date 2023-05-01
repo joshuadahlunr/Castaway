@@ -439,7 +439,7 @@ namespace Crew {
             int listIndex = crewList.FindIndex(c => c == crew); // Obtain the crewmate's index in crew list
             // Fetch the ID of the SQL table containing the player deck
 			var playerDeckId = DatabaseManager.GetOrCreateTable<Deck.DeckList>()
-				.FirstOrDefault(l => l.name == playerDeckName).id;
+				?.FirstOrDefault(l => l.name == playerDeckName)?.id ?? 0;
             // Insert the crewmate's card into the database based on crewmate's attributes
             DatabaseManager.database.Insert(new Deck.DeckListCard
             {
@@ -511,11 +511,11 @@ namespace Crew {
                 .FirstOrDefault(l => l.name == playerDeckName).id;
             var crew = DatabaseManager.GetOrCreateTable<CrewData>();
             // For each member in the crew list...
-            for (int i = 0; i > crew.Count(); i++)
+            foreach (var crewmate in crew)
             {
                 // Obtain crewmate at this index
-                var crewmate = DatabaseManager.GetOrCreateTable<CrewData>()
-                    .FirstOrDefault(c => c.id == i); 
+                // var crewmate = DatabaseManager.GetOrCreateTable<CrewData>()
+                //     .FirstOrDefault(c => c.id == i); 
                 if (crewmate == null) { continue; } // If no crewmate exists at this index value, skip
                 // Find the matching card in the player's deck that shares the same index
                 var cardMatch = DatabaseManager.GetOrCreateTable<Deck.DeckListCard>()
@@ -526,6 +526,9 @@ namespace Crew {
                 {
                     crewmate.status = 1; // ...change crewmate's crew tag to WasInCrew(1)
                 }
+                // Save the change in status back to the database
+                Debug.Log($"Saving {crewmate.name}");
+                DatabaseManager.database.InsertOrReplace(crewmate);
             }
         }
 

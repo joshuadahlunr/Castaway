@@ -263,12 +263,7 @@ namespace ResourceMgmt
         {
             var @out = DatabaseManager.GetOrCreateTable<UpgradeInfo>().First();
             if (@out is null) return; // Return if we can't find an upgrade info table for some reason
-
-            upgradeData.currentLvl = @out.currentLvl;
-            upgradeData.currentProgress = @out.currentProgress;
-            upgradeData.lvlCost = @out.lvlCost;
-            upgradeData.currentResources = @out.currentResources;
-            upgradeData.currentShipHealth = @out.currentShipHealth;
+            upgradeData = @out;
         }
 
         /// <summary>
