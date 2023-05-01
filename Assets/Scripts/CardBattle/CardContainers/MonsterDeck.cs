@@ -55,28 +55,47 @@ namespace CardBattle.Containers {
 				turnsRemaining = 1
 			});
 
-			var revealHolderA = new GameObject {
-				name = "RevealHolderOuter", transform = { parent = transform }
-			}; // TODO: This is super inefficient and needs to be cached!
-			revealHolderA.transform.SetGlobalScale(Vector3.one);
-			var revealHolder = new GameObject { transform = { parent = revealHolderA.transform } };
-			revealHolder.transform.LookAt(Camera.main.transform.position);
+			// Create a new GameObject and assign it to the variable revealHolderA
+			var revealHolderOuter = new GameObject {
+				name = "RevealHolderOuter", // Set the name of the GameObject
+				transform = { parent = transform } // Set the parent of the GameObject to the parent of the current object
+			};
+
+			// Set the global scale of the revealHolderA GameObject
+			revealHolderOuter.transform.SetGlobalScale(Vector3.one);
+
+			// Create a new GameObject and assign it to the variable revealHolder
+			var revealHolder = new GameObject {
+				name = "RevealHolder",
+				transform = { parent = revealHolderOuter.transform } // Set the parent of the GameObject to the revealHolderA GameObject
+			};
+
+			// Rotate the revealHolder GameObject to face the main camera
+			if (Camera.main != null) revealHolder.transform.LookAt(Camera.main.transform.position);
+
+			// Rotate the revealHolder GameObject an additional 90 degrees around the x-axis
 			revealHolder.transform.rotation *= Quaternion.Euler(90, 0, 0);
-			revealHolder.transform.position =
-				transform.position + Vector3.up * .25f + Vector3.right * (revealedCards.Count - 1);
+
+			// Set the position of the revealHolder GameObject
+			revealHolder.transform.position = transform.position + Vector3.up * .25f + Vector3.right * (revealedCards.Count - 1);
+
+			// If target is not null, create an arrow GameObject and position it between the revealHolder and the last revealed card
 			if (target is not null) {
-				var arrow = Instantiate(arrowPrefab.gameObject, revealHolderA.transform).GetComponent<Arrow>();
+				var arrow = Instantiate(arrowPrefab.gameObject, revealHolderOuter.transform).GetComponent<Arrow>();
 				arrow.transform.localScale = new Vector3(.05f, .05f, .05f);
 				arrow.start.transform.position = revealHolder.transform.position;
 				arrow.end.transform.position = revealedCards[^1].Item2.transform.position;
 			}
 
-			revealedCards[^1].Item1.gameObject.SetActive(true);
-			revealedCards[^1].Item1.transform.parent = revealHolder.transform;
-			revealedCards[^1].Item1.transform.localPosition = Vector3.zero;
-			revealedCards[^1].Item1.transform.localRotation = Quaternion.Euler(0, 0, 0);
-			revealedCards[^1].Item1.collider.enabled = false; // Don't let the player interact with the revealed card!
+			// Reveal the last card in the revealedCards list
+			revealedCards[^1].Item1.gameObject.SetActive(true); // Set the GameObject of the card to active
+			revealedCards[^1].Item1.transform.parent = revealHolder.transform; // Set the parent of the card to the revealHolder GameObject
+			revealedCards[^1].Item1.transform.localPosition = Vector3.zero; // Set the local position of the card to zero
+			revealedCards[^1].Item1.transform.localRotation = Quaternion.Euler(0, 0, 0); // Set the local rotation of the card to zero
+			revealedCards[^1].Item1.transform.localScale = new Vector3(.0312499f, 2, .05f);
+			revealedCards[^1].Item1.collider.enabled = false; // Disable the collider of the card
 
+			// Call the OnMonsterReveal method on the last card in the revealedCards list
 			revealedCards[^1].Item1.OnMonsterReveal();
 		}
 
@@ -89,12 +108,12 @@ namespace CardBattle.Containers {
 			// Make sure the revealed card can be interacted with again!
 			foreach (var (revealedCard, target) in revealedCards) {
 				revealedCard.collider.enabled = true;
-
-				// Get rid of the temporary object used to reveal the card
 				var p = revealedCard.transform.parent.parent;
 
 				// NOTE: On target should send the card back to the graveyard (aka bottom of deck)
 				revealedCard?.OnTarget(target);
+				
+				// Get rid of the temporary object used to reveal the card
 				Destroy(p.gameObject);
 			}
 

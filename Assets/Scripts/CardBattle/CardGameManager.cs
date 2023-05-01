@@ -238,8 +238,8 @@ namespace CardBattle {
 			var shipUpgradeInfo = DatabaseManager.GetOrCreateTable<ResourceManager.UpgradeInfo>().FirstOrDefault();
 			_playerHealthState.health = shipUpgradeInfo?.currentShipHealth ?? 10; // Get the current ship health
 			var shipLevel = shipUpgradeInfo?.currentLvl ?? 0;
-
 			Debug.Log("Ship's level" + shipLevel);
+			
 
 			// Set the material of the ship to track its upgrades
 			ship.material = material0;
@@ -288,25 +288,23 @@ namespace CardBattle {
 				encounterType = EncounterType.FinalBoss;
 
 
-			// Calculate the number of encounters to spawn based on the encounter type and level
+			// Calculate the number of monsters to spawn based on the encounter type and level
 			numberOfMonstersKilled = encounterType == EncounterType.Normal ? monsterLevel / 5 + 1 : 1;
-			// Spawn the encounters
+			// Spawn the monsters
 			for (var i = 0; i < numberOfMonstersKilled; i++) {
 				MonsterCardBase monster;
 				if (string.IsNullOrEmpty(spawnSpecificMonster)) {
 					monster = encounterType switch {
-						EncounterType.Normal => monsterDatabase.Instantiate(
-							monsterDatabase.cards.Keys.Shuffle().First()),
+						EncounterType.Normal => monsterDatabase.Instantiate(monsterDatabase.cards.Keys.Shuffle().First()),
 						EncounterType.Boss => bossDatabase.Instantiate(bossDatabase.cards.Keys.Shuffle().First()),
-						EncounterType.FinalBoss => finalBossDatabase.Instantiate(finalBossDatabase.cards.Keys
-							.Shuffle()
-							.First()),
+						EncounterType.FinalBoss => finalBossDatabase.Instantiate(finalBossDatabase.cards.Keys.Shuffle().First()),
 						_ => throw new ArgumentOutOfRangeException()
 					};
 				} else monster = (monsterDatabase.Instantiate(spawnSpecificMonster)
 				                  ?? bossDatabase.Instantiate(spawnSpecificMonster))
 				                  ?? finalBossDatabase.Instantiate(spawnSpecificMonster);
 
+				// Position the monster somewhere in a circle around the ship
 				monster.Position();
 
 				// Add a modification to each card in the monster's deck to adjust its difficulty based on the level of the encounter
@@ -314,8 +312,9 @@ namespace CardBattle {
 					Debug.Log($"Upgrading {card.name}");
 					card.AddModification(new LevelModification(monsterLevel));
 				}
-
 				monster.AddModification(new LevelModification(monsterLevel));
+				
+				// Add the monster to the list of monsters for this encounter
 				monsters = new List<MonsterCardBase>(monsters) { monster }.ToArray();
 			}
 
@@ -331,9 +330,10 @@ namespace CardBattle {
 			turnStart?.Invoke();
 		}
 
-		public void Start() {
-			AudioManager.instance.PlayBattleMusic();
-		}
+		/// <summary>
+		///		On start switch the music to battle music instead of calmer music
+		/// </summary>
+		public void Start() => AudioManager.instance.PlayBattleMusic();
 
 
 		/// <summary>
