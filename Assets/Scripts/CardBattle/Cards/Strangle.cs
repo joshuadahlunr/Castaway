@@ -1,7 +1,8 @@
 namespace CardBattle {
 
     /// <summary>
-    /// Strangle card
+    /// Strangle card - 
+    /// Disables 2 crewmates for battle
     /// </summary>
     /// <author>Dana Conley</author>
 
@@ -25,6 +26,7 @@ namespace CardBattle {
                 return;
             }
 
+            // removes cards
             target.RemoveFromGame();
             SendToGraveyard();
         }
