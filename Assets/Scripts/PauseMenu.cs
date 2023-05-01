@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
+using MainMenuClass = MainMenu;
 using UnityEngine.InputSystem;
 
 /// <summary>
@@ -104,8 +105,6 @@ public class PauseMenu : MonoBehaviour {
             OnSFXVolumeChanged(sfxSlider.value = PlayerPrefs.GetFloat("sfxVolume"));
         }
         StartCoroutine(SetVolumeNextFrame());
-
-
         // end
     }
 
@@ -129,7 +128,7 @@ public class PauseMenu : MonoBehaviour {
 
     // Quit the application
     public void Quit() {
-        Application.Quit();
+        MainMenuClass.Quit();
         Debug.Log("Application stopped.");
     }
 
