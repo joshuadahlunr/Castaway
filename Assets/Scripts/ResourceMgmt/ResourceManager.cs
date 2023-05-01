@@ -61,7 +61,7 @@ namespace ResourceMgmt
 
         [SerializeField] private Sprite[] shipLevels;
 
-        [SerializeField] private TextMeshProUGUI shipSliderTxt, crewSliderTxt, winTxt;
+        [SerializeField] private TextMeshProUGUI shipSliderTxt, crewSliderTxt, winTxt, shipLvlTxt, progressTxt;
 
         private int resourcesWon;
 
@@ -90,6 +90,7 @@ namespace ResourceMgmt
             {
                 LoadUpgradeInfo(); // ...load the upgrade info to restore upgrade progress
             }
+            
             else    // Otherwise, use default vals
             {
                 var shipUpgradeInfo = DatabaseManager.GetOrCreateTable<UpgradeInfo>().FirstOrDefault();
@@ -131,6 +132,8 @@ namespace ResourceMgmt
             // Display the correct amount of resources to be allocated based on slider value
             shipSliderTxt.text = shipSlider.value.ToString();
             crewSliderTxt.text = crewSlider.value.ToString();
+            shipLvlTxt.text = "Ship: Level " + upgradeData.currentLvl.ToString(); 
+            progressTxt.text = "Progress to next level: " + upgradeData.currentProgress.ToString() + "/" + upgradeData.lvlCost.ToString();
         }
 
         void OnDestroy()
