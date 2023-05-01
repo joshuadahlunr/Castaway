@@ -237,7 +237,7 @@ namespace CardBattle {
 			// Calculate the ship level
 			var shipUpgradeInfo = DatabaseManager.GetOrCreateTable<ResourceManager.UpgradeInfo>().FirstOrDefault();
 			_playerHealthState.health = shipUpgradeInfo?.currentShipHealth ?? 10; // Get the current ship health
-			var shipLevel = shipUpgradeInfo?.currentLvl ?? 0;
+			var shipLevel = shipUpgradeInfo?.currentLvl ?? 1;
 			Debug.Log("Ship's level" + shipLevel);
 			
 
@@ -487,8 +487,11 @@ namespace CardBattle {
 		public void OnWin() {
 			IEnumerator WinCoroutine() {
 				var winScreen = Instantiate(playerWinPrefab, canvas.transform);
-				while (winScreen != null)
+				while (winScreen != null) {
+					winScreen.transform.SetSiblingIndex(winScreen.transform.parent.childCount - 1);
 					yield return null;
+				}
+				
 				SceneManager.LoadScene("Scenes/ResourceMgmtScene");
 			}
 

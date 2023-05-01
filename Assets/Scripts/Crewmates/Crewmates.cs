@@ -194,5 +194,11 @@ namespace Crew {
         {
             GameObject.FindGameObjectWithTag("Info Panel").transform.localScale = new Vector3(0, 0, 0);
         }
+
+        public void DecreaseMorale()
+        {
+            _morale--;
+        }
+
     }
 }
