@@ -63,10 +63,11 @@ MonoBehaviour:
     - Mystic Stew
     - Oracle
     - Plain Broth
-    - KillCrewmate
-    - SandleThrow
-    - DestroyShip
+    - Kill Crewmate
+    - Sandal Throw
+    - Destroy Ship
     - Mockery
+    - All Out Attack
     _keys:
     - Prototype AttackCard
     - Attack
@@ -95,10 +96,11 @@ MonoBehaviour:
     - Mystic Stew
     - Oracle
     - Plain Broth
-    - KillCrewmate
-    - SandleThrow
-    - DestroyShip
+    - Kill Crewmate
+    - Sandal Throw
+    - Destroy Ship
     - Mockery
+    - All Out Attack
     _values:
     - {fileID: 4430917359204932427, guid: ffed5da40e94bbd4ba57c97a28388c0a, type: 3}
     - {fileID: 1798558198490400397, guid: 948a13693cf3aad4a9a0bd359cc158ef, type: 3}
@@ -131,3 +133,4 @@ MonoBehaviour:
     - {fileID: -628711727757717840, guid: 304e50ce826acd54bba93b86078c4c34, type: 3}
     - {fileID: 4740916913306936747, guid: 8f5342357c31fd541ae0afd3d9a65292, type: 3}
     - {fileID: 3517169621757349709, guid: 024645a7add5c4146be2d4f1fcd3e9fd, type: 3}
+    - {fileID: -137115044125620674, guid: 2ccea9c9f9c301b47a7f2fcf0775b2c8, type: 3}

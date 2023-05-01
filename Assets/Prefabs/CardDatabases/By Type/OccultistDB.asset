@@ -41,15 +41,21 @@ MonoBehaviour:
     - Scry
     - Occult Twirl
     - Fate Tie
+    - Oracle
+    - Mysterious Potion
     _keys:
     - Attack
     - Bail Water
     - Scry
     - Occult Twirl
     - Fate Tie
+    - Oracle
+    - Mysterious Potion
     _values:
     - {fileID: 1798558198490400397, guid: 948a13693cf3aad4a9a0bd359cc158ef, type: 3}
     - {fileID: 134441627470835729, guid: d942d0a9d7ce2914c841ea09612a31ea, type: 3}
     - {fileID: 8474119564818363157, guid: f674866313c09184a95e00b1074bc542, type: 3}
     - {fileID: 720940868532831341, guid: 60b0e72c10495414bb1635a5a22a267c, type: 3}
     - {fileID: 6126150281627410766, guid: 51c8c4b57b3807c4e9976f9916f25acc, type: 3}
+    - {fileID: -2165165948327342399, guid: dd64c36d80187684499199611a34cd15, type: 3}
+    - {fileID: 87248326428547608, guid: cbe12079456972e4cadd91271322b5fa, type: 3}

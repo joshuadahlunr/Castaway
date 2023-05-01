@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4430917359204932420}
   - component: {fileID: 4430917359204932421}
   m_Layer: 0
-  m_Name: SandleThrow
+  m_Name: SandalThrow
   m_TagString: Targetable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -53,7 +53,7 @@ MonoBehaviour:
   container: {fileID: 0}
   _state: 2
   cardOwner: 0
-  _name: Sandle Throw
+  _name: Sandal Throw
   _art: {fileID: 21300000, guid: a96f840c57f2c094ba619484ac3cb50c, type: 3}
   _rules: Kill target crewmate, remove from game.
   _properties:

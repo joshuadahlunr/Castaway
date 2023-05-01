@@ -38,9 +38,12 @@ MonoBehaviour:
     _keyValues:
     - Attack
     - Bail Water
+    - Shanty
     _keys:
     - Attack
     - Bail Water
+    - Shanty
     _values:
     - {fileID: 1798558198490400397, guid: 948a13693cf3aad4a9a0bd359cc158ef, type: 3}
     - {fileID: 134441627470835729, guid: d942d0a9d7ce2914c841ea09612a31ea, type: 3}
+    - {fileID: 2645531004360110525, guid: 01a46dd0f75c01844a6a52e3bd299484, type: 3}

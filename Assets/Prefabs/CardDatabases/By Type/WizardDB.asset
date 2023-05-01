@@ -41,21 +41,21 @@ MonoBehaviour:
     - Lightning Spear
     - Flame
     - Arcane Twirl
-    - Jerry's Arcane Twirl
     - Summoning
+    - Freeze
     _keys:
     - Attack
     - Bail Water
     - Lightning Spear
     - Flame
     - Arcane Twirl
-    - Jerry's Arcane Twirl
     - Summoning
+    - Freeze
     _values:
     - {fileID: 1798558198490400397, guid: 948a13693cf3aad4a9a0bd359cc158ef, type: 3}
     - {fileID: 134441627470835729, guid: d942d0a9d7ce2914c841ea09612a31ea, type: 3}
     - {fileID: 5413654936612339483, guid: 9834e746bacf5844496ddcf81e2d4551, type: 3}
     - {fileID: 2899929746517373117, guid: 79cc360886b28cc4bbddcd240bff6764, type: 3}
     - {fileID: 1421373476609381672, guid: da9e3729d23487343a12a4ef49e503ca, type: 3}
-    - {fileID: -4917259886615291091, guid: 9eeedca544d5cac4083c46b206905cd2, type: 3}
     - {fileID: 3977357017348899511, guid: 695721156c9fa5a49bb4d3c77095cea9, type: 3}
+    - {fileID: 356454053035637107, guid: b5c0d88dbbe2b2e41834901cdf7031dd, type: 3}
