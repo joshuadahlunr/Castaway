@@ -10,35 +10,24 @@ namespace CardBattle
     /// <author> Misha Desear </author>
     public class Evade : Card.ActionCardBase
     {
-        // Can only target monsters
+        // Can't target anything
         public override CardFilterer.CardFilters TargetingFilters =>
-            ~(CardFilterer.CardFilters.Monster | CardFilterer.CardFilters.InPlay);
+            CardFilterer.CardFilters.All;
 
-        public override CardFilterer.CardFilters MonsterTargetingFilters =>
-            TargetingFilters | CardFilterer.CardFilters.Monster;
-
-        public override void OnTarget(Card.CardBase _target)
+        public override void OnTarget(Card.CardBase _)
         {
             var mod = new ReductionModification {
                 turnsRemaining = properties["duration"],
                 DamageReductionAmount = properties["reduction"]
             };
 
+            // If owned by the player, apply the damage 
             if (OwnedByPlayer)
             {
-                // If the target isn't a monster then return to hand
-                var target = _target?.GetComponent<MonsterCardBase>();
-                if (target is null)
+                for (int i = 0; i < CardGameManager.instance.monsters.Length; i++)
                 {
-                    RefundAndReset();
-                    return;
+                    CardGameManager.instance.monsters[i].AddModification(mod);
                 }
-
-                // Reveal top card of targeted monster's deck
-                target.deck.RevealCard();
-
-                // Apply the damage reduction modification
-                target.deck.revealedCards[^1].Item1.AddModification(mod);
             }
             
             // If owned by a monster, reduce the damage done by the top card of the player's deck
