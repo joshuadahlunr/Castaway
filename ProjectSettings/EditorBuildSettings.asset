@@ -21,8 +21,8 @@ EditorBuildSettings:
     path: Assets/Scenes/BattleScene.unity
     guid: 8697964f0083e2f4d811d26f5f6cab66
   - enabled: 0
-    path: Assets/Scenes/ShopScene.unity
-    guid: 251d07f3485755e4d8b15d0b84463685
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/Scenes/ResourceMgmtScene.unity
     guid: 74b6392c886f7ef4a9fa4f3c2fb64543
@@ -50,6 +50,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Tutorial/TutorialBattleScene.unity
     guid: f3051d9998f21d54492c815bc2f64dab
+  - enabled: 1
+    path: Assets/Scenes/Tutorial/TutorialCrewmate.unity
+    guid: a54fa7fcc2f43f44aa4dca887e2570a7
   - enabled: 1
     path: Assets/Scenes/LoseScene.unity
     guid: a105bb26775a30f4f8f3fbc81b1749ff
