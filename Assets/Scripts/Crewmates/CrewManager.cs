@@ -237,10 +237,15 @@ namespace Crew {
             crewmate.transform.localScale = new Vector3(1.5f,1.5f,1f);
             
             List<Crewmates> shuffledCrew = crewList;
-            shuffledCrew.Shuffle();
+            shuffledCrew.Shuffle(); // Shuffle the crew list
 
-            var randomCrewmate = shuffledCrew.Find(c => c.CrewTag == (Crewmates.Status.CrewTag)1);
+            var randomCrewmate = shuffledCrew.Find(c => c.CrewTag == (Crewmates.Status.CrewTag)1); // Obtain the first crewmate with CrewTag(1)
+            if (randomCrewmate is null) // If this is null, just spawn a new crewmate
+            {
+                SpawnNewCrewmate();
+            }
 
+            // Load the associated information into the crewmate prefab 
             crewmate.GetComponent<Crewmates>().Code = randomCrewmate.Code;
             crewmate.GetComponent<Crewmates>().CrewTag = randomCrewmate.CrewTag;
             crewmate.GetComponent<Crewmates>().Type = randomCrewmate.Type;
@@ -251,6 +256,7 @@ namespace Crew {
             crewmate.GetComponent<Crewmates>().XPNeeded = randomCrewmate.XPNeeded;
             crewmate.GetComponent<Crewmates>().CrewCard = randomCrewmate.CrewCard;
 
+            // Load associated sprites
             crewmate.GetComponent<Crewmates>().BaseSprite = randomCrewmate.BaseSprite;
             crewmate.GetComponent<Crewmates>().HairSprite = randomCrewmate.HairSprite;
             crewmate.GetComponent<Crewmates>().MouthSprite = randomCrewmate.MouthSprite;

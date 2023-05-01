@@ -56,6 +56,17 @@ public static class DatabaseManager {
 
 		// The player starts every new game with 10 HP
 		var shipUpgradeInfo = GetOrCreateTable<ResourceManager.UpgradeInfo>().FirstOrDefault();
+		if (shipUpgradeInfo is null)
+		{
+			DatabaseManager.database.Insert(new ResourceManager.UpgradeInfo
+			{
+				currentShipHealth = 10,
+				currentLvl = 1,
+				currentProgress = 0,
+				currentResources = 0
+			});
+			shipUpgradeInfo = GetOrCreateTable<ResourceManager.UpgradeInfo>().FirstOrDefault();
+		}
 		shipUpgradeInfo.currentShipHealth = 10;
 		// Reset ship level
 		shipUpgradeInfo.currentLvl = 1;
