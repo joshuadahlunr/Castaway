@@ -12,18 +12,19 @@ namespace EncounterMap {
     public class PlayerMovement : MonoBehaviour {
         // Initialize the static variable to be the player's start position
         public static Vector3 playerPos = new Vector3(-5f, 0f, 90.0f);
-
         public Animator animator;
+        public EncounterMapScript map;
         
         [SerializeField]
         private float speed = 8f;
+        [SerializeField] float nodeGravity = 3;
         public bool moving = false;
         private float vertical, horizontal;
 
         private Camera mainCamera;
         private Rigidbody2D playerRB;
         private BoxCollider2D playerCol;
-        private Vector2 movementInput;
+        private Vector2 movementInput = new Vector2(1, 0);
 
         void Awake() {
             // Get the 2D Rigidbody of the player gameObject
@@ -37,7 +38,10 @@ namespace EncounterMap {
 
         void FixedUpdate() {
             // This handles the player movement and sets the animation bool accordingly to switch between idle and movement animations
-            playerRB.velocity = movementInput * speed;
+            playerPos = transform.position;
+            var velocity =  new Vector3(movementInput.x, movementInput.y, 0) * speed;
+            velocity += (map.ClosestNode(playerPos).transform.position - playerPos).normalized * nodeGravity;
+            playerRB.velocity = velocity;
             if(playerRB.velocity == Vector2.zero) {
                 moving = false;
             }
@@ -47,6 +51,7 @@ namespace EncounterMap {
         // Uses the Unity Input System to get the input value that determines what direction to move in 
         private void OnMove(InputValue inputVal) {
             movementInput = inputVal.Get<Vector2>();
+            movementInput.x = 1;
             // Set moving to true
             moving = true;
         }
