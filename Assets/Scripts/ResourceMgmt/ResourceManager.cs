@@ -119,7 +119,7 @@ namespace ResourceMgmt
         private void Start()
         {
             // Play calm music
-            AudioManager.instance.PlayCalmMusic();
+            AudioManager.instance?.PlayCalmMusic();
             
             // Crew slider is only enabled if we actually have a crew to allocate resources to
             if (CrewManager.instance.crewList.Count == 0 || CrewManager.instance.crewList == null)
@@ -263,12 +263,7 @@ namespace ResourceMgmt
         {
             var @out = DatabaseManager.GetOrCreateTable<UpgradeInfo>().First();
             if (@out is null) return; // Return if we can't find an upgrade info table for some reason
-
-            upgradeData.currentLvl = @out.currentLvl;
-            upgradeData.currentProgress = @out.currentProgress;
-            upgradeData.lvlCost = @out.lvlCost;
-            upgradeData.currentResources = @out.currentResources;
-            upgradeData.currentShipHealth = @out.currentShipHealth;
+            upgradeData = @out;
         }
 
         /// <summary>
