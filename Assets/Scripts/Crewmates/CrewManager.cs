@@ -350,7 +350,7 @@ namespace Crew {
             crewmate.GetComponent<Crewmates>().BaseSprite = baseTextures.sprites.ElementAt(Random.Range(0, baseTextures.sprites.Count)).Value;
             
             // If the crewmate is a wizard or chef...
-            if (crewmate.GetComponent<Crewmates>().Type == (Crewmates.CrewClass.Type)0 || crewmate.GetComponent<Crewmates>().Type == (Crewmates.CrewClass.Type)4) 
+            if (crewmate.GetComponent<Crewmates>().Type == (Crewmates.CrewClass.Type)1 || crewmate.GetComponent<Crewmates>().Type == (Crewmates.CrewClass.Type)5) 
             {
                 // ...exclude the first hairstyle since bandana in Style 1 and hats in outfits overlap strangely
                 crewmate.GetComponent<Crewmates>().HairSprite = hairTextures.sprites.ElementAt(Random.Range(4, hairTextures.sprites.Count)).Value;

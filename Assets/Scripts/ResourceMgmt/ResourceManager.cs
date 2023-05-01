@@ -55,13 +55,15 @@ namespace ResourceMgmt
 
         [SerializeField] private Slider shipSlider, crewSlider;
 
-        [SerializeField] private Button confirmBtn;
+        [SerializeField] private Button confirmBtn, nameBtn;
 
         [SerializeField] private UpgradeInfo upgradeData;
 
         [SerializeField] private Sprite[] shipLevels;
 
         [SerializeField] private TextMeshProUGUI shipSliderTxt, crewSliderTxt, winTxt, shipLvlTxt, progressTxt;
+
+        [SerializeField] private InputField nameInput;
 
         private int resourcesWon;
 
@@ -90,7 +92,7 @@ namespace ResourceMgmt
             {
                 LoadUpgradeInfo(); // ...load the upgrade info to restore upgrade progress
             }
-            
+
             else    // Otherwise, use default vals
             {
                 var shipUpgradeInfo = DatabaseManager.GetOrCreateTable<UpgradeInfo>().FirstOrDefault();

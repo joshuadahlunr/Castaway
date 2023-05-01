@@ -3,6 +3,7 @@ using UnityEngine;
 using Crew;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 namespace Crew {
     /// <summary>
@@ -12,6 +13,8 @@ namespace Crew {
     public class CrewmateEncounter : MonoBehaviour
     {
         private Crewmates newCrew = null;
+        
+        [SerializeField] private TMP_InputField nameInput;
 
         /// <summary>
         ///     Adds a crewmate to the player's crew and their associated card to their deck
@@ -34,6 +37,7 @@ namespace Crew {
 
         private void Start()
         {
+            nameInput.onEndEdit.AddListener(delegate {NameChange(nameInput);});
             var crew = DatabaseManager.GetOrCreateTable<CrewManager.CrewData>(); // Obtain the crew data table
             if (crew is null) // If null, spawn a new crewmate
             {
@@ -52,6 +56,20 @@ namespace Crew {
                 }
             }
             newCrew.ShowInfo(); // Show the information of the spawned crewmate
+        }
+
+        public void NameChange(TMP_InputField input)
+        {
+            if (input.text.Length > 0)
+            {
+                newCrew.Name = input.text;
+                GameObject displayName = GameObject.FindGameObjectWithTag("Crew Name");
+                displayName.GetComponent<TextMeshProUGUI>().text = newCrew.Name.ToString();
+            } 
+            else if (input.text.Length == 0)
+            {
+                return;
+            }
         }
     }
 }
