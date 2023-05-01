@@ -487,8 +487,11 @@ namespace CardBattle {
 		public void OnWin() {
 			IEnumerator WinCoroutine() {
 				var winScreen = Instantiate(playerWinPrefab, canvas.transform);
-				while (winScreen != null)
+				while (winScreen != null) {
+					winScreen.transform.SetSiblingIndex(winScreen.transform.parent.childCount - 1);
 					yield return null;
+				}
+				
 				SceneManager.LoadScene("Scenes/ResourceMgmtScene");
 			}
 
