@@ -38,9 +38,12 @@ MonoBehaviour:
     _keyValues:
     - Attack
     - Bail Water
+    - Blunderbuss
     _keys:
     - Attack
     - Bail Water
+    - Blunderbuss
     _values:
     - {fileID: 1798558198490400397, guid: 948a13693cf3aad4a9a0bd359cc158ef, type: 3}
     - {fileID: 134441627470835729, guid: d942d0a9d7ce2914c841ea09612a31ea, type: 3}
+    - {fileID: -5070487588157384340, guid: ad7f2878a69f11147acfcac6add49dc6, type: 3}
