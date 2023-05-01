@@ -6,9 +6,8 @@ namespace CardBattle {
     /// </summary>
     /// <author>Dana Conley</author>
 
-    public class Strangle : Card.ActionCardBase
+    public class Strangle : Card.ActionCardBase 
     {
-
         // Can target anything but monsters
         public override CardFilterer.CardFilters TargetingFilters => CardFilterer.CardFilters.Monster;
         public override CardFilterer.CardFilters MonsterTargetingFilters => CardFilterer.CardFilters.Monster;
@@ -17,8 +16,7 @@ namespace CardBattle {
 
         // When played, two cards removed from the game
 
-        public override void OnTarget(Card.CardBase target)
-        {
+        public override void OnTarget(Card.CardBase target) {
 
             if (target is null)
             {
