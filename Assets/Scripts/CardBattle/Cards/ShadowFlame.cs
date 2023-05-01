@@ -3,16 +3,14 @@ using System.Collections;
 using System.Drawing.Text;
 using CardBattle.Containers;
 
-namespace CardBattle
-{
+namespace CardBattle {
     /// <summary>
     /// Shadow Flame attack: damages the target and adds Burn card into the deck
     /// </summary>
     /// <author>
     /// Dana Conley
     /// </author>
-    public class ShadowFlame : Card.ActionCardBase
-    {
+    public class ShadowFlame : Card.ActionCardBase {
         // Can target player and equipment
         //public override CardFilterer.CardFilters TargetingFilters
         //    => ~(CardFilterer.CardFilters.Player |
@@ -26,8 +24,7 @@ namespace CardBattle
         public override bool CanTargetPlayer => false;
 
         /// Damages target
-        public override void OnTarget(Card.CardBase _target)
-        {
+        public override void OnTarget(Card.CardBase _target) {
             var target = _target?.GetComponent<Card.HealthCardBase>();
             // Target cannot be null
             if (target is null)

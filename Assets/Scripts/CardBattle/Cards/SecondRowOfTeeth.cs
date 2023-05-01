@@ -3,16 +3,14 @@ using System.Drawing.Text;
 using CardBattle.Containers;
 using UnityEngine;
 
-namespace CardBattle
-{
+namespace CardBattle {
     /// <summary>
     /// Second Row of Teeth attack: increases amount of damage
     /// </summary>
     /// <author>
     /// Dana Conley
     /// </author>
-    public class SecondRowOfTeeth : Card.ActionCardBase
-    {
+    public class SecondRowOfTeeth : Card.ActionCardBase {
         // Can target player and equipment
         //public override CardFilterer.CardFilters TargetingFilters
         //    => ~(CardFilterer.CardFilters.Player |
@@ -26,8 +24,7 @@ namespace CardBattle
         public override bool CanTargetPlayer => false;
 
         /// Damages target
-        public override void OnTarget(Card.CardBase _target)
-        {
+        public override void OnTarget(Card.CardBase _target) {
             var target = _target?.GetComponent<Card.HealthCardBase>();
             // Target cannot be null
             if (target is null)

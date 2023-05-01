@@ -4,16 +4,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using CardBattle.Containers;
 
-namespace CardBattle
-{
+namespace CardBattle {
     /// <summary>
     /// Big ol Bite attack: takes away card from deck and does a large amount damage
     /// </summary>
     /// <author>
     /// Dana Conley
     /// </author>
-    public class BigOlBite : Card.ActionCardBase
-    {
+    public class BigOlBite : Card.ActionCardBase {
         // Can target player and equipment
         //public override CardFilterer.CardFilters TargetingFilters
         //    => ~(CardFilterer.CardFilters.Player |
@@ -27,8 +25,7 @@ namespace CardBattle
         public override bool CanTargetPlayer => false;
 
         /// Damages target
-        public override void OnTarget(Card.CardBase _target)
-        {
+        public override void OnTarget(Card.CardBase _target) {
             var target = _target?.GetComponent<Card.HealthCardBase>();
             // Target cannot be null
             if (target is null)
