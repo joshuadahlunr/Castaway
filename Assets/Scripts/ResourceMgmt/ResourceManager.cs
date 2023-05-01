@@ -118,6 +118,9 @@ namespace ResourceMgmt
 
         private void Start()
         {
+            // Play calm music
+            AudioManager.instance.PlayCalmMusic();
+            
             // Crew slider is only enabled if we actually have a crew to allocate resources to
             if (CrewManager.instance.crewList.Count == 0 || CrewManager.instance.crewList == null)
             {
