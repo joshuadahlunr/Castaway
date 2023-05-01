@@ -236,7 +236,7 @@ namespace CardBattle {
 
 			// Calculate the ship level
 			var shipUpgradeInfo = DatabaseManager.GetOrCreateTable<ResourceManager.UpgradeInfo>().FirstOrDefault();
-			_playerHealthState.health = shipUpgradeInfo.currentShipHealth; // Get the current ship health
+			_playerHealthState.health = shipUpgradeInfo?.currentShipHealth ?? 10; // Get the current ship health
 			var shipLevel = shipUpgradeInfo?.currentLvl ?? 0;
 
 			Debug.Log("Ship's level" + shipLevel);

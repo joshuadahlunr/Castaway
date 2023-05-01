@@ -70,6 +70,7 @@ MonoBehaviour:
     - All Out Attack
     - Evade
     - Blunderbuss
+    - Jerry's Arcane Twirl
     _keys:
     - Prototype AttackCard
     - Attack
@@ -105,6 +106,7 @@ MonoBehaviour:
     - All Out Attack
     - Evade
     - Blunderbuss
+    - Jerry's Arcane Twirl
     _values:
     - {fileID: 4430917359204932427, guid: ffed5da40e94bbd4ba57c97a28388c0a, type: 3}
     - {fileID: 1798558198490400397, guid: 948a13693cf3aad4a9a0bd359cc158ef, type: 3}
@@ -140,3 +142,4 @@ MonoBehaviour:
     - {fileID: -137115044125620674, guid: 2ccea9c9f9c301b47a7f2fcf0775b2c8, type: 3}
     - {fileID: -4226460590872552451, guid: ac4c3e3d846640948a3c5173b562098f, type: 3}
     - {fileID: -5070487588157384340, guid: ad7f2878a69f11147acfcac6add49dc6, type: 3}
+    - {fileID: -4917259886615291091, guid: 9eeedca544d5cac4083c46b206905cd2, type: 3}

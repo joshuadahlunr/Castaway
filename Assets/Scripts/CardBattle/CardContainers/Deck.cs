@@ -143,9 +143,12 @@ namespace CardBattle.Containers {
 
 			// Use the associated cardDB to load the cards from the database
 			foreach (var card in cards) {
-				Debug.Log(card.name);
 				// Instantiate the card from the associated cardDB
 				var instantiated = cardDB.Instantiate(card.name);
+				if (instantiated is null) {
+					Debug.LogError($"Failed to load {card.name} from the database!");
+					continue;
+                }
 
 				// Associate the card with a crewmate (if the database says it should be!)
 				instantiated.associatedCrewmate = card.associatedCrewmateID;
