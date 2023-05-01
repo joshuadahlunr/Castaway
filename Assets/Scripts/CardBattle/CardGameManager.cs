@@ -269,7 +269,7 @@ namespace CardBattle {
 
 			// Set reset people juice to match the current crewmates
 			if (!debugPeopleJuice) {
-				var reset = new PeopleJuice.Cost { PeopleJuice.Types.Wizard }; // Jerry gives a wizard
+				var reset = new PeopleJuice.Cost { PeopleJuice.Types.Wizard, PeopleJuice.Types.Generic }; // Jerry gives a wizard
 
 				var crewmates = DatabaseManager.GetOrCreateTable<CrewManager.CrewData>();
 				foreach (var crewmate in crewmates)
