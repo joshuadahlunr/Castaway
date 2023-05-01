@@ -118,7 +118,7 @@ namespace EncounterMap {
 		// Start is called before the first frame update
 		private void Start() {
 			// Play calm music
-			AudioManager.instance.PlayCalmMusic();
+			AudioManager.instance?.PlayCalmMusic();
 			
 			// If we have information saved in the database, then generate based on the saved information
 			if (DatabaseManager.GetOrCreateTable<EncounterMapInfo>().Any())
