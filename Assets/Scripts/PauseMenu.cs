@@ -65,6 +65,9 @@ public class PauseMenu : MonoBehaviour {
             PlayerPrefs.SetInt(qualityOption, qualityDropdown.value);
             PlayerPrefs.Save();
         }));
+        
+        musicSlider.onValueChanged.AddListener(OnMusicVolumeChanged);
+        sfxSlider.onValueChanged.AddListener(OnSFXVolumeChanged);
         // end
     }
 
@@ -94,6 +97,15 @@ public class PauseMenu : MonoBehaviour {
         resolutionDropdown.AddOptions(resOptions); // Adds the options to the dropdown
         resolutionDropdown.value = PlayerPrefs.GetInt(resOption, currentResolutionIndex); //
         resolutionDropdown.RefreshShownValue(); // Shows the new selected value
+
+        IEnumerator SetVolumeNextFrame() {
+            yield return null;
+            OnMusicVolumeChanged(musicSlider.value = PlayerPrefs.GetFloat("musicVolume"));
+            OnSFXVolumeChanged(sfxSlider.value = PlayerPrefs.GetFloat("sfxVolume"));
+        }
+        StartCoroutine(SetVolumeNextFrame());
+
+
         // end
     }
 
@@ -111,11 +123,8 @@ public class PauseMenu : MonoBehaviour {
     // Set fullscreen
     public void SetFullScreen(bool isFullScreen) {
         Screen.fullScreen = isFullScreen;
-        if(isFullScreen == false) {
-            PlayerPrefs.SetInt("fullScreenKey", 0);
-        } else if (isFullScreen == true) {
-            PlayerPrefs.SetInt("fullScreenKey", 1);
-        }
+        PlayerPrefs.SetInt("fullScreenKey", isFullScreen == false ? 0 : 1);
+        this.isFullScreen = isFullScreen;
     }
 
     // Quit the application
@@ -139,6 +148,25 @@ public class PauseMenu : MonoBehaviour {
 
     private void OnDisable() {
         inputAction.Disable();
+        PlayerPrefs.Save();
+    }
+
+    public void OnMusicVolumeChanged(float volume) {
+        PlayerPrefs.SetFloat("musicVolume", volume);
+
+        if (AudioManager.instance == null) return;
+        AudioManager.instance.musicVolume = volume;
+        if (AudioManager.instance.playingBattleMusic)
+            AudioManager.instance.PlayBattleMusic(.001f);
+        else AudioManager.instance.PlayCalmMusic(.001f);
+    }
+
+    public void OnSFXVolumeChanged(float volume) {
+        PlayerPrefs.SetFloat("sfxVolume", volume);
+
+        if (AudioManager.instance == null) return;
+        AudioManager.instance.soundFXPlayer.volume = volume;
+        AudioManager.instance.uiSoundFXPlayer.volume = volume;
     }
     
     // Check if the game is paused or not

@@ -10,6 +10,9 @@ public class AudioManager : AudioManagerBase {
 	// List of sound effect clips
 	public NamedAudioClip[] soundFxClips;
 
+	public float musicVolume = 1;
+	public bool playingBattleMusic = false;
+
 	// References to the audio players we create
 	public AudioManagerBase.AudioPlayer battleMusicPlayer, calmMusicPlayer, uiSoundFXPlayer, soundFXPlayer;
 
@@ -22,7 +25,7 @@ public class AudioManager : AudioManagerBase {
 		battleMusicPlayer.CycleTracks(/*once*/ false, true, 5); // Since our tracks are kinda short, play each track 3 times before switching to a new one!
 
 		calmMusicPlayer = CreateAudioPlayer("music", calmMusicClips);
-		calmMusicPlayer.volume = .1f;
+		calmMusicPlayer.volume = musicVolume;
 		calmMusicPlayer.CycleTracks(/*once*/ false, true,5, 3); // Since our tracks are kinda short, play each track 3 times before switching to a new one!
 
 		// Create a UI SoundFX player
@@ -34,8 +37,14 @@ public class AudioManager : AudioManagerBase {
 		soundFXPlayer.source.loop = false;
 	}
 
-	public void PlayBattleMusic(float fadeDuration = 3) => StartCoroutine(PlayMusicImpl(.8f, 0, fadeDuration));
-	public void PlayCalmMusic(float fadeDuration = 3) => StartCoroutine(PlayMusicImpl(0, .1f, fadeDuration));
+	public void PlayBattleMusic(float fadeDuration = 3) {
+		StartCoroutine(PlayMusicImpl(.8f * musicVolume, 0, fadeDuration));
+		playingBattleMusic = true;
+	}
+	public void PlayCalmMusic(float fadeDuration = 3) {
+		StartCoroutine(PlayMusicImpl(0, musicVolume, fadeDuration));
+		playingBattleMusic = false;
+	}
 
 	private IEnumerator PlayMusicImpl(float targetBattleVolume, float targetCalmVolume, float fadeDuration = 3) {
 		float initialBattleVolume = battleMusicPlayer.volume;
