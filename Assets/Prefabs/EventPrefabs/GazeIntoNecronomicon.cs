@@ -1,4 +1,6 @@
-using CardBattle.Card;
+using CardBattle.Containers;
+using CardBattle;
+using Crew;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,46 +11,44 @@ using UnityEngine.UI;
     /// </summary>
 	/// <author>Dana Conley</author>
 
-public class GazeIntoNecronomicon : MonoBehaviour
-{
-    public Text eventText;
-    public Button loseGameButton;
-    public Button killCrewmateButton;
+namespace RandomEvents {
 
-    void Start()
+    public class GazeIntoNecronomicon : MonoBehaviour
     {
-        // buttons
-        killCrewmateButton.onClick.AddListener(KillCrewmate);
-        loseGameButton.onClick.AddListener(LoseGame);
+        public Text eventText;
+        public Button loseGameButton;
+        public Button killCrewmateButton;
+
+        void Start()
+        {
+            // buttons
+            killCrewmateButton.onClick.AddListener(KillCrewmate);
+            loseGameButton.onClick.AddListener(LoseGame);
+        }
+
+        void LoseGame()
+        {
+            // player loses the game
+        
+
+            EndEvent();        
+        }
+
+        void KillCrewmate()
+        {
+            // player chooses a crewmate to kill
+
+            CardContainerBase card = new CardContainerBase();
+            card.RemoveCard(1);
+
+            EndEvent();
+        }
+
+        void EndEvent()
+        {
+            killCrewmateButton.gameObject.SetActive(false);
+            loseGameButton.gameObject.SetActive(false);
+        }
+
     }
-
-    void LoseGame()
-    {
-        // player loses the game
-
-
-        EndEvent();        
-    }
-
-    void KillCrewmate()
-    {
-        // player chooses a crewmate to kill
-        //if (target is null)
-        //{
-        //    RefundAndReset();
-        //    return;
-        //}
-
-        //target.RemoveFromGame();
-
-
-        EndEvent();
-    }
-
-    void EndEvent()
-    {
-        killCrewmateButton.gameObject.SetActive(false);
-        loseGameButton.gameObject.SetActive(false);
-    }
-
 }

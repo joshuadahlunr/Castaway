@@ -11,57 +11,58 @@ using UnityEngine.UI;
     /// </summary>
 	/// <author>Dana Conley</author>
 
-public class Mutiny : MonoBehaviour
-{
-    public Text eventText;
-    public Button loseCardsButton;
-    public Button lowerMoraleButton;
-    public 
+namespace RandomEvents {
 
-    //public override CardFilterer.CardFilters TargetingFilters => CardFilterer.CardFilters.All;
-    //public override bool CanTargetPlayer => false;
-
-    void Start()
+    public class Mutiny : MonoBehaviour
     {
-        // buttons
-        lowerMoraleButton.onClick.AddListener(LowerMorale);
-        loseCardsButton.onClick.AddListener(LoseCards);
+        public Text eventText;
+        public Button loseCardsButton;
+        public Button lowerMoraleButton;
+        public 
+
+        //public override CardFilterer.CardFilters TargetingFilters => CardFilterer.CardFilters.All;
+        //public override bool CanTargetPlayer => false;
+
+        void Start()
+        {
+            // buttons
+            lowerMoraleButton.onClick.AddListener(LowerMorale);
+            loseCardsButton.onClick.AddListener(LoseCards);
+        }
+
+        void LoseCards()
+        {
+            // ship loses 1 hp
+
+            //CardGameManager ship = new CardGameManager();
+            //ship.shipLevel = shipLevel -1;
+
+            // player loses a card
+
+            CardContainerBase card = new CardContainerBase();
+            card.RemoveCard(1);
+            //target.RemoveFromGame();
+            EndEvent();
+        }
+
+        void LowerMorale()
+        {
+            // ship loses 1 hp
+
+            //CardGameManager ship = new CardGameManager();
+            //ship.shipLevel = shipLevel -1;
+
+            // crew morale is lowered
+            Crewmates crewmate = new Crewmates();
+            crewmate.DecreaseMorale();
+
+            EndEvent();
+        }
+
+        void EndEvent()
+        {
+            loseCardsButton.gameObject.SetActive(false);
+            lowerMoraleButton.gameObject.SetActive(false);
+        }
     }
-
-    void LoseCards()
-    {
-        // ship loses 1 hp
-
-        //CardGameManager ship = new CardGameManager();
-        //ship.shipLevel = shipLevel -1;
-
-        // player loses a card
-
-        CardContainerBase card = new CardContainerBase();
-        card.RemoveCard(1);
-        //target.RemoveFromGame();
-        EndEvent();
-    }
-
-    void LowerMorale()
-    {
-        // ship loses 1 hp
-
-        //CardGameManager ship = new CardGameManager();
-        //ship.shipLevel = shipLevel -1;
-
-        // crew morale is lowered
-        Crewmates crewmate = new Crewmates();
-        crewmate.DecreaseMorale();
-
-
-        EndEvent();
-    }
-
-    void EndEvent()
-    {
-        loseCardsButton.gameObject.SetActive(false);
-        lowerMoraleButton.gameObject.SetActive(false);
-    }
-
 }
