@@ -9,11 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4430917359204932422}
-  - component: {fileID: -1593728744382886218}
+  - component: {fileID: -5070487588157384340}
   - component: {fileID: 4430917359204932420}
   - component: {fileID: 7621077776159269127}
   m_Layer: 0
-  m_Name: Ram
+  m_Name: Blunderbuss
   m_TagString: Targetable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -35,7 +35,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-1593728744382886218
+--- !u!114 &-5070487588157384340
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -44,7 +44,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4430917359204932423}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 34db036d06b91d642870788c9587d5f7, type: 3}
+  m_Script: {fileID: 11500000, guid: 315ee6ebafbf15642955866e31fb5fa8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _renderer: {fileID: 8054100049657687534}
@@ -53,10 +53,10 @@ MonoBehaviour:
   container: {fileID: 0}
   _state: 2
   cardOwner: 0
-  _name: Ram
+  _name: Blunderbuss
   _art: {fileID: 21300000, guid: a96f840c57f2c094ba619484ac3cb50c, type: 3}
-  _rules: Deals <color=red>{properties["primary"]}</color> damage to the target,
-    but has a 25% chance to deal this damage to the card owner!
+  _rules: Deals <color=red>{properties["primary"]}</color> damage to the target but
+    has a 33% chance to jam!
   _properties:
     reorderableList:
       canAdd: 1
@@ -86,9 +86,9 @@ MonoBehaviour:
     - primary
     _values:
     - tag: 4
-      value: 2
+      value: 3
   _cost:
-    list: 0000000000000000
+    list: 04000000
   associatedSelkie: {fileID: 0}
 --- !u!65 &4430917359204932420
 BoxCollider:

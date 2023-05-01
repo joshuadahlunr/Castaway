@@ -32,6 +32,7 @@ namespace CardBattle {
                 {
                     {
                         CardGameManager.instance.playerHealthState.ApplyDamage(properties["primary"]);
+                        NotificationHolder.instance.CreateNotification("Your ship has been damaged by the impact!");
                     }
                 }
                 else
