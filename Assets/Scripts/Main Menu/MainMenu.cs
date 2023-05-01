@@ -27,4 +27,12 @@ public class MainMenu : MonoBehaviour {
         EncounterMap.CameraMovement.ResetCamPosition();
         SceneManager.LoadScene("EncounterMapScene");
     }
+
+    public static void Quit() {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
+    }
 }
