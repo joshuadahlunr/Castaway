@@ -54,7 +54,7 @@ MonoBehaviour:
   _state: 2
   cardOwner: 0
   _name: Destroy Ship
-  _art: {fileID: 0}
+  _art: {fileID: 21300000, guid: 320fad9c0748f2d43a77d3dfa6dd0caa, type: 3}
   _rules: Destroys the Ship!
   _properties:
     reorderableList:

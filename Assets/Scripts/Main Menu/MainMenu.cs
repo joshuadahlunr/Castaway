@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using ResourceMgmt;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -28,10 +27,4 @@ public class MainMenu : MonoBehaviour {
         EncounterMap.CameraMovement.ResetCamPosition();
         SceneManager.LoadScene("EncounterMapScene");
     }
-
-    /* TO DOs:
-        - Finish settings
-        - Finish credits page
-        - Get button sprite change to work
-    */
 }
