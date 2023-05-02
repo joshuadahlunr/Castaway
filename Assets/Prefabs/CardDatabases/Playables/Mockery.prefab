@@ -54,7 +54,7 @@ MonoBehaviour:
   _state: 2
   cardOwner: 0
   _name: Mockery
-  _art: {fileID: 21300000, guid: a96f840c57f2c094ba619484ac3cb50c, type: 3}
+  _art: {fileID: 21300000, guid: 4e02698744de18f47bc7c6a711f136a6, type: 3}
   _rules: Target monster deals <color=blue>{properties["strength"]}</color> less
     damage for a turn.
   _properties:
