@@ -41,15 +41,18 @@ MonoBehaviour:
     - Rotate
     - Evade
     - Ram
+    - Mystic Charge
     _keys:
     - Attack
     - Bail Water
     - Rotate
     - Evade
     - Ram
+    - Mystic Charge
     _values:
     - {fileID: 1798558198490400397, guid: 948a13693cf3aad4a9a0bd359cc158ef, type: 3}
     - {fileID: 134441627470835729, guid: d942d0a9d7ce2914c841ea09612a31ea, type: 3}
     - {fileID: -874858629119296669, guid: b2014efdd714972479d08a574d4fa620, type: 3}
     - {fileID: -4226460590872552451, guid: ac4c3e3d846640948a3c5173b562098f, type: 3}
     - {fileID: -1593728744382886218, guid: d646ec752ba03c1428ca0606e502674d, type: 3}
+    - {fileID: -5318121309935395766, guid: e275cee3ce4853745aff102a27757ddc, type: 3}

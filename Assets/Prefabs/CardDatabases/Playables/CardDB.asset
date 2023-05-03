@@ -72,6 +72,7 @@ MonoBehaviour:
     - Blunderbuss
     - Jerry's Arcane Twirl
     - Enhanced Attack
+    - Mystic Charge
     _keys:
     - Prototype AttackCard
     - Attack
@@ -109,6 +110,7 @@ MonoBehaviour:
     - Blunderbuss
     - Jerry's Arcane Twirl
     - Enhanced Attack
+    - Mystic Charge
     _values:
     - {fileID: 4430917359204932427, guid: ffed5da40e94bbd4ba57c97a28388c0a, type: 3}
     - {fileID: 1798558198490400397, guid: 948a13693cf3aad4a9a0bd359cc158ef, type: 3}
@@ -146,3 +148,4 @@ MonoBehaviour:
     - {fileID: -5070487588157384340, guid: ad7f2878a69f11147acfcac6add49dc6, type: 3}
     - {fileID: -4917259886615291091, guid: 9eeedca544d5cac4083c46b206905cd2, type: 3}
     - {fileID: 4882680146507802729, guid: 68f4ad0082acb32418ef053cf43b076d, type: 3}
+    - {fileID: -5318121309935395766, guid: e275cee3ce4853745aff102a27757ddc, type: 3}

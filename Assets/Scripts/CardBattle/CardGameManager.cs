@@ -21,6 +21,16 @@ namespace CardBattle {
 	///     Singleton Manager responsible for controlling the flow of the card game
 	/// </summary>
 	/// <author>Joshua Dahl</author>
+
+	/// <summary>
+	///     The type of encounter this is (normal or boss)
+	/// </summary>
+	public enum EncounterType {
+		Normal,
+		Boss,
+		FinalBoss
+	}
+
 	public class CardGameManager : MonoBehaviour {
 		/// <summary>
 		///     Singleton instance of this class
@@ -32,15 +42,8 @@ namespace CardBattle {
 		/// </summary>
 		public static float encounterDifficulty;
 
-		/// <summary>
-		///     The type of encounter this is (normal or boss)
-		/// </summary>
-		public enum EncounterType {
-			Normal,
-			Boss,
-			FinalBoss
-		}
 		public static EncounterType encounterType = EncounterType.Normal;
+		public EncounterType encounterTypeAccess;
 
 		public static int numberOfMonstersKilled;
 		public static int monsterLevel;
@@ -287,6 +290,8 @@ namespace CardBattle {
 			if (monsterLevel > 20)
 				encounterType = EncounterType.FinalBoss;
 
+			encounterTypeAccess = encounterType;
+			MysticCharge.encounterType = encounterTypeAccess;
 
 			// Calculate the number of monsters to spawn based on the encounter type and level
 			numberOfMonstersKilled = encounterType == EncounterType.Normal ? monsterLevel / 5 + 1 : 1;

@@ -1529,6 +1529,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6d20db3e7f143d7bf126c1fb8d918f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  encounterTypeAccess: 0
   canvas: {fileID: 115369221}
   rope: {fileID: 1696576803}
   OldFilmPostProcessing: {fileID: 1439854249}
@@ -2403,7 +2404,7 @@ PrefabInstance:
     - target: {fileID: 1544155291932017918, guid: 81290e39ce335894885e0134e5d791f5,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3157227680666778444, guid: 81290e39ce335894885e0134e5d791f5,
         type: 3}
@@ -2413,7 +2414,7 @@ PrefabInstance:
     - target: {fileID: 3157227680666778444, guid: 81290e39ce335894885e0134e5d791f5,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3471145457061078122, guid: 81290e39ce335894885e0134e5d791f5,
         type: 3}
@@ -2423,7 +2424,7 @@ PrefabInstance:
     - target: {fileID: 4814467383763091943, guid: 81290e39ce335894885e0134e5d791f5,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6036262293467148160, guid: 81290e39ce335894885e0134e5d791f5,
         type: 3}
@@ -2483,7 +2484,7 @@ PrefabInstance:
     - target: {fileID: 6168491901161800830, guid: 81290e39ce335894885e0134e5d791f5,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7249284715257524273, guid: 81290e39ce335894885e0134e5d791f5,
         type: 3}
@@ -2493,7 +2494,7 @@ PrefabInstance:
     - target: {fileID: 8122878231255436924, guid: 81290e39ce335894885e0134e5d791f5,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
