@@ -39,11 +39,14 @@ MonoBehaviour:
     - Attack
     - Bail Water
     - All Out Attack
+    - Enhanced Attack
     _keys:
     - Attack
     - Bail Water
     - All Out Attack
+    - Enhanced Attack
     _values:
     - {fileID: 1798558198490400397, guid: 948a13693cf3aad4a9a0bd359cc158ef, type: 3}
     - {fileID: 134441627470835729, guid: d942d0a9d7ce2914c841ea09612a31ea, type: 3}
     - {fileID: -137115044125620674, guid: 2ccea9c9f9c301b47a7f2fcf0775b2c8, type: 3}
+    - {fileID: 1798558198490400397, guid: 686468109328ed94fab79054468227e2, type: 3}
