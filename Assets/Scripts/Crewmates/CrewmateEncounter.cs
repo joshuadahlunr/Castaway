@@ -26,6 +26,11 @@ namespace Crew {
             StartCoroutine(ReturnToMap(3f));
         }
 
+        public void DeclineCrewmate()
+        {
+            StartCoroutine(ReturnToMap(0f));
+        }
+
         /// <summary>
         ///     Returns to the encounter map after a specified number of seconds
         /// </summary>

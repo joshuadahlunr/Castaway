@@ -61,7 +61,7 @@ namespace ResourceMgmt
 
         [SerializeField] private Sprite[] shipLevels;
 
-        [SerializeField] private TextMeshProUGUI shipSliderTxt, crewSliderTxt, winTxt, shipLvlTxt, progressTxt;
+        [SerializeField] private TextMeshProUGUI shipSliderTxt, crewSliderTxt, winTxt, shipLvlTxt, crewAmtTxt, progressTxt;
 
         [SerializeField] private InputField nameInput;
 
@@ -188,9 +188,9 @@ namespace ResourceMgmt
             // If current progress meets or exceeds level cost...
             if (upgradeData.currentProgress >= upgradeData.lvlCost)
             {
+                upgradeData.currentProgress -= upgradeData.lvlCost; // ...subtract the cost of leveling up from current progress...
                 upgradeData.lvlCost *= 2; // ...multiply cost by two...
                 upgradeData.currentLvl += 1; // ...increment current level...
-                upgradeData.currentProgress -= upgradeData.lvlCost; // ...subtract the cost of leveling up from current progress...
                 upgradeData.currentShipHealth += 2; // ...and restore two health to our ship!
                 shipSlider.maxValue = upgradeData.lvlCost; // New ship slider max value is equivalent to the cost for the next level
                 NotificationHolder.instance.CreateNotification("Level up! Ship is now Level " + upgradeData.currentLvl.ToString() + "!", 3f);
