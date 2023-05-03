@@ -26,7 +26,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5954383398381643665}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -35,7 +35,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.029345933, y: 0.040948786}
   m_AnchorMax: {x: 0.9689895, y: 0.3500256}
-  m_AnchoredPosition: {x: 219.1, y: 362.7}
+  m_AnchoredPosition: {x: 219.1, y: -40}
   m_SizeDelta: {x: -343.9, y: -79.32}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1836211380166610388
@@ -78,8 +78,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4281808957
-  m_fontColor: {r: 0.23921569, g: 0.21960784, b: 0.21568628, a: 1}
+    rgba: 4293911792
+  m_fontColor: {r: 0.94117653, g: 0.8941177, b: 0.93725497, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -234,7 +234,7 @@ PrefabInstance:
     - target: {fileID: 1232506761614981824, guid: 43cdfc534094f1e4ab64aaacb3a6ccb9,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.0010070801
+      value: 0.0009765625
       objectReference: {fileID: 0}
     - target: {fileID: 1232506761614981824, guid: 43cdfc534094f1e4ab64aaacb3a6ccb9,
         type: 3}
@@ -266,6 +266,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Monster
       objectReference: {fileID: 0}
+    - target: {fileID: 1232506761773263808, guid: 43cdfc534094f1e4ab64aaacb3a6ccb9,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -253
+      objectReference: {fileID: 0}
+    - target: {fileID: 1232506761773263809, guid: 43cdfc534094f1e4ab64aaacb3a6ccb9,
+        type: 3}
+      propertyPath: m_fontStyle
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1232506761773263809, guid: 43cdfc534094f1e4ab64aaacb3a6ccb9,
         type: 3}
       propertyPath: m_sharedMaterial
@@ -282,7 +292,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 4b638752ac5df9648adaff8b876f1025,
+      objectReference: {fileID: 21300000, guid: 1bc5ff7bfa72a8d43991a67c6811be34,
         type: 3}
     - target: {fileID: 6466231282346409730, guid: 43cdfc534094f1e4ab64aaacb3a6ccb9,
         type: 3}

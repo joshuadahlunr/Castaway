@@ -196,7 +196,7 @@ MonoBehaviour:
   cardOwner: 1
   _name: Groundhog
   _art: {fileID: 21300000, guid: 740ee0cd461ab8c4aa158024af711195, type: 3}
-  _rules: A groundhog? On a boat??
+  _rules: 
   _properties:
     reorderableList:
       canAdd: 1
