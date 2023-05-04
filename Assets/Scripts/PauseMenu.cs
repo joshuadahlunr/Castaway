@@ -101,8 +101,8 @@ public class PauseMenu : MonoBehaviour {
 
         IEnumerator SetVolumeNextFrame() {
             yield return null;
-            OnMusicVolumeChanged(musicSlider.value = PlayerPrefs.GetFloat("musicVolume"));
-            OnSFXVolumeChanged(sfxSlider.value = PlayerPrefs.GetFloat("sfxVolume"));
+            OnMusicVolumeChanged(musicSlider.value = PlayerPrefs.GetFloat("musicVolume", .5f));
+            OnSFXVolumeChanged(sfxSlider.value = PlayerPrefs.GetFloat("sfxVolume", 1));
         }
         StartCoroutine(SetVolumeNextFrame());
         // end
