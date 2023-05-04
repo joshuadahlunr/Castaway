@@ -75,6 +75,7 @@ MonoBehaviour:
     - Mystic Charge
     - Shadow Flame
     - Mystic Patch
+    - Cower And Courage
     _keys:
     - Prototype AttackCard
     - Attack
@@ -115,6 +116,7 @@ MonoBehaviour:
     - Mystic Charge
     - Shadow Flame
     - Mystic Patch
+    - Cower And Courage
     _values:
     - {fileID: 4430917359204932427, guid: ffed5da40e94bbd4ba57c97a28388c0a, type: 3}
     - {fileID: 1798558198490400397, guid: 948a13693cf3aad4a9a0bd359cc158ef, type: 3}
@@ -155,3 +157,4 @@ MonoBehaviour:
     - {fileID: -5318121309935395766, guid: e275cee3ce4853745aff102a27757ddc, type: 3}
     - {fileID: 8539964099090318889, guid: 95e483bf3adeacc47b4f332aca0187f4, type: 3}
     - {fileID: -4841413737105856379, guid: 8ca205edaa17b6f4dad9806e90b144f9, type: 3}
+    - {fileID: -7881631328191306074, guid: 48ce8615cae325d48acbcdf2e86cbde9, type: 3}

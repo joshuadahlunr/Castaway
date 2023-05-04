@@ -40,13 +40,16 @@ MonoBehaviour:
     - Bail Water
     - Shanty
     - Mockery
+    - Cower and Courage
     _keys:
     - Attack
     - Bail Water
     - Shanty
     - Mockery
+    - Cower and Courage
     _values:
     - {fileID: 1798558198490400397, guid: 948a13693cf3aad4a9a0bd359cc158ef, type: 3}
     - {fileID: 134441627470835729, guid: d942d0a9d7ce2914c841ea09612a31ea, type: 3}
     - {fileID: 2645531004360110525, guid: 01a46dd0f75c01844a6a52e3bd299484, type: 3}
     - {fileID: 3517169621757349709, guid: 024645a7add5c4146be2d4f1fcd3e9fd, type: 3}
+    - {fileID: -7881631328191306074, guid: 48ce8615cae325d48acbcdf2e86cbde9, type: 3}
