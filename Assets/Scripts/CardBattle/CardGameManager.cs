@@ -504,6 +504,11 @@ namespace CardBattle {
 			shipUpgradeInfo.currentShipHealth = playerHealthState.health;
 			DatabaseManager.database.InsertOrReplace(shipUpgradeInfo);
 			CrewManager.XPGain();
+
+			if (encounterType == EncounterType.FinalBoss) {
+				DatabaseManager.ResetToNewSave();
+				SceneManager.LoadScene("Scenes/WinScene");
+			}
 		}
 
 		/// <summary>

@@ -41,6 +41,7 @@ namespace EncounterMap {
             playerPos = transform.position;
             var velocity =  new Vector3(movementInput.x, movementInput.y, 0) * speed;
             velocity += (map.ClosestNode(playerPos).transform.position - playerPos).normalized * nodeGravity;
+            velocity.y -= Mathf.Pow(playerPos.y / 100, 3);
             playerRB.velocity = velocity;
             if(playerRB.velocity == Vector2.zero) {
                 moving = false;
