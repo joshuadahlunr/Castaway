@@ -578,6 +578,7 @@ namespace Crew {
                 level = crew.Level,
                 associatedCrewmateID = crew.Code
             });
+            NotificationHolder.instance.CreateNotification(crew.Name.ToString() + " leveled up and is now level " + crew.Level.ToString() + "!");
             SaveCrew(); // Save the newly updated crew list to SQL
         }
 
