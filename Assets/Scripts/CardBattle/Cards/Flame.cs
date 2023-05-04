@@ -23,6 +23,8 @@ namespace CardBattle
         public override CardFilterer.CardFilters MonsterTargetingFilters =>
             TargetingFilters | CardFilterer.CardFilters.Monster;
 
+        [SerializeField] private Card.StatusCardBase burn;
+
         /// <summary>
         /// When the player targets something, damage it (if it exists) and then send this card to the graveyard
         /// </summary>
@@ -39,7 +41,12 @@ namespace CardBattle
 
             if (OwnedByPlayer) 
             {
-                CardGameManager.instance.playerDeck.cardDB.Instantiate("Burn");
+                CardGameManager.instance.playerDeck.AddCard(burn);
+            }
+
+            else
+            {
+                OwningMonster.deck.AddCard(burn);
             }
 
             if (rotateChance == 1)

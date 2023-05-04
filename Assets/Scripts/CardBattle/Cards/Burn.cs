@@ -1,6 +1,8 @@
 using CardBattle.Card;
 using CardBattle.Containers;
+using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 using System.Linq;
 
 namespace CardBattle
@@ -16,23 +18,30 @@ namespace CardBattle
         /// <summary>
         /// Can't target anything
         /// </summary>
-        /// 
         public override CardFilterer.CardFilters TargetingFilters => CardFilterer.CardFilters.All;
-
         public override bool CanTargetPlayer => false;
-        public override void OnDrawn() => StartCoroutine(
-            IndicationAnimation(() => {
-                /// <summary>
-                /// Apply damage to the player
+
+        [SerializeField] private Card.StatusCardBase burn;
+
+        public override void OnDrawn()
+        {
+                /// Apply damage to the owner and add another burn to the deck
                 /// </summary>
-                CardGameManager.instance.playerHealthState = CardGameManager.instance.playerHealthState.ApplyDamage(properties["primary"]);
-
-                CardGameManager.instance.playerDeck.cardDB.Instantiate("Burn");
-
+            if (OwnedByPlayer)
+            {
+                CardGameManager.instance.playerHealthState.ApplyDamage(properties["primary"]);
+                CardGameManager.instance.playerDeck.AddCard(Instantiate(burn));
                 CardGameManager.instance.DrawPlayerCard();
+            }
 
-                SendToGraveyard();
+            else
+            {
+                OwningMonster.healthState.ApplyDamage(properties["primary"]);
+                OwningMonster.deck.AddCard(Instantiate(burn));
+            }
 
-            }));
+            SendToGraveyard();
+
+        }
     }
 }

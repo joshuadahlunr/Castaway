@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &5205442351230048264
+--- !u!1 &4430917359204932423
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,10 +8,10 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1889981245791683793}
-  - component: {fileID: -6255882244370562531}
-  - component: {fileID: -3394823509322553077}
-  - component: {fileID: -2639241911110576358}
+  - component: {fileID: 4430917359204932422}
+  - component: {fileID: 8539964099090318889}
+  - component: {fileID: 4430917359204932420}
+  - component: {fileID: 7621077776159269127}
   m_Layer: 0
   m_Name: ShadowFlame
   m_TagString: Targetable
@@ -19,35 +19,35 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1889981245791683793
+--- !u!4 &4430917359204932422
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5205442351230048264}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_GameObject: {fileID: 4430917359204932423}
+  m_LocalRotation: {x: -0.000000031677015, y: 0.97213596, z: -0.23441778, w: -0.000000030120635}
+  m_LocalPosition: {x: 0.1, y: 1.19, z: -1.039}
+  m_LocalScale: {x: 0.015624996, y: 1, z: 0.024999999}
+  m_ConstrainProportionsScale: 1
   m_Children:
-  - {fileID: 2197241254338736935}
+  - {fileID: 3195752126365954151}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-6255882244370562531
+--- !u!114 &8539964099090318889
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5205442351230048264}
+  m_GameObject: {fileID: 4430917359204932423}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4575d9b7f28f5943b0f29432c1ea885, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _renderer: {fileID: 6765063828653813422}
+  _renderer: {fileID: 8054100049657687534}
   draggable: {fileID: 0}
   collider: {fileID: 0}
   container: {fileID: 0}
@@ -55,7 +55,8 @@ MonoBehaviour:
   cardOwner: 0
   _name: Shadow Flame
   _art: {fileID: 21300000, guid: a96f840c57f2c094ba619484ac3cb50c, type: 3}
-  _rules: Damages target and adds Burn Card into the deck
+  _rules: Deal <color=red>{properties["primary"]}</color> damage and shuffle 1 Burn
+    into your deck.
   _properties:
     reorderableList:
       canAdd: 1
@@ -85,17 +86,18 @@ MonoBehaviour:
     - primary
     _values:
     - tag: 0
-      value: 0
+      value: 1
   _cost:
     list: 00000000
   associatedSelkie: {fileID: 0}
---- !u!65 &-3394823509322553077
+  burn: {fileID: 2136001348172326070, guid: 950311418b7fbdc48b261eb5f5d3d287, type: 3}
+--- !u!65 &4430917359204932420
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5205442351230048264}
+  m_GameObject: {fileID: 4430917359204932423}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -108,31 +110,34 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &-2639241911110576358
+  m_Size: {x: 10, y: 0.02, z: 10}
+  m_Center: {x: 0, y: 0, z: 0.0000076293945}
+--- !u!114 &7621077776159269127
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5205442351230048264}
+  m_GameObject: {fileID: 4430917359204932423}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bacaee4e85274ca5b1cb4c468f21b94f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pointerAction: {fileID: 0}
-  clickAction: {fileID: 0}
-  arrowPrefab: {fileID: 0}
+  pointerAction: {fileID: -1654692200621890270, guid: 2b1e799f00d5d624cbc25aa4c6f38c8e,
+    type: 3}
+  clickAction: {fileID: 3001919216989983466, guid: 2b1e799f00d5d624cbc25aa4c6f38c8e,
+    type: 3}
+  arrowPrefab: {fileID: 6722190504438028770, guid: e2e954b1ee2caff408b59a53e7370e2a,
+    type: 3}
   targetNeeded: 1
---- !u!1001 &892383402110633315
+--- !u!1001 &4487235728669804067
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1889981245791683793}
+    m_TransformParent: {fileID: 4430917359204932422}
     m_Modifications:
     - target: {fileID: 1305000173628552771, guid: 5a1ba109fb2faf6459cc61ba4c4fb70c,
         type: 3}
@@ -249,22 +254,27 @@ PrefabInstance:
       propertyPath: m_PresetInfoIsWorld
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5872751417051278285, guid: 5a1ba109fb2faf6459cc61ba4c4fb70c,
+        type: 3}
+      propertyPath: card
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5a1ba109fb2faf6459cc61ba4c4fb70c, type: 3}
---- !u!224 &2197241254338736935 stripped
+--- !u!224 &3195752126365954151 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1305000173628552772, guid: 5a1ba109fb2faf6459cc61ba4c4fb70c,
     type: 3}
-  m_PrefabInstance: {fileID: 892383402110633315}
+  m_PrefabInstance: {fileID: 4487235728669804067}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &6765063828653813422 stripped
+--- !u!114 &8054100049657687534 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5872751417051278285, guid: 5a1ba109fb2faf6459cc61ba4c4fb70c,
     type: 3}
-  m_PrefabInstance: {fileID: 892383402110633315}
+  m_PrefabInstance: {fileID: 4487235728669804067}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
