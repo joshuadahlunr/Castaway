@@ -76,6 +76,9 @@ MonoBehaviour:
     - Shadow Flame
     - Mystic Patch
     - Cower And Courage
+    - Harpoon
+    - Damaged Harpoon
+    - Harpoon (Equipment)
     _keys:
     - Prototype AttackCard
     - Attack
@@ -117,6 +120,9 @@ MonoBehaviour:
     - Shadow Flame
     - Mystic Patch
     - Cower And Courage
+    - Harpoon
+    - Damaged Harpoon
+    - Harpoon (Equipment)
     _values:
     - {fileID: 4430917359204932427, guid: ffed5da40e94bbd4ba57c97a28388c0a, type: 3}
     - {fileID: 1798558198490400397, guid: 948a13693cf3aad4a9a0bd359cc158ef, type: 3}
@@ -158,3 +164,6 @@ MonoBehaviour:
     - {fileID: 8539964099090318889, guid: 95e483bf3adeacc47b4f332aca0187f4, type: 3}
     - {fileID: -4841413737105856379, guid: 8ca205edaa17b6f4dad9806e90b144f9, type: 3}
     - {fileID: -7881631328191306074, guid: 48ce8615cae325d48acbcdf2e86cbde9, type: 3}
+    - {fileID: 5016739780409052406, guid: 84761fefd25073a4591c3a999ce9cfaa, type: 3}
+    - {fileID: 245135133887060864, guid: ce0607d22b880d04fa308dbc33bb2c80, type: 3}
+    - {fileID: 1302548177074960351, guid: c7a9824fa99c21b44a6c50a5a710948d, type: 3}

@@ -94,16 +94,16 @@ namespace CardBattle {
 		public virtual void TargetCurrentTransform() { }
 
 
-			// ---- Behavior ----
+		// ---- Behavior ----
 
 
 		// On dis/enable un/register listeners for the click and pointer actions
 		public void OnEnable() {
-			pointerAction.action.Enable();
-			clickAction.action.Enable();
+			pointerAction?.action.Enable();
+			clickAction?.action.Enable();
 
-			pointerAction.action.performed += OnPointerMove;
-			clickAction.action.performed += OnClickUp;
+			if(pointerAction is not null) pointerAction.action.performed += OnPointerMove;
+			if(clickAction is not null) clickAction.action.performed += OnClickUp;
 		}
 
 		public void OnDisable() {
@@ -189,7 +189,7 @@ namespace CardBattle {
 			return new Vector3(mousePoint2D.x, mousePoint2D.y, initialZ);
 		}
 
-		/// <summary>
+		/// <summary>trarget.pPosition.y = Mathf.Max()targetPosition.y, .1f;
 		///     Gets the mouse position in world space
 		/// </summary>
 		/// <returns>The mouse position in world space</returns>

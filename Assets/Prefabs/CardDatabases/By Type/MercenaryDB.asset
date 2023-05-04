@@ -40,13 +40,16 @@ MonoBehaviour:
     - Bail Water
     - All Out Attack
     - Enhanced Attack
+    - Harpoon
     _keys:
     - Attack
     - Bail Water
     - All Out Attack
     - Enhanced Attack
+    - Harpoon
     _values:
     - {fileID: 1798558198490400397, guid: 948a13693cf3aad4a9a0bd359cc158ef, type: 3}
     - {fileID: 134441627470835729, guid: d942d0a9d7ce2914c841ea09612a31ea, type: 3}
     - {fileID: -137115044125620674, guid: 2ccea9c9f9c301b47a7f2fcf0775b2c8, type: 3}
     - {fileID: 4882680146507802729, guid: 68f4ad0082acb32418ef053cf43b076d, type: 3}
+    - {fileID: 5016739780409052406, guid: 84761fefd25073a4591c3a999ce9cfaa, type: 3}
