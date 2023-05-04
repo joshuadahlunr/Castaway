@@ -87,7 +87,7 @@ MonoBehaviour:
     - tag: 1
       value: 1
   _cost:
-    list: 00000000
+    list: 04000000
   associatedSelkie: {fileID: 0}
 --- !u!65 &4430917359204932420
 BoxCollider:
