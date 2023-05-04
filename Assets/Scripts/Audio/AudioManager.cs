@@ -49,7 +49,7 @@ public class AudioManager : AudioManagerBase {
 	private IEnumerator PlayMusicImpl(float targetBattleVolume, float targetCalmVolume, float fadeDuration = 3) {
 		float initialBattleVolume = battleMusicPlayer.volume;
 		float initialCalmVolume = calmMusicPlayer.volume;
-		for (float time = 0; time < 1; time += Time.deltaTime / fadeDuration) { // The divide by 3 means it will take 3 seconds to fade
+		for (float time = 0; time < 1; time += Time.unscaledDeltaTime / fadeDuration) { // The divide by 3 means it will take 3 seconds to fade
 			yield return null;
 			battleMusicPlayer.volume = Mathf.Lerp(initialBattleVolume, targetBattleVolume, time);
 			calmMusicPlayer.volume = Mathf.Lerp(initialCalmVolume, targetCalmVolume, time);
