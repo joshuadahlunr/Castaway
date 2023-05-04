@@ -79,6 +79,7 @@ MonoBehaviour:
     - Harpoon
     - Damaged Harpoon
     - Harpoon (Equipment)
+    - Repair
     _keys:
     - Prototype AttackCard
     - Attack
@@ -123,6 +124,7 @@ MonoBehaviour:
     - Harpoon
     - Damaged Harpoon
     - Harpoon (Equipment)
+    - Repair
     _values:
     - {fileID: 4430917359204932427, guid: ffed5da40e94bbd4ba57c97a28388c0a, type: 3}
     - {fileID: 1798558198490400397, guid: 948a13693cf3aad4a9a0bd359cc158ef, type: 3}
@@ -167,3 +169,4 @@ MonoBehaviour:
     - {fileID: 5016739780409052406, guid: 84761fefd25073a4591c3a999ce9cfaa, type: 3}
     - {fileID: 245135133887060864, guid: ce0607d22b880d04fa308dbc33bb2c80, type: 3}
     - {fileID: 1302548177074960351, guid: c7a9824fa99c21b44a6c50a5a710948d, type: 3}
+    - {fileID: -77900500058834699, guid: 9847a001a3b68914aa0be41fb095fb5f, type: 3}
