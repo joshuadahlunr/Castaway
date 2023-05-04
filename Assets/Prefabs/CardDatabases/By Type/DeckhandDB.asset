@@ -40,13 +40,16 @@ MonoBehaviour:
     - Bail Water
     - Douse
     - Nautical Chart
+    - Mystic Patch
     _keys:
     - Attack
     - Bail Water
     - Douse
     - Nautical Chart
+    - Mystic Patch
     _values:
     - {fileID: 1798558198490400397, guid: 948a13693cf3aad4a9a0bd359cc158ef, type: 3}
     - {fileID: 134441627470835729, guid: d942d0a9d7ce2914c841ea09612a31ea, type: 3}
     - {fileID: -4293880748526012951, guid: 34b534ebfd1f9be498b7db222a0c7055, type: 3}
     - {fileID: -176229504365669494, guid: 642e2f9917e32ef48beddc3d3576acd8, type: 3}
+    - {fileID: -4841413737105856379, guid: 8ca205edaa17b6f4dad9806e90b144f9, type: 3}

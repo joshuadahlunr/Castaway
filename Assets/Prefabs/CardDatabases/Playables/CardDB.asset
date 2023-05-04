@@ -73,7 +73,8 @@ MonoBehaviour:
     - Jerry's Arcane Twirl
     - Enhanced Attack
     - Mystic Charge
-    - Ramping Ballad
+    - Shadow Flame
+    - Mystic Patch
     _keys:
     - Prototype AttackCard
     - Attack
@@ -112,7 +113,8 @@ MonoBehaviour:
     - Jerry's Arcane Twirl
     - Enhanced Attack
     - Mystic Charge
-    - Ramping Ballad
+    - Shadow Flame
+    - Mystic Patch
     _values:
     - {fileID: 4430917359204932427, guid: ffed5da40e94bbd4ba57c97a28388c0a, type: 3}
     - {fileID: 1798558198490400397, guid: 948a13693cf3aad4a9a0bd359cc158ef, type: 3}
@@ -151,4 +153,5 @@ MonoBehaviour:
     - {fileID: -4917259886615291091, guid: 9eeedca544d5cac4083c46b206905cd2, type: 3}
     - {fileID: 4882680146507802729, guid: 68f4ad0082acb32418ef053cf43b076d, type: 3}
     - {fileID: -5318121309935395766, guid: e275cee3ce4853745aff102a27757ddc, type: 3}
-    - {fileID: -2739451547622633798, guid: 70b96cda9635df049bcf86e3843f0134, type: 3}
+    - {fileID: 8539964099090318889, guid: 95e483bf3adeacc47b4f332aca0187f4, type: 3}
+    - {fileID: -4841413737105856379, guid: 8ca205edaa17b6f4dad9806e90b144f9, type: 3}

@@ -9,11 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4430917359204932422}
-  - component: {fileID: 134441627470835729}
+  - component: {fileID: -4841413737105856379}
   - component: {fileID: 4430917359204932420}
-  - component: {fileID: 4430917359204932421}
+  - component: {fileID: 7621077776159269127}
   m_Layer: 0
-  m_Name: BailWater
+  m_Name: MysticPatch
   m_TagString: Targetable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31,11 +31,11 @@ Transform:
   m_LocalScale: {x: 0.015624996, y: 1, z: 0.024999999}
   m_ConstrainProportionsScale: 1
   m_Children:
-  - {fileID: 954769430994150680}
+  - {fileID: 3195752126365954151}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &134441627470835729
+--- !u!114 &-4841413737105856379
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -44,18 +44,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 4430917359204932423}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c83d991422265044be671fd8798c870, type: 3}
+  m_Script: {fileID: 11500000, guid: acb26cf75b498544fa82eb4a9ee53498, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _renderer: {fileID: 5682552410136803473}
+  _renderer: {fileID: 8054100049657687534}
   draggable: {fileID: 0}
   collider: {fileID: 0}
   container: {fileID: 0}
   _state: 2
   cardOwner: 0
-  _name: Bail Water
-  _art: {fileID: 21300000, guid: 9c43c886a2d9215409f6b66cf2c454ea, type: 3}
-  _rules: Adds <color=red>1</color> HP to the ship!
+  _name: Mystic Patch
+  _art: {fileID: 21300000, guid: a96f840c57f2c094ba619484ac3cb50c, type: 3}
+  _rules: Removes all status effects from owner's deck, then restores health equal
+    to number of effects removed.
   _properties:
     reorderableList:
       canAdd: 1
@@ -83,7 +84,7 @@ MonoBehaviour:
     _keys: []
     _values: []
   _cost:
-    list: 00000000
+    list: 0800000001000000
   associatedSelkie: {fileID: 0}
 --- !u!65 &4430917359204932420
 BoxCollider:
@@ -106,7 +107,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 10, y: 0.02, z: 10}
   m_Center: {x: 0, y: 0, z: 0.0000076293945}
---- !u!114 &4430917359204932421
+--- !u!114 &7621077776159269127
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -124,8 +125,8 @@ MonoBehaviour:
     type: 3}
   arrowPrefab: {fileID: 6722190504438028770, guid: e2e954b1ee2caff408b59a53e7370e2a,
     type: 3}
-  targetNeeded: 0
---- !u!1001 &2259767988615713628
+  targetNeeded: 1
+--- !u!1001 &4487235728669804067
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -248,22 +249,27 @@ PrefabInstance:
       propertyPath: m_PresetInfoIsWorld
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5872751417051278285, guid: 5a1ba109fb2faf6459cc61ba4c4fb70c,
+        type: 3}
+      propertyPath: card
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5a1ba109fb2faf6459cc61ba4c4fb70c, type: 3}
---- !u!224 &954769430994150680 stripped
+--- !u!224 &3195752126365954151 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1305000173628552772, guid: 5a1ba109fb2faf6459cc61ba4c4fb70c,
     type: 3}
-  m_PrefabInstance: {fileID: 2259767988615713628}
+  m_PrefabInstance: {fileID: 4487235728669804067}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &5682552410136803473 stripped
+--- !u!114 &8054100049657687534 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5872751417051278285, guid: 5a1ba109fb2faf6459cc61ba4c4fb70c,
     type: 3}
-  m_PrefabInstance: {fileID: 2259767988615713628}
+  m_PrefabInstance: {fileID: 4487235728669804067}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1

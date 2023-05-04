@@ -291,7 +291,6 @@ namespace CardBattle {
 				encounterType = EncounterType.FinalBoss;
 
 			encounterTypeAccess = encounterType;
-			MysticCharge.encounterType = encounterTypeAccess;
 
 			// Calculate the number of monsters to spawn based on the encounter type and level
 			numberOfMonstersKilled = encounterType == EncounterType.Normal ? monsterLevel / 5 + 1 : 1;

@@ -6,12 +6,12 @@ using UnityEngine;
 namespace CardBattle
 {
     /// <summary>
-    /// Douse card: removes a specified number of burns 
-    /// and/or frozen status cards from the owner's deck
+    /// Mystic Patch card, which iterates through owner's entire deck and removes
+    /// all status effect cards, then applies healing equal to the number of status
+    /// effects removed from deck
     /// </summary>
-    /// <author>Misha Desear</author>
-
-    public class Douse : ActionCardBase
+    /// <author> Misha Desear </author>
+    public class MysticPatch : ActionCardBase
     {
         // Can't target anything
         public override CardFilterer.CardFilters TargetingFilters => CardFilterer.CardFilters.All;
@@ -27,17 +27,15 @@ namespace CardBattle
                 var playerDeck = CardGameManager.instance.playerDeck;
                 for (int i = 0; i < playerDeck.Count; i++)
                 {
-                    if (playerDeck[i].name == "Burn" || playerDeck[i].name == "Frozen")
+                    if (playerDeck[i] is Card.StatusCardBase)
                     {
                         playerDeck.RemoveCard(i);
                         removalCounter++;
                     }
-
-                    if (removalCounter >= properties["duration"])
-                    {
-                        break;
-                    }
                 }
+                
+                CardGameManager.instance.playerHealthState = CardGameManager.instance.playerHealthState.ApplyHealing(removalCounter);
+                NotificationHolder.instance.CreateNotification("Removed " + removalCounter.ToString() + " status effect(s) from deck!");
             }
 
             else
@@ -45,17 +43,14 @@ namespace CardBattle
                 var monsterDeck = OwningMonster.deck;
                 for (int i = 0; i < monsterDeck.Count; i++)
                 {
-                    if (monsterDeck[i].name == "Burn" || monsterDeck[i].name == "Frozen")
+                    if (monsterDeck[i] is Card.StatusCardBase)
                     {
                         monsterDeck.RemoveCard(i);
                         removalCounter++;
                     }
-
-                    if (removalCounter >= properties["duration"])
-                    {
-                        break;
-                    }
                 }
+
+                OwningMonster.healthState = OwningMonster.healthState.ApplyHealing(removalCounter);
             }
 
             SendToGraveyard();
