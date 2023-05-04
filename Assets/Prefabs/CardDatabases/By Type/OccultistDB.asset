@@ -43,6 +43,7 @@ MonoBehaviour:
     - Fate Tie
     - Oracle
     - Mysterious Potion
+    - Mythic Blast
     _keys:
     - Attack
     - Bail Water
@@ -51,6 +52,7 @@ MonoBehaviour:
     - Fate Tie
     - Oracle
     - Mysterious Potion
+    - Mythic Blast
     _values:
     - {fileID: 1798558198490400397, guid: 948a13693cf3aad4a9a0bd359cc158ef, type: 3}
     - {fileID: 134441627470835729, guid: d942d0a9d7ce2914c841ea09612a31ea, type: 3}
@@ -59,3 +61,4 @@ MonoBehaviour:
     - {fileID: 6126150281627410766, guid: 51c8c4b57b3807c4e9976f9916f25acc, type: 3}
     - {fileID: -2165165948327342399, guid: dd64c36d80187684499199611a34cd15, type: 3}
     - {fileID: 87248326428547608, guid: cbe12079456972e4cadd91271322b5fa, type: 3}
+    - {fileID: -9145708878501865009, guid: 50bb603b0bf9a464b96615015de1933b, type: 3}
