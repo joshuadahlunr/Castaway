@@ -234,6 +234,12 @@ namespace CardBattle {
 						level = 2,
 						associatedCrewmateID = null
 					});
+					DatabaseManager.database.Insert(new Deck.DeckListCard {
+						listID = playerDeckId,
+						name = "Cannon",
+						level = 2,
+						associatedCrewmateID = null
+					});
 				}
 			}
 
@@ -241,7 +247,7 @@ namespace CardBattle {
 			var shipUpgradeInfo = DatabaseManager.GetOrCreateTable<ResourceManager.UpgradeInfo>().FirstOrDefault();
 			_playerHealthState.health = shipUpgradeInfo?.currentShipHealth ?? 10; // Get the current ship health
 			var shipLevel = shipUpgradeInfo?.currentLvl ?? 1;
-			Debug.Log("Ship's level" + shipLevel);
+			Debug.Log("Ship's level " + shipLevel);
 			
 
 			// Set the material of the ship to track its upgrades
