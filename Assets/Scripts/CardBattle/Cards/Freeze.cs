@@ -11,9 +11,10 @@ namespace CardBattle
     /// <author> Misha Desear </author>
     public class Freeze : Card.ActionCardBase
     {
-        private int rotateChance;
-        public Card.CardBase frozenCard;
+        [SerializeField] private Card.StatusCardBase frozenCard;
 
+        private int rotateChance;
+        
         public override CardFilterer.CardFilters TargetingFilters =>
             CardFilterer.CardFilters.All;
 

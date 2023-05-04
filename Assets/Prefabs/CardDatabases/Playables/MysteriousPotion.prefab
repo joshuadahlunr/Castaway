@@ -85,6 +85,7 @@ MonoBehaviour:
   _cost:
     list: 06000000
   associatedSelkie: {fileID: 0}
+  poison: {fileID: -5257259473322441926, guid: ae44472b46cbfa04da18e25e67fdc73f, type: 3}
 --- !u!65 &4430917359204932420
 BoxCollider:
   m_ObjectHideFlags: 0

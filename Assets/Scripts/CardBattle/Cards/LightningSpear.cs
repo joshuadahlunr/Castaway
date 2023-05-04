@@ -1,4 +1,6 @@
 using CardBattle.Containers;
+using System.Collections;
+using UnityEngine;
 using System.Linq;
 
 namespace CardBattle
@@ -17,6 +19,8 @@ namespace CardBattle
         public Deck playerDeck;
         public override CardFilterer.CardFilters MonsterTargetingFilters =>
             TargetingFilters | CardFilterer.CardFilters.Monster;
+
+        [SerializeField] private Card.StatusCardBase electric;        
 
         public class DamageTimesXModification : Modification
         {
@@ -77,7 +81,13 @@ namespace CardBattle
             // Damage target (falling back to player if we are monster and not targeting anything!)
             DamageTargetOrPlayer(properties["primary"], target);
 
-            CardGameManager.instance.playerDeck.cardDB.Instantiate("Electric");
+            if (OwnedByPlayer) 
+            {
+                CardGameManager.instance.playerDeck.AddCard(Instantiate(electric));
+            } else
+            {
+                OwningMonster.deck.AddCard(Instantiate(electric));
+            }
 
             SendToGraveyard();
         }

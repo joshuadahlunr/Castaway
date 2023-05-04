@@ -88,7 +88,7 @@ MonoBehaviour:
     - tag: 0
       value: 1
   _cost:
-    list: 00000000
+    list: 06000000
   associatedSelkie: {fileID: 0}
   burn: {fileID: 2136001348172326070, guid: 950311418b7fbdc48b261eb5f5d3d287, type: 3}
 --- !u!65 &4430917359204932420

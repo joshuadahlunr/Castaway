@@ -13,6 +13,8 @@ namespace CardBattle
         public override CardFilterer.CardFilters MonsterTargetingFilters =>
             TargetingFilters | CardFilterer.CardFilters.Monster;
 
+        [SerializeField] private Card.StatusCardBase poison;
+
         /// <summary>
         /// When the player targets a monster, add a poison card to their deck and send to graveyard
         /// <summary>
@@ -23,12 +25,12 @@ namespace CardBattle
                 var target = _target?.GetComponent<Card.MonsterCardBase>();
                 if (NullAndPlayerCheck(target)) return; // Make sure the target isn't null if owned by the player
 
-                target.deck.cardDB.Instantiate("Poison"); 
+                target.deck.AddCard(Instantiate(poison)); 
             }
 
             else 
             {
-                CardGameManager.instance.playerDeck.cardDB.Instantiate("Poison");
+                CardGameManager.instance.playerDeck.AddCard(Instantiate(poison));
             }
 
                 SendToGraveyard();

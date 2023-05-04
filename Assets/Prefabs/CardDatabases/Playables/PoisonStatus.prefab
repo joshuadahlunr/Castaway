@@ -76,7 +76,7 @@ MonoBehaviour:
   cardOwner: 0
   _name: Poison
   _art: {fileID: 21300000, guid: 3708a074dadfb1f488f9099835aae886, type: 3}
-  _rules: Deal <color=red>{properties["primary"]}</color> damage to the player. Does
+  _rules: Deal <color=red>{properties["primary"]}</color> damage when drawn. Does
     not affect equipment.
   _properties:
     reorderableList:

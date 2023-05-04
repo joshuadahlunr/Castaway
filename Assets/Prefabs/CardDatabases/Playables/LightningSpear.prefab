@@ -48,6 +48,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _renderer: {fileID: 8054100049657687534}
+  draggable: {fileID: 0}
+  collider: {fileID: 0}
   container: {fileID: 0}
   _state: 2
   cardOwner: 0
@@ -87,7 +89,10 @@ MonoBehaviour:
       value: 2
   _cost:
     list: 01000000
+  associatedSelkie: {fileID: 0}
   playerDeck: {fileID: 0}
+  electric: {fileID: -6176029271198475228, guid: 3a94dc0aa6a120549b83d80ce09b64da,
+    type: 3}
 --- !u!65 &4430917359204932420
 BoxCollider:
   m_ObjectHideFlags: 0

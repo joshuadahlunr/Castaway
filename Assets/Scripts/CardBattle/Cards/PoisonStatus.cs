@@ -16,7 +16,14 @@ namespace CardBattle {
         public override void OnDrawn() => StartCoroutine(
             IndicationAnimation(() => {
                 // Apply 1 damage to player
-                CardGameManager.instance.playerHealthState = CardGameManager.instance.playerHealthState.ApplyDamage(properties["primary"]);
+                if (OwnedByPlayer)
+                {
+                    CardGameManager.instance.playerHealthState.ApplyDamage(properties["primary"]);
+                }
+                else 
+                {
+                    OwningMonster.healthState.ApplyDamage(properties["primary"]);
+                }
                 // Send to Graveyard
                 SendToGraveyard();
             }));
