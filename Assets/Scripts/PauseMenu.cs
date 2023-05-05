@@ -126,6 +126,26 @@ public class PauseMenu : MonoBehaviour {
         this.isFullScreen = isFullScreen;
     }
 
+    // If the music volume changes
+    public void OnMusicVolumeChanged(float volume) {
+        PlayerPrefs.SetFloat("musicVolume", volume);
+
+        if (AudioManager.instance == null) return;
+        AudioManager.instance.musicVolume = volume;
+        if (AudioManager.instance.playingBattleMusic)
+            AudioManager.instance.PlayBattleMusic(.001f);
+        else AudioManager.instance.PlayCalmMusic(.001f);
+    }
+
+    // If the SFX volume changes
+    public void OnSFXVolumeChanged(float volume) {
+        PlayerPrefs.SetFloat("sfxVolume", volume);
+
+        if (AudioManager.instance == null) return;
+        AudioManager.instance.soundFXPlayer.volume = volume;
+        AudioManager.instance.uiSoundFXPlayer.volume = volume;
+    }
+
     // Quit the application
     public void Quit() {
         MainMenuClass.Quit();
@@ -135,6 +155,7 @@ public class PauseMenu : MonoBehaviour {
     // Go back to the main menu
     public void MainMenu() {
         SceneManager.LoadScene("MainMenu");
+        Time.timeScale = 1; // resume the game
     }
 
     /// <summary>
@@ -149,24 +170,6 @@ public class PauseMenu : MonoBehaviour {
         inputAction.Disable();
         PlayerPrefs.Save();
     }
-
-    public void OnMusicVolumeChanged(float volume) {
-        PlayerPrefs.SetFloat("musicVolume", volume);
-
-        if (AudioManager.instance == null) return;
-        AudioManager.instance.musicVolume = volume;
-        if (AudioManager.instance.playingBattleMusic)
-            AudioManager.instance.PlayBattleMusic(.001f);
-        else AudioManager.instance.PlayCalmMusic(.001f);
-    }
-
-    public void OnSFXVolumeChanged(float volume) {
-        PlayerPrefs.SetFloat("sfxVolume", volume);
-
-        if (AudioManager.instance == null) return;
-        AudioManager.instance.soundFXPlayer.volume = volume;
-        AudioManager.instance.uiSoundFXPlayer.volume = volume;
-    }
     
     // Check if the game is paused or not
     public void CheckPause() {
@@ -179,13 +182,14 @@ public class PauseMenu : MonoBehaviour {
 
     public void PauseGame() {
         Time.timeScale = 0; // paused the game;
-        isPaused = true;    // set the isPaused bool to true
         pauseMenu.SetActive(true);  // set the menu UI component to true so it appears for the player
+        isPaused = true;    // set the isPaused bool to true
+        
     }
 
     public void ResumeGame() {
         Time.timeScale = 1; // resume the game
-        isPaused = false;   // set the isPaused bool to false
         pauseMenu.SetActive(false); // set the menu UI component to false so it does not show for the player
+        isPaused = false;   // set the isPaused bool to false
     }
 }
