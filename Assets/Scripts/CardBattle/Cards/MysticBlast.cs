@@ -9,7 +9,7 @@ namespace CardBattle
     ///     on current damage to the ship or owning monster
     /// </summary>
     /// <author> Misha Desear </author>
-    public class MythicBlast : ActionCardBase
+    public class MysticBlast : ActionCardBase
     {
         // Can only target monsters and equipment
         public override CardFilterer.CardFilters TargetingFilters

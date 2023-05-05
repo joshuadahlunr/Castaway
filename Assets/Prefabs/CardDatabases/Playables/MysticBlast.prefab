@@ -9,11 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4430917359204932422}
-  - component: {fileID: -9145708878501865009}
+  - component: {fileID: -8550836045912916987}
   - component: {fileID: 4430917359204932420}
   - component: {fileID: 4430917359204932421}
   m_Layer: 0
-  m_Name: MythicBlast
+  m_Name: MysticBlast
   m_TagString: Targetable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -35,7 +35,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-9145708878501865009
+--- !u!114 &-8550836045912916987
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -53,10 +53,10 @@ MonoBehaviour:
   container: {fileID: 0}
   _state: 2
   cardOwner: 0
-  _name: Mythic Blast
-  _art: {fileID: 21300000, guid: a96f840c57f2c094ba619484ac3cb50c, type: 3}
-  _rules: Deals <color=red>{properties["primary"]}</color> damage. Increases in damage
-    for every point of health you're missing!
+  _name: Mystic Blast
+  _art: {fileID: 21300000, guid: 070d251aa8dbced4aa541bf704528e36, type: 3}
+  _rules: Deals  <color=red>{properties["primary"]}</color> damage plus damage equal
+    to current health missing.
   _properties:
     reorderableList:
       canAdd: 1
