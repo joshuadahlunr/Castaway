@@ -55,8 +55,8 @@ MonoBehaviour:
   cardOwner: 0
   _name: Electric
   _art: {fileID: 21300000, guid: f75a0f1c60db003418e1007e57b17347, type: 3}
-  _rules: Deal <color=red>{properties["primary"]}</color> damage to the player, all
-    monsters, and all equipment in play.
+  _rules: Deal <color=red>{properties["primary"]}</color> damage to the player and
+    all monsters.
   _properties:
     reorderableList:
       canAdd: 1

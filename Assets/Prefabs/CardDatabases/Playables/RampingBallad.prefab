@@ -9,11 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4430917359204932422}
-  - component: {fileID: -7881631328191306074}
+  - component: {fileID: 4957349781236513610}
   - component: {fileID: 4430917359204932420}
   - component: {fileID: 4430917359204932421}
   m_Layer: 0
-  m_Name: Cower and Courage
+  m_Name: RampingBallad
   m_TagString: Targetable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -35,7 +35,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-7881631328191306074
+--- !u!114 &4957349781236513610
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -44,7 +44,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4430917359204932423}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 43de90cee088bed44bb63578ce209ad6, type: 3}
+  m_Script: {fileID: 11500000, guid: 8cefdd10a2e8cdd4383846db9f1d369a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _renderer: {fileID: 8054100049657687534}
@@ -53,9 +53,9 @@ MonoBehaviour:
   container: {fileID: 0}
   _state: 2
   cardOwner: 0
-  _name: Cower and Courage
+  _name: Ramping Ballad
   _art: {fileID: 21300000, guid: a96f840c57f2c094ba619484ac3cb50c, type: 3}
-  _rules: Discard your entire hand, then draw that many cards next turn.
+  _rules: 
   _properties:
     reorderableList:
       canAdd: 1
@@ -83,7 +83,7 @@ MonoBehaviour:
     _keys: []
     _values: []
   _cost:
-    list: 03000000
+    list: 00000000
   associatedSelkie: {fileID: 0}
 --- !u!65 &4430917359204932420
 BoxCollider:
@@ -124,7 +124,7 @@ MonoBehaviour:
     type: 3}
   arrowPrefab: {fileID: 6722190504438028770, guid: e2e954b1ee2caff408b59a53e7370e2a,
     type: 3}
-  targetNeeded: 0
+  targetNeeded: 1
 --- !u!1001 &4487235728669804067
 PrefabInstance:
   m_ObjectHideFlags: 0

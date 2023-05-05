@@ -16,7 +16,7 @@ namespace CardBattle
     public class BurnStatus : Card.StatusCardBase
     {
         /// <summary>
-        /// Can't target anything
+        ///     Can't target anything
         /// </summary>
         public override CardFilterer.CardFilters TargetingFilters => CardFilterer.CardFilters.All;
         public override bool CanTargetPlayer => false;
@@ -25,8 +25,9 @@ namespace CardBattle
 
         public override void OnDrawn()
         {
-                /// Apply damage to the owner and add another burn to the deck
-                /// </summary>
+            /// <summary>
+            ///     Apply damage to the owner and add another burn to the deck
+            /// </summary>
             if (OwnedByPlayer)
             {
                 CardGameManager.instance.playerHealthState.ApplyDamage(properties["primary"]);
@@ -34,14 +35,13 @@ namespace CardBattle
                 CardGameManager.instance.DrawPlayerCard();
             }
 
-            else
-            {
-                OwningMonster.healthState.ApplyDamage(properties["primary"]);
-                OwningMonster.deck.AddCard(Instantiate(burn));
-            }
-
             SendToGraveyard();
+        }
 
+        public override void OnMonsterReveal()
+        {
+            DamageTargetOrPlayer(properties["primary"], OwningMonster);
+            OwningMonster.deck.AddCard(Instantiate(burn));
         }
     }
 }

@@ -12,7 +12,7 @@ namespace CardBattle {
 
         public override void OnTarget(CardBase _) {
 			if (OwnedByPlayer) {
-				NotificationHolder.instance.CreateNotification("Player's can't take a Selkie Form!");
+				NotificationHolder.instance.CreateNotification("Players can't take a Selkie Form!");
 				RemoveFromGame();
 				return;
 			}

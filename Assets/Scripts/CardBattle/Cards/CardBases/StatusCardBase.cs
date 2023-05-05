@@ -53,5 +53,6 @@ namespace CardBattle.Card {
 		///     Callback called whenever this status is drawn
 		/// </summary>
 		public virtual void OnDrawn() { }
+
 	}
 }

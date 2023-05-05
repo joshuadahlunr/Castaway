@@ -30,7 +30,10 @@ namespace CardBattle.Containers {
 		public void AssignOwnerToCards(int ownerIndex) {
 			foreach (var card in cards) {
 				card.cardOwner = ownerIndex + 1; // Assign the card to the appropriate monster (index 0 is the player)
-				card.draggable.enabled = false; // Make sure monster cards can't be interacted with by the player!
+				if (card.GetComponent<StatusCardBase>() == null)
+				{
+					card.draggable.enabled = false; // Make sure monster cards can't be interacted with by the player!
+				}
 			}
 		}
 

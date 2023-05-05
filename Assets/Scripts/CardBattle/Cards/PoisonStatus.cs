@@ -10,23 +10,29 @@ namespace CardBattle {
     ///     <author> Jared White </author>
     /// </summary>
     public class PoisonStatus : Card.StatusCardBase {
-        // Can't target equipment 
-        public override CardFilterer.CardFilters TargetingFilters => CardFilterer.CardFilters.EquipmentImpl;
+        // Can't target anything 
+        public override CardFilterer.CardFilters TargetingFilters => CardFilterer.CardFilters.All;
         public override bool CanTargetPlayer => false;
-        public override void OnDrawn() => StartCoroutine(
-            IndicationAnimation(() => {
-                // Apply 1 damage to player
-                if (OwnedByPlayer)
-                {
-                    CardGameManager.instance.playerHealthState.ApplyDamage(properties["primary"]);
-                }
-                else 
-                {
-                    OwningMonster.healthState.ApplyDamage(properties["primary"]);
-                }
+        public override void OnDrawn() 
+        {
+            // Apply 1 damage to player
+            if (OwnedByPlayer)
+            {
+                CardGameManager.instance.playerHealthState.ApplyDamage(properties["primary"]);
+            }
+                 
                 // Send to Graveyard
-                SendToGraveyard();
-            }));
+            SendToGraveyard();
+        }
 
+        public override void OnMonsterReveal()
+        {
+            DamageTargetOrPlayer(properties["primary"], OwningMonster);
+        }
+
+        public override void OnTarget(Card.CardBase _)
+		{
+            SendToGraveyard();
+		}
     }
 }
