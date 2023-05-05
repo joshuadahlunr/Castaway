@@ -216,12 +216,12 @@ namespace CardBattle {
 					// 	level = 2,
 					// 	associatedCrewmateID = null
 					// });
-					DatabaseManager.database.Insert(new Deck.DeckListCard {
-						listID = playerDeckId,
-						name = "Damaged Harpoon",
-						level = 2,
-						associatedCrewmateID = null
-					});
+					// DatabaseManager.database.Insert(new Deck.DeckListCard {
+					// 	listID = playerDeckId,
+					// 	name = "Damaged Harpoon",
+					// 	level = 2,
+					// 	associatedCrewmateID = null
+					// });
 					DatabaseManager.database.Insert(new Deck.DeckListCard {
 						listID = playerDeckId,
 						name = "Bail Water",
@@ -234,12 +234,12 @@ namespace CardBattle {
 						level = 2,
 						associatedCrewmateID = null
 					});
-					DatabaseManager.database.Insert(new Deck.DeckListCard {
-						listID = playerDeckId,
-						name = "Cannon",
-						level = 2,
-						associatedCrewmateID = null
-					});
+					// DatabaseManager.database.Insert(new Deck.DeckListCard {
+					// 	listID = playerDeckId,
+					// 	name = "Cannon",
+					// 	level = 2,
+					// 	associatedCrewmateID = null
+					// });
 				}
 			}
 
