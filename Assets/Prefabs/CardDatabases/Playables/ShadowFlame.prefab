@@ -54,7 +54,7 @@ MonoBehaviour:
   _state: 2
   cardOwner: 0
   _name: Shadow Flame
-  _art: {fileID: 21300000, guid: a96f840c57f2c094ba619484ac3cb50c, type: 3}
+  _art: {fileID: 21300000, guid: b50dc5a205e7c514bb17884379024eb9, type: 3}
   _rules: Deal <color=red>{properties["primary"]}</color> damage and shuffle 1 Burn
     into your deck.
   _properties:
