@@ -82,7 +82,7 @@ MonoBehaviour:
     - Repair
     - Freeze
     - Fire Bomb
-    - Hot Pan
+    - Sizzling Pan
     - Mystic Blast
     _keys:
     - Prototype AttackCard
@@ -131,7 +131,7 @@ MonoBehaviour:
     - Repair
     - Freeze
     - Fire Bomb
-    - Hot Pan
+    - Sizzling Pan
     - Mystic Blast
     _values:
     - {fileID: 4430917359204932427, guid: ffed5da40e94bbd4ba57c97a28388c0a, type: 3}
