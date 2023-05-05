@@ -83,6 +83,7 @@ MonoBehaviour:
     - Freeze
     - Fire Bomb
     - Hot Pan
+    - Mystic Blast
     _keys:
     - Prototype AttackCard
     - Attack
@@ -131,6 +132,7 @@ MonoBehaviour:
     - Freeze
     - Fire Bomb
     - Hot Pan
+    - Mystic Blast
     _values:
     - {fileID: 4430917359204932427, guid: ffed5da40e94bbd4ba57c97a28388c0a, type: 3}
     - {fileID: 1798558198490400397, guid: 948a13693cf3aad4a9a0bd359cc158ef, type: 3}
@@ -179,3 +181,4 @@ MonoBehaviour:
     - {fileID: 356454053035637107, guid: b5c0d88dbbe2b2e41834901cdf7031dd, type: 3}
     - {fileID: 5483755422852644754, guid: 164d114f04764924bbe34ab3c9ad5b4d, type: 3}
     - {fileID: 6972148205057429938, guid: b16ad2bd2282bf94f956bb7dddb5e5be, type: 3}
+    - {fileID: -8550836045912916987, guid: 50bb603b0bf9a464b96615015de1933b, type: 3}
