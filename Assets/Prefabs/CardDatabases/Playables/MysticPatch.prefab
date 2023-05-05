@@ -54,7 +54,7 @@ MonoBehaviour:
   _state: 2
   cardOwner: 0
   _name: Mystic Patch
-  _art: {fileID: 21300000, guid: a96f840c57f2c094ba619484ac3cb50c, type: 3}
+  _art: {fileID: 21300000, guid: 0faaf5f00d112844fb264ca705ce31f5, type: 3}
   _rules: Removes all status effects from owner's deck, then restores health equal
     to number of effects removed.
   _properties:

@@ -55,8 +55,8 @@ MonoBehaviour:
   cardOwner: 0
   _name: Fate Tie
   _art: {fileID: 21300000, guid: 1a456e163c9543544aedb20604cf43a4, type: 3}
-  _rules: "<B>\u041F\u039B\u03A3M D\u1102\u0426\u04E8\u1103 \u01ACI \u01AC\u039B\u0389\u0429
-    \u01A7\u0429\u04E8\u041FK \u04E8\u0389</B>"
+  _rules: When played, damage dealt to the owner of this card is also dealt to the
+    target!
   _properties:
     reorderableList:
       canAdd: 1

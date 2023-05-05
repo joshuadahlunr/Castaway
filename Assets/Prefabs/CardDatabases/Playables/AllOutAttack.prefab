@@ -55,8 +55,7 @@ MonoBehaviour:
   cardOwner: 0
   _name: All Out Attack
   _art: {fileID: 21300000, guid: a96f840c57f2c094ba619484ac3cb50c, type: 3}
-  _rules: "<B>\u041F\u039B\u03A3M D\u1102\u0426\u04E8\u1103 \u01ACI \u01AC\u039B\u0389\u0429
-    \u01A7\u0429\u04E8\u041FK \u04E8\u0389</B"
+  _rules: Double attack is dealt this turn, but double damage is taken next turn.
   _properties:
     reorderableList:
       canAdd: 1
