@@ -35,10 +35,12 @@ namespace CardBattle {
 			// Damage the target
 			DamageTargetOrPlayer(1, target);
             var inst = Instantiate(burn);
-            target.deck.AddCard(inst);
-            if(OwnedByPlayer) {
-                inst.cardOwner = target.cardOwner;
-            } 
+			for(int i = 0; i < properties["primary"]; i++){
+				target.deck.AddCard(inst);
+				if(OwnedByPlayer) {
+					inst.cardOwner = target.cardOwner;
+				} 
+			}
 
             CardGameManager.instance.CheckWinLose();
 			// Send this card to the graveyard

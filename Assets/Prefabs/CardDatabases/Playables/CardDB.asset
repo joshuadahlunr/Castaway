@@ -81,6 +81,8 @@ MonoBehaviour:
     - Harpoon (Equipment)
     - Repair
     - Freeze
+    - Fire Bomb
+    - Hot Pan
     _keys:
     - Prototype AttackCard
     - Attack
@@ -127,6 +129,8 @@ MonoBehaviour:
     - Harpoon (Equipment)
     - Repair
     - Freeze
+    - Fire Bomb
+    - Hot Pan
     _values:
     - {fileID: 4430917359204932427, guid: ffed5da40e94bbd4ba57c97a28388c0a, type: 3}
     - {fileID: 1798558198490400397, guid: 948a13693cf3aad4a9a0bd359cc158ef, type: 3}
@@ -173,3 +177,5 @@ MonoBehaviour:
     - {fileID: 1302548177074960351, guid: c7a9824fa99c21b44a6c50a5a710948d, type: 3}
     - {fileID: -77900500058834699, guid: 9847a001a3b68914aa0be41fb095fb5f, type: 3}
     - {fileID: 356454053035637107, guid: b5c0d88dbbe2b2e41834901cdf7031dd, type: 3}
+    - {fileID: 5483755422852644754, guid: 164d114f04764924bbe34ab3c9ad5b4d, type: 3}
+    - {fileID: 6972148205057429938, guid: b16ad2bd2282bf94f956bb7dddb5e5be, type: 3}

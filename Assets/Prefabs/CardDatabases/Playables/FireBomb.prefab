@@ -55,7 +55,8 @@ MonoBehaviour:
   cardOwner: 0
   _name: Fire Bomb
   _art: {fileID: 21300000, guid: 46b42437f0ca4bc47bdf29bbd2e3d520, type: 3}
-  _rules: Deal <color=red>1</color> damage and shuffle 1 Burn into the target's deck.
+  _rules: Deal <color=red>1</color> damage and shuffle <color=red>{properties["primary"]}</color> 
+    Burn into the target's deck.
   _properties:
     reorderableList:
       canAdd: 1
@@ -79,11 +80,15 @@ MonoBehaviour:
       elementIcon: {fileID: 0}
     reqReferences: {fileID: 0}
     isExpanded: 1
-    _keyValues: []
-    _keys: []
-    _values: []
+    _keyValues:
+    - primary
+    _keys:
+    - primary
+    _values:
+    - tag: 4
+      value: 1
   _cost:
-    list: 07000000
+    list: 04000000
   associatedSelkie: {fileID: 0}
   burn: {fileID: 2136001348172326070, guid: 950311418b7fbdc48b261eb5f5d3d287, type: 3}
 --- !u!65 &4430917359204932420
