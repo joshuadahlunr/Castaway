@@ -41,15 +41,18 @@ MonoBehaviour:
     - Blunderbuss
     - Repair
     - Fire Bomb
+    - Cannon
     _keys:
     - Attack
     - Bail Water
     - Blunderbuss
     - Repair
     - Fire Bomb
+    - Cannon
     _values:
     - {fileID: 1798558198490400397, guid: 948a13693cf3aad4a9a0bd359cc158ef, type: 3}
     - {fileID: 134441627470835729, guid: d942d0a9d7ce2914c841ea09612a31ea, type: 3}
     - {fileID: -5070487588157384340, guid: ad7f2878a69f11147acfcac6add49dc6, type: 3}
     - {fileID: -77900500058834699, guid: 9847a001a3b68914aa0be41fb095fb5f, type: 3}
     - {fileID: 5483755422852644754, guid: 164d114f04764924bbe34ab3c9ad5b4d, type: 3}
+    - {fileID: 1302548177074960351, guid: 7f64d2c389d671d45b0304aeed4e7fc3, type: 3}
