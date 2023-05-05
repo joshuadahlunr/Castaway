@@ -55,7 +55,7 @@ MonoBehaviour:
   cardOwner: 0
   _name: Bail Water
   _art: {fileID: 21300000, guid: 9c43c886a2d9215409f6b66cf2c454ea, type: 3}
-  _rules: Adds <color=red>1</color> HP to the ship!
+  _rules: Adds <color=green>1</color> HP to the ship!
   _properties:
     reorderableList:
       canAdd: 1

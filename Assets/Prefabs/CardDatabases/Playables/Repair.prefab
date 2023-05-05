@@ -54,8 +54,9 @@ MonoBehaviour:
   _state: 2
   cardOwner: 0
   _name: Repair
-  _art: {fileID: 0}
-  _rules: 'Repair '
+  _art: {fileID: 21300000, guid: bc95f1a609dc10545b15faa7c1f32c0c, type: 3}
+  _rules: Repair any in-play equipment with <color=green>{properties["primary"]}</color>
+    HP!
   _properties:
     reorderableList:
       canAdd: 1
