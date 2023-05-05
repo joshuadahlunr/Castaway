@@ -54,7 +54,7 @@ MonoBehaviour:
   _state: 2
   cardOwner: 0
   _name: Evade
-  _art: {fileID: 21300000, guid: a96f840c57f2c094ba619484ac3cb50c, type: 3}
+  _art: {fileID: 21300000, guid: 25ea2d05b7f5f38409d86eaeabfed241, type: 3}
   _rules: 'Reduces the damage of the target''s next attack by <color=green>{properties["reduction"]}</color>
     for <color=green>{properties["duration"]}</color> turns.k by '
   _properties:

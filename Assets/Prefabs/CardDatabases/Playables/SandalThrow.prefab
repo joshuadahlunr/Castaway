@@ -54,7 +54,7 @@ MonoBehaviour:
   _state: 2
   cardOwner: 0
   _name: Sandal Throw
-  _art: {fileID: 0}
+  _art: {fileID: 21300000, guid: baefa1c366663ea46ba54f7cb3c6ddd1, type: 3}
   _rules: 
   _properties:
     reorderableList:
