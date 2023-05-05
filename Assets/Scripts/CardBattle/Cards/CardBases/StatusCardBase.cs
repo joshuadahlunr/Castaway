@@ -49,6 +49,8 @@ namespace CardBattle.Card {
 			toPerform();
 		}
 
+		public override void OnMonsterReveal() => OnDrawn();
+
 		/// <summary>
 		///     Callback called whenever this status is drawn
 		/// </summary>

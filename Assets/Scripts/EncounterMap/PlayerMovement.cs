@@ -11,7 +11,7 @@ namespace EncounterMap {
     /// </summary>
     public class PlayerMovement : MonoBehaviour {
         // Initialize the static variable to be the player's start position
-        public static Vector3 playerPos = new Vector3(-5f, 0f, 90.0f);
+        public static Vector3 playerPos = new Vector3(-15f, 0f, 90.0f);
         public Animator animator;
         public EncounterMapScript map;
         

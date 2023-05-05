@@ -90,9 +90,9 @@ namespace EncounterMap {
             // Determine the sprite displayed based on the event type
             DetermineSprite(nodeType);
             // If the node is a random event, set the type of event that will occur
-            if (nodeType == NodeType.Random) {
-                SetRandomEvent();
-            }
+            // if (nodeType == NodeType.Random) {
+            //     SetRandomEvent();
+            // }
         }
 
         /// <summary>
@@ -161,18 +161,18 @@ namespace EncounterMap {
                 // If the depth of the map is greater/equal to 20, all nodes will be battle nodes
                 // This forces the player to encounter the final boss rather than avoiding the boss battle
                 nodeType = NodeType.Battle;
-            } else if (Depth < 20 && value <= 4) {
+            } else if (Depth < 20 && value <= 6) {
                 // If the value is 0-4, the event node type is Battle
-                // 50% spawn rate
+                // 60% spawn rate
                 nodeType = NodeType.Battle;
-            } else if (Depth < 20 && value > 4 || Depth < 20 && value <= 7) {
-                // If the value is 5-7, the event node type is Random
+            } else if (Depth < 20 && value > 6 || Depth < 20 && value <= 9) {
+                // If the value is 5-7, the event node type is Random *CREWMATE)
                 // 30% spawn rate
-                nodeType = NodeType.Random;
-            } else if (Depth < 20 && value > 7 ||Depth < 20 && value <= 9) {
-                // If the value is 8-9 the event node type is Crewmate
-                // 20% spawn rate (can occur as a random event)
-                nodeType = NodeType.Crewmate;
+                 nodeType = NodeType.Crewmate;
+            // } else if (Depth < 20 && value > 7 ||Depth < 20 && value <= 9) {
+            //     // If the value is 8-9 the event node type is Crewmate
+            //     // 20% spawn rate (can occur as a random event)
+            //     nodeType = NodeType.Crewmate;
             } else {
                 nodeType = NodeType.Battle;
             }
@@ -184,9 +184,9 @@ namespace EncounterMap {
                 case NodeType.Battle:
                     this.GetComponent<SpriteRenderer>().sprite = battleSprite;
                     break;
-                case NodeType.Random:
-                    this.GetComponent<SpriteRenderer>().sprite = randomSprite;
-                    break;
+                // case NodeType.Random:
+                //     this.GetComponent<SpriteRenderer>().sprite = randomSprite;
+                //     break;
                 case NodeType.Crewmate:
                     this.GetComponent<SpriteRenderer>().sprite = crewmateSprite;
                     break;

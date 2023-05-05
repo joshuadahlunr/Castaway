@@ -434,10 +434,11 @@ namespace CardBattle {
 
 				// If it's not the player's turn, reset the damage negation of all active monsters and reveal their top card
 				foreach (var monster in monsters)
-					if (!(monster?.Disabled ?? true)) {
-						monster.healthState = monster.RawHealth.SetTemporaryDamageReduction(0);
-						monster.deck.RevealCard();
-					}
+					if(monster != null)
+						if (!monster.Disabled) {
+							monster.healthState = monster.RawHealth.SetTemporaryDamageReduction(0);
+							monster.deck.RevealCard();
+						}
 			}
 
 			// Disable all of the unaffordable cards in the player's hand!

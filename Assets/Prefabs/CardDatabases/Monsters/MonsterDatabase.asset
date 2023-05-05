@@ -63,6 +63,7 @@ MonoBehaviour:
       - {fileID: 7484713053374070152, guid: 5e002bc146a90bb439b438cd6f690c60, type: 3}
       - {fileID: 7484713053374070152, guid: 5e002bc146a90bb439b438cd6f690c60, type: 3}
       - {fileID: 6534445929746580176, guid: 5cf1d068fa56c2e4db065e18bd27fbb8, type: 3}
+      - {fileID: 2136001348172326070, guid: 950311418b7fbdc48b261eb5f5d3d287, type: 3}
       deckListString: 
     - monsterCard: {fileID: 618883279989994325, guid: 261ee2c184aa5a741ae02f1c3277cded,
         type: 3}
