@@ -13,6 +13,13 @@ using UnityEngine.InputSystem;
 /// </summary>
 
 /// <summary>
+/// References used for  this section as there is a lot of already existing documentation and functioning
+/// code for this specific purpose. These videos were used in tandem to fit the needs of our project: 
+/// https://www.youtube.com/watch?v=YOaYQrN1oYQ
+/// https://www.youtube.com/watch?v=rtpHU1kfabI
+/// https://www.youtube.com/watch?v=9tsbUoFfAgo&t=786s
+
+/// <summary>
 /// Class that handles the pause menu and its needed functionality
 /// </summary>
 public class PauseMenu : MonoBehaviour {

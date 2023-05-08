@@ -54,7 +54,7 @@ namespace RandomEvents {
 
             // crew morale is lowered
             Crewmates crewmate = new Crewmates();
-            crewmate.DecreaseMorale();
+            //crewmate.DecreaseMorale();
 
             EndEvent();
         }

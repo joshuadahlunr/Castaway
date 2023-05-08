@@ -2538,6 +2538,16 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3234773675761648025, guid: 81290e39ce335894885e0134e5d791f5,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 3234773675761648025, guid: 81290e39ce335894885e0134e5d791f5,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 3471145457061078122, guid: 81290e39ce335894885e0134e5d791f5,
         type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -2613,6 +2623,36 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7288933305454154006, guid: 81290e39ce335894885e0134e5d791f5,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7288933305454154006, guid: 81290e39ce335894885e0134e5d791f5,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7288933305454154006, guid: 81290e39ce335894885e0134e5d791f5,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7288933305454154006, guid: 81290e39ce335894885e0134e5d791f5,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7288933305454154006, guid: 81290e39ce335894885e0134e5d791f5,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 920
+      objectReference: {fileID: 0}
+    - target: {fileID: 7288933305454154006, guid: 81290e39ce335894885e0134e5d791f5,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 80
+      objectReference: {fileID: 0}
     - target: {fileID: 8122878231255436924, guid: 81290e39ce335894885e0134e5d791f5,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -2624,7 +2664,7 @@ PrefabInstance:
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 5322523036793143321, guid: 81290e39ce335894885e0134e5d791f5,
         type: 3}
-      insertIndex: 2
+      insertIndex: -1
       addedObject: {fileID: 561366647}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 81290e39ce335894885e0134e5d791f5, type: 3}
