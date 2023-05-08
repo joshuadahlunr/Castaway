@@ -55,7 +55,8 @@ MonoBehaviour:
   cardOwner: 0
   _name: Freeze
   _art: {fileID: 21300000, guid: 008a6027b5bf8314ba71cec3901d804f, type: 3}
-  _rules: Creates a <b>Frozen</b> card in the owner's hand.
+  _rules: Creates a <b>Frozen</b> card in the owner's hand, causing them to discard
+    their hand.
   _properties:
     reorderableList:
       canAdd: 1
@@ -83,7 +84,7 @@ MonoBehaviour:
     _keys: []
     _values: []
   _cost:
-    list: 0100000001000000
+    list: 01000000
   associatedSelkie: {fileID: 0}
   frozenCard: {fileID: 1427780925322784421, guid: 4ed95169b93d183459db567c5cee3ab7,
     type: 3}
@@ -126,7 +127,7 @@ MonoBehaviour:
     type: 3}
   arrowPrefab: {fileID: 6722190504438028770, guid: e2e954b1ee2caff408b59a53e7370e2a,
     type: 3}
-  targetNeeded: 1
+  targetNeeded: 0
 --- !u!1001 &4487235728669804067
 PrefabInstance:
   m_ObjectHideFlags: 0

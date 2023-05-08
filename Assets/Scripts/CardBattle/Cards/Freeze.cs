@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using CardBattle.Card;
 using UnityEngine;
 
 namespace CardBattle
@@ -25,12 +26,12 @@ namespace CardBattle
 
             if (OwnedByPlayer)
             {
-                CardGameManager.instance.playerHand.AddCard(frozenCard); // Add the frozen card to player hand
+                CardGameManager.instance.playerHand.AddCard(Instantiate(frozenCard)); // Add the frozen card to player hand
             }
 
             else
             {
-                OwningMonster.deck.AddCard(frozenCard, 0); // Add frozen card to monster deck
+                OwningMonster.deck.AddCard(Instantiate(frozenCard)); // Add frozen card to monster deck
                 OwningMonster.deck.RevealCard(); // Reveal the frozen card
                 OwningMonster.deck.PlayRevealedCard(); // Play it immediately
             }
@@ -46,9 +47,10 @@ namespace CardBattle
                     var angle = Mathf.Round(Random.Range(0f, 360f) / 30) * 30;
                     CardGameManager.instance.ship.transform.rotation = Quaternion.Euler(0, angle, 0);
                 }
-            }
-            
+            }    
+
             SendToGraveyard();
+        
         }
     }
 }
