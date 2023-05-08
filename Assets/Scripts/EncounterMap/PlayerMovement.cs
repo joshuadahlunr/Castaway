@@ -59,7 +59,7 @@ namespace EncounterMap {
 
         // This is used to reset the player to the start position for a new game
         public static void ResetPosition() {
-            playerPos = new Vector3(-5f, 0f, 90.0f);
+            playerPos = new Vector3(-15f, 0f, 90.0f);
         }
     }
 }
