@@ -26,6 +26,9 @@ namespace Crew {
             StartCoroutine(ReturnToMap(3f));
         }
 
+        /// <summary>
+        ///     Returns to the encounter map immediately
+        /// </summary>
         public void DeclineCrewmate()
         {
             StartCoroutine(ReturnToMap(0f));
@@ -63,6 +66,9 @@ namespace Crew {
             newCrew.ShowInfo(); // Show the information of the spawned crewmate
         }
 
+        /// <summary>
+        ///     Allows players to change an encountered crewmate's name
+        /// </summary>
         public void NameChange(TMP_InputField input)
         {
             if (input.text.Length > 0)

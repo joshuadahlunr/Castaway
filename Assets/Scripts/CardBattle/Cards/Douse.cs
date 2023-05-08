@@ -19,6 +19,10 @@ namespace CardBattle
 
         private int removalCounter = 0;
 
+        /// <summary>
+        ///     Iterate through player deck and remove Burn and Frozen cards,
+        ///     break when the duration of turns has been exceeded
+        /// </summary>
         public override void OnTarget(Card.CardBase _)
         {
 

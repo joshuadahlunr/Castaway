@@ -35,6 +35,7 @@ namespace CardBattle
                 OwningMonster.deck.PlayRevealedCard(); // Play it immediately
             }
 
+            // If RNG outputs 1, rotate the ship randomly
             if (rotateChance == 1)
             {
                 StartCoroutine(RotateNextFrame());

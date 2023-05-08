@@ -35,7 +35,7 @@ namespace CardBattle
                 DamageTargetOrPlayer(properties["primary"] + currentShipDamage, target);
             }
 
-            // Otherwise, deal damaage based on owning monster's missing health
+            // Otherwise, deal damage based on owning monster's missing health
             else
             {
                 int currentMonsterDamage = OwningMonster.healthState.maxHealth - OwningMonster.healthState.health;

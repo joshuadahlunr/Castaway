@@ -21,7 +21,8 @@ namespace CardBattle
 
         public override void OnTarget(Card.CardBase _)
         {
-
+            // If owned by the player, iterate through our deck 
+            // and add to the counter as we remove status cards
             if (OwnedByPlayer)
             {
                 var playerDeck = CardGameManager.instance.playerDeck;
@@ -34,12 +35,15 @@ namespace CardBattle
                     }
                 }
                 
+                // Apply healing based on amount of cards removed
                 CardGameManager.instance.playerHealthState = CardGameManager.instance.playerHealthState.ApplyHealing(removalCounter);
                 NotificationHolder.instance.CreateNotification("Removed " + removalCounter.ToString() + " status effect(s) from deck!");
             }
 
             else
             {
+                // Otherwise, do the same, but remove cards from 
+                // monster deck and restore health to the monster
                 var monsterDeck = OwningMonster.deck;
                 for (int i = 0; i < monsterDeck.Count; i++)
                 {

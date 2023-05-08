@@ -43,7 +43,7 @@ namespace Crew {
         [Serializable]
         public struct CrewClass {
             public enum Type {
-                Invalid,
+                Invalid,        // 0
                 Wizard,         // 1
                 Navigator,      // 2
                 Entertainer,    // 3
@@ -193,11 +193,6 @@ namespace Crew {
         public void HideInfo()
         {
             GameObject.FindGameObjectWithTag("Info Panel").transform.localScale = new Vector3(0, 0, 0);
-        }
-
-        public void DecreaseMorale()
-        {
-            _morale--;
         }
 
     }

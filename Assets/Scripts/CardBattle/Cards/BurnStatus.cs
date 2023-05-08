@@ -38,6 +38,9 @@ namespace CardBattle
             SendToGraveyard();
         }
 
+        /// <summary>
+        ///     Apply damage to the monster and add burn to their deck
+        /// </summary>
         public override void OnMonsterReveal()
         {
             DamageTargetOrPlayer(properties["primary"], OwningMonster);

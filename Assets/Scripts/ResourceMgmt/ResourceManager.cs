@@ -53,22 +53,29 @@ namespace ResourceMgmt
         /// </summary>
         public static ResourceManager instance;
 
+        // Slidrs for allocating resources to ship and crew
         [SerializeField] private Slider shipSlider, crewSlider;
 
-        [SerializeField] private Button confirmBtn, nameBtn;
+        // Button for confirming upgrades
+        [SerializeField] private Button confirmBtn;
 
+        // UpgradeInfo to be used for loading/saving to database
         [SerializeField] private UpgradeInfo upgradeData;
 
+        // Array of sprites for each ship upgrade
         [SerializeField] private Sprite[] shipLevels;
 
+        // Text for displaying amount of resources to be allocated via sliders, message for winning battle,
+        // current ship level, current crew count, and progress towards the next level
         [SerializeField] private TextMeshProUGUI shipSliderTxt, crewSliderTxt, winTxt, shipLvlTxt, crewAmtTxt, progressTxt;
 
-        [SerializeField] private InputField nameInput;
-
+        // Amount of resources from winning battle
         private int resourcesWon;
 
+        // Displays current amount allocated to a slider at any time
         private readonly float currentVal;
 
+        // The ship currently being displayed
         public Image ship;
 
         private void Awake()

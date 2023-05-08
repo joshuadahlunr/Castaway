@@ -4,6 +4,11 @@ using CardBattle.Card;
 
 namespace CardBattle
 {
+    /// <summary>
+    ///     Mysterious Potion: instantiates one Poison card
+    ///     into the target's deck
+    /// </summary>
+    /// <author> Misha Desear </author>
     public class MysteriousPotion : Card.ActionCardBase
     {
         // Can only target monsters
